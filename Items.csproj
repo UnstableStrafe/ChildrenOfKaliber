@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FFBA1617-0851-4332-B99D-65E9086FA8AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Items</RootNamespace>
+    <AssemblyName>Items</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Assembly-CSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Desktop\Steam Games\Gungeon Mods\Dependencies\Assembly-CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Assembly-CSharp.Base.mm, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Desktop\Steam Games\Gungeon Mods\Dependencies\Assembly-CSharp.Base.mm.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour, Version=18.9.0.42435, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Desktop\Steam Games\Gungeon Mods\Dependencies\MonoMod.RuntimeDetour.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.Utils, Version=18.9.0.42433, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Desktop\Steam Games\Gungeon Mods\Dependencies\MonoMod.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="PlayMaker">
+      <HintPath>..\..\..\Desktop\Steam Games\Gungeon Mods\Dependencies\PlayMaker.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>..\..\..\Desktop\Steam Games\Gungeon Mods\Dependencies\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule.Base.mm">
+      <HintPath>..\..\..\Desktop\Steam Games\Gungeon Mods\Dependencies\UnityEngine.CoreModule.Base.mm.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.ImageConversionModule">
+      <HintPath>..\..\..\Desktop\Steam Games\Gungeon Mods\Dependencies\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.JSONSerializeModule">
+      <HintPath>..\..\..\Desktop\Steam Games\Gungeon Mods\Dependencies\UnityEngine.JSONSerializeModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Physics2DModule">
+      <HintPath>..\..\..\Desktop\Steam Games\Gungeon Mods\Dependencies\UnityEngine.Physics2DModule.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\..\..\Desktop\Steam Games\Gungeon Mods\Dependencies\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AccursedShackles.cs" />
+    <Compile Include="ACMESupply.cs" />
+    <Compile Include="ActiveLoopItem.cs" />
+    <Compile Include="AdvancedGunBehaviour.cs" />
+    <Compile Include="AdvancedSynergyFormProcessor.cs" />
+    <Compile Include="AK94.cs" />
+    <Compile Include="ALiteralRock.cs" />
+    <Compile Include="AssaultFleet.cs" />
+    <Compile Include="AuricVial.cs" />
+    <Compile Include="Avarice.cs" />
+    <Compile Include="BabyGoodBullet.cs" />
+    <Compile Include="BananaJamHands.cs" />
+    <Compile Include="BashelliskRifle.cs" />
+    <Compile Include="BilliardBounceAdder.cs" />
+    <Compile Include="BilliardBouncer.cs" />
+    <Compile Include="CharcoalDustEffect.cs" />
+    <Compile Include="DEATHDrone.cs" />
+    <Compile Include="DEATHGun.cs" />
+    <Compile Include="DooDooCode.cs" />
+    <Compile Include="Drone2.cs" />
+    <Compile Include="Drone.cs" />
+    <Compile Include="DroneBuddy1Gun.cs" />
+    <Compile Include="DroneController.cs" />
+    <Compile Include="DualGunsManager.cs" />
+    <Compile Include="DualWieldController.cs" />
+    <Compile Include="DualWieldSynergyAdder.cs" />
+    <Compile Include="EarthBending.cs" />
+    <Compile Include="EvilCharmedBow.cs" />
+    <Compile Include="Günther.cs" />
+    <Compile Include="IonFist.cs" />
+    <Compile Include="LeakingSyringe.cs" />
+    <Compile Include="MultiActiveReload.cs" />
+    <Compile Include="NAcidController.cs" />
+    <Compile Include="NenFist.cs" />
+    <Compile Include="NitricAcid.cs" />
+    <Compile Include="PrimalCharcoal.cs" />
+    <Compile Include="PrimalNitricAcid.cs" />
+    <Compile Include="PrimalSaltpeter.cs" />
+    <Compile Include="PrimalSulfur.cs" />
+    <Compile Include="ProjGoopTrail.cs" />
+    <Compile Include="HoveringGunController.cs" />
+    <Compile Include="HoveringGunsAdder.cs" />
+    <Compile Include="ImpactRounds.cs" />
+    <Compile Include="Keywords\SlowKey.cs" />
+    <Compile Include="Keywords\LargeKey.cs" />
+    <Compile Include="Keywords\PoisonKey.cs" />
+    <Compile Include="Keywords\PowerKey.cs" />
+    <Compile Include="Keywords\QuickKey.cs" />
+    <Compile Include="Keywords\SidearmKey.cs" />
+    <Compile Include="Keywords\ToxicKey.cs" />
+    <Compile Include="Keywords\HomingKey.cs" />
+    <Compile Include="Keywords\FlareKey.cs" />
+    <Compile Include="Keywords\DamageKey.cs" />
+    <Compile Include="Keywords\CritKey.cs" />
+    <Compile Include="Keywords\ChainKey.cs" />
+    <Compile Include="Keywords\BurstKey.cs" />
+    <Compile Include="Keywords\BounceKey.cs" />
+    <Compile Include="Keywords\BlazingKey.cs" />
+    <Compile Include="Keywords\AmmoKey.cs" />
+    <Compile Include="Keywords\BackKey.cs" />
+    <Compile Include="Library.cs" />
+    <Compile Include="LittleDroneBuddy.cs" />
+    <Compile Include="MercuryAmmolet.cs" />
+    <Compile Include="BismuthAmmolet.cs" />
+    <Compile Include="CursedArtifact.cs" />
+    <Compile Include="D6.cs" />
+    <Compile Include="EliteBullets.cs" />
+    <Compile Include="FireworkRifle.cs" />
+    <Compile Include="FleetController.cs" />
+    <Compile Include="FloopBullets.cs" />
+    <Compile Include="GlassHeart.cs" />
+    <Compile Include="Keywords\FireKey.cs" />
+    <Compile Include="Keywords\RailKey.cs" />
+    <Compile Include="Keywords\RapidKey.cs" />
+    <Compile Include="Keywords\GunKey.cs" />
+    <Compile Include="Keywords\SawKey.cs" />
+    <Compile Include="MarkOfWind.cs" />
+    <Compile Include="GungeonAPI\dungeons\DungeonHandler.cs" />
+    <Compile Include="GungeonAPI\dungeons\DungeonHooks.cs" />
+    <Compile Include="GungeonAPI\dungeons\RoomFactory.cs" />
+    <Compile Include="GungeonAPI\dungeons\StaticReferences.cs" />
+    <Compile Include="GungeonAPI\fakeprefab\FakePrefab.cs" />
+    <Compile Include="GungeonAPI\fakeprefab\FakePrefabHooks.cs" />
+    <Compile Include="GungeonAPI\ResourceExtractor.cs" />
+    <Compile Include="GungeonAPI\shrines\Franseis.cs" />
+    <Compile Include="GungeonAPI\shrines\FranseisInteractable.cs" />
+    <Compile Include="GungeonAPI\shrines\NPCBuilder.cs" />
+    <Compile Include="GungeonAPI\shrines\RandomShrine.cs" />
+    <Compile Include="GungeonAPI\shrines\ShrineFactory.cs" />
+    <Compile Include="GungeonAPI\shrines\SimpleInteractable.cs" />
+    <Compile Include="GungeonAPI\shrines\SimpleShrine.cs" />
+    <Compile Include="GungeonAPI\SpriteBuilder.cs" />
+    <Compile Include="GungeonAPI\Tools.cs" />
+    <Compile Include="ElectricBass.cs" />
+    <Compile Include="Holoprinter.cs" />
+    <Compile Include="Incremental.cs" />
+    <Compile Include="IsharsSoul.cs" />
+    <Compile Include="LoopManager.cs" />
+    <Compile Include="MalachiteAmmolet.cs" />
+    <Compile Include="CitrineAmmolet.cs" />
+    <Compile Include="DaggerSpray.cs" />
+    <Compile Include="DDR.cs" />
+    <Compile Include="DragunClaw.cs" />
+    <Compile Include="DragunHeart.cs" />
+    <Compile Include="DragunSkull.cs" />
+    <Compile Include="DragunWing.cs" />
+    <Compile Include="Enemies.cs" />
+    <Compile Include="GravityWell.cs" />
+    <Compile Include="ItemAPI\CompanionBuilder.cs" />
+    <Compile Include="ItemAPI\CustomSynergies.cs" />
+    <Compile Include="ItemAPI\FakePrefab.cs" />
+    <Compile Include="ItemAPI\FakePrefabHooks.cs" />
+    <Compile Include="ItemAPI\ItemBuilder.cs" />
+    <Compile Include="ItemAPI\ResourceExtractor.cs" />
+    <Compile Include="ItemAPI\SpriteBuilder.cs" />
+    <Compile Include="LiteralTrash.cs" />
+    <Compile Include="MidasRounds.cs" />
+    <Compile Include="Monogun.cs" />
+    <Compile Include="MunitionsChestController.cs" />
+    <Compile Include="OverclockingUnit.cs" />
+    <Compile Include="PassiveTemplate.cs" />
+    <Compile Include="PermafrostRounds.cs" />
+    <Compile Include="PrimeCannon.cs" />
+    <Compile Include="PrimeLaser.cs" />
+    <Compile Include="PrimeSaw.cs" />
+    <Compile Include="PrimeVice.cs" />
+    <Compile Include="PushBlock.cs" />
+    <Compile Include="ReloadedRifle.cs" />
+    <Compile Include="RussianRevolver.cs" />
+    <Compile Include="Slag.cs" />
+    <Compile Include="SoulForge.cs" />
+    <Compile Include="Spellcaster.cs" />
+    <Compile Include="SpiritOfTheDragun.cs" />
+    <Compile Include="SulfurFuseEffect.cs" />
+    <Compile Include="SynergyFormAdder.cs" />
+    <Compile Include="TriggerDroneGun.cs" />
+    <Compile Include="TriggerPulseDrone.cs" />
+    <Compile Include="TrueGunpowder.cs" />
+    <Compile Include="VenomRounds.cs" />
+    <Compile Include="ShellBank.cs" />
+    <Compile Include="RGB.cs" />
+    <Compile Include="Skeleton.cs" />
+    <Compile Include="SpinelTonic.cs" />
+    <Compile Include="StakeLauncher.cs" />
+    <Compile Include="StakeProj.cs" />
+    <Compile Include="CelSynergies.cs" />
+    <Compile Include="TheBullet.cs" />
+    <Compile Include="Contract.cs" />
+    <Compile Include="TimeKeepersPistol.cs" />
+    <Compile Include="TonicAffliction.cs" />
+    <Compile Include="Tools.cs" />
+    <Compile Include="TrackersShotgun.cs" />
+    <Compile Include="Matchbox.cs" />
+    <Compile Include="Mininomicon.cs" />
+    <Compile Include="Questlog.cs" />
+    <Compile Include="Sawblade.cs" />
+    <Compile Include="DwarvenMallet.cs" />
+    <Compile Include="EmptyBullets.cs" />
+    <Compile Include="Examples\ExampleCompanion.cs" />
+    <Compile Include="ExecutionerProjectile.cs" />
+    <Compile Include="Fallout.cs" />
+    <Compile Include="FalloutProjectile.cs" />
+    <Compile Include="Examples\Fiddlyfuk.cs" />
+    <Compile Include="GattlingBullets.cs" />
+    <Compile Include="Glyph.cs" />
+    <Compile Include="DwarvenHammer.cs" />
+    <Compile Include="H-Gun.cs" />
+    <Compile Include="Hooks.cs" />
+    <Compile Include="Hoverboard.cs" />
+    <Compile Include="IVGun.cs" />
+    <Compile Include="PactSeal.cs" />
+    <Compile Include="PetRock.cs" />
+    <Compile Include="phazor.cs" />
+    <Compile Include="PhazorProjectile.cs" />
+    <Compile Include="RGG.cs" />
+    <Compile Include="RiggedRoulette.cs" />
+    <Compile Include="ScrapGun1.cs" />
+    <Compile Include="ScrapGunCounter.cs" />
+    <Compile Include="Shader.cs" />
+    <Compile Include="Slugger.cs" />
+    <Compile Include="SprunButBetter.cs" />
+    <Compile Include="SteamSale.cs" />
+    <Compile Include="stellub.cs" />
+    <Compile Include="SuperCrate.cs" />
+    <Compile Include="SyncDiode.cs" />
+    <Compile Include="TerribleAmmoBag.cs" />
+    <Compile Include="Tesla.cs" />
+    <Compile Include="TeslaProjectile.cs" />
+    <Compile Include="TrickstersGun.cs" />
+    <Compile Include="VenomSpitDGun.cs" />
+    <Compile Include="VenomSpitDrone.cs" />
+    <Compile Include="VoidBottle.cs" />
+    <Compile Include="CorruptHeart.cs" />
+    <Compile Include="Dispenser.cs" />
+    <Compile Include="DispenserProjectile.cs" />
+    <Compile Include="ExampleActive.cs" />
+    <Compile Include="ExamplePassive.cs" />
+    <Compile Include="FunkyBullets.cs" />
+    <Compile Include="ImpsHorn.cs" />
+    <Compile Include="IronHeart.cs" />
+    <Compile Include="NeedleBullets.cs" />
+    <Compile Include="Sash.cs" />
+    <Compile Include="ShockingBattery.cs" />
+    <Compile Include="SnareBullets.cs" />
+    <Compile Include="CelsItems.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Vindication.cs" />
+    <Compile Include="VindicationProjectile.cs" />
+    <Compile Include="Gunlust.cs" />
+    <Compile Include="WaterCup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\needle_bullets.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\funky_bullets.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\TheBullet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\snare_bullets.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\corrupt_heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\empty_bottle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\stellub.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\glyph.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\sync_diode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\dwarven_hammer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\gattling_bullets.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\imps_horn.png" />
+    <EmbeddedResource Include="Resources\test_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\shocking_battery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\pet_rock.png" />
+    <EmbeddedResource Include="Resources\pet_rock_blink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\strang_strongbox.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\steam_sale.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\empty_bullets.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\iron_heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\sawblade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\acme_crate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\mininomicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\terrible_ammo_bag.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\contract.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\quest_log.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\matchsticks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\garnet_rounds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\gunlust.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\banana_jam_hands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AuricSprite_idle_001.png" />
+    <EmbeddedResource Include="Resources\gilded_vial.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\dragun_claw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\dragun_wing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\dragun_heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\dragun_skull.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\gravity_well.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\dagger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\tonic_affliction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\water_cup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\midas_rounds.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\LoopItemRoom.room" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\tricksters_gun.png" />
+    <EmbeddedResource Include="Resources\primal_saltpeter.png" />
+    <EmbeddedResource Include="Resources\true_gunpowder.png" />
+    <EmbeddedResource Include="Resources\venom_spit_drone.png" />
+    <EmbeddedResource Include="Resources\trigger_drone.png" />
+    <EmbeddedResource Include="Resources\goop_standard_base_001.png" />
+    <EmbeddedResource Include="Resources\water_standard_base_001.png" />
+    <EmbeddedResource Include="Resources\venom_rounds.png" />
+    <EmbeddedResource Include="Resources\trickster_knife.png" />
+    <EmbeddedResource Include="Resources\loop_item.png" />
+    <EmbeddedResource Include="Resources\TimeCase.png" />
+    <EmbeddedResource Include="Resources\floop_bullets.png" />
+    <EmbeddedResource Include="Resources\spinel_tonic.png" />
+    <EmbeddedResource Include="Resources\elite_bullets.png" />
+    <EmbeddedResource Include="Keywords\fire_key.png" />
+    <EmbeddedResource Include="Keywords\gun_key.png" />
+    <EmbeddedResource Include="Keywords\rail_key.png" />
+    <EmbeddedResource Include="Keywords\rapid_key.png" />
+    <EmbeddedResource Include="Keywords\sawblade_key.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_appear_001.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_appear_002.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_appear_003.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_appear_004.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_appear_005.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_idle_001.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_open_001.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_open_002.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_open_003.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_break_001.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_break_002.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_break_003.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\munitions_chest_break_004.png" />
+    <EmbeddedResource Include="Resources\MunitionsChest\low_chest_shadow_001.png" />
+    <EmbeddedResource Include="Resources\mercury_ammolet.png" />
+    <EmbeddedResource Include="Resources\bismuth_ammolet.png" />
+    <EmbeddedResource Include="Keywords\ammo_key.png" />
+    <EmbeddedResource Include="Keywords\back_key.png" />
+    <EmbeddedResource Include="Keywords\blazing_key.png" />
+    <EmbeddedResource Include="Keywords\bounce_key.png" />
+    <EmbeddedResource Include="Keywords\burst_key.png" />
+    <EmbeddedResource Include="Keywords\chain_key.png" />
+    <EmbeddedResource Include="Keywords\crit_key.png" />
+    <EmbeddedResource Include="Keywords\damage_key.png" />
+    <EmbeddedResource Include="Keywords\flare_key.png" />
+    <EmbeddedResource Include="Keywords\homing_key.png" />
+    <EmbeddedResource Include="Keywords\large_key.png" />
+    <EmbeddedResource Include="Keywords\poison_key.png" />
+    <EmbeddedResource Include="Keywords\power_key.png" />
+    <EmbeddedResource Include="Keywords\quick_key.png" />
+    <EmbeddedResource Include="Keywords\sidearm_key.png" />
+    <EmbeddedResource Include="Keywords\slow_key.png" />
+    <EmbeddedResource Include="Keywords\toxic_key.png" />
+    <EmbeddedResource Include="Resources\impact_rounds.png" />
+    <EmbeddedResource Include="Resources\little_drone.png" />
+    <EmbeddedResource Include="Resources\primal_nitric_acid.png" />
+    <EmbeddedResource Include="Resources\primal_charcoal.png" />
+    <EmbeddedResource Include="Resources\primal_sulfur.png" />
+    <EmbeddedResource Include="Resources\shell_bank.png" />
+    <EmbeddedResource Include="Resources\leaking_syringe.png" />
+    <EmbeddedResource Include="Resources\holoprinter.png" />
+    <Content Include="Resources\Tick\DoEffect\tick_do_effect_001.png" />
+    <Content Include="Resources\Tick\DoEffect\tick_do_effect_002.png" />
+    <Content Include="Resources\Tick\DoEffect\tick_do_effect_003.png" />
+    <Content Include="Resources\Tick\DoEffect\tick_do_effect_004.png" />
+    <Content Include="Resources\Tick\DoEffect\tick_do_effect_005.png" />
+    <Content Include="Resources\Tick\DoEffect\tick_do_effect_006.png" />
+    <Content Include="Resources\Tick\DoEffect\tick_do_effect_007.png" />
+    <Content Include="Resources\Tick\DoEffect\tick_do_effect_008.png" />
+    <Content Include="Resources\Tick\Idle\tick_idle_001.png" />
+    <Content Include="Resources\Tick\Talk\tick_talk_001.png" />
+    <Content Include="Resources\Tick\Talk\tick_talk_002.png" />
+    <Content Include="Resources\Tick\tick_shadow_001.png" />
+    <EmbeddedResource Include="Resources\citrine_ammolet.png" />
+    <EmbeddedResource Include="Resources\malachite_ammolet.png" />
+    <EmbeddedResource Include="Resources\crystal_heart.png" />
+    <EmbeddedResource Include="Resources\accursed_shackle.png" />
+    <EmbeddedResource Include="Resources\d6.png" />
+    <EmbeddedResource Include="Resources\permafrost_rounds.png" />
+    <Content Include="Resources\GungeoneerKin\ConvictKin\convict_kin_idle_left_001.png" />
+    <Content Include="Resources\GungeoneerKin\ConvictKin\convict_kin_idle_left_002.png" />
+    <Content Include="Resources\rgb.png" />
+    <EmbeddedResource Include="Resources\ddr.png" />
+    <Content Include="Resources\Midas\midas_die_001.png" />
+    <Content Include="Resources\Midas\midas_die_002.png" />
+    <Content Include="Resources\Midas\midas_die_003.png" />
+    <Content Include="Resources\Midas\midas_die_004.png" />
+    <Content Include="Resources\Midas\midas_die_005.png" />
+    <Content Include="Resources\Midas\midas_idle_001.png" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
