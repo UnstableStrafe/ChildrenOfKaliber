@@ -34,6 +34,7 @@ namespace Items
             gun.DefaultModule.burstCooldownTime = .1f;
             gun.DefaultModule.cooldownTime = .8f;
             gun.DefaultModule.numberOfShotsInClip = 500;
+            gun.DefaultModule.angleVariance = 5;
             gun.gunClass = GunClass.FULLAUTO;
             gun.gunHandedness = GunHandedness.HiddenOneHanded;
             Gun gun2 = PickupObjectDatabase.GetById(153) as Gun;

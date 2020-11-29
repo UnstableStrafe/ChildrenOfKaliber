@@ -26,7 +26,7 @@ namespace Items
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
 
-            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 500);
+            ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 700);
 
             item.consumable = false;
             item.quality = ItemQuality.S;
@@ -34,7 +34,7 @@ namespace Items
         }
 
         float speedBuff = -1;
-        float duration = 12f;
+        float duration = 8f;
         protected override void DoEffect(PlayerController user)
         {
 

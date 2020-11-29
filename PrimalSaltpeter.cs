@@ -27,7 +27,7 @@ namespace Items
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
 
-            item.quality = ItemQuality.C;
+            item.quality = ItemQuality.D;
             item.sprite.IsPerpendicular = true;
         }
         protected override void Update()

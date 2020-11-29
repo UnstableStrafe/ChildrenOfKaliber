@@ -136,6 +136,11 @@ namespace Items
             LeakingSyringe.Init();//77           PASSIVE 40
             Holoprinter.Init();//78              ACTIVE 14
             Günther.Add();//79                   GUN 23
+            AK141.Add();//80                     GUN 24
+            AK188.Add();//81                     GUN 25
+            InfiniteAK.Add();//                  GUN 26
+            AltarOfKaliber.Init();
+            BrokenAltar.Init();
             //SPINEL TONIC BY TankTheta!
             //Bismuth Ammolet sprite by TankTheta!
             //Spirit spride by TankTheta!

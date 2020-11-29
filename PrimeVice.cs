@@ -40,7 +40,7 @@ namespace Items
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.baseData.damage *= 2.75f;
+            projectile.baseData.damage *= 3f;
             projectile.transform.parent = gun.barrelOffset;
             projectile.baseData.range *= .14f;
             projectile.sprite.renderer.enabled = false;

@@ -50,7 +50,7 @@ namespace Items
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
 
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 1);
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 3);
 
 
             item.quality = PickupObject.ItemQuality.D;

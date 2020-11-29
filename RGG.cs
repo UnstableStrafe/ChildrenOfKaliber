@@ -19,10 +19,10 @@ namespace Items
         {
             RGG.rng_gun.reloadTime = (Random.Range(.5f, 1.3f));
             RGG.rng_gun.DefaultModule.ammoCost = Random.Range(1, 4);
-            RGG.rng_gun.DefaultModule.cooldownTime = (Random.Range(.08f, 0.4f));
+            RGG.rng_gun.DefaultModule.cooldownTime = (Random.Range(.08f, 0.55f));
             RGG.rng_gun.SetBaseMaxAmmo ((Random.Range(100, 701)));
             RGG.rng_gun.DefaultModule.numberOfShotsInClip = (Random.Range(6, 101));
-            RGG.Dmg = (Random.Range(8.5f, 15f));
+            RGG.Dmg = (Random.Range(5.5f, 15f));
             RGG.rng_gun.DefaultModule.projectiles[0].baseData.damage *= RGG.Dmg /= 5.5f;
             RGG.PspD = (Random.Range(12f, 50f));
             RGG.rng_gun.DefaultModule.projectiles[0].baseData.speed *= RGG.PspD /= 23f;

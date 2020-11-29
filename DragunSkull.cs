@@ -32,7 +32,6 @@ namespace Items
             string shortDesc = "More Bite Than Bark";
             string longDesc = "Replaces all shots with fireballs that deal 20% more damage than the original shot and bypass even the strongest of fire immunities.\n\nPart of the skull of the High Dragun, flames still curl from the barrel." +
                 "\n\nBroken by grief, the Dragun Warrior now guards the Gungeon's depths as the last of his kind, The High Dragun. Perhaps he seeks to prevent what he leanred from happening to others.";
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalShotPiercing, 1f, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
 
             item.quality = ItemQuality.A;

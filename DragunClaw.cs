@@ -46,11 +46,7 @@ namespace Items
             var bundle = ResourceManager.LoadAssetBundle("shared_auto_001");
             var goop = bundle.LoadAsset<GoopDefinition>("assets/data/goops/napalmgoopquickignite.asset");
             var ddgm = DeadlyDeadlyGoopManager.GetGoopManagerForGoopType(goop);
-            if (!gun.InfiniteAmmo)
-            {
                 ddgm.TimedAddGoopCircle(Owner.sprite.WorldCenter, 3f, .1f);
-
-            }
         }
 
         public override void Pickup(PlayerController player)

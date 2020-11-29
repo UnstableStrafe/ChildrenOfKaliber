@@ -21,12 +21,12 @@ namespace Items
             gun.SetAnimationFPS(gun.reloadAnimation, 10);
             gun.AddProjectileModuleFrom("ak-47", true, false);
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BULLET;
-            gun.DefaultModule.ammoCost = 1;
+            gun.DefaultModule.ammoCost = 2;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1f;
-            gun.DefaultModule.angleVariance = 0f;
-            gun.DefaultModule.cooldownTime = .06f;
+            gun.DefaultModule.angleVariance = 4;
+            gun.DefaultModule.cooldownTime = .11f;
             gun.DefaultModule.numberOfShotsInClip = 60;
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(15) as Gun).gunSwitchGroup;
             gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(15) as Gun).muzzleFlashEffects;
@@ -42,13 +42,13 @@ namespace Items
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.transform.parent = gun.barrelOffset;
-            projectile.baseData.damage *= .6f;
+            projectile.baseData.damage *= 1f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.force *= 1f;
             ETGMod.Databases.Items.Add(gun, null, "ANY");
         }
         private bool HasReloaded;
-
+        private float Tracker = 0;
         protected override void Update()
         {
             base.Update();
@@ -65,9 +65,29 @@ namespace Items
                 }
             }
         }
-
-
-
+        protected override void OnPickedUpByPlayer(PlayerController player)
+        {
+            base.OnPickedUpByPlayer(player);
+            player.OnKilledEnemy += this.Transforming;
+        }
+        protected override void OnPostDroppedByPlayer(PlayerController player)
+        {
+            base.OnPostDroppedByPlayer(player);
+            player.OnKilledEnemy -= this.Transforming;
+        }
+        private void Transforming(PlayerController player)
+        {
+            if(player.CurrentGun == this)
+            {
+                this.Tracker++;
+                if (Tracker == 30)
+                {
+                    Gun gun = ETGMod.Databases.Items["cel:ak_141"] as Gun;
+                    player.inventory.AddGunToInventory(gun, true);
+                    player.inventory.DestroyGun(ETGMod.Databases.Items["cel:ak_94"] as Gun);
+                }
+            }            
+        }
         public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
         {
             if (gun.IsReloading && this.HasReloaded)
@@ -82,8 +102,9 @@ namespace Items
         public override void OnPostFired(PlayerController player, Gun gun)
         {
             base.OnPostFired(player, gun);
+            float v1 = UnityEngine.Random.Range(-4f, 4f);
             Projectile projectile2 = ((Gun)ETGMod.Databases.Items[15]).DefaultModule.projectiles[0];
-            GameObject gameObject2 = SpawnManager.SpawnProjectile(projectile2.gameObject, base.Owner.sprite.WorldCenter, Quaternion.Euler(0f, 0f, (base.Owner.CurrentGun == null) ? 0f : base.Owner.CurrentGun.CurrentAngle + revAngle), true);          
+            GameObject gameObject2 = SpawnManager.SpawnProjectile(projectile2.gameObject, base.Owner.sprite.WorldCenter, Quaternion.Euler(0f, 0f, (base.Owner.CurrentGun == null) ? 0f : base.Owner.CurrentGun.CurrentAngle + revAngle + v1), true);          
             Projectile component2 = gameObject2.GetComponent<Projectile>();
             if (component2 != null)
             {
@@ -93,9 +114,8 @@ namespace Items
                 component2.baseData.force *= player.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
                 component2.baseData.damage *= player.stats.GetStatValue(PlayerStats.StatType.Damage);
             }
+            
         }
-
-
 
         public AK94()
         {

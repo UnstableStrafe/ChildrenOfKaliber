@@ -28,7 +28,7 @@ namespace Items
 
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
 
-            string shortDesc = "Envenomed";
+            string shortDesc = "Toxic";
             string longDesc = "Creates a pool of poison upon using a blank. Gives poison immunity.\n\nThis ammolet was found in the corpse of an extremely venomous snake.";
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1, StatModifier.ModifyMethod.ADDITIVE);
 

@@ -26,7 +26,7 @@ class IronHeart : PlayerItem
 
         ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
 
-        string shortDesc = "Proof You Have a Heart.";
+        string shortDesc = "Proof You Have a Heart";
         string longDesc = "Removes all but one heart container and gives double the amount in armor, plus 2 extra.\n\n" +
             "This heart-shaped pin converts all iron, carbon, and other 'necessary' trace metals that " +
             "scientists claim are 'vital for human survival' and 'required for bodily functions' into an ultimate shield!";

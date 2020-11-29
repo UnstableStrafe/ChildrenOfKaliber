@@ -27,7 +27,7 @@ namespace Items
             gun.reloadTime = 1f;            
             gun.DefaultModule.angleVariance = 4f;
             gun.DefaultModule.cooldownTime = 0.08f;
-            gun.SetBaseMaxAmmo(150);
+            gun.SetBaseMaxAmmo(200);
             gun.gunClass = GunClass.PISTOL;
             gun.DefaultModule.numberOfShotsInClip = 5;
             Gun gun2 = PickupObjectDatabase.GetById(56) as Gun;

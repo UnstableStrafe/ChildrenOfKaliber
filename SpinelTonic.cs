@@ -37,7 +37,7 @@ namespace Items
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, .9f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.RateOfFire, .9f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.MovementSpeed, .9f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, .9f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 1.1f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 200f);
             item.sprite.IsPerpendicular = true;
             item.CanBeDropped = true;

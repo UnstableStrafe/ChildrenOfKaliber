@@ -34,7 +34,7 @@ namespace Items
             gun.DefaultModule.numberOfShotsInClip = 30;
             Gun gun2 = PickupObjectDatabase.GetById(15) as Gun;
             gun.muzzleFlashEffects = gun2.muzzleFlashEffects;
-            gun.SetBaseMaxAmmo(400);
+            gun.SetBaseMaxAmmo(360);
             gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "hfhajafaassaafsjsapaspfafjadafwwdafx.";
             gun.sprite.IsPerpendicular = true;

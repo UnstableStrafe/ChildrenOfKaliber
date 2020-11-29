@@ -69,7 +69,7 @@ namespace Items
                 usesComprehensiveDelay = false,
                 doScreenShake = false,
                 playDefaultSFX = true,
-                effect = Firecracker.GetComponent<ExplodeOnDeath>().explosionData.effect
+                effect = Firecracker.GetComponent<ExplodeOnDeath>().explosionData.effect,
                 //AssetBundle assetBundle = ResourceManager.LoadAssetBundle("shared_auto_001");
                 //  GameObject TestingVFX = assetBundle.LoadAsset<GameObject>("VFX_Dust_Explosion");
         };

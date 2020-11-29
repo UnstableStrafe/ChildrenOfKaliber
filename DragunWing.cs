@@ -42,16 +42,14 @@ namespace Items
 
         public void OnKill(PlayerController player)
         {
-            if (!Owner.CurrentGun.InfiniteAmmo)
+            if (this.m_indicator)
             {
-                if (this.m_indicator)
-                {
-                    return;
-                }
-                tk2dBaseSprite Psprite;
-                Psprite = player.sprite;
-                Psprite.StartCoroutine(this.HandleHeatEffectsCR(TRadius, TDuration, THeatEffect, Psprite));
+                return;
             }
+            tk2dBaseSprite Psprite;
+            Psprite = player.sprite;
+            Psprite.StartCoroutine(this.HandleHeatEffectsCR(TRadius, TDuration, THeatEffect, Psprite));
+            
         }
         private IEnumerator HandleHeatEffectsCR(float Radius, float Duration, GameActorFireEffect HeatEffect, tk2dBaseSprite Psprite)
         {

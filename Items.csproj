@@ -81,8 +81,11 @@
     <Compile Include="ActiveLoopItem.cs" />
     <Compile Include="AdvancedGunBehaviour.cs" />
     <Compile Include="AdvancedSynergyFormProcessor.cs" />
+    <Compile Include="AK141.cs" />
+    <Compile Include="AK188.cs" />
     <Compile Include="AK94.cs" />
     <Compile Include="ALiteralRock.cs" />
+    <Compile Include="AltarOfKaliber.cs" />
     <Compile Include="AssaultFleet.cs" />
     <Compile Include="AuricVial.cs" />
     <Compile Include="Avarice.cs" />
@@ -91,6 +94,7 @@
     <Compile Include="BashelliskRifle.cs" />
     <Compile Include="BilliardBounceAdder.cs" />
     <Compile Include="BilliardBouncer.cs" />
+    <Compile Include="BrokenAltar.cs" />
     <Compile Include="CharcoalDustEffect.cs" />
     <Compile Include="DEATHDrone.cs" />
     <Compile Include="DEATHGun.cs" />
@@ -105,6 +109,7 @@
     <Compile Include="EarthBending.cs" />
     <Compile Include="EvilCharmedBow.cs" />
     <Compile Include="Günther.cs" />
+    <Compile Include="InfiniteAK.cs" />
     <Compile Include="IonFist.cs" />
     <Compile Include="LeakingSyringe.cs" />
     <Compile Include="MultiActiveReload.cs" />
