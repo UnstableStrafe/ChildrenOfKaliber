@@ -33,20 +33,26 @@ namespace Items
         private void MarkEnemies()
         {
             int i = 0;
-            AIActor actor;
-            RoomHandler absoluteRoom = base.transform.position.GetAbsoluteRoom();
+            int capper = 0;
             do
-            {  
+            {
+                AIActor actor;
+                RoomHandler absoluteRoom = base.transform.position.GetAbsoluteRoom();
                 do
                 {
-                    actor = Owner.CurrentRoom.GetRandomActiveEnemy(true);
+                    do
+                    {
+                        actor = Owner.CurrentRoom.GetRandomActiveEnemy(true);
+                    }
+                    while (actor.gameObject.GetComponent<ExplodeOnDeath>() != null);
+                    actor.ApplyEffect(Library.SulfurEffect);
+                    i++;
                 }
-                while (actor.gameObject.GetComponent<ExplodeOnDeath>() != null);
-                actor.ApplyEffect(Library.SulfurEffect);
-                i++;
+                while (i < 3);
+                capper++;
             }
-            while (i < 3);
-            i = 0;
+            while (capper < 5);
+            
         }
         public override void Pickup(PlayerController player)
         {
