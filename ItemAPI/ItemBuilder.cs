@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using UnityEngine;
-using System.Diagnostics;
 using System.Reflection;
-using System.IO;
 using System.Collections;
-using MonoMod.RuntimeDetour;
-using ItemAPI;
 
 namespace ItemAPI
 {

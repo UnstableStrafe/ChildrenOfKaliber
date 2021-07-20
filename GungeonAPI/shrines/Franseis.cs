@@ -1,13 +1,8 @@
 ﻿
 using GungeonAPI;
 using ItemAPI;
-using System;
 using System.Collections.Generic;
-
-using System.Linq;
-using System.Text;
 using UnityEngine;
-using HutongGames;
 using Random = UnityEngine.Random;
 using StatType = PlayerStats.StatType;
 namespace CustomCharacters

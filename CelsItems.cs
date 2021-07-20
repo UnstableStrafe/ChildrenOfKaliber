@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using ItemAPI;
 using GungeonAPI;
-using MonoMod.RuntimeDetour;
-using System.Reflection;
+using Steamworks;
 using UnityEngine;
-using Items.Keywords;
-using Random = UnityEngine.Random;
 using Dungeonator;
-
+using Gungeon;
+using System;
+using System.Collections.Generic;
+using System.Collections;
+using SaveAPI;
 namespace Items
 {
     public class CelsItems : ETGModule
     {
         public static readonly string Modname = "Cel's Items";
-        public static readonly string Version = "3.2";
+        public static readonly string Version = "Children of Kaliber, Part 2/3";
         public static readonly string Color = "#FCA4E2";
         public static HellDragZoneController hellDrag;
+        public static string SteamUsername;
         public override void Init()
         {
 
@@ -29,14 +28,25 @@ namespace Items
             
             ItemAPI.FakePrefabHooks.Init();
             GungeonAPI.FakePrefabHooks.Init();
+            ItemAPI.EnemyBuilder.Init();
+            ItemAPI.BossBuilder.Init();
+            ItemAPI.EnemyTools.Init();
+            SaveAPI.SaveAPIManager.Setup("cel");
             ItemBuilder.Init();
             Hooks.Init();
             GungeonAPI.Tools.Init();            
             ShrineFactory.Init();
+            Library.DefineGoops();
+            Library.InitVacuumProjectiles();
+            SpecialBlankModificationItem.InitHooks();
             var forgeDungeon = DungeonDatabase.GetOrLoadByName("Base_Forge");
             hellDrag = forgeDungeon.PatternSettings.flows[0].AllNodes.Where(node => node.overrideExactRoom != null && node.overrideExactRoom.name.Contains("EndTimes")).First().overrideExactRoom.placedObjects.Where(ppod => ppod != null && ppod.nonenemyBehaviour != null).First().nonenemyBehaviour.gameObject.GetComponentsInChildren<HellDragZoneController>()[0];
             forgeDungeon = null;
             MultiActiveReloadManager.SetupHooks();
+          //---  PrinceOfTheJammed.Init();
+           //--- PoisonGeistEnemy.Init();
+          //---  RiskyAmmoCrate.Register();
+
             TheBullet.Init(); //1                ACTIVE 1
             FunkyBullets.Init(); //2             PASSIVE 1
             NeedleBullets.Init(); //3            PASSIVE 2
@@ -138,26 +148,61 @@ namespace Items
             Günther.Add();//79                   GUN 23
             AK141.Add();//80                     GUN 24
             AK188.Add();//81                     GUN 25
-            InfiniteAK.Add();//                  GUN 26
-            AltarOfKaliber.Init();
+            InfiniteAK.Add();//82                GUN 26
+          //  ---AltarOfKaliber.Init();
             BrokenAltar.Init();
+            PlasmaCannon.Add();//85              GUN 27
+            TheLastChamber.Add();//86            GUN 28
+          //  ---BulletDog.Init();//ENEMY 1
+           //--- HunterKin.Init();//ENEMY 2
+            AutoShotgun.Add();//87               GUN 29
+           // ---CrownOfTheChosen.Init();
+           // ---CrownChanger.InitCrowns();
+                 
+            Vacuum.Add();//88                    GUN 30
+            StickyLauncher.Add();//89            GUN 31
+            SupportContract.Init();//90          ACTIVE 15
+            PanicPistol.Add();//91               GUN 32            
+            NineBarreledGun.Add();//92           GUN 33
+            //---Ak_hillesHeel.Init();
+           //--- TestTargettingSystem.Init();
+            SympathyBullets.Init();//93          PASSIVE 41
+           //--- RefractedGlass.Init();
+            BloatedRounds.Init();//94            PASSIVE 42
+            EyesOfStone.Init();//95              PASSIVE 43
+            ShellBank.Init();//96                PASSIVE 44
+            //Katana.Add();
+            /*
+            HairGel.Init();
+            IgnitionPowder.Init();
+            Magnorbs.Add(); // need to do the orbiting code 
+            PoisonPoltergeist.Init();
+
+            PsiMarker.Init(); //Still need to fix this lol, specifically SpecialOrbitals needs to be fixed.
+            PsiScales.Add();
+            PsiFocus.Init();
+            //Prob wok on Psi Scales tomorrow.
+            SliverBeam.Add();
+            */
+            GoldenRecord.Init();//97             ACTIVE 16
+            
+
+           //--- MunitionsChestController.Init();
+            if (SteamUsername != string.Empty)
+            {
+                SteamUsername = SteamFriends.GetPersonaName();
+                CrownChanger.Change();
+            }
+            
             //SPINEL TONIC BY TankTheta!
             //Bismuth Ammolet sprite by TankTheta!
             //Spirit spride by TankTheta!
-            //Hooks.HardmodeTweaks();
+            
             //Thanks to ExplosivePanda for helping with the code for Soul Forge
             DualGunsManager.AddDual();
             HoveringGunsAdder.AddHovers();
             SynergyFormAdder.AddForms();
-            //MunitionsChestController.Init();
-            foreach (ETGModule etgmodule in ETGMod.GameMods)
-            {
-                bool flag = etgmodule is CelsItems;
-                if (flag)
-                {
-                    this.HasCel = true;
-                }
-            }
+            
             foreach (AdvancedSynergyEntry syn in GameManager.Instance.SynergyManager.synergies)
             {
                 if(syn.NameKey == "#IRONSHOT")
@@ -165,6 +210,7 @@ namespace Items
                     syn.OptionalGunIDs.Add(ETGMod.Databases.Items["billiard_bouncer"].PickupObjectId);
                 }
             }
+
             GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
             {
                new CelSynergies.ExtravaganceSyn()
@@ -181,19 +227,10 @@ namespace Items
             {
                new CelSynergies.LeadWeightSyn()
             }).ToArray<AdvancedSynergyEntry>();
-        /*    GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
-            {
-               new CelSynergies.TippedPoiSyn()
-            }).ToArray<AdvancedSynergyEntry>();
-            */
             GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
             {
                new CelSynergies.DragunRoarSyn()
             }).ToArray<AdvancedSynergyEntry>();
-            /*  GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
-              {
-                 new CelSynergies.TrueDragunfireSyn()
-              }).ToArray<AdvancedSynergyEntry>(); */
             GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
             {
                new CelSynergies.IronManSyn()
@@ -210,11 +247,6 @@ namespace Items
             {
                new CelSynergies.CriticalMassSyn()
             }).ToArray<AdvancedSynergyEntry>();
-         /*   GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
-            {
-               new CelSynergies.RerollSyn()
-            }).ToArray<AdvancedSynergyEntry>();
-            */
             GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
             {
                new CelSynergies.OverclockedSyn()
@@ -259,39 +291,191 @@ namespace Items
             {
                new CelSynergies.AllOutOfLoveSyn()
             }).ToArray<AdvancedSynergyEntry>();
-            /* foreach(AdvancedSynergyEntry entry in GameManager.Instance.SynergyManager.synergies)
-             {
-                 bool flag1 = entry.NameKey == "#IRONSTANCE";
-                 if (flag1)
-                 {
-                     entry.OptionalGunIDs.Add(ETGMod.Databases.Items["billiard_bouncer"].PickupObjectId);
-                 }
-             }
-             */
-            //ETGModConsole.Commands.AddUnit("m_chest", delegate (string[] args)
-            // {
-            //     Chest.Spawn(MunitionsChestController.MChest, (GameManager.Instance.PrimaryPlayer.CenterPosition + new Vector2(1f, 0f)).ToIntVector2(VectorConversions.Round));
-            // });
+            GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
+            {
+               new CelSynergies.BleedingEdgeSyn()
+            }).ToArray<AdvancedSynergyEntry>();
+            GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
+            {
+               new CelSynergies.AbsoluteChaosSyn()
+            }).ToArray<AdvancedSynergyEntry>();
+            GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
+{
+               new CelSynergies.ShakenSyn()
+            }).ToArray<AdvancedSynergyEntry>();
+            GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
+{
+               new CelSynergies.CallingInTheHeavySupportSyn()
+            }).ToArray<AdvancedSynergyEntry>();
+            GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
+{
+               new CelSynergies.BloodlessSyn()
+            }).ToArray<AdvancedSynergyEntry>();
+            GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
+{
+               new CelSynergies.KvotheKingKillerSyn()
+            }).ToArray<AdvancedSynergyEntry>();
+          /* --- GameManager.Instance.SynergyManager.synergies = GameManager.Instance.SynergyManager.synergies.Concat(new AdvancedSynergyEntry[]
+            {
+               new CelSynergies.VacuumChamberSyn()
+            }).ToArray<AdvancedSynergyEntry>();
+          */
+            ETGModConsole.Commands.AddGroup("cel", args =>
+            {
+            });
 
+            //---ETGModConsole.Commands.GetGroup("cel").AddUnit("crown_override", this.CrownOverride);
+            //---ETGModConsole.Commands.GetGroup("cel").AddUnit("mchest", this.SpawnMChest);
+            ETGModConsole.Commands.GetGroup("cel").AddUnit("toggle_eyestrain", ToggleEyeStrain);
+           //--- ETGModConsole.Commands.GetGroup("cel").AddUnit("get_risk_value", GetRiskStatValue);
             Log($"{Modname} v{Version} started successfully.", Color);
-            Log($"Link to Changelog https://pastebin.com/TPvwpdGJ", Color);
+            Log($"Link to Changelog https://pastebin.com/0LeBBa57", Color);
         }
+        private void CrownOverride(string[] args)
+        {
+            if (args.Length < 1)
+            {
+                ETGModConsole.Log("At least 1 arguments required.");
+            }
+            else
+            {
+                SteamUsername = args[0];
+                ETGModConsole.Log($"Name : {SteamUsername}");
+                CrownChanger.Change();
+            }
+        }
+        private void SpawnMChest(string[] args)
+        {
+            Chest testMChest = MunitionsChestController.MChest;
+            if (!testMChest.IsLocked)
+            {
+                testMChest.IsLocked = true;
+                Log("WHY ISNT THE CHEST LOCKED????????");
+            }
+            Chest.Spawn(testMChest, (GameManager.Instance.PrimaryPlayer.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true)));
+            
+        }
+        private void GetRiskStatValue(string[] args)
+        {
+            foreach(PlayerController player in GameManager.Instance.AllPlayers)
+            {
+                if(player == GameManager.Instance.PrimaryPlayer)
+                {
+                    Log("Player One risk value: " + player.gameObject.GetOrAddComponent<RiskStat>().RiskAMT.ToString());
+                }
+                else
+                {
+                    Log("Player Two risk value: " + player.gameObject.GetOrAddComponent<RiskStat>().RiskAMT.ToString());
+                }
+            }
+        }
+        private void ToggleEyeStrain(string[] args)
+        {
+            if (SaveAPIManager.GetFlag(CustomDungeonFlags.EYESTRAINDISABLE) == true)
+            {
+                ETGModConsole.Log("Potentially eye=straining effects turned off!");
+                SaveAPIManager.SetFlag(CustomDungeonFlags.EYESTRAINDISABLE, true);
+            }
+            else
+            {
+                ETGModConsole.Log("Potentially eye=straining effects turned on!");
+                SaveAPIManager.SetFlag(CustomDungeonFlags.EYESTRAINDISABLE, false);
+            }
+        }
+
         public static void Log(string text, string color = "FFFFFF")
         {
             ETGModConsole.Log($"<color={color}>{text}</color>");
         }
 
-
+        public static IEnumerator IfOtherModsExist()
+        {
+            yield return new WaitForSeconds(3);
+            ModdedLootAdditions();
+            yield break;
+        }
         public override void Exit()
         {
             
         }
-        
-        
-        private bool HasCel = false;
-        private bool HasRtr = false;
+        public static void ModdedLootAdditions()
+        {
+            GenericLootTable Table = MunitionsChestController.MChest.lootTable.lootTable;
+            ETGModConsole.Log("Test 1");
+            Table.defaultItemDrops = new WeightedGameObjectCollection();
+            Table.defaultItemDrops.elements = new List<WeightedGameObject>();
+            try
+            {
+                if (ModdedMunitionsIDs.Any())
+                {
+                    ETGModConsole.Log("Test 2");
+                    foreach (string s in ModdedMunitionsIDs)
+                    {
+                        if (Game.Items.ContainsID(s))
+                        {
+                            ETGModConsole.Log("Test 3");
+                            int id = ETGMod.Databases.Items[s].PickupObjectId;
+                            ETGModConsole.Log("Test 4");
+                            Table.defaultItemDrops.elements.Add(new WeightedGameObject()
+                            {
+                                pickupId = id,
+                                weight = 1,
+                                forceDuplicatesPossible = false,
+                                additionalPrerequisites = new DungeonPrerequisite[0]
+                            });
+                        }
+                    }
+                    
 
-        //written by @UnstableStrafe#3928 with help from KyleTheScientist, Neighborino, Glorfindel, Retrash, Reto, TheTurtleMelon, TankTheta, Spapi, and Eternal Frost
+                }
+            }
+            catch(Exception e)
+            {
+                ETGModConsole.Log(e.ToString());
+                
+            }
+        }
+        public static List<string> ModdedMunitionsIDs = new List<string>() 
+        {
+
+            //-----
+            //OMITB items
+
+
+            //----
+            //Prismatism items
+
+            //----
+            //KnifeToGunFight items
+
+            //----
+            //Retrash items
+            "Tiny Bullets",
+            //----
+            //An3s items
+
+            //----
+            //SomeBunny items
+
+            //----
+            //Glau items
+
+            //----
+            //Roundking items
+
+            //----
+            //Planetside items
+
+
+            //----
+            //Chiper items
+
+            //----
+            
+
+        };
+
+        //written by @UnstableStrafe#3928 with help from KyleTheScientist, Neighborino, Glorfindel, Retrash, Reto, TheTurtleMelon, TankTheta, Spapi, Eternal Frost, Some Bunny, NotABot, BlazeyKat, ExplosivePanda, Nevernamed
     }
 }
 

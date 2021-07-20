@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using Gungeon;
-using MonoMod;
-using UnityEngine;
+﻿using Gungeon;
 
 namespace BasicGun
 {

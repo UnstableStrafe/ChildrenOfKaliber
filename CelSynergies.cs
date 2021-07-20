@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Items
 {
@@ -11,10 +8,9 @@ namespace Items
         {
             public ExtravaganceSyn()
             {
-                this.NameKey = "Extravagance";
+                this.NameKey = " ";
                 this.MandatoryItemIDs = new List<int>
-                {
-                    ETGMod.Databases.Items["Auric Vial"].PickupObjectId,
+                { 
                     532
                 };
                 this.IgnoreLichEyeBullets = true;
@@ -202,26 +198,6 @@ namespace Items
 
             }
         }
-        public class RerollSyn : AdvancedSynergyEntry
-        {
-            public RerollSyn()
-            {
-                this.NameKey = "Reroll!";
-                this.MandatoryItemIDs = new List<int>
-                {
-                    ETGMod.Databases.Items["D6"].PickupObjectId
-
-                };
-                this.MandatoryGunIDs = new List<int>
-                {
-                    ETGMod.Databases.Items["R.G.G."].PickupObjectId
-
-                };
-                this.IgnoreLichEyeBullets = true;
-                this.statModifiers = new List<StatModifier>(0);
-                this.bonusSynergies = new List<CustomSynergyType>();
-            }
-        }
 
         public class OverclockedSyn : AdvancedSynergyEntry
         {
@@ -373,9 +349,9 @@ namespace Items
                 };
                 this.ActiveWhenGunUnequipped = false;
                 this.statModifiers = new List<StatModifier>
-                    {
-                        StatModifier.Create(PlayerStats.StatType.AdditionalClipCapacityMultiplier, StatModifier.ModifyMethod.MULTIPLICATIVE, .366666f)
-                    };
+                {
+                    StatModifier.Create(PlayerStats.StatType.AdditionalClipCapacityMultiplier, StatModifier.ModifyMethod.MULTIPLICATIVE, .366666f)
+                };
                 this.IgnoreLichEyeBullets = false;
                 this.bonusSynergies = new List<CustomSynergyType>();
             }
@@ -443,5 +419,195 @@ namespace Items
                 this.bonusSynergies = new List<CustomSynergyType>();
             }
         }
+        public class BleedingEdgeSyn : AdvancedSynergyEntry
+        {
+            public BleedingEdgeSyn()
+            {
+                this.NameKey = "Bleeding Edge";
+                this.OptionalGunIDs = new List<int>
+                {
+                    341,
+                    740
+                };
+                this.MandatoryItemIDs = new List<int>
+                {
+                    ETGMod.Databases.Items["Sawblade"].PickupObjectId,
+                };
+                this.RequiresAtLeastOneGunAndOneItem = true;
+                this.IgnoreLichEyeBullets = false;
+                this.NumberObjectsRequired = 2;
+                this.statModifiers = new List<StatModifier>(0);
+                this.bonusSynergies = new List<CustomSynergyType>();
+            }
+        }
+        public class AbsoluteChaosSyn : AdvancedSynergyEntry
+        {
+
+            public AbsoluteChaosSyn()
+            {
+                this.NameKey = "Absolute Insanity";
+                this.MandatoryItemIDs = new List<int>
+                {
+                    ETGMod.Databases.Items["Mininomocon"].PickupObjectId,
+                    
+                };
+                this.MandatoryGunIDs = new List<int>
+                {
+                    ETGMod.Databases.Items["R.G.G."].PickupObjectId
+                };
+                this.IgnoreLichEyeBullets = true;
+                this.statModifiers = new List<StatModifier>(0);
+                this.bonusSynergies = new List<CustomSynergyType>();
+            }
+        }
+        public class ShakenSyn : AdvancedSynergyEntry
+        {
+
+            public ShakenSyn()
+            {
+                this.NameKey = "S H A K E N";
+                this.MandatoryGunIDs = new List<int>
+                {
+                    ETGMod.Databases.Items["Skeleton"].PickupObjectId,
+                    406
+                };
+                this.IgnoreLichEyeBullets = false;
+                this.statModifiers = new List<StatModifier>(0);
+                this.bonusSynergies = new List<CustomSynergyType>();
+                ActiveWhenGunUnequipped = false;
+            }
+        }
+        public class CallingInTheHeavySupportSyn : AdvancedSynergyEntry
+        {
+
+            public CallingInTheHeavySupportSyn()
+            {
+                this.NameKey = "Calling In The Heavy Support";
+                this.MandatoryItemIDs = new List<int>
+                {
+                    ETGMod.Databases.Items["Support Contract"].PickupObjectId,
+                    529
+                };
+                this.IgnoreLichEyeBullets = true;
+                this.statModifiers = new List<StatModifier>(0);
+                this.bonusSynergies = new List<CustomSynergyType>();
+                
+            }
+        }
+        public class GreatLeadershipSyn : AdvancedSynergyEntry
+        {
+
+            public GreatLeadershipSyn()
+            {
+                this.NameKey = "Great Leadership";
+                this.MandatoryItemIDs = new List<int>
+                {
+                    ETGMod.Databases.Items["Support Contract"].PickupObjectId,
+                    527
+                };
+                this.IgnoreLichEyeBullets = true;
+                this.statModifiers = new List<StatModifier>(0);
+                this.bonusSynergies = new List<CustomSynergyType>();
+
+            }
+        }
+
+        public class BloodlessSyn : AdvancedSynergyEntry
+        {
+            public BloodlessSyn()
+            {
+                NameKey = "Bloodless";
+                this.MandatoryItemIDs = new List<int>
+                {
+                    ETGMod.Databases.Items["Sympathy Bullets"].PickupObjectId,
+                };
+                OptionalItemIDs = new List<int>
+                {
+                    167,
+                    524,
+                };
+                OptionalGunIDs = new List<int>
+                {
+                    333,
+
+                };
+                IgnoreLichEyeBullets = true;
+                NumberObjectsRequired = 2;
+                this.statModifiers = new List<StatModifier>(0);
+                this.bonusSynergies = new List<CustomSynergyType>();
+
+            }
+        }
+        public class KvotheKingKillerSyn : AdvancedSynergyEntry
+        {
+            public KvotheKingKillerSyn()
+            {
+                NameKey = "Kvothe, Kingkiller";
+                this.MandatoryItemIDs = new List<int>
+                {
+                    ETGMod.Databases.Items["Sympathy Bullets"].PickupObjectId,
+                };
+                MandatoryGunIDs = new List<int>
+                {
+                    506
+                };
+                IgnoreLichEyeBullets = false;
+                NumberObjectsRequired = 2;
+                this.statModifiers = new List<StatModifier>
+                {
+                    StatModifier.Create(PlayerStats.StatType.Accuracy, StatModifier.ModifyMethod.MULTIPLICATIVE, .5f),
+                    StatModifier.Create(PlayerStats.StatType.RateOfFire, StatModifier.ModifyMethod.MULTIPLICATIVE, 1.25f),
+                    StatModifier.Create(PlayerStats.StatType.DamageToBosses, StatModifier.ModifyMethod.MULTIPLICATIVE, 1.5f),
+                    StatModifier.Create(PlayerStats.StatType.RangeMultiplier, StatModifier.ModifyMethod.MULTIPLICATIVE, 5),
+                };
+                this.bonusSynergies = new List<CustomSynergyType>();
+                ActiveWhenGunUnequipped = false;
+
+            }
+        }
+        public class VacuumChamberSyn : AdvancedSynergyEntry
+        {
+
+            public VacuumChamberSyn()
+            {
+                this.NameKey = "Vacuum Chamber";
+                this.MandatoryGunIDs = new List<int>
+                {
+                    ETGMod.Databases.Items["Vacuum"].PickupObjectId,
+                };
+                this.MandatoryItemIDs = new List<int>
+                {
+                    155
+                };
+                this.IgnoreLichEyeBullets = true;
+                this.statModifiers = new List<StatModifier>(0);
+                this.bonusSynergies = new List<CustomSynergyType>();
+                ActiveWhenGunUnequipped = false;
+            }
+        }
+        //public class StrongCoolantSyn : AdvancedSynergyEntry
+        //{
+        //    public StrongCoolantSyn()
+        //    {
+        //        this.NameKey = "Strong Coolant";
+
+        //        this.MandatoryGunIDs = new List<int>
+        //        {
+        //            ETGMod.Databases.Items["heater_assault_rifle"].PickupObjectId,
+        //        };
+        //        this.OptionalItemIDs = new List<int>
+        //        {
+        //            109,
+        //            170,
+        //            364,
+
+        //        };
+        //        this.IgnoreLichEyeBullets = false;
+        //        this.NumberObjectsRequired = 2;
+        //        this.statModifiers = new List<StatModifier>(0);
+        //        this.ActiveWhenGunUnequipped = false;
+        //        this.bonusSynergies = new List<CustomSynergyType>();
+        //    }
+        //}
     }
 }

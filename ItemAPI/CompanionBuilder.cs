@@ -2,11 +2,9 @@
 using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using UnityEngine;
 using MonoMod.RuntimeDetour;
-using Brave.BulletScript;
 using DirectionType = DirectionalAnimation.DirectionType;
 using FlipType = DirectionalAnimation.FlipType;
 

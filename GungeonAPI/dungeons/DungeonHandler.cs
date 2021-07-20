@@ -1,16 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-using UnityEngine;
 using Dungeonator;
-using Random = UnityEngine.Random;
-using CustomShrineData = GungeonAPI.ShrineFactory.CustomShrineController;
 using RoomData = GungeonAPI.RoomFactory.RoomData;
 using RoomCategory = PrototypeDungeonRoom.RoomCategory;
-using RoomNormalSubCategory = PrototypeDungeonRoom.RoomNormalSubCategory;
-using RoomBossSubCategory = PrototypeDungeonRoom.RoomBossSubCategory;
 using RoomSpecialSubCategory = PrototypeDungeonRoom.RoomSpecialSubCategory;
 namespace GungeonAPI
 {
