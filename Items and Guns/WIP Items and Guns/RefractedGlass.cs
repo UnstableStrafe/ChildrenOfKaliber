@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Gungeon;
 
@@ -83,7 +83,7 @@ namespace Items
             Owner.stats.RecalculateStats(Owner, false, false);
             return base.Drop(player);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (Owner)
             {

@@ -1,11 +1,11 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
     class Skeleton : AdvancedGunBehaviour
     {
-        
+        public static int itemID;
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Skeleton", "skeleton");
@@ -15,7 +15,7 @@ namespace Items
             gun.SetLongDescription("It is not unheard of for a mimic to die with its last meal still mid-digestion. How the Gungeon could possibly consider this as a gun is best left to the imagination.");
             gun.SetupSprite(null, "skeleton_idle_001", 13);
             gun.SetAnimationFPS(gun.shootAnimation, 12);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -38,10 +38,10 @@ namespace Items
             projectile.baseData.damage *= 1;
             projectile.baseData.speed *= 1f;            
             projectile.transform.parent = gun.barrelOffset;
-            projectile.SetProjectileSpriteRight("skeleton_projectile_001", 16, 7, null, null);
+            projectile.SetProjectileSpriteRight("skeleton_projectile_001", 16, 7);
             gun.sprite.IsPerpendicular = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
+            itemID = gun.PickupObjectId;
         }
 
         private bool HasReloaded;

@@ -1,5 +1,5 @@
 ﻿using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -10,7 +10,7 @@ namespace Items
         {
             string itemName = "Holoprinter";
 
-            string resourceName = "Items/Resources/holoprinter.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/holoprinter.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -30,7 +30,7 @@ namespace Items
 
 
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             base.DoEffect(user);
             if(StoredGunId == -3)
@@ -96,13 +96,15 @@ namespace Items
         [SerializeField]
         private int StoredGunId = -3;
 
-        public DebrisObject Drop(PlayerController player)
+        public override void OnPreDrop(PlayerController user)
         {
-            DebrisObject debrisObject = base.Drop(player);
-            debrisObject.GetComponent<Holoprinter>().m_pickedUpThisRun = true;
-
-            return debrisObject;
+            user.inventory.GunLocked.SetOverride("Holoprinter Deploy", false);
+            user.inventory.DestroyGun(HologramGun);
+            
+            this.CanBeSold = true;
+            this.CanBeDropped = true;
+            base.OnPreDrop(user);
         }
-         
+
     }
 }

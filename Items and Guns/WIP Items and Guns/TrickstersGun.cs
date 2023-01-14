@@ -2,7 +2,7 @@
 using Dungeonator;
 using UnityEngine;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -38,7 +38,7 @@ namespace Items
         {
             base.Pickup(player);
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             EnemyListing(user);
         }

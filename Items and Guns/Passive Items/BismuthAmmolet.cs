@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Dungeonator;
 
@@ -11,7 +11,7 @@ namespace Items
         {
             string itemName = "Bismuth Ammolet";
 
-            string resourceName = "Items/Resources/bismuth_ammolet.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/bismuth_ammolet.png";
 
             GameObject obj = new GameObject(itemName);
 

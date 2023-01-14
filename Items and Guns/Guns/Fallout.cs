@@ -1,11 +1,11 @@
 ﻿
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
 {
-    class Fallout : GunBehaviour
+    class Fallout : AdvancedGunBehaviour
     {
         public static void Add()
         {
@@ -18,7 +18,7 @@ namespace Items
             gun.SetupSprite(null,"fallout_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 4);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -28,6 +28,7 @@ namespace Items
             gun.DefaultModule.angleVariance = 0f;
             gun.DefaultModule.cooldownTime = .75f;
             gun.DefaultModule.numberOfShotsInClip = 1;
+            gun.PreventNormalFireAudio = false;
             Gun gun2 = PickupObjectDatabase.GetById(151) as Gun;
             Gun gun3 = PickupObjectDatabase.GetById(32) as Gun;
             gun.gunSwitchGroup = gun3.gunSwitchGroup;
@@ -48,8 +49,8 @@ namespace Items
             projectile.baseData.speed *= 2f;
             projectile.baseData.force *= 4f;
             projectile.baseData.range *= 1000;
-            projectile.SetProjectileSpriteRight("fallout_smol_projectile_001", 31, 8, null, null);
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            projectile.SetProjectileSpriteRight("fallout_smol_projectile_001", 31, 8);
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             gun.AddToSubShop(ItemBuilder.ShopType.Goopton);
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
 
@@ -58,15 +59,12 @@ namespace Items
 
         private bool HasReloaded;
 
-        protected void Update()
+        protected override void Update()
         {
             if (gun.CurrentOwner)
             {
 
-                if (gun.PreventNormalFireAudio)
-                {
-                    this.gun.PreventNormalFireAudio = true;
-                }
+               
                 if (!gun.IsReloading && !HasReloaded)
                 {
                     this.HasReloaded = true;
@@ -91,7 +89,7 @@ namespace Items
         public override void OnPostFired(PlayerController player, Gun gun)
         {
             
-            gun.PreventNormalFireAudio = false;
+          
         }
 
 

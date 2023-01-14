@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Dungeonator;
 
@@ -22,7 +22,7 @@ namespace Items
             gun.SetupSprite(null, "panic_pistol_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.MEDIUM_BLASTER;
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -44,13 +44,13 @@ namespace Items
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
-            projectile.transform.parent = gun.barrelOffset;
+           
             projectile.baseData.damage *= 1;
             projectile.baseData.speed *= 1f;
             projectile.baseData.force *= 1f;
             projectile.baseData.range *= .75f;
-            projectile.SetProjectileSpriteRight("panic_bolt", 9, 5, null, null);
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            projectile.SetProjectileSpriteRight("panic_bolt", 9, 5);
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;

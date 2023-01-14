@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System.Collections;
 namespace Items
 {
@@ -11,7 +11,7 @@ namespace Items
         {
             string itemName = "Shocking Battery";
 
-            string resourceName = "Items/Resources/shocking_battery.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/shocking_battery.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -34,7 +34,7 @@ namespace Items
 
         float speedBuff = -1;
         float duration = 8f;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
 
             AkSoundEngine.PostEvent("Play_WPN_zapper_shot_01", base.gameObject);
@@ -63,6 +63,8 @@ namespace Items
             speedBuff = 2;
             user.stats.RecalculateStats(user, false, false);
             user.StartCoroutine(DoGoop(user));
+            CanBeDropped = false;
+            CanBeSold = false;
         }
         private DamageTypeModifier m_electricityImmunity;
         private IEnumerator DoGoop(PlayerController player)
@@ -98,6 +100,8 @@ namespace Items
             speedBuff = -1;
             user.StartCoroutine(DelayedRemoveElectricImmunity(user));
             user.stats.RecalculateStats(user, false, false);
+            CanBeDropped = true;
+            CanBeSold = true;
         }
         private IEnumerator DelayedRemoveElectricImmunity(PlayerController player)
         {

@@ -1,11 +1,12 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
 {
     class SpiritOfTheDragun : GunBehaviour
     {
+        public static int gunID;
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Spirit Of The Dragun", "spirit_of_the_dragun");
@@ -16,7 +17,7 @@ namespace Items
             gun.SetupSprite(null, "spirit_of_the_dragun_idle_001", 13);
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.SetAnimationFPS(gun.reloadAnimation, 10);
-            gun.AddProjectileModuleFrom("ak-47", true, false);
+            gun.AddProjectileModuleFrom("ak-47");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Burst;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -46,13 +47,14 @@ namespace Items
             PierceProjModifier orAddComponent = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             orAddComponent.penetration -= 50;
             projectile.GetComponent<TrailController>();
-            projectile.transform.parent = gun.barrelOffset;
+          //  projectile.transform.parent = gun.barrelOffset;
             projectile.ignoreDamageCaps = true;
             gun.sprite.IsPerpendicular = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
+            gunID = gun.PickupObjectId;
         }
         private bool HasReloaded;
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

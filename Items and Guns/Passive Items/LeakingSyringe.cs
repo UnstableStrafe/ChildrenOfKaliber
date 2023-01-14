@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -11,7 +11,7 @@ namespace Items
         {
             string itemName = "Leaking Syringe";
 
-            string resourceName = "Items/Resources/leaking_syringe.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/leaking_syringe.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -31,7 +31,7 @@ namespace Items
         }
         private float Boost = 3f, lastBoost = -1;
         
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
             if (Boost == lastBoost) return;

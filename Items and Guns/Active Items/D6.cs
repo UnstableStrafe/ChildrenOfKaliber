@@ -1,6 +1,6 @@
 ﻿using Gungeon;
 using Dungeonator;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,11 +12,12 @@ namespace Items
 {
     class D6 : PlayerItem
     {
+        public static int itemID;
         public static void Init()
         {
 
             string itemName = "D6";
-            string resourceName = "Items/Resources/d6.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/d6.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -33,6 +34,7 @@ namespace Items
             item.sprite.IsPerpendicular = true;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 1000f);
             item.consumable = false;
+            itemID = item.PickupObjectId;
         }
         public override void Pickup(PlayerController player)
         {
@@ -45,7 +47,7 @@ namespace Items
             
             return debrisObject;
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             base.DoEffect(user);
             FindItem(user);
@@ -53,7 +55,7 @@ namespace Items
         }
         private void FindItem(PlayerController user)
         {
-
+            
             pickupsInRoom.Clear();
             DebrisObject[] shitOnGround = FindObjectsOfType<DebrisObject>();
             foreach (DebrisObject debris in shitOnGround)
@@ -87,7 +89,7 @@ namespace Items
                 if (gunsInRoom.Any())
                 {
                     Gun targetGun = BraveUtility.GetClosestToPosition(gunsInRoom, user.CenterPosition);
-                    if (targetGun)
+                    if (targetGun && targetGun != null)
                     {
                         RerollGun(targetGun);
                     }

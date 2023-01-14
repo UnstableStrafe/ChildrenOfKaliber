@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -14,7 +14,7 @@ namespace Items
             gun.SetLongDescription("why are you reading this?.");
             gun.SetupSprite(null, "drone_2_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 15);
-            gun.AddProjectileModuleFrom("plasma_rifle", true, false);
+            gun.AddProjectileModuleFrom("plasma_rifle");
             gun.SetBaseMaxAmmo(69);
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(229) as Gun).gunSwitchGroup;
             gun.DefaultModule.ammoCost = 1;
@@ -39,12 +39,12 @@ namespace Items
             projectile.transform.parent = gun.barrelOffset;
             projectile.sprite.renderer.enabled = true;
 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;
 
-        protected void Update()
+        public override void Update()
         {
             PlayerController player = gun.CurrentOwner as PlayerController;
             if (gun.CurrentOwner)

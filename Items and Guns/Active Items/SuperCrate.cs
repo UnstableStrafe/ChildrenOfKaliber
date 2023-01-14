@@ -1,21 +1,19 @@
 ﻿using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 
 namespace Items
 {
     class SuperCrate : PlayerItem
     {
-       
+        public static int itemID;
+
         public static void Init()
         {
 
-            //UFF GILDED HYDRA
-            //BUFF GILDED HYDRA
-            //BUFF GILDED HYDRA
-            //BUFF TURBO GUN
+
             string itemName = "Suspiscious Strongbox";
-            string resourceName = "Items/Resources/strang_strongbox.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/strang_strongbox.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -37,7 +35,7 @@ namespace Items
             item.quality = PickupObject.ItemQuality.S;
             item.sprite.IsPerpendicular = true;
             item.AddToSubShop(ItemBuilder.ShopType.Flynt);
-
+            itemID = item.PickupObjectId;
         }
 
        // private bool HasBeenPickedUp;
@@ -61,7 +59,7 @@ namespace Items
 
         }
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             IntVector2 bestRewardLocation = user.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true);
             Chest chest = GameManager.Instance.RewardManager.Rainbow_Chest;

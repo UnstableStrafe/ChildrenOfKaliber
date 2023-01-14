@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Dungeonator;
 
@@ -31,7 +31,7 @@ namespace Items
 
 
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             base.DoEffect(user);
             BossFinder(user);

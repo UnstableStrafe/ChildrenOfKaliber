@@ -1,5 +1,5 @@
 ﻿using System;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -8,11 +8,12 @@ namespace Items
 {
     class Mininomicon : PassiveItem
     {
+        public static int itemID;
         public static void Init()
         {
 
             string itemName = "Mininomocon";
-            string resourceName = "Items/Resources/mininomicon.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/mininomicon.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -27,6 +28,7 @@ namespace Items
             item.quality = PickupObject.ItemQuality.A;
             item.sprite.IsPerpendicular = true;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
+            itemID = item.PickupObjectId;
         }
         private Projectile ReplacementProjectile1;
         private Projectile HandlePreFireProjectileModification(Gun sourceGun, Projectile sourceProjectile)

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Dungeonator;
 
@@ -11,7 +11,7 @@ namespace Items
         {
 
             string itemName = "Crystal Heart";
-            string resourceName = "Items/Resources/crystal_heart.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/crystal_heart.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -98,7 +98,7 @@ namespace Items
 
         }
 
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.OnDestroy();
         }

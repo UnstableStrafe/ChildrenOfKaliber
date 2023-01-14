@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 namespace Items
 {
     class DroneBuddy1Gun : GunBehaviour 
@@ -14,7 +14,7 @@ namespace Items
             gun.SetupSprite(null, "little_drone_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
             gun.SetAnimationFPS(gun.reloadAnimation, 10);
-            gun.AddProjectileModuleFrom("future_assault_rifle", true, false);
+            gun.AddProjectileModuleFrom("future_assault_rifle");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -39,16 +39,16 @@ namespace Items
             projectile.baseData.damage *= 1;
             projectile.baseData.speed *= 1f;
             projectile.baseData.force *= 1f;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
 
 
-        private int i;
+       
 
         private bool HasReloaded;
 
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

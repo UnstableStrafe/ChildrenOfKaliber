@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 
 namespace Items
 {
     public class NeedleBullets: PassiveItem
     {
+        public static int itemID;
         public static void Init()
         {
             
             string itemName = "Needle Bullets";
-            string resourceName = "Items/Resources/needle_bullets.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/needle_bullets.png";
           
             GameObject obj = new GameObject(itemName);
           
@@ -35,6 +36,7 @@ namespace Items
             item.sprite.IsPerpendicular = true;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);
+            itemID = item.PickupObjectId;
         }
     }
 }

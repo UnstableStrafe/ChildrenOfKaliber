@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Gungeon;
 using Dungeonator;
 using UnityEngine;
@@ -25,7 +25,7 @@ namespace Items
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
             for (int i = 0; i < 3; i++)
             {
-                GunExt.AddProjectileModuleFrom(gun, "ak-47", true, false);
+                GunExt.AddProjectileModuleFrom(gun, "ak-47");
             }
             foreach (ProjectileModule projectileModule in gun.Volley.projectiles)
             {
@@ -76,7 +76,7 @@ namespace Items
             gun.encounterTrackable.EncounterGuid = "vrooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooom";
             gun.sprite.IsPerpendicular = true;
             gun.gunClass = GunClass.SILLY;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
 
         }
 

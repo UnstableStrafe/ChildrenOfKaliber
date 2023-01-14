@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -14,7 +14,7 @@ namespace Items
         {
             string itemName = "Bloated Rounds";
 
-            string resourceName = "Items/Resources/bloated_rounds.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/bloated_rounds.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -48,6 +48,7 @@ namespace Items
         public override void Pickup(PlayerController player)
         {
             player.PostProcessProjectile += PostProcess;
+            cached_owner = player;
             base.Pickup(player);
 
         }
@@ -56,14 +57,16 @@ namespace Items
             DebrisObject debrisObject = base.Drop(player);
             debrisObject.GetComponent<BloatedRounds>().m_pickedUpThisRun = true;
             player.PostProcessProjectile -= PostProcess;
+            cached_owner = null;
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
-            Owner.PostProcessProjectile -= PostProcess;
+            cached_owner.PostProcessProjectile -= PostProcess;
+            cached_owner = null;
             base.OnDestroy();
         }
-
+        private PlayerController cached_owner;
     }
     public class PreventBloatDuping : MonoBehaviour
     {

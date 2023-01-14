@@ -42,7 +42,8 @@ namespace Items
                     typeof(PlayerController).GetProperty("CanDetectHiddenEnemies", BindingFlags.Public | BindingFlags.Instance).GetGetMethod(),
                     typeof(Hooks).GetMethod("HiddenDetectionHook"));
                // Hook gunSpawnHook = new Hook(typeof(LootEngine).GetMethod("PostprocessGunSpawn", BindingFlags.Static | BindingFlags.NonPublic), typeof(Hooks).GetMethod("HandleGunModHook"));
-               // Hook activeUseHook = new Hook(typeof(PlayerController).GetMethod("UseItem", BindingFlags.Instance | BindingFlags.NonPublic), typeof(Hooks).GetMethod("OnUsedActiveHook"));
+                Hook activeUseHook = new Hook(typeof(PlayerController).GetMethod("UseItem", BindingFlags.Instance | BindingFlags.NonPublic), typeof(Hooks).GetMethod("OnUsedActiveHook"));
+                
             }
             catch (Exception e)
             {
@@ -50,6 +51,9 @@ namespace Items
                 ETGModConsole.Log(e.Message);
             }
         }
+        
+
+
         public static void OnUsedActiveHook(Action<PlayerController> orig, PlayerController player)
         {
             PlayerItem active = player.CurrentItem;
@@ -113,6 +117,7 @@ namespace Items
             {
                 gun.gameObject.AddComponent<PerilousParticles>();
             }
+            orig(gun);
         }
         public static List<AGDEnemyReplacementTier> m_cachedReplacementTiers = GameManager.Instance.EnemyReplacementTiers;
 
@@ -129,7 +134,8 @@ namespace Items
             RGG.RandomizeStats();
             Replacement.RunReplace(m_cachedReplacementTiers);
             PrimeSaw.HasGottenVice = false;
-            CrownChanger.Change();
+            ChestReplacementHooks.amountPerRun = 0;
+            //CrownChanger.Change();
         }
 
 
@@ -186,7 +192,8 @@ namespace Items
             RGG.RandomizeStats();
             Replacement.RunReplace(m_cachedReplacementTiers);      
             PrimeSaw.HasGottenVice = false;
-            CrownChanger.Change();
+            ChestReplacementHooks.amountPerRun = 0;
+            //CrownChanger.Change();
         }
         public static void BuffGuns()
         {
@@ -201,7 +208,8 @@ namespace Items
         {
            return Gungeon.Game.Items[console_id].PickupObjectId;
         }
-        
+
+       
         public static PlayerController playerS;
     }
 }

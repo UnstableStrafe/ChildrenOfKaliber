@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -30,40 +30,40 @@ namespace Items
                     passive.quality = PickupObject.ItemQuality.EXCLUDED;
                 }
             }
-            bool flag = string.IsNullOrEmpty(CelsItems.SteamUsername);
-            if (CelsItems.SteamUsername == "UnstableStrafe")
+            bool flag = string.IsNullOrEmpty(ChildrenOfKaliberModule.SteamUsername);
+            if (ChildrenOfKaliberModule.SteamUsername == "UnstableStrafe")
             {
                 BaseCrown.quality = PickupObject.ItemQuality.EXCLUDED;
                 CrownForms[0].quality = PickupObject.ItemQuality.S;
             }
-            else if (CelsItems.SteamUsername == "Nevernamed")
+            else if (ChildrenOfKaliberModule.SteamUsername == "Nevernamed")
             {
                 BaseCrown.quality = PickupObject.ItemQuality.EXCLUDED;
                 CrownForms[1].quality = PickupObject.ItemQuality.S;
 
             }
-            else if (CelsItems.SteamUsername == "TheTurtleMelon")
+            else if (ChildrenOfKaliberModule.SteamUsername == "TheTurtleMelon")
             {
 
                 BaseCrown.quality = PickupObject.ItemQuality.EXCLUDED;
                 CrownForms[2].quality = PickupObject.ItemQuality.S;
             }
-            else if (CelsItems.SteamUsername == "SirWow")
+            else if (ChildrenOfKaliberModule.SteamUsername == "SirWow")
             {
                 BaseCrown.quality = PickupObject.ItemQuality.EXCLUDED;
                 CrownForms[3].quality = PickupObject.ItemQuality.S;
             }
-            else if (CelsItems.SteamUsername == "Some Bunny")
+            else if (ChildrenOfKaliberModule.SteamUsername == "Some Bunny")
             {
                 BaseCrown.quality = PickupObject.ItemQuality.EXCLUDED;
                 CrownForms[4].quality = PickupObject.ItemQuality.S;
             }            
-            else if (CelsItems.SteamUsername == "BleakBubbles")
+            else if (ChildrenOfKaliberModule.SteamUsername == "BleakBubbles")
             {
                 BaseCrown.quality = PickupObject.ItemQuality.EXCLUDED;
                 CrownForms[5].quality = PickupObject.ItemQuality.S;
             }
-            else if (CelsItems.SteamUsername == "LordOfHippos")
+            else if (ChildrenOfKaliberModule.SteamUsername == "LordOfHippos")
             {
                 //("Phantom's Crown");
                 //("Steal Your Heart!");
@@ -71,7 +71,7 @@ namespace Items
                 //instantly kills hit bosses that are on low hp
 
             }
-            else if (CelsItems.SteamUsername == "Neighborino")
+            else if (ChildrenOfKaliberModule.SteamUsername == "Neighborino")
             {
                 //("Frostfire Crown");
                 //("Wandering...");
@@ -79,27 +79,27 @@ namespace Items
                 //Adds two additional fire and ice projectiles that have orbital bullet effects with each shot.
             }
 
-            else if (CelsItems.SteamUsername == "The explosive panda")
+            else if (ChildrenOfKaliberModule.SteamUsername == "The explosive panda")
             {
                 //("Shimmering Crown");
                 //("Cult Of Shadows");
                 
                 //Causes random effects
             }
-            else if (CelsItems.SteamUsername == "N0tAB0t")
+            else if (ChildrenOfKaliberModule.SteamUsername == "N0tAB0t")
             {
 
                 //("N0R Crown");
                 //("!Crown");
                 
             }
-            else if (CelsItems.SteamUsername == "KyleTheScientist")
+            else if (ChildrenOfKaliberModule.SteamUsername == "KyleTheScientist")
             {
                 //("Creator's Crown");
                 //("The One To Rule All");
                 
             }
-            else if (CelsItems.SteamUsername == "Retromation")
+            else if (ChildrenOfKaliberModule.SteamUsername == "Retromation")
             {
                 //("Lich Slayer's Crown");
                 //("Supreme");
@@ -107,13 +107,13 @@ namespace Items
                 //Massive Boss Damage up, ignores boss dps cap
             }
 
-            else if (CelsItems.SteamUsername == "YaBoiLazer")
+            else if (ChildrenOfKaliberModule.SteamUsername == "YaBoiLazer")
             {
                 //("Laser Crown");
                 //("Pew Pew");
                 
             }
-            else if (CelsItems.SteamUsername == "W.D Cipher")
+            else if (ChildrenOfKaliberModule.SteamUsername == "W.D Cipher")
             {
                 //("Low-Quality Crown");
                 //("Ascendant");
@@ -121,59 +121,59 @@ namespace Items
                 //Like Key Of Chaos, but more random
 
             }
-            else if (CelsItems.SteamUsername == "Glaurung4567")
+            else if (ChildrenOfKaliberModule.SteamUsername == "Glaurung4567")
             {
                 //("Dragon's Horns");
                 //("The First Wyrm");
                  
                 //Gives the player 2 permanent orbiting Dragunfires
             }
-            else if (CelsItems.SteamUsername == "Retrash")
+            else if (ChildrenOfKaliberModule.SteamUsername == "Retrash")
             {
                 //("Blunderbeast Helmet");
                 //("Cursed");
                  
             }
             
-            else if (CelsItems.SteamUsername == "An3s")
+            else if (ChildrenOfKaliberModule.SteamUsername == "An3s")
             {
                 //Shoots random projectiles around the player when hit
                 //("");
                 //("");
                  
             }
-            else if (CelsItems.SteamUsername == "Skilotar_")
+            else if (ChildrenOfKaliberModule.SteamUsername == "Skilotar_")
             {
                 //spawn several shadowclones on taking damage
                 //("");
                 //("");
 
             }
-            else if (CelsItems.SteamUsername == "Solanum Tuberosum")
+            else if (ChildrenOfKaliberModule.SteamUsername == "Solanum Tuberosum")
             {
                 //("");
                 //("");
 
             }
-            else if (CelsItems.SteamUsername == "blazeykat")
+            else if (ChildrenOfKaliberModule.SteamUsername == "blazeykat")
             {
                 //("Prismatic Crown");
                 //("Queen Of Frogs");
                 
             }
-            else if (CelsItems.SteamUsername == "Round King")
+            else if (ChildrenOfKaliberModule.SteamUsername == "Round King")
             {
                 //("");
                 //("");
 
             }
-            else if (CelsItems.SteamUsername == "")
+            else if (ChildrenOfKaliberModule.SteamUsername == "")
             {
                 //("");
                 //("");
 
             }
-            else if (CelsItems.SteamUsername == "")
+            else if (ChildrenOfKaliberModule.SteamUsername == "")
             {
                 //("");
                 //("");

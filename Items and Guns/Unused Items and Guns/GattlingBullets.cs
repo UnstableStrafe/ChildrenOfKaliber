@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -33,7 +33,7 @@ namespace Items
 
 
         }
-        private void PostProcessProjectile(Projectile obj, float effectChanceScalar)
+        private new void PostProcessProjectile(Projectile obj, float effectChanceScalar)
         {
             base.Owner.SpawnShadowBullet(obj, true);
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Gungeon;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using System.Collections;
 
@@ -22,7 +22,7 @@ namespace Items
             gun.SetupSprite(null, "psi_scale_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 9);
             gun.SetAnimationFPS(gun.reloadAnimation, 10);
-            gun.AddProjectileModuleFrom("ak-47", true, false);
+            gun.AddProjectileModuleFrom("ak-47");
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BULLET;
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -40,12 +40,6 @@ namespace Items
             gun.barrelOffset.transform.localPosition = new Vector3(2.25f, 0.3125f, 0f);
             gun.gunClass = GunClass.NONE;
 
-            psi_projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(15) as Gun).DefaultModule.projectiles[0]);
-            FakePrefab.MarkAsFakePrefab(psi_projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(psi_projectile);
-            psi_projectile.baseData.damage *= 1.45f;
-            psi_projectile.baseData.speed *= 1f;
-            psi_projectile.SetProjectileSpriteRight("psi_scale_projectile", 12, 7);
 
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -53,20 +47,21 @@ namespace Items
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.transform.parent = gun.barrelOffset;
-            projectile.baseData.damage *= 0f;
+            projectile.baseData.damage *= 1.1f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.force *= 0f;
-            projectile.sprite.renderer.enabled = false;
-            projectile.baseData.range = .0001f;
-            projectile.hitEffects.suppressMidairDeathVfx = true;
-            projectile.collidesWithEnemies = false;
-            projectile.UpdateCollisionMask();
+            projectile.SetProjectileSpriteRight("psi_scale_projectile", 12, 7);
 
-            
 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
         private bool HasReloaded;
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            base.PostProcessProjectile(projectile);
+            projectile.DieInAir(true);
+        }
         protected override void Update()
         {
             base.Update();
@@ -97,22 +92,23 @@ namespace Items
         public override void OnPostFired(PlayerController player, Gun gun)
         {
             base.OnPostFired(player, gun);
-            Projectile proj = Instantiate<Projectile>(psi_projectile);
+            
             int shotsToSpawn = 1;
             shotsToSpawn *= GetPlayerShotMultiplier(player);
             float distance = 0;
             bool hasTarget = false;
             AIActor actor = null;
-           
-            if (player.CurrentRoom.HasActiveEnemies(RoomHandler.ActiveEnemyType.RoomClear))
+            
+            if (player.CurrentRoom.HasActiveEnemies(RoomHandler.ActiveEnemyType.All))
             {
-                actor = player.CurrentRoom.GetNearestEnemy(player.CenterPosition, out distance, true, true);
+                actor = player.CurrentRoom.GetNearestEnemy(player.CenterPosition, out distance);
                 if(actor != null)
                 {
-                    if(distance <= 10)
+                    if(distance <= 13)
                     {
                         hasTarget = true;
                     }
+                    
                 }
             }
             
@@ -120,7 +116,7 @@ namespace Items
             {
                 if(hasTarget && actor != null)
                 {
-                    SpawnTargettedProjectile(proj, actor, player);
+                    SpawnTargettedProjectile(gun.DefaultModule.projectiles[0], actor, player);
                 }
                 else
                 {
@@ -129,6 +125,32 @@ namespace Items
             }
             
         }
+
+        public AIActor GetNearestValidEnemy(RoomHandler room, Vector2 pos, out float distance)
+        {
+            AIActor result = null;
+            distance = float.MaxValue;
+            bool flag = room.HasActiveEnemies(RoomHandler.ActiveEnemyType.All);
+            if (!flag)
+            {
+                return null;
+            }
+            List<AIActor> actorsInRoom = room.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+            for(int i = 0; i < actorsInRoom.Count; i++)
+            {
+                if (!actorsInRoom[i].healthHaver.IsDead)
+                {
+                    float num = Vector2.Distance(pos, actorsInRoom[i].CenterPosition);
+                    if (num < distance)
+                    {
+                        distance = num;
+                        result = actorsInRoom[i];
+                    }
+                }
+            }
+            return result;
+        }
+
         private int GetPlayerShotMultiplier(PlayerController player)
         {
             int num = 1;
@@ -208,7 +230,7 @@ namespace Items
             Vector2 pos = (UnityEngine.Random.insideUnitCircle * 3) + player.CenterPosition;
             LootEngine.DoDefaultPurplePoof(pos, true);
         }
-        private static Projectile psi_projectile;
+        
 
         public PsiScales()
         {

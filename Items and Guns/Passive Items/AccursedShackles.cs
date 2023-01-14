@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 namespace Items
 {
@@ -10,7 +10,7 @@ namespace Items
         {
 
             string itemName = "Accursed Shackles";
-            string resourceName = "Items/Resources/accursed_shackle.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/accursed_shackle.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -29,8 +29,10 @@ namespace Items
             item.sprite.IsPerpendicular = true;
         }
         private bool Shackled = true;
-        private float MaxHp, CurHp, StoredHp, Killed;
-        protected override void Update()
+        private float MaxHp, CurHp, StoredHp;
+        [SerializeField]
+        private float killed;
+        public override void Update()
         {
             base.Update();
 
@@ -63,9 +65,12 @@ namespace Items
         
         private void KillTracker(PlayerController player)
         {
-            Killed += 1;
+            if(killed < 100)
+            {
+                killed += 1;
+            }
             
-            if(Killed == 100f && Shackled == true)
+            if(killed == 100f && Shackled == true)
             {
                 StatModifier statModifierH = new StatModifier()
                 {

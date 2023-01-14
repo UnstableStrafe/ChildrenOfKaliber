@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -16,7 +16,7 @@ namespace Items
             gun.SetupSprite(null, "earth_bending_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("ak-47", true, false);
+            gun.AddProjectileModuleFrom("ak-47");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -40,12 +40,12 @@ namespace Items
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.transform.parent = gun.barrelOffset;
             projectile.shouldRotate = true;
-            projectile.SetProjectileSpriteRight("firework_proj", 13, 7, null, null);
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            projectile.SetProjectileSpriteRight("firework_proj", 13, 7);
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
         private bool HasReloaded;
 
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

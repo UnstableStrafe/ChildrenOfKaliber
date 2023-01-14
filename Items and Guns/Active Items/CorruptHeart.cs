@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Dungeonator;
-
+using System.Linq;
+using System;
+using System.Reflection;
 namespace Items
 {
     class CorruptHeart : PlayerItem
@@ -11,7 +13,7 @@ namespace Items
         {
             string itemName = "Corrupt Heart";
 
-            string resourceName = "Items/Resources/corrupt_heart.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/corrupt_heart.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -34,31 +36,29 @@ namespace Items
         }
 
         private PlayerController player;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             AkSoundEngine.PostEvent("Play_WPN_seriouscannon_shot_01", base.gameObject);
             EnemyListing(user);
             player = user;
-           // TestOrbital(user);
+            DebugLogging();
             
         }
-        private void TestOrbital(PlayerController player)
+       
+        private void DebugLogging()            
         {
-            GameObject newOBJ = SpriteBuilder.SpriteFromResource("Items/Resources/hat_i_stole.png");
-            ItemAPI.FakePrefab.MarkAsFakePrefab(newOBJ);
-            tk2dSprite sprite = newOBJ.GetComponent<tk2dSprite>();
-            sprite.HeightOffGround = .1f;
-            sprite.UpdateZDepth();
-            sprite.PlaceAtPositionByAnchor(player.CenterPosition, tk2dBaseSprite.Anchor.MiddleCenter);
-            SpecialOrbital specialOrbital = newOBJ.AddComponent<SpecialOrbital>();
-            specialOrbital.owner = player;
-            specialOrbital.orbitingMode = SpecialOrbital.OrbitingMode.ENEMY;
+            RoomHandler room = player.CurrentRoom;
+            float x = room.GetBoundingRect().width;
+            float y = room.GetBoundingRect().height;
+            ETGModConsole.Log("Room X = " + x.ToString());
+            ETGModConsole.Log("Room Y = " + y.ToString());
         }
 
         private void EnemyListing(PlayerController user)
         {
             RoomHandler absoluteRoom = base.transform.position.GetAbsoluteRoom();
             List<AIActor> activeEnemies = absoluteRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All);
+           
             bool flag = activeEnemies != null;
             if (flag)
             {
@@ -75,11 +75,10 @@ namespace Items
             {
 
                 target.healthHaver.ApplyDamage(20f, Vector2.zero, "Heart of Doom", CoreDamageTypes.None, DamageCategory.Normal, false, null, false);
-                
+              
                 if (user.HasPickupID(379))
                 {
                     target.healthHaver.OnDeath += this.LoveLeech;
-
                     
 
                 }
@@ -87,6 +86,7 @@ namespace Items
             
         }
 
+      
         private void LoveLeech(Vector2 idk)
         {
             float f = .05f;

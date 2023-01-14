@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -9,7 +9,7 @@ namespace Items
         {
             string itemName = "Dragun Claw";
 
-            string resourceName = "Items/Resources/dragun_claw.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/dragun_claw.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -28,6 +28,8 @@ namespace Items
             item.CanBeDropped = true;
             item.CanBeSold = true;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
+            dragunClawID = item.PickupObjectId;
+
         }
 
         private void Oil(PlayerController player, Gun gun)
@@ -40,48 +42,17 @@ namespace Items
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
-            WeightedGameObject Object1 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Dragun Wing"].PickupObjectId,
-                weight = 1.7f,
-                rawGameObject = ETGMod.Databases.Items["Dragun Wing"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            WeightedGameObject Object2 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Dragun Heart"].PickupObjectId,
-                weight = 1.7f,
-                rawGameObject = ETGMod.Databases.Items["Dragun Heart"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            WeightedGameObject Object3 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Dragun Skull"].PickupObjectId,
-                weight = 1.8f,
-                rawGameObject = ETGMod.Databases.Items["Dragun Skull"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            if (!player.HasPickupID(ETGMod.Databases.Items["Dragun Wing"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object1);
-            }
-            if (!player.HasPickupID(ETGMod.Databases.Items["Dragun Heart"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object2);
-            }
-            if (!player.HasPickupID(ETGMod.Databases.Items["Dragun Skull"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object3);
-            }
+            
             this.m_fireImmunity = new DamageTypeModifier();
             this.m_fireImmunity.damageMultiplier = 0f;
             this.m_fireImmunity.damageType = CoreDamageTypes.Fire;
             player.healthHaver.damageTypeModifiers.Add(this.m_fireImmunity);
             player.OnReloadedGun += this.Oil;
-            if (player.HasPickupID(ETGMod.Databases.Items["Dragun Skull"].PickupObjectId) && player.HasPickupID(ETGMod.Databases.Items["Dragun Wing"].PickupObjectId) && player.HasPickupID(ETGMod.Databases.Items["Dragun Heart"].PickupObjectId) && !player.HasPickupID(ETGMod.Databases.Items["spirit_of_the_dragun"].PickupObjectId))
+           
+            if (player.HasPickupID(DragunSkull.dragunSkullId) && player.HasPickupID(DragunWing.dragunWingId) && player.HasPickupID(DragunHeart.dragunHeartId) && !player.HasPickupID(SpiritOfTheDragun.gunID))
             {
                 AkSoundEngine.PostEvent("Play_VO_dragun_death_01", gameObject);
-                player.inventory.AddGunToInventory((ETGMod.Databases.Items["spirit_of_the_dragun"] as Gun), true);
+                player.inventory.AddGunToInventory(PickupObjectDatabase.GetById(SpiritOfTheDragun.gunID) as Gun, true);
             }
         }
 
@@ -91,12 +62,12 @@ namespace Items
             player.OnReloadedGun -= this.Oil;
             player.healthHaver.damageTypeModifiers.Remove(this.m_fireImmunity);
             debrisObject.GetComponent<DragunClaw>().m_pickedUpThisRun = true;
+           
             return debrisObject;
         }
         private DamageTypeModifier m_fireImmunity;
-        //private int DragunWing = ETGMod.Databases.Items["Dragun Wing"].PickupObjectId;
-       // private int DragunHeart = ETGMod.Databases.Items["Dragun Heart"].PickupObjectId;
-       // private int DragunSkull = ETGMod.Databases.Items["Dragun Skull"].PickupObjectId;
+        public static int dragunClawID;
+
 
         
     }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -12,7 +12,7 @@ namespace Items
         {
 
             string itemName = "[_____] Bullets";
-            string resourceName = "Items/Resources/empty_bullets.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/empty_bullets.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -34,15 +34,11 @@ namespace Items
 
         public override void Pickup(PlayerController player)
         {
-            if (this.m_pickedUp)
-            {
-                return;
-            }
             base.Pickup(player);
 
         }
 
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
             BlankAmount();
@@ -51,16 +47,21 @@ namespace Items
         private float blanks = 0, lastBlanks = -1;
         private void BlankAmount()
         {
-            blanksInt = m_owner.Blanks;
-            blanks = blanksInt;
-       //     ETGModConsole.Log(blanks.ToString());
-            if (blanks == lastBlanks) return;
-            
-            RemoveStat(PlayerStats.StatType.Damage);
-            AddStat(PlayerStats.StatType.Damage, blanks * .10f);
-            this.Owner.stats.RecalculateStats(Owner, true);
-            
-            lastBlanks = blanks;
+            if(Owner != null)
+            {
+                blanksInt = m_owner.Blanks;
+                blanks = blanksInt;
+                //     ETGModConsole.Log(blanks.ToString());
+                if (blanks == lastBlanks) return;
+
+                RemoveStat(PlayerStats.StatType.Damage);
+                this.Owner.stats.RecalculateStats(Owner, true);
+                AddStat(PlayerStats.StatType.Damage, blanks * .10f);
+                this.Owner.stats.RecalculateStats(Owner, true);
+       
+                lastBlanks = blanks;
+            }
+           
         }
 
 

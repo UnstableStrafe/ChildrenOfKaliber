@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Gungeon;
 
 namespace Items
@@ -15,11 +15,11 @@ namespace Items
             Gun gun = ETGMod.Databases.Items.NewGun("Sticky Launcher", "sticky_launcher");
             Game.Items.Rename("outdated_gun_mods:sticky_launcher", "cel:sticky_launcher");
             gun.SetShortDescription("KA-BLOOIE!");
-            gun.SetLongDescription("Shoots sticky bombs that detonate on reloading.\n\nA weather sticky bomb launcher with the words \"Mann Co. Property\" written on the side.");
+            gun.SetLongDescription("Shoots sticky bombs that detonate on reloading.\n\nA weathered sticky bomb launcher with the words \"Mann Co. Property\" written on the side.");
             gun.SetupSprite(null, "sticky_launcher_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.gameObject.AddComponent<StickyLauncher>();
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.MEDIUM_BULLET;
             gun.DefaultModule.ammoCost = 1;
@@ -47,10 +47,10 @@ namespace Items
             StickyProjectile sticky = projectile.gameObject.AddComponent<StickyProjectile>();
             sticky.explosionData = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData;
             sticky.explosionData.damageToPlayer = 0;
-            sticky.explosionData.damage = 7.5f;
+            sticky.explosionData.damage = 15f;
             sticky.destroyOnGunChanged = true;
             sticky.shouldExplodeOnReload = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
         private bool HasReloaded;
         protected override void Update()

@@ -1,15 +1,16 @@
 ﻿using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 namespace Items
 {
     class TrueGunpowder : PassiveItem
     {
+        public static int itemID;
         public static void Init()
         {
             string itemName = "True Gunpowder";
 
-            string resourceName = "Items/Resources/true_gunpowder.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/true_gunpowder.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -26,6 +27,7 @@ namespace Items
             item.sprite.IsPerpendicular = true;
             item.CanBeDropped = false;
             item.CanBeSold = false;
+            itemID = item.PickupObjectId;
         }
         private float cooldown = 0;
         private void GrabbyGrabTime(PlayerController player, float oof)
@@ -37,32 +39,47 @@ namespace Items
                 AIActor actor;
                 RoomHandler absoluteRoom = base.transform.position.GetAbsoluteRoom();
                 actor = Owner.CurrentRoom.GetRandomActiveEnemy(true);
-                GameObject hand = UnityEngine.Object.Instantiate<GameObject>(CelsItems.hellDrag.HellDragVFX);
+                var hand = (EnemyDatabase.GetOrLoadByGuid("cd88c3ce60c442e9aa5b3904d31652bc")).GetComponent<LichDeathController>().HellDragVFX;
+                HellDraggerArbitrary component2 = UnityEngine.Object.Instantiate<GameObject>(hand).GetComponent<HellDraggerArbitrary>();
+
                 AkSoundEngine.PostEvent("Play_BOSS_lichB_grab_01", gameObject);
                 if (!actor.healthHaver.IsBoss)
                 {
+                    Grab(actor, component2.HellDragVFX);
+                    actor.CorpseObject = null;
                     actor.healthHaver.ApplyDamage(10000000, Vector2.zero, "GetFuckedNerd", CoreDamageTypes.Void, DamageCategory.Unstoppable, true, null, true);
-                    actor.sprite.renderer.enabled = false;
-                    actor.shadowDeathType = AIActor.ShadowDeathType.None;
-                    tk2dBaseSprite corpsesprite = actor.CorpseObject.GetComponent<tk2dBaseSprite>();
-                    corpsesprite.sprite.renderer.enabled = false;
+                   
 
                 }
                 else
                 {
                     if (actor.healthHaver.IsBoss)
                     {
+                        Grab(actor, component2.HellDragVFX);
                         actor.healthHaver.ApplyDamage(80, Vector2.zero, "GetFuckedNerdButSlightlyLessThanNormalNerds", CoreDamageTypes.Void, DamageCategory.Unstoppable, true, null, true);
+                        
                     }
                 }
-                tk2dBaseSprite component1 = hand.GetComponent<tk2dBaseSprite>();
-                component1.usesOverrideMaterial = true;
-                component1.PlaceAtLocalPositionByAnchor(actor.specRigidbody.UnitCenter, tk2dBaseSprite.Anchor.LowerCenter);
-                component1.renderer.material.shader = ShaderCache.Acquire("Brave/Effects/StencilMasked");
+
                 cooldown -= 120;
             }
             
             
+        }
+        private void Grab(AIActor enemy, GameObject HellDragVFX)
+        {
+            GameObject gameObject = enemy.PlayEffectOnActor(HellDragVFX, new Vector3(0f, 0, 0f), true, false, false);
+
+            tk2dBaseSprite component = gameObject.GetComponent<tk2dBaseSprite>();
+            component.UpdateZDepth();
+            component.attachParent = null;
+            component.IsPerpendicular = false;
+            component.HeightOffGround = 1f;
+            component.UpdateZDepth();
+            component.transform.position = component.transform.position.WithX(component.transform.position.x + 0.25f);
+            component.transform.position = component.transform.position.WithY((float)enemy.ParentRoom.area.basePosition.y + 55f);
+            component.usesOverrideMaterial = true;
+            component.renderer.material.shader = ShaderCache.Acquire("Brave/Effects/StencilMasked");
         }
         public override void Pickup(PlayerController player)
         {

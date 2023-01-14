@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,7 +11,7 @@ namespace Items
         {
 
             string itemName = "Sawblade";
-            string resourceName = "Items/Resources/sawblade.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/sawblade.png";
 
             GameObject obj = new GameObject(itemName);
 

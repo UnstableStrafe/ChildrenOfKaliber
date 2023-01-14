@@ -1,5 +1,5 @@
 ﻿using System;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Random = UnityEngine.Random;
 using UnityEngine;
 
@@ -11,7 +11,7 @@ namespace Items
         {
             string itemName = "Gravity Well Module";
 
-            string resourceName = "Items/Resources/gravity_well.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/gravity_well.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -22,7 +22,7 @@ namespace Items
             string shortDesc = "Where Is My Super Suit?";
             string longDesc = "Reduces knockback from weapons and gives some damage.\n\nAdding this to a gun increases the gravitational field of its bullets until they have a pull that is strong enough to counteract their kenetic force.";
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, .6f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.25f, StatModifier.ModifyMethod.MULTIPLICATIVE);
+            ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.10f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
 
             item.quality = ItemQuality.C;

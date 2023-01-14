@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -47,7 +47,7 @@ namespace Items
         }
 
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
 
             ScrapCount += 1;

@@ -23,7 +23,7 @@ namespace Items
 
             gun.SetupSprite(null, "IV_gun_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
-            gun.AddProjectileModuleFrom("ak-47", true, false);            
+            gun.AddProjectileModuleFrom("ak-47");            
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1.1f;
@@ -36,7 +36,7 @@ namespace Items
 
             gun.quality = PickupObject.ItemQuality.D;
             gun.encounterTrackable.EncounterGuid = "change this for different guns, so the game doesn't think they're the same gun";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
 
         }
 

@@ -20,7 +20,7 @@ namespace Items
             gun.SetupSprite(null, "fallout_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 4);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("ak-47", true, false);
+            gun.AddProjectileModuleFrom("ak-47");
 
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -35,7 +35,7 @@ namespace Items
 
             gun.quality = PickupObject.ItemQuality.SPECIAL;
             gun.encounterTrackable.EncounterGuid = "eivdkswdgdgvsbdgdsgdsgcvascsakvkvdvs.";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
 
         }
 

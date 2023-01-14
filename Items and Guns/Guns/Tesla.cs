@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -16,7 +16,7 @@ namespace Items
             gun.SetupSprite(null, "tesla_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
 
-            gun.AddProjectileModuleFrom("electric_rifle", true, false);
+            gun.AddProjectileModuleFrom("electric_rifle");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Burst;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -34,7 +34,7 @@ namespace Items
             gun.sprite.IsPerpendicular = true;
             gun.quality = PickupObject.ItemQuality.S;
             gun.encounterTrackable.EncounterGuid = "Please do not lick electricty. k thanks.";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
 
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
@@ -51,7 +51,7 @@ namespace Items
         private bool HasReloaded;
         private PlayerController lastOwner = null;
         private DamageTypeModifier electricityImmunity = null;
-        protected void Update()
+        public override void Update()
         {
             PlayerController player = gun.CurrentOwner as PlayerController;
             if (gun.CurrentOwner)

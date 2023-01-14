@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Gungeon;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -23,7 +23,7 @@ namespace Items
             gun.SetupSprite(null, "sliver_beam_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.isAudioLoop = true;
-            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun, true, false);
+            gun.AddProjectileModuleFrom(PickupObjectDatabase.GetById(86) as Gun);
             gun.doesScreenShake = false;
             gun.DefaultModule.ammoCost = 10;
             gun.DefaultModule.angleVariance = 0;
@@ -53,28 +53,7 @@ namespace Items
             //BULLET STATS
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(86) as Gun).DefaultModule.projectiles[0]);
 
-            BasicBeamController beamComp = projectile.GenerateBeamPrefab(
-                "Items/Resources/Beams/sliver_beam_mid_001",
-                new Vector2(10, 4),
-                new Vector2(0, 1),
-                BeamAnimPaths,
-                9,
-                //Impact
-                null,
-                -1,
-                null,
-                null,
-                //End
-                BeamEndPaths,
-                9,
-                new Vector2(10, 3),
-                new Vector2(0, 1),
-                //Beginning
-                null,
-                -1,
-                null,
-                null
-                );
+            BasicBeamController beamComp = projectile.GenerateBeamPrefab(BeamAnimPaths[0], new Vector2(10, 4), new Vector2(0, 1), BeamAnimPaths, 9,/*impact sprites*/ null, -1, null, null, /*End*/ BeamEndPaths, 9, new Vector2(10, 3), new Vector2(0, 1), /*Beginning*/ null, -1, null, null);
 
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
@@ -91,7 +70,7 @@ namespace Items
             gun.DefaultModule.projectiles[0] = projectile;
             gun.encounterTrackable.EncounterGuid = "FWOZZOOOOOMMMMM";
             gun.quality = PickupObject.ItemQuality.C; //D
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
 
         }
         public SliverBeam()

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Dungeonator;
 
@@ -36,7 +36,7 @@ namespace Items
         {
             base.Pickup(player);
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             base.DoEffect(user);
             AIActor Target = TargetEnemies(user, 8, 2);

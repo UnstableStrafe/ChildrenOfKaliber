@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 namespace Items
 {
     class ReloadedRifle : MultiActiveReloadController
     {
+        public static int itemID;
         public static void Add()
         {
             string shorthandName = "reloaded_rifle";
@@ -17,7 +18,7 @@ namespace Items
             gun.SetLongDescription("Has multiple active reloads with different effects. If the first active reload is performed with an empty clip, the empty clip is thrown, stunning hit enemies.\n\nNothing is more satisfying, more sweet to a gunslinger than a crisp, fluid reload.");
             gun.SetupSprite(null, shorthandName+"_idle_001", 6);
             gun.SetAnimationFPS(gun.shootAnimation, 12);
-            gun.AddProjectileModuleFrom("ak-47", true, false);
+            gun.AddProjectileModuleFrom("ak-47");
             gun.SetBaseMaxAmmo(500);
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
@@ -48,7 +49,8 @@ namespace Items
             ProjectileSlashingBehaviour projectileSlashing = projectile.gameObject.AddComponent<ProjectileSlashingBehaviour>();
             projectileSlashing.SlashDimensions = 45;
             
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
+            itemID = gun.PickupObjectId;
             behav.activeReloadEnabled = true;
             behav.reloads = new List<MultiActiveReloadData>
             {

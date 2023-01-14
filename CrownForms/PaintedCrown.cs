@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System.Collections;
 using UnityEngine;
 using Gungeon;

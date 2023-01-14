@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Collections;
 namespace Items
@@ -10,7 +10,7 @@ namespace Items
         {
             string itemName = "Shell Bank";
 
-            string resourceName = "Items/Resources/shell_bank.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/shell_bank.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -31,15 +31,19 @@ namespace Items
         {
             Stored = Mathf.FloorToInt(Stored * .85f);
         }
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
-            if(Baseline != Owner.carriedConsumables.Currency)
+            if(Owner != null)
             {
-                int num1 = Owner.carriedConsumables.Currency - Baseline;
-                Owner.carriedConsumables.Currency -= num1;
-                Stored += num1;
+                if (Baseline != Owner.carriedConsumables.Currency)
+                {
+                    int num1 = Owner.carriedConsumables.Currency - Baseline;
+                    Owner.carriedConsumables.Currency -= num1;
+                    Stored += num1;
+                }
             }
+            
         }
 
         public override void Pickup(PlayerController player)
@@ -73,7 +77,7 @@ namespace Items
             }  
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.OnDestroy();
         }

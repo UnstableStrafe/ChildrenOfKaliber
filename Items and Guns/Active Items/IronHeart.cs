@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 
 class IronHeart : PlayerItem
@@ -7,7 +7,7 @@ class IronHeart : PlayerItem
     {
         string itemName = "Iron Heart";
 
-        string resourceName = "Items/Resources/iron_heart.png";
+        string resourceName = "Items/Resources/ItemSprites/Actives/iron_heart.png";
 
         GameObject obj = new GameObject();
 
@@ -31,8 +31,8 @@ class IronHeart : PlayerItem
         item.quality = ItemQuality.B;
         item.sprite.IsPerpendicular = true;
     }
-    private PlayerController player;
-    protected override void DoEffect(PlayerController user)
+    
+    public override void DoEffect(PlayerController user)
     {
         float curHealth = user.healthHaver.GetMaxHealth();
         float trueHP = curHealth - 1;       

@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -9,7 +9,7 @@ namespace Items
         {
             string itemName = "Elite Bullets";
 
-            string resourceName = "Items/Resources/elite_bullets.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/elite_bullets.png";
 
             GameObject obj = new GameObject(itemName);
 

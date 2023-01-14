@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 namespace Items
 {
     class DEATHGun : GunBehaviour
@@ -14,7 +14,7 @@ namespace Items
             gun.SetupSprite(null, "d.e.a.t.h._idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.SetAnimationFPS(gun.reloadAnimation, 10);
-            gun.AddProjectileModuleFrom("electric_rifle", true, false);
+            gun.AddProjectileModuleFrom("electric_rifle");
             gun.DefaultModule.ammoCost = 1;
             gun.gunHandedness = GunHandedness.HiddenOneHanded;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Burst;
@@ -45,12 +45,12 @@ namespace Items
             projectile.baseData.speed *= 1f;
             projectile.baseData.force *= .25f;
             projectile.sprite.renderer.enabled = false;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
         private bool HasReloaded;
         private PlayerController lastOwner = null;
         private DamageTypeModifier electricityImmunity = null;
-        protected void Update()
+        public override void Update()
         {
             PlayerController player = gun.CurrentOwner as PlayerController;
             if (gun.CurrentOwner)

@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 namespace Items
 {
     class Günther : AdvancedGunBehaviour
@@ -15,7 +15,7 @@ namespace Items
             gun.SetupSprite(null, ShortName+"_idle_001", 13);
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 4);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -40,7 +40,7 @@ namespace Items
             projectile.baseData.speed *= 1f;
             projectile.transform.parent = gun.barrelOffset;
             gun.sprite.IsPerpendicular = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;

@@ -1,15 +1,16 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 
+
 namespace Items
-{
+{ 
     class MalachiteAmmolet : SpecialBlankModificationItem
     {
         public static void Init()
         {
 
             string itemName = "Malachite Ammolet";
-            string resourceName = "Items/Resources/malachite_ammolet.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/malachite_ammolet.png";
 
             GameObject obj = new GameObject(itemName);
 

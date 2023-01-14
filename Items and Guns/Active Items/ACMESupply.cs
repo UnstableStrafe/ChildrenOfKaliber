@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -10,7 +10,7 @@ namespace Items
         {
 
             string itemName = "ACME Supply Crate";
-            string resourceName = "Items/Resources/acme_crate.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/acme_crate.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -33,7 +33,7 @@ namespace Items
 
         }
         private float duration = 12f;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
 
             StartEffect(user);
@@ -68,13 +68,22 @@ namespace Items
 
         private void EndEffect(PlayerController user)
         {
-            user.inventory.GunLocked.RemoveOverride("acme gun");
+            user.inventory.GunLocked.SetOverride("acme gun", false);
             user.inventory.DestroyGun(this.m_extantGun);
             this.m_extantGun = null;
             this.CanBeSold = true;
             this.CanBeDropped = true;
         }
 
+        public override void OnPreDrop(PlayerController user)
+        {
+            user.inventory.GunLocked.SetOverride("acme gun", false);
+            user.inventory.DestroyGun(this.m_extantGun);
+            this.m_extantGun = null;
+            this.CanBeSold = true;
+            this.CanBeDropped = true;
+            base.OnPreDrop(user);
+        }
 
         private Gun m_extantGun;
         

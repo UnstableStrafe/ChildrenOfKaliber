@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using Dungeonator;
 using UnityEngine;
-//using ItemAPI;
+//using Alexandria.ItemAPI;
 using Gungeon;
-using GungeonAPI;
+using Alexandria.DungeonAPI;
 using System.Collections;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -16,11 +17,11 @@ namespace Items
 		
 		public static void Init()
         {
-			GameObject gameObject = ItemAPI.SpriteBuilder.SpriteFromResource("Items/Enemies/Sprites/potj");
+			GameObject gameObject = SpriteBuilder.SpriteFromResource("Items/Enemies/Sprites/potj");
 			gameObject.AddAnimation("start", "Items/Enemies/Sprites/POTJ/Start", 8, Library.AnimationType.Idle, DirectionalAnimation.DirectionType.None, DirectionalAnimation.FlipType.None, tk2dSpriteAnimationClip.WrapMode.Once);
 			gameObject.AddAnimation("idle", "Items/Enemies/Sprites/POTJ/Idle", 10, Library.AnimationType.Idle, DirectionalAnimation.DirectionType.None, DirectionalAnimation.FlipType.None, tk2dSpriteAnimationClip.WrapMode.Loop);
 			gameObject.AddComponent<PrinceOfTheJammed>();
-			ItemAPI.FakePrefab.MarkAsFakePrefab(gameObject);
+			FakePrefab.MarkAsFakePrefab(gameObject);
 			gameObject.SetActive(false);
 		    
 

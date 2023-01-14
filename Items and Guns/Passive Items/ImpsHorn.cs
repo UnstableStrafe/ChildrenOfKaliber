@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,7 +11,7 @@ namespace Items
 
 
             string itemName = "Imp's Horn";
-            string resourceName = "Items/Resources/imps_horn.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/imps_horn.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -31,7 +31,7 @@ namespace Items
             
             item.AppliesFire = true;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);
-
+           
 
 
 
@@ -67,6 +67,7 @@ namespace Items
                 return;
             }
             base.Pickup(player);
+            
             player.PostProcessProjectile += this.PostProcessProjectile;
             player.PostProcessBeam += this.PostProcessBeam;
             player.PostProcessBeamTick += this.PostProcessBeamTick;
@@ -74,7 +75,7 @@ namespace Items
         }
 
 
-        public void PostProcessBeam(BeamController beam)
+        public new void PostProcessBeam(BeamController beam)
         {
             if (this.TintBeams)
             {
@@ -82,7 +83,7 @@ namespace Items
             }
         }
 
-        void PostProcessProjectile(Projectile projectile, float effectChanceScalar)
+        public new void PostProcessProjectile(Projectile projectile, float effectChanceScalar)
         {
             if (Random.value < (chanceOfActivating * effectChanceScalar))
             {
@@ -95,7 +96,7 @@ namespace Items
             }
         }
 
-        public void PostProcessBeamTick(BeamController beam, SpeculativeRigidbody hitRigidbody, float tickRate)
+        public new void PostProcessBeamTick(BeamController beam, SpeculativeRigidbody hitRigidbody, float tickRate)
         {
             GameActor gameActor = hitRigidbody.gameActor;
             if (!gameActor)

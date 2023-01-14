@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using Gungeon;
 namespace Items
 {
@@ -14,7 +14,7 @@ namespace Items
             gun.SetupSprite(null, "spellcaster_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 9);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.SetBaseMaxAmmo(350);
             gun.DefaultModule.ammoCost = 1;
             gun.InfiniteAmmo = true;
@@ -42,7 +42,7 @@ namespace Items
             projectile.baseData.speed *= 1f;
             projectile.baseData.force *= 1f;
             projectile.transform.parent = gun.barrelOffset;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;

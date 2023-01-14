@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using Gungeon;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ namespace Items
             gun.SetupSprite(null, "firework_rifle_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 18);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("ak-47", true, false);
+            gun.AddProjectileModuleFrom("ak-47");
 
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
@@ -43,7 +43,7 @@ namespace Items
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.transform.parent = gun.barrelOffset;
             projectile.shouldRotate = true;
-            projectile.SetProjectileSpriteRight("firework_proj", 13, 7, null, null);
+            projectile.SetProjectileSpriteRight("firework_proj", 13, 7);
             AIActor Firecracker = EnemyDatabase.GetOrLoadByGuid("5f15093e6f684f4fb09d3e7e697216b4");
             ExplosiveModifier GetFucked = projectile.gameObject.AddComponent<ExplosiveModifier>();
 
@@ -72,7 +72,7 @@ namespace Items
             GetFucked.explosionData = die;
             
             
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
 
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
             
@@ -84,10 +84,10 @@ namespace Items
             modifier.penetration = 0;
         }
 
-        private static GameObject Death;
+        //private static GameObject Death;
         private bool HasReloaded;
 
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

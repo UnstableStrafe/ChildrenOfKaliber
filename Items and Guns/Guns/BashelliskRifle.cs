@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -17,7 +17,7 @@ namespace Items
             gun.SetupSprite(null, "bashellisk_rifle_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
             gun.SetAnimationFPS(gun.reloadAnimation, 10);
-            gun.AddProjectileModuleFrom("future_assault_rifle", true, false);
+            gun.AddProjectileModuleFrom("future_assault_rifle");
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
@@ -50,17 +50,17 @@ namespace Items
             projectile.healthEffect = Library.Venom;
             projectile.DefaultTintColor = new Color(78 / 90f, 5 / 90f, 120 / 90f);
             projectile.HasDefaultTint = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             gun.AddToSubShop(ItemBuilder.ShopType.Goopton);
         }
         
 
         
-        private int i;
+       
 
         private bool HasReloaded;
         
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

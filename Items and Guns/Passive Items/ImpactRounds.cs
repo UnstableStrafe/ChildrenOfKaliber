@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -9,7 +9,7 @@ namespace Items
         {
             string itemName = "Ballistic Rounds";
 
-            string resourceName = "Items/Resources/impact_rounds.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/impact_rounds.png";
 
             GameObject obj = new GameObject(itemName);
 

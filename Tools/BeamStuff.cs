@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Gungeon;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System.Collections;
 
 namespace Items
@@ -23,7 +23,7 @@ namespace Items
                 int spriteID = SpriteBuilder.AddSpriteToCollection(spritePath, ETGMod.Databases.Items.ProjectileCollection);
                 tk2dTiledSprite tiledSprite = projectile.gameObject.GetOrAddComponent<tk2dTiledSprite>();
 
-
+               
 
                 tiledSprite.SetSprite(ETGMod.Databases.Items.ProjectileCollection, spriteID);
                 tk2dSpriteDefinition def = tiledSprite.GetCurrentSpriteDef();
@@ -40,6 +40,7 @@ namespace Items
                 animation.clips = new tk2dSpriteAnimationClip[0];
                 animator.Library = animation;
                 UnityEngine.Object.Destroy(projectile.GetComponentInChildren<tk2dSprite>());
+                projectile.sprite = tiledSprite;
                 BasicBeamController beamController = projectile.gameObject.GetOrAddComponent<BasicBeamController>();
 
                 //---------------- Sets up the animation for the main part of the beam

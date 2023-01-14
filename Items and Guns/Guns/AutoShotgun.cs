@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Gungeon;
 
 namespace Items
@@ -16,9 +16,9 @@ namespace Items
             gun.SetupSprite(null, "auto_shotgun_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 10);
             gun.SetAnimationFPS(gun.reloadAnimation, 5);
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 3; i++)
             {
-                GunExt.AddProjectileModuleFrom(gun, "38_special", true, false);
+                GunExt.AddProjectileModuleFrom(gun, "38_special");
             }
             foreach (ProjectileModule projectileModule in gun.Volley.projectiles)
             {
@@ -59,7 +59,7 @@ namespace Items
             gun.sprite.IsPerpendicular = true;
             gun.gunClass = GunClass.FULLAUTO;
             gun.reloadTime = 2.2f;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
         private bool HasReloaded;
         protected override void Update()

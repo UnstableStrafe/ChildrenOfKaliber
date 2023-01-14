@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -18,7 +18,7 @@ namespace Items
             gun.SetupSprite(null, "ancient_katana_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BULLET;
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Charged;
@@ -81,11 +81,11 @@ namespace Items
                 chargeProjectile2
                
             };
-            VFXPool SlashVFX = VFXLibrary.CreateMuzzleflash("katanaslice", new List<string> { "katanaslice_001", "katanaslice_002", "katanaslice_003",}, 10, new List<IntVector2> { new IntVector2(72, 67), new IntVector2(72, 67), new IntVector2(72, 67), }, new List<tk2dBaseSprite.Anchor> {
-                tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft}, new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero}, false, false, false, false, 0, VFXAlignment.Fixed, true, new List<float> { 0, 0, 0}, new List<Color> { VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor});
-            slashingBehaviour.SlashVFX = SlashVFX;
-            slashingBehaviour2.SlashVFX = SlashVFX;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            //VFXPool SlashVFX = VFXLibrary.CreateMuzzleflash("katanaslice", new List<string> { "katanaslice_001", "katanaslice_002", "katanaslice_003",}, 10, new List<IntVector2> { new IntVector2(72, 67), new IntVector2(72, 67), new IntVector2(72, 67), }, new List<tk2dBaseSprite.Anchor> {
+            //    tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft}, new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero}, false, false, false, false, 0, VFXAlignment.Fixed, true, new List<float> { 0, 0, 0}, new List<Color> { VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor});
+            //slashingBehaviour.SlashVFX = SlashVFX;
+            //slashingBehaviour2.SlashVFX = SlashVFX;
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             gun.AddToSubShop(ItemBuilder.ShopType.Goopton);
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
             

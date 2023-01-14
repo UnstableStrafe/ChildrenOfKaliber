@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using Gungeon;
 using UnityEngine;
 
@@ -9,14 +9,14 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("AK-188", "ak_188");
-            Game.Items.Rename("outdated_gun_mods:ak-188", "cel:ak-188");
+            Game.Items.Rename("outdated_gun_mods:ak188", "cel:ak_188");
             gun.gameObject.AddComponent<AK188>();
             gun.SetShortDescription("No God Can Help You");
             gun.SetLongDescription("Good luck, kid.");
             gun.SetupSprite(null, "ak_188_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 9);
             gun.SetAnimationFPS(gun.reloadAnimation, 10);
-            gun.AddProjectileModuleFrom("ak-47", true, false);
+            gun.AddProjectileModuleFrom("ak-47");
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BULLET;
             gun.DefaultModule.ammoCost = 4;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
@@ -44,10 +44,16 @@ namespace Items
             projectile.baseData.damage *= 1f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.force *= 1f;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
+            AK188.AK188ID = gun.PickupObjectId;
         }
+        public static int AK188ID;
         private bool HasReloaded;
-
+        private void OnDestroy()
+        {
+            c_playerController.OnKilledEnemy -= Transforming;
+        }
+        private PlayerController c_playerController;
         protected override void Update()
         {
             base.Update();
@@ -68,12 +74,13 @@ namespace Items
         protected override void OnPickup(GameActor owner)
         {
             base.OnPickup(owner);
+
+           
+
             (owner as PlayerController).OnKilledEnemy += this.Transforming;
-            Gun gun = ETGMod.Databases.Items["ak_141"] as Gun;
-            if ((owner as PlayerController).HasGun(gun.PickupObjectId))
-            {
-                (owner as PlayerController).inventory.DestroyGun(gun);
-            }
+         
+            
+            c_playerController = owner as PlayerController;
         }
         protected override void OnPostDrop(GameActor owner)
         {
@@ -82,15 +89,19 @@ namespace Items
         }
         private void Transforming(PlayerController player)
         {
-            
-            this.Tracker++;
-            if (Tracker >= 55)
+            if (player != null)
             {
-                Gun gun = ETGMod.Databases.Items["infinite_ak"] as Gun;
-                player.inventory.AddGunToInventory(gun, true);
-                player.inventory.DestroyGun(ETGMod.Databases.Items["ak_188"] as Gun);
+                this.Tracker++;
+                if (Tracker >= 55)
+                {
+                    Gun ak188 = PickupObjectDatabase.GetById(AK188.AK188ID) as Gun;
+                    Gun akinfinity = PickupObjectDatabase.GetById(InfiniteAK.AKINFID) as Gun;
+                    player.OnKilledEnemy -= Transforming;
+                    player.inventory.AddGunToInventory(akinfinity, true);
+                    player.inventory.DestroyGun(ak188);
+                }
             }
-                       
+
         }
         public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
         {
@@ -102,7 +113,7 @@ namespace Items
             }
         }
 
-        private float revAngle = 180;
+        
         public override void OnPostFired(PlayerController player, Gun gun)
         {
             base.OnPostFired(player, gun);
@@ -114,8 +125,8 @@ namespace Items
                 Projectile component2 = gameObject2.GetComponent<Projectile>();
                 if (component2 != null)
                 {
-                    component2.Owner = base.Owner;
-                    component2.Shooter = base.Owner.specRigidbody;
+                    component2.Owner = player;
+                    component2.Shooter = player.specRigidbody;
                     component2.baseData.speed *= player.stats.GetStatValue(PlayerStats.StatType.ProjectileSpeed);
                     component2.baseData.force *= player.stats.GetStatValue(PlayerStats.StatType.KnockbackMultiplier);
                     component2.baseData.damage *= player.stats.GetStatValue(PlayerStats.StatType.Damage);

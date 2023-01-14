@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 using Gungeon;
 
@@ -16,7 +16,7 @@ namespace Items
             gun.SetupSprite(null, "prime_cannon_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 4);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BULLET;
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
@@ -63,13 +63,13 @@ namespace Items
             };
 
             GetFucked.explosionData = die;
-            projectile.SetProjectileSpriteRight("prime_bomb", 9, 9, null, null);
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            projectile.SetProjectileSpriteRight("prime_bomb", 9, 9);
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;
 
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

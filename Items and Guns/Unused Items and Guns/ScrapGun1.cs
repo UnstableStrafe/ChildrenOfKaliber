@@ -20,7 +20,7 @@ namespace Items
             gun.SetAnimationFPS(gun.shootAnimation, 24);
             // Every modded gun has base projectile it works with that is borrowed from other guns in the game. 
             // The gun names are the names from the JSON dump! While most are the same, some guns named completely different things. If you need help finding gun names, ask a modder on the Gungeon discord.
-            gun.AddProjectileModuleFrom("ak-47", true, false);
+            gun.AddProjectileModuleFrom("ak-47");
             // Here we just take the default projectile module and change its settings how we want it to be.
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -32,7 +32,7 @@ namespace Items
             // Here we just set the quality of the gun and the "EncounterGuid", which is used by Gungeon to identify the gun.
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             gun.encounterTrackable.EncounterGuid = "According to all known laws of aviation, there is no way a bee should be able to fly.";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
 
         }
 

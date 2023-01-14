@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -17,7 +17,7 @@ namespace Items
 
 
             string itemName = "Steam Sale";
-            string resourceName = "Items/Resources/steam_sale.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/steam_sale.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -70,7 +70,7 @@ namespace Items
             
         }
 
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.OnDestroy();
         }

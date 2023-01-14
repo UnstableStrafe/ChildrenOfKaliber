@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -9,7 +9,7 @@ namespace Items
         {
 
             string itemName = "Matchsticks";
-            string resourceName = "Items/Resources/matchsticks.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/matchsticks.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -33,8 +33,8 @@ namespace Items
 
 
         }
-        private static PlayerController player;
-        protected override void DoEffect(PlayerController user)
+        
+        public override void DoEffect(PlayerController user)
         {
 
             Projectile projectile2 = ((Gun)ETGMod.Databases.Items[275]).DefaultModule.projectiles[0];

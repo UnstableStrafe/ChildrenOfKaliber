@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using ItemAPI;
-using Steamworks;
+using Alexandria.ItemAPI;
+
 namespace Items
 {
     class PetRock : PassiveItem
@@ -20,7 +20,7 @@ namespace Items
 
 
             string itemName = "Pet Rock";
-            string resourceName = "Items/Resources/pet_rock.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/pet_rock.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -47,7 +47,7 @@ namespace Items
         }
         private void RoomCleared(PlayerController obj)
         {
-            string username = SteamFriends.GetPersonaName();
+            
             MotivateCh = 2;
             int ValRocc = 1;
             if(ValRocc < MotivateCh)
@@ -61,67 +61,42 @@ namespace Items
                     if (Saying == 0)
                     {
                         header = "Pet rock cheers you on";
-                        if(username == string.Empty)
-                        {
-                            text = "You can do it!";
-                        }
-                        else
-                        {
-                            text = "You can do it, " + username + "!";
-                        }
+
+                        text = "You can do it!";
+
+
                         
                     }
                     if (Saying == 1)
                     {
                         header = "Pet rock cheers you on";
-                        if (username == string.Empty)
-                        {
-                            text = "Good job!";
-                        }
-                        else
-                        {
-                            text = "Good job, " + username + "!";
-                        }
+                        
+                        text = "Good job!";
+                        
                         
                     }
                     if (Saying == 2)
                     {
                         header = "Pet rock cheers you on";
-                        if (username == string.Empty)
-                        {
-                            text = "I believe in you!";
-                        }
-                        else
-                        {
-                            text = "I believe in you, " + username + "!";
-                        }
+                       
+                        text = "I believe in you!";
+                      
                         
                     }
                     if (Saying == 3)
                     {
                         header = "Pet rock cheers you on";
-                        if (username == string.Empty)
-                        {
-                            text = "You did great!";
-                        }
-                        else
-                        {
-                            text = "You did great, " + username + "!";
-                        }
+                        
+                        text = "You did great!";
+                     
                         
                     }
                     if (Saying == 4)
                     {
                         header = "Pet rock cheers you on";
-                        if (username == string.Empty)
-                        {
-                            text = "Well done!";
-                        }
-                        else
-                        {
-                            text = "Well done, " + username + "!";
-                        }
-                        
+                       
+                        text = "Well done!";
+                       
                     }
 
                 }
@@ -130,14 +105,9 @@ namespace Items
                     
                     header = "Ṫ̶͖̫̺͖̞̹͚̫̍͐̕ḩ̵̲̬̥̭̬́̋͜ͅe̷̹̤̺͋ ̸̧͉̻͈̣͚̜̹̹̣͋́̓̊̂̓̐p̷̛̬̃̈́̊͘͝a̶̗͖̰̜̰̤̹̩̹͂̒̃̏̈́͆̕č̶̛͙͕͎̘̭̩̤͕̓̌̕͝ţ̵̢̛̥̹̦̤̝̫̪̼͍̄͂̆͒̀̔́ ̷̨͓̩̤̼͉̉̃̆́͒́h̵͖̣͉̘͓͖͚̗̽̿̀̑̏̊̐̽̈́͘á̴͉͈̖̟̲̫̏ͅs̸̢͎̭͆̎͠ ̵̩̗̥̥̈̈́̌b̶̳̲͙͇͍̭͇̏ͅȩ̵̢̲̯̗͂̿̂̄̉̒́̏͊͝é̴͍͇͔̲͎̀̊̾͒̅̒ṋ̴̰̟͇̣͉̄͋̈̀͑̽̊͘͜͜ ̴̜̝͌̀̀̾̋̓̀̈́̀̿̕s̴̘̻̬̓͂̒̀͝͠ȇ̷͍̥̝̬̫͎̰̉̋̏̆̏͌ͅả̶̖͊̀̿l̸̡̡̛̺͖̫̰͛̓̐͌̾̄͘ͅḛ̸̢̞̟͕͂̐͘̚d̷̢͚̟͔͉͔͔͗́̈̂̽̏ͅ";
 
-                    if (username == string.Empty)
-                    {
-                        text = "Your soul is mine!";
-                    }
-                    else
-                    {
-                        text = "Your soul is mine " + username + "!";
-                    }
+                    text = "Your soul is mine!";
+
+                   
                     
                     AkSoundEngine.PostEvent("Play_ENM_reaper_spawn_01", gameObject);
                 }

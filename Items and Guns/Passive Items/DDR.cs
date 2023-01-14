@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 
@@ -12,7 +12,7 @@ namespace Items
         {
 
             string itemName = "DDR";
-            string resourceName = "Items/Resources/ddr.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/ddr.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -29,7 +29,7 @@ namespace Items
 
         }
         private float AngVel, AngVelLast = -1f;
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
             this.Movement();
@@ -50,25 +50,25 @@ namespace Items
             if (AngVel == 0f)
             {
                 AddStat(PlayerStats.StatType.ProjectileSpeed, 1.3f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                outlineMaterial.SetColor("_OverrideColor", new Color(54f, 208f, 255f, 50f));
+                outlineMaterial.SetColor("_OverrideColor", new Color(54, 208, 255, 50));
             }
 
             if(AngVel == 90f)
             {
                 AddStat(PlayerStats.StatType.RateOfFire, 1.3f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                outlineMaterial.SetColor("_OverrideColor", new Color(232f, 255f, 54f, 50f));
+                outlineMaterial.SetColor("_OverrideColor", new Color(232, 255, 54, 50));
             }   
 
             if(AngVel == -180f)
             {
                 AddStat(PlayerStats.StatType.Damage, 1.3f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                outlineMaterial.SetColor("_OverrideColor", new Color(252f, 56f, 56f, 50f));
+                outlineMaterial.SetColor("_OverrideColor", new Color(252, 56, 56, 50));
             }
 
             if(AngVel == -90f)
             {
                 AddStat(PlayerStats.StatType.ReloadSpeed, .7f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                outlineMaterial.SetColor("_OverrideColor", new Color(54f, 255f, 121f, 50f));
+                outlineMaterial.SetColor("_OverrideColor", new Color(54, 255, 121, 50));
             }
             
             this.Owner.stats.RecalculateStats(Owner, true);
@@ -77,7 +77,7 @@ namespace Items
         private void DisableVFX(PlayerController user)
         {
             Material outlineMaterial = SpriteOutlineManager.GetOutlineMaterial(user.sprite);
-            outlineMaterial.SetColor("_OverrideColor", new Color(0f, 0f, 0f));
+            outlineMaterial.SetColor("_OverrideColor", new Color(0, 0, 0, 0));
             
         }
         public override DebrisObject Drop(PlayerController player)

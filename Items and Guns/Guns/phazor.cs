@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -23,7 +23,7 @@ namespace Items
             gun.SetupSprite(null, "phazor_idle_001", 13);
            
             gun.SetAnimationFPS(gun.shootAnimation, 24);
-            gun.AddProjectileModuleFrom("future_assault_rifle", true, false);
+            gun.AddProjectileModuleFrom("future_assault_rifle");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -47,13 +47,13 @@ namespace Items
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.baseData.damage *= 2.28571428571f;
             projectile.baseData.speed *= 1f;
-            projectile.SetProjectileSpriteRight("phazor_projectile_002", 21, 3, null, null);
+            projectile.SetProjectileSpriteRight("phazor_projectile_002", 21, 3);
             gun.sprite.IsPerpendicular = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             projectile.transform.parent = gun.barrelOffset;
         }
         private bool HasReloaded;
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 namespace Items
 {
@@ -16,7 +16,7 @@ namespace Items
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             for (int i = 0; i < 3; i++)
             {
-                GunExt.AddProjectileModuleFrom(gun, "38_special", true, false);
+                GunExt.AddProjectileModuleFrom(gun, "38_special");
             }
             foreach (ProjectileModule projectileModule in gun.Volley.projectiles)
             {
@@ -38,9 +38,10 @@ namespace Items
                 bounce.damageMultiplierOnBounce = 1;
                 bounce.numberOfBounces = 6;
                 projectile.baseData.range *= 10f;
-                projectileModule.ammoType = GameUIAmmoType.AmmoType.SHOTGUN;
+                projectileModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+                projectileModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Billiard", "Items/Resources/CustomGunAmmoTypes/billiard_full", "Items/Resources/CustomGunAmmoTypes/billiard_empty");
                 projectile.shouldRotate = true;
-                projectile.SetProjectileSpriteRight("billiard_1", 9, 9, null, null);
+                projectile.SetProjectileSpriteRight("billiard_1", 9, 9);
                 bool flag = projectileModule == gun.DefaultModule;
                 if (flag)
                 {
@@ -62,7 +63,7 @@ namespace Items
             gun.quality = PickupObject.ItemQuality.A;
             gun.encounterTrackable.EncounterGuid = "Billiard Shotgun";
             gun.sprite.IsPerpendicular = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;
@@ -87,8 +88,8 @@ namespace Items
                 projectile.SendInDirection(dirVec, false, true);
             }
         }
-        private bool IronStanceOn = false;
-        protected void Update()
+        
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

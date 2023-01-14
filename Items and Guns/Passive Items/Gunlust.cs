@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -11,7 +11,7 @@ namespace Items
         {
 
             string itemName = "Gunlust";
-            string resourceName = "Items/Resources/gunlust.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/gunlust.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -111,10 +111,15 @@ namespace Items
         }
 
 
-        protected override void Update()
+        public override void Update()
         {
+            
             base.Update();
-            this.Stats();
+            if(Owner != null)
+            {
+                this.Stats();
+            }
+         
         }
 
         public override void Pickup(PlayerController player)

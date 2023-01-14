@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Gungeon;
 using System.Collections;
 using Dungeonator;
-using GungeonAPI;
+using Alexandria.DungeonAPI;
 
 
 
@@ -19,7 +19,7 @@ namespace Items
         {
             string itemName = "Poison Poltergeist";
 
-            string resourceName = "Items/Resources/poison_poltergeist.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/poison_poltergeist.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -36,7 +36,7 @@ namespace Items
             item.quality = ItemQuality.B;
             item.sprite.IsPerpendicular = true;
         }
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
 

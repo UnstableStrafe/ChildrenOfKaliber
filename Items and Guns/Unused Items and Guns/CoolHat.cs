@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Gungeon;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -48,7 +48,7 @@ namespace Items
 
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.OnDestroy();
             DestroyHat();

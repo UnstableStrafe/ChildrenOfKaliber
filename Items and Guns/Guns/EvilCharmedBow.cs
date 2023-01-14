@@ -1,6 +1,6 @@
 ﻿
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 namespace Items
 {
     class EvilCharmedBow : AdvancedGunBehaviour
@@ -14,7 +14,7 @@ namespace Items
             gun.SetLongDescription("filler text.");
             gun.SetupSprite(null, "evil_charmed_bow_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 6);
-            gun.AddProjectileModuleFrom("crossbow", true, false);
+            gun.AddProjectileModuleFrom("crossbow");
             gun.SetBaseMaxAmmo(180);
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -42,7 +42,7 @@ namespace Items
             projectile.PoisonApplyChance = .33f;
             projectile.healthEffect = Library.Venom;
             projectile.transform.parent = gun.barrelOffset;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;

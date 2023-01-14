@@ -1,5 +1,5 @@
 ﻿
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -10,7 +10,7 @@ namespace Items
         {
             string itemName = "Auric Vial";
 
-            string resourceName = "Items/Resources/gilded_vial.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/gilded_vial.png";
 
             GameObject obj = new GameObject(itemName);
 

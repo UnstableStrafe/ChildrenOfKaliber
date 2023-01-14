@@ -1,7 +1,10 @@
 ﻿using System;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
+using System.Collections;
+using System.Linq;
+using System.Collections.Generic;
 namespace Items
 {
     class PrimalSulfur : PassiveItem
@@ -10,7 +13,7 @@ namespace Items
         {
             string itemName = "Primal Sulfur";
 
-            string resourceName = "Items/Resources/primal_sulfur.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/primal_sulfur.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -25,63 +28,34 @@ namespace Items
 
             item.quality = ItemQuality.B;
             item.sprite.IsPerpendicular = true;
+            primalSulfurId = item.PickupObjectId;
         }
         private void MarkEnemies()
         {
-            int i = 0;
-            int capper = 0;
-
-            AIActor actor;
+            
+            List<AIActor> actors = new List<AIActor> { };
             RoomHandler absoluteRoom = base.transform.position.GetAbsoluteRoom();
-            do
+            if (absoluteRoom.HasActiveEnemies(RoomHandler.ActiveEnemyType.All))
             {
-                actor = Owner.CurrentRoom.GetRandomActiveEnemy(false);
-                actor.ApplyEffect(Library.SulfurEffect);
-                i++;
+                actors = Library.RandomNoRepeats(absoluteRoom.GetActiveEnemies(RoomHandler.ActiveEnemyType.All), 4);
+
             }
-            while (i < 4);
-            
-            
+            if (actors.Any())
+            {
+                foreach(AIActor a in actors)
+                {
+                    a.ApplyEffect(Library.SulfurEffect);
+                }
+            }
         }
         public override void Pickup(PlayerController player)
         {
             player.OnEnteredCombat = (Action)Delegate.Combine(player.OnEnteredCombat, new Action(this.MarkEnemies));
-            WeightedGameObject Object1 = new WeightedGameObject
+           
+           
+            if (player.HasPickupID(PrimalCharcoal.primalCharcoalId) && player.HasPickupID(PrimalSaltpeter.primalSaltpeterId) && player.HasPickupID(PrimalNitricAcid.primalNitricAcidId) && !player.HasPickupID(TrueGunpowder.itemID))
             {
-                pickupId = ETGMod.Databases.Items["Primal Saltpeter"].PickupObjectId,
-                weight = 1.7f,
-                rawGameObject = ETGMod.Databases.Items["Primal Saltpeter"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            WeightedGameObject Object2 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Primal Charcoal"].PickupObjectId,
-                weight = 1.7f,
-                rawGameObject = ETGMod.Databases.Items["Primal Charcoal"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            WeightedGameObject Object3 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Primal Nitric Acid"].PickupObjectId,
-                weight = 1.8f,
-                rawGameObject = ETGMod.Databases.Items["Primal Nitric Acid"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            if (!player.HasPickupID(ETGMod.Databases.Items["Primal Saltpeter"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object1);
-            }
-            if (!player.HasPickupID(ETGMod.Databases.Items["Primal Charcoal"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object2);
-            }
-            if (!player.HasPickupID(ETGMod.Databases.Items["Primal Nitric Acid"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object3);
-            }
-            if (player.HasPickupID(ETGMod.Databases.Items["Primal Saltpeter"].PickupObjectId) && player.HasPickupID(ETGMod.Databases.Items["Primal Nitric Acid"].PickupObjectId) && player.HasPickupID(ETGMod.Databases.Items["Primal Charcoal"].PickupObjectId) && !player.HasPickupID(ETGMod.Databases.Items["True Gunpowder"].PickupObjectId))
-            {
-                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(ETGMod.Databases.Items["True Gunpowder"].PickupObjectId).gameObject, player);
+                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(TrueGunpowder.itemID).gameObject, player);
             }
             base.Pickup(player);
         }
@@ -90,7 +64,10 @@ namespace Items
             DebrisObject debrisObject = base.Drop(player);
             debrisObject.GetComponent<PrimalSulfur>().m_pickedUpThisRun = true;
             player.OnEnteredCombat = (Action)Delegate.Remove(player.OnEnteredCombat, new Action(this.MarkEnemies));
+           
             return debrisObject;
         }
+        public static int primalSulfurId;
     }
+    
 }

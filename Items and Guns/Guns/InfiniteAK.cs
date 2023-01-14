@@ -1,6 +1,9 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
+using System.Collections;
+using System;
+using System.Collections.Generic;
 
 namespace Items
 {
@@ -18,7 +21,7 @@ namespace Items
             gun.SetAnimationFPS(gun.reloadAnimation, 10);
             for (int i = 0; i < 1; i++)
             {
-                GunExt.AddProjectileModuleFrom(gun, "ak-47", true, false);
+                GunExt.AddProjectileModuleFrom(gun, "ak-47");
             }
             foreach (ProjectileModule projectileModule in gun.Volley.projectiles)
             {
@@ -37,7 +40,15 @@ namespace Items
                 projectileModule.cooldownTime = .08f;
                 projectile.ignoreDamageCaps = true;
                 projectileModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BULLET;
-
+                List<string> frameNames = new List<string> 
+                {
+                    "infinity_projectile_001",
+                    "infinity_projectile_002",
+                    "infinity_projectile_003",
+                    "infinity_projectile_004",
+                };
+                projectile.AnimateProjectile(frameNames, 10, true, Library.ConstructListOfSameValues(new IntVector2(13, 13), 4), Library.ConstructListOfSameValues(true, 4), Library.ConstructListOfSameValues(tk2dBaseSprite.Anchor.LowerLeft, 4), Library.ConstructListOfSameValues(false, 4), Library.ConstructListOfSameValues(false, 4), Library.ConstructListOfSameValues<Vector3?>(null, 4), Library.ConstructListOfSameValues<IntVector2?>(null, 4), Library.ConstructListOfSameValues<IntVector2?>(null, 4), Library.ConstructListOfSameValues<Projectile>(null, 4));
+                projectile.shouldRotate = false;
                 bool flag = projectileModule == gun.DefaultModule;
                 if (flag)
                 {
@@ -54,7 +65,7 @@ namespace Items
             gun.CanBeDropped = false;
             gun.CanBeSold = false;
             gun.muzzleFlashEffects.type = VFXPoolType.None;
-            gun.InfiniteAmmo = true;      
+            gun.InfiniteAmmo = true;
             gun.gunSwitchGroup = (PickupObjectDatabase.GetById(15) as Gun).gunSwitchGroup;
             gun.muzzleFlashEffects = (PickupObjectDatabase.GetById(15) as Gun).muzzleFlashEffects;
             gun.SetBaseMaxAmmo(2000);
@@ -64,10 +75,12 @@ namespace Items
             gun.barrelOffset.transform.localPosition = new Vector3(2.25f, 0.3125f, 0f);
             gun.gunClass = GunClass.FULLAUTO;
             
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
+            InfiniteAK.AKINFID = gun.PickupObjectId;
         }
+        public static int AKINFID;
         private bool HasReloaded;
- 
+
         protected override void Update()
         {
             base.Update();
@@ -87,16 +100,13 @@ namespace Items
         public override void PostProcessProjectile(Projectile projectile)
         {
             base.PostProcessProjectile(projectile);
-            
+
         }
         protected override void OnPickup(GameActor owner)
         {
             base.OnPickup(owner);
-            Gun gun = ETGMod.Databases.Items["ak_188"] as Gun;
-            if ((owner as PlayerController).HasGun(gun.PickupObjectId))
-            {
-                (owner as PlayerController).inventory.DestroyGun(gun);
-            }
+
+          
         }
         public override void OnReloadPressed(PlayerController player, Gun gun, bool bSOMETHING)
         {

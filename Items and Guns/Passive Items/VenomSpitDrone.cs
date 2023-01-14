@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -9,7 +9,7 @@ namespace Items
         {
             string itemName = "Venom Spit Drone";
 
-            string resourceName = "Items/Resources/venom_spit_drone.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/venom_spit_drone.png";
 
             GameObject obj = new GameObject(itemName);
 

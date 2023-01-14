@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Collections;
 using System.Reflection;
@@ -14,7 +14,16 @@ namespace Items
 {
 	public class UndodgeableProjectile : Projectile
 	{
-		protected override void OnPreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherCollider)
+		public override void Start()
+        {
+			Material sharedMaterial = projectile.sprite.renderer.sharedMaterial;
+			projectile.sprite.usesOverrideMaterial = true;
+			Material material = new Material(ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive"));
+			material.SetTexture("_MainTex", sharedMaterial.GetTexture("_MainTex"));
+			material.SetColor("_OverrideColor", new Color32(161, 3, 252, 1));
+			material.SetFloat("_EmissivePower", Mathf.Lerp(0, 22, 0.4f));
+		}
+		public override void OnPreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherCollider)
 		{
 			if (otherRigidbody == Shooter && !allowSelfShooting)
 			{
@@ -70,7 +79,7 @@ namespace Items
 			}
 		}
 
-		protected override HandleDamageResult HandleDamage(SpeculativeRigidbody rigidbody, PixelCollider hitPixelCollider, out bool killedTarget, PlayerController player, bool alreadyPlayerDelayed = false)
+		public override HandleDamageResult HandleDamage(SpeculativeRigidbody rigidbody, PixelCollider hitPixelCollider, out bool killedTarget, PlayerController player, bool alreadyPlayerDelayed = false)
 		{
 			killedTarget = false;
 			if (rigidbody.ReflectProjectiles)

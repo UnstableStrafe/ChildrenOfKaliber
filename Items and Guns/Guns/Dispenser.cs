@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -17,7 +17,7 @@ namespace Items
             gun.SetupSprite(null, "dispenser_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
             gun.SetAnimationFPS(gun.reloadAnimation, 9);
-            gun.AddProjectileModuleFrom("crossbow", true, false);
+            gun.AddProjectileModuleFrom("crossbow");
             gun.SetBaseMaxAmmo(180);
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -41,13 +41,13 @@ namespace Items
             projectile.baseData.speed *= .769f;
             projectile.baseData.force *= .6f;
             projectile.transform.parent = gun.barrelOffset;
-            projectile.SetProjectileSpriteRight("dispenser_projectile_001", 11, 3, null, null);
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            projectile.SetProjectileSpriteRight("dispenser_projectile_001", 11, 3);
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;
 
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

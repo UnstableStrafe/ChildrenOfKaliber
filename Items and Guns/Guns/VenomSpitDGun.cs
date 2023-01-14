@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 namespace Items
 {
     class VenomSpitDGun : GunBehaviour
@@ -15,7 +15,7 @@ namespace Items
             gun.SetupSprite(null, "venom_spit_drone_gun_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
             gun.SetAnimationFPS(gun.reloadAnimation, 10);
-            gun.AddProjectileModuleFrom("future_assault_rifle", true, false);
+            gun.AddProjectileModuleFrom("future_assault_rifle");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -44,7 +44,7 @@ namespace Items
             projectile.DefaultTintColor = new Color(78 / 90f, 5 / 90f, 120 / 90f);
             projectile.AppliesPoison = true;
             projectile.healthEffect = Library.Venom;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
 
 
         }
@@ -53,7 +53,7 @@ namespace Items
 
         private bool HasReloaded;
 
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gungeon;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -80,7 +80,7 @@ namespace Items
             gun.SetupSprite(null, shortName+"_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 9);
             gun.SetAnimationFPS(gun.reloadAnimation, 10);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BULLET;
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
@@ -106,7 +106,7 @@ namespace Items
             projectile.baseData.damage *= 1f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.force *= 1f;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
             gun.AddToSubShop(ItemBuilder.ShopType.Cursula);
         }

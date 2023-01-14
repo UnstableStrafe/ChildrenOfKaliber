@@ -1,5 +1,5 @@
 ﻿using System;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Dungeonator;
 
@@ -16,7 +16,7 @@ namespace Items
         {
             string itemName = "Floop Bullets";
 
-            string resourceName = "Items/Resources/floop_bullets.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/floop_bullets.png";
 
             GameObject obj = new GameObject(itemName);
 

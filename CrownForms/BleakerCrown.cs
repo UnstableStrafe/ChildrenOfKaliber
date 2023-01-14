@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System.Collections;
 using UnityEngine;
 using Gungeon;
@@ -33,7 +33,7 @@ namespace Items
 
         }
 		float Coolness = 0, lastCoolness = -1;
-        protected override void Update()
+		public override void Update()
         {
             base.Update();
 			Coolness = Owner.stats.GetStatValue(PlayerStats.StatType.Coolness);

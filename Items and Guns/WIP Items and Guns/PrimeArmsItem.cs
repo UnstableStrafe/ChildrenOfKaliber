@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using Dungeonator;
-using GungeonAPI;
-using ItemAPI;
+using Alexandria.DungeonAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items

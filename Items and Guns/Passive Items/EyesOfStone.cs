@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Collections;
 using System.Reflection;
@@ -19,7 +19,7 @@ namespace Items
         {
             string itemName = "Eyes Of Stone";
 
-            string resourceName = "Items/Resources/eyes_of_stone.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/eyes_of_stone.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -62,19 +62,11 @@ namespace Items
         {
             DebrisObject debrisObject = base.Drop(player);
             debrisObject.GetComponent<EyesOfStone>().m_pickedUpThisRun = true;
-            if (!player.CurrentGun.GetComponent<PredatorGunController>())
-            {
-                
-            }
             ETGMod.AIActor.OnPostStart = (Action<AIActor>)Delegate.Remove(ETGMod.AIActor.OnPostStart, new Action<AIActor>(ClearIllusions));
             return debrisObject;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
-            if (!Owner.CurrentGun.GetComponent<PredatorGunController>())
-            {
-                
-            }
             ETGMod.AIActor.OnPostStart = (Action<AIActor>)Delegate.Remove(ETGMod.AIActor.OnPostStart, new Action<AIActor>(ClearIllusions));
             base.OnDestroy();
         }

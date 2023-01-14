@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,7 +10,7 @@ namespace Items
         {
 
             string itemName = "Quest Log";
-            string resourceName = "Items/Resources/quest_log.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/quest_log.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -30,7 +30,7 @@ namespace Items
             item.quality = PickupObject.ItemQuality.D;
             item.sprite.IsPerpendicular = true;
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             Kill = false;
             Shop = false;
@@ -235,7 +235,7 @@ namespace Items
         private bool Kill = false;
         private bool Shop = false;
         private bool Table = false;
-        private bool Ignite = false;
+        
         private bool Blank = false;
         private bool Clear = false;
         private bool RewardDue = false;

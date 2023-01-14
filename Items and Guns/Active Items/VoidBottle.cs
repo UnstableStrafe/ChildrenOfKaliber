@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -11,7 +11,7 @@ namespace Items
         {
             string itemName = "Void Bottle";
 
-            string resourceName = "Items/Resources/empty_bottle.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/empty_bottle.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -35,7 +35,7 @@ namespace Items
 
 
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             float curHealth = user.healthHaver.GetCurrentHealth();          
             {
@@ -59,7 +59,7 @@ namespace Items
                 
             }
         }
-        public PlayerController player;
+        
 
         public override void Pickup(PlayerController player)
         {

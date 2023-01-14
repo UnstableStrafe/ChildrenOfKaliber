@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Gungeon;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 
 namespace Items

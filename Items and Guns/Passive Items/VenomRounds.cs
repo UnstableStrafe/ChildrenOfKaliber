@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using Random = UnityEngine.Random;
 using UnityEngine;
 
@@ -6,11 +6,12 @@ namespace Items
 {
     class VenomRounds : PassiveItem
     {
+        public static int itemID;
         public static void Init()
         {
             string itemName = "Venom Rounds";
 
-            string resourceName = "Items/Resources/venom_rounds.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/venom_rounds.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -24,7 +25,7 @@ namespace Items
 
             item.quality = ItemQuality.A;
             item.sprite.IsPerpendicular = true;
-
+            itemID = item.PickupObjectId;
         }
         
         public void Post(Projectile projectile, float eff)

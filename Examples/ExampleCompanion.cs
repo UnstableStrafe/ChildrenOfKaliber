@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 using Random = UnityEngine.Random;
 namespace CustomItems

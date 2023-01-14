@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 class AdvancedGunBehaviour : MonoBehaviour, IGunInheritable, ILevelLoadedListener
 {
+
     /// <summary>
     /// Update() is called every tick when the gun is the player's current gun or is dropped.
     /// </summary>

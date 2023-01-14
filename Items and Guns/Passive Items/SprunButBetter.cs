@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using System.Collections;
 namespace Items
@@ -147,7 +147,7 @@ namespace Items
 
 
 
-        protected override void Update()
+        public override void Update()
         {
             if (this.m_transformation == SprunButBetter.SprenTransformationState.TRANSFORMED && (GameManager.Instance.IsLoadingLevel || Dungeon.IsGenerating || (this.m_player && this.m_player.CurrentRoom != null && this.m_player.CurrentRoom.IsWinchesterArcadeRoom)))
             {
@@ -303,7 +303,7 @@ namespace Items
             }
             this.m_player.inventory.GunChangeForgiveness = false;
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (this.m_player)
             {

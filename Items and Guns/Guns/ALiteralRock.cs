@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using Gungeon;
 namespace Items
 {
@@ -16,7 +16,7 @@ namespace Items
             gun.SetupSprite(null, "a_literal_rock_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("magnum", true, false);
+            gun.AddProjectileModuleFrom("magnum");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -45,7 +45,7 @@ namespace Items
             projectile.baseData.force *= 0f;
             projectile.baseData.range *= 0;
 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
 

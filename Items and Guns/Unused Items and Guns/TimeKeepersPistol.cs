@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 namespace Items
 {
     class TimeKeepersPistol : GunBehaviour
@@ -17,7 +17,7 @@ namespace Items
             gun.SetupSprite(null, "time_keeper's_pistol_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("magnum", true, false);
+            gun.AddProjectileModuleFrom("magnum");
 
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -53,14 +53,14 @@ namespace Items
             projectile.baseData.range *= 0.266f;
 
 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
 
 
         private bool HasReloaded;
-        
-        protected void Update()
+
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

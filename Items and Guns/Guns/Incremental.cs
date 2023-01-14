@@ -1,6 +1,6 @@
 ﻿
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using System;
 
 namespace Items
@@ -19,7 +19,7 @@ namespace Items
             gun.SetAnimationFPS(gun.shootAnimation, 24);
             gun.SetAnimationFPS(gun.reloadAnimation, 4);
             
-            gun.AddProjectileModuleFrom("ak-47", true, false);
+            gun.AddProjectileModuleFrom("ak-47");
 
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
@@ -44,7 +44,7 @@ namespace Items
             projectile.transform.parent = gun.barrelOffset;
             projectile.baseData.damage *= .54545454545f;
             projectile.shouldRotate = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
         }
         private float Inc = 0;
@@ -53,7 +53,7 @@ namespace Items
         private float ClipCheck = 0;
         private bool HasReloaded;
 
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

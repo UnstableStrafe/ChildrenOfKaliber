@@ -1,6 +1,6 @@
 ﻿
-using GungeonAPI;
-using ItemAPI;
+using Alexandria.DungeonAPI;
+using Alexandria.ItemAPI;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -157,13 +157,13 @@ namespace Items
             obj.AddAnimation("idle", "Items/Resources/Tick/Idle/", 5, NPCBuilder.AnimationType.Idle);
             obj.AddAnimation("talk", "Items/Resources/Tick/Talk/", 10, NPCBuilder.AnimationType.Talk);
             obj.AddAnimation("do_effect", "Items/Resources/Tick/DoEffect/", 10, NPCBuilder.AnimationType.Other);
-            var npc = obj.GetComponent<FranseisInteractable>();
-            npc.conversation = new List<string>() {
-                "I'm Grandfather Tick...",
-                "Do you want to start again...",
-                "I can bring you to when this began...",
-                "But I must warn you, you will lose every item you currently have..."
-            };
+           // var npc = obj.GetComponent<FranseisInteractable>();
+            //npc.conversation = new List<string>() {
+              //  "I'm Grandfather Tick...",
+               // "Do you want to start again...",
+               // "I can bring you to when this began...",
+               // "But I must warn you, you will lose every item you currently have..."
+           // };
             obj.SetActive(false);
             ETGModConsole.Log("Test 3");
         }

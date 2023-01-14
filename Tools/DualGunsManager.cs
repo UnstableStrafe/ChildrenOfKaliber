@@ -17,6 +17,13 @@
 
             DualWieldController TommyGunController = (PickupObjectDatabase.GetById(2) as Gun).gameObject.AddComponent<DualWieldController>();
             TommyGunController.PartnerGunID = ETGMod.Databases.Items["russian_revolver"].PickupObjectId;
+            /*
+           DualWieldController MiniLeftHandController = PickupObjectDatabase.GetById(MiniUberbotHand.lesserLeftHand).gameObject.AddComponent<DualWieldController>();
+           MiniLeftHandController.PartnerGunID = MiniUberbotHand2.greaterRight;
+
+           DualWieldController MiniRightHandController = PickupObjectDatabase.GetById(MiniUberbotHand2.greaterRight).gameObject.AddComponent<DualWieldController>();
+           MiniRightHandController.PartnerGunID = MiniUberbotHand.lesserLeftHand;
+           */
         }
     }
 }

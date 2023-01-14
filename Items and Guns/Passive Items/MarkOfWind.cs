@@ -1,5 +1,5 @@
 ﻿using System;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -10,7 +10,7 @@ namespace Items
         {
             string itemName = "Mark Of The Wind";
 
-            string resourceName = "Items/Resources/glyph.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/glyph.png";
 
             GameObject obj = new GameObject(itemName);
 

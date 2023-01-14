@@ -1,11 +1,18 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Collections;
+using System.Linq;
+using System.Text;
+using System.Collections.Generic;
+using System;
+using System.Collections.ObjectModel;
+
 namespace Items
 {
     class TheLastChamber : AdvancedGunBehaviour
     {
+        public static int itemID;
         public static void Add()
         {
 
@@ -18,7 +25,7 @@ namespace Items
             gun.SetupSprite(null, "the_last_chamber_idle_001", 10);
             gun.SetAnimationFPS(gun.shootAnimation, 18);
             gun.SetAnimationFPS(gun.reloadAnimation, 6);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -53,9 +60,9 @@ namespace Items
             orAddComponent.penetratesBreakables = true;
             orAddComponent.penetration = 100;
             projectile.shouldRotate = true;
-            projectile.SetProjectileSpriteRight("the_last_bullet", 10, 6, null, null);
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            projectile.SetProjectileSpriteRight("the_last_bullet", 10, 6);
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
+            itemID = gun.PickupObjectId;
         }
 
         public override void PostProcessProjectile(Projectile projectile)
@@ -166,7 +173,27 @@ namespace Items
                 //aiActor.spriteAnimator.UpdateAnimation(GameManager.INVARIANT_DELTA_TIME);
                 yield return null;
             }
+            ReadOnlyCollection<Projectile> allProjectiles = StaticReferenceManager.AllProjectiles;
+            for (int l = allProjectiles.Count - 1; l >= 0; l--)
+            {
+                Projectile projectile = allProjectiles[l];
+                if (projectile != null)
+                {
+                    if (projectile.Owner != null)
+                    {
+                        if (projectile.Owner is AIActor)
+                        {
+                            if (projectile.GetComponent<ChainLightningModifier>())
+                            {
+                                Destroy(projectile.GetComponent<ChainLightningModifier>());
+                            }
+                            projectile.DieInAir(false, false, false, true);
+                        }
+                    }
+                }
+            }
             aiActor.healthHaver.ApplyDamage(10000000f, Vector2.zero, "You Died.", CoreDamageTypes.None, DamageCategory.Unstoppable, false, null, true);
+            
             elapsed = 0f;
             duration = 1f;
             while (elapsed < duration)

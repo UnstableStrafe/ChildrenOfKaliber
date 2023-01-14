@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Gungeon;
 using Dungeonator;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Collections;
 
@@ -16,7 +16,7 @@ namespace Items
         {
             string itemName = "Support Contract";
 
-            string resourceName = "Items/Resources/support_contract.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/support_contract.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -24,7 +24,7 @@ namespace Items
 
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
 
-            string shortDesc = "Call In The Big Guns";
+            string shortDesc = "Me And The Boys";
             string longDesc = "Summons a temporary group of Bullet Kin to aid you in battle! \n\nThe Gundead, aside from being irreparably stupid, are extremely loyal. These bullet kin will fight to the death for anyone holding this contract.";
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
@@ -35,7 +35,7 @@ namespace Items
         }
         int amountToSummon = 5;
         float duration = 15;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             base.DoEffect(user);
             SpawnMainWave(user);
@@ -62,6 +62,7 @@ namespace Items
                     TargetActor.gameObject.AddComponent<GoAwayAfterRoomClear>();
                     TargetActor.IsHarmlessEnemy = true;
                     TargetActor.IgnoreForRoomClear = true;
+                    TargetActor.CollisionDamage = 0;                    
                     TargetActor.StartCoroutine(HandleTimer(TargetActor, duration));
                     float hpMax = TargetActor.healthHaver.GetMaxHealth();
                     TargetActor.healthHaver.SetHealthMaximum(hpMax * 3f);
@@ -153,7 +154,7 @@ namespace Items
             RoomHandler parentRoom = base.aiActor.ParentRoom;
             parentRoom.OnEnemiesCleared = (Action)Delegate.Combine(parentRoom.OnEnemiesCleared, new Action(this.RoomCleared));
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             if (base.aiActor && base.aiActor.ParentRoom != null)
             {

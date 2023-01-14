@@ -18,7 +18,7 @@ namespace Items
             gun.SetupSprite(null, "tracker's_shotgun_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 8);
             gun.SetAnimationFPS(gun.reloadAnimation, 1);
-            gun.AddProjectileModuleFrom("shotgun", true, false);
+            gun.AddProjectileModuleFrom("shotgun");
             gun.Volley = (PickupObjectDatabase.GetById(202) as Gun).Volley;
             gun.singleModule = (PickupObjectDatabase.GetById(202) as Gun).singleModule;
             gun.RawSourceVolley = (PickupObjectDatabase.GetById(202) as Gun).RawSourceVolley;
@@ -42,7 +42,7 @@ namespace Items
             
             Guid.NewGuid().ToString();
            
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         public override void PostProcessProjectile(Projectile projectile)

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
+using LootTableAPI;
+using Dungeonator;
+using Alexandria.DungeonAPI;
 
 namespace Items
 {
@@ -13,18 +16,28 @@ namespace Items
         {
 
         };
-        public static Chest MChest = new Chest();
+        public static Chest munitionsChest = new Chest();
+
+       
+
+        private void Start()
+        {
+            RoomHandler room = base.GetAbsoluteParentRoom();
+            base.ConfigureOnPlacement(room);
+        }
+        
         public static void Init()
         {
             try
             {
-                GameObject obj = SpriteBuilder.SpriteFromResource("Items/Resources/MunitionsChest/munitions_chest_idle_001", new GameObject("MunitionsChest"));
-                obj.SetActive(false);
-                FakePrefab.MarkAsFakePrefab(obj);
-                UnityEngine.Object.DontDestroyOnLoad(obj);
+
+                GameObject obj = ChildrenOfKaliberModule.ModAssets.LoadAsset<GameObject>("munitionschestobj");
+                SpriteBuilder.SpriteFromResource("Items/Resources/MunitionsChest/munitions_chest_idle_001", obj);
                 tk2dSprite sprite = obj.GetComponent<tk2dSprite>();
+                sprite.HeightOffGround = -1;
                 SpeculativeRigidbody body = sprite.SetUpSpeculativeRigidbody(new IntVector2(0, -8), new IntVector2(25, 25));
                 body.PrimaryPixelCollider.CollisionLayer = CollisionLayer.HighObstacle;
+                Library.GenerateOrAddToRigidBody(obj, CollisionLayer.HighObstacle);
                 tk2dSpriteAnimator animator = obj.AddComponent<tk2dSpriteAnimator>();
                 animator.Library = animator.gameObject.AddComponent<tk2dSpriteAnimation>();
                 animator.Library.clips = new tk2dSpriteAnimationClip[0];
@@ -97,13 +110,76 @@ namespace Items
                 }
                 breakClip.wrapMode = tk2dSpriteAnimationClip.WrapMode.Once;
                 animator.Library.clips = animator.Library.clips.Concat(new tk2dSpriteAnimationClip[] { breakClip }).ToArray();
+
+                GameObject chestLock = obj.transform.Find("Lock").gameObject;
+                SpriteBuilder.SpriteFromResource("Items/Resources/MunitionsChest/Lock/munitions_lock_idle_001", chestLock);
+                tk2dSprite lockSprite = chestLock.GetComponent<tk2dSprite>();
+                lockSprite.HeightOffGround = -.5f;
+
+                List<string> lockOpen = new List<string> 
+                {
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_open_001",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_open_002",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_open_003",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_open_004",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_open_005",
+                };
+                List<string> lockNoKey = new List<string>
+                {
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_idle_001",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_nokey_001",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_idle_001",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_nokey_002",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_idle_001",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_nokey_001",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_idle_001",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_nokey_002",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_idle_001",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_nokey_001",
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_idle_001",
+                };
+                List<string> lockBreak = new List<string>
+                {
+                    "Items/Resources/MunitionsChest/Lock/munitions_lock_broke_001",
+                };
+
+                tk2dSpriteCollectionData lockCollection = null; 
+                if(lockCollection == null)
+                {
+                    lockCollection = SpriteBuilder.ConstructCollection(chestLock, "MunitionsLockCollection");
+                    for (int i = 0; i < lockOpen.Count(); i++)
+                    {
+                        SpriteBuilder.AddSpriteToCollection(lockOpen[i], lockCollection);
+                    }
+                    for (int i = 0; i < lockNoKey.Count(); i++)
+                    {
+                        SpriteBuilder.AddSpriteToCollection(lockNoKey[i], lockCollection);
+                    }
+                    for (int i = 0; i < lockBreak.Count(); i++)
+                    {
+                        SpriteBuilder.AddSpriteToCollection(lockBreak[i], lockCollection);
+                    }
+                }
+                Library.GenerateSpriteAnimator(chestLock);
+
+                tk2dSpriteAnimator chestLockAnimator = chestLock.GetComponent<tk2dSpriteAnimator>();
+
+                Library.AddAnimation2(chestLockAnimator, lockCollection, lockOpen, "munitions_lock_open", tk2dSpriteAnimationClip.WrapMode.Once, 12);
+                chestLockAnimator.Library.clips[0].frames[0].eventAudio = "Play_OBJ_chest_unlock_01";
+                chestLockAnimator.Library.clips[0].frames[0].triggerEvent = true;
+                Library.AddAnimation2(chestLockAnimator, lockCollection, lockNoKey, "munitions_lock_nokey", tk2dSpriteAnimationClip.WrapMode.Once, 12);
+                chestLockAnimator.Library.clips[0].frames[0].eventAudio = "Play_OBJ_chest_lock_jiggle_01";
+                chestLockAnimator.Library.clips[0].frames[0].triggerEvent = true;
+                Library.AddAnimation2(chestLockAnimator, lockCollection, lockBreak, "munitions_lock_break", tk2dSpriteAnimationClip.WrapMode.Once, 12);
+                chestLockAnimator.Library.clips[0].frames[0].eventAudio = "Play_WPN_gun_empty_01";
+                chestLockAnimator.Library.clips[0].frames[0].triggerEvent = true;
                 Chest chest = obj.AddComponent<Chest>();
                 chest.spawnCurve = new AnimationCurve
                 {
                     keys = new Keyframe[] { new Keyframe { time = 0f, value = 0f, inTangent = 3.562501f, outTangent = 3.562501f }, new Keyframe { time = 1f, value = 1.0125f, inTangent = 0.09380959f,
                 outTangent = 0.09380959f } }
                 };
-                List<int> MuniStock = new List<int>
+                List<int> items = new List<int>
                 {
                     //Base Game
                     //----------
@@ -176,25 +252,18 @@ namespace Items
 
                 };
 
-                GenericLootTable Table;
-                Table = UnityEngine.Object.Instantiate<GenericLootTable>(GameManager.Instance.RewardManager.ItemsLootTable);
-                
-                Table.defaultItemDrops = new WeightedGameObjectCollection();
-                Table.defaultItemDrops.elements = new List<WeightedGameObject>();
-                foreach (int id in MuniStock)
+                var lootTable = LootTableTools.CreateLootTable();
+                foreach(int i in items)
                 {
-                    Table.defaultItemDrops.elements.Add(new WeightedGameObject()
-                    {
-                        pickupId = id,
-                        weight = 1,
-                        forceDuplicatesPossible = false,
-                        additionalPrerequisites = new DungeonPrerequisite[0]
-                    });
-
+                    lootTable.AddItemToPool(i);
                 }
 
                 //MLoot.Add(Table);
-                
+
+                chest.LockAnimator = chestLockAnimator;
+                chest.LockOpenAnim = "munitions_lock_open";
+                chest.LockNoKeyAnim = "munitions_lock_nokey";
+                chest.LockBreakAnim = "munitions_lock_break";
                 chest.openAnimName = "open";
                 chest.spawnAnimName = "appear";
                 chest.majorBreakable = obj.AddComponent<MajorBreakable>();
@@ -208,17 +277,22 @@ namespace Items
                 chest.ChestType = GeneralChestType.ITEM;
                 chest.overrideMimicChance = 0f;
                 chest.lootTable = new LootData();
-                chest.lootTable.lootTable = Table;
+                chest.lootTable.lootTable = lootTable;
                 chest.lootTable.S_Chance = 0.2f;
                 chest.lootTable.A_Chance = 0.2f;
                 chest.lootTable.B_Chance = 0.2f;
                 chest.lootTable.C_Chance = 0.2f;
                 chest.lootTable.D_Chance = 0.2f;
                 chest.IsLocked = true;
-                
-                MunitionsChestController.MChest = chest;
+                chest.IsSealed = false;
+                chest.IsOpen = false;
+                chest.IsBroken = false;
+                chest.MinimapIconPrefab = SpriteBuilder.SpriteFromResource("Items/Resources/MunitionsChest/munitions_chest_icon_001.png");
 
-                
+
+
+                MunitionsChestController.munitionsChest = chest;
+                StaticReferences.StoredRoomObjects.Add("MunitionsChest", munitionsChest.gameObject);
             }
             catch(Exception e)
             {

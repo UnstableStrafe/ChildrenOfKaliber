@@ -1,6 +1,6 @@
 ﻿
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Collections;
 using Dungeonator;
@@ -21,7 +21,7 @@ namespace Items
             gun.SetupSprite(null, "electric_bass_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
             gun.SetAnimationFPS(gun.reloadAnimation, 3);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.sprite.IsPerpendicular = true;
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
@@ -30,6 +30,7 @@ namespace Items
             gun.DefaultModule.cooldownTime = .3f;
             gun.SetBaseMaxAmmo(500);
             Gun gun2 = PickupObjectDatabase.GetById(149) as Gun;
+            gun.PreventNormalFireAudio = false;
             //gun.gunSwitchGroup = gun2.gunSwitchGroup;
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.MEDIUM_BLASTER;
             gun.DefaultModule.numberOfShotsInClip = gun.GetBaseMaxAmmo();
@@ -50,8 +51,7 @@ namespace Items
             projectile.collidesWithPlayer = false;
             projectile.sprite.renderer.enabled = false;
             projectile.hitEffects.suppressMidairDeathVfx = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
-
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
         private IEnumerator HandleHeatEffectsCR(float Radius, float Duration, GameActorEffect gameActorEffect, tk2dBaseSprite Psprite)
         {
@@ -130,18 +130,15 @@ namespace Items
                 return result;
             }
         }
-        private bool AuraAssigned = false;
+        
         private bool HasReloaded;
-        private PlayerController lastOwner = null;
+        //private PlayerController lastOwner = null;
         protected override void Update()
         {
             if (gun.CurrentOwner)
             {
 
-                if (gun.PreventNormalFireAudio)
-                {
-                    this.gun.PreventNormalFireAudio = true;
-                }
+               
                 if (!gun.IsReloading && !HasReloaded)
                 {
                     this.HasReloaded = true;

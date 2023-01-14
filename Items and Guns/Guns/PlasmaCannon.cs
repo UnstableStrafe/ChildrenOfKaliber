@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 namespace Items
 {
@@ -17,7 +17,7 @@ namespace Items
             gun.SetupSprite(null, "plasma_cannon_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 18);
             gun.SetAnimationFPS(gun.reloadAnimation, 6);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -45,11 +45,11 @@ namespace Items
             projectile.baseData.range *= 10000;
             projectile.baseData.speed *= 4;
             projectile.shouldRotate = true;
-            //projectile.AppliesKnockbackToPlayer = true;
-            //projectile.PlayerKnockbackForce = 100;
+            projectile.AppliesKnockbackToPlayer = true;
+            projectile.PlayerKnockbackForce = 200;
             Gun gun3 = PickupObjectDatabase.GetById(32) as Gun;
             gun.gunSwitchGroup = gun3.gunSwitchGroup;
-            projectile.SetProjectileSpriteRight("plasma_shot", 32, 20, null, null);
+            projectile.SetProjectileSpriteRight("plasma_shot", 32, 20);
             AIActor Firecracker = EnemyDatabase.GetOrLoadByGuid("4d37ce3d666b4ddda8039929225b7ede");
             ExplosiveModifier Spelunked = projectile.gameObject.AddComponent<ExplosiveModifier>();
 
@@ -78,7 +78,7 @@ namespace Items
             Spelunked.explosionData = YourAreDecease;
             Spelunked.IgnoreQueues = true;
 
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
 
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
 
@@ -93,10 +93,6 @@ namespace Items
             if (gun.CurrentOwner)
             {
 
-                if (gun.PreventNormalFireAudio)
-                {
-                    this.gun.PreventNormalFireAudio = true;
-                }
                 if (!gun.IsReloading && !HasReloaded)
                 {
                     this.HasReloaded = true;
@@ -114,30 +110,12 @@ namespace Items
                 AkSoundEngine.PostEvent("Play_WPN_rpg_reload_01", base.gameObject);
             }
         }
-        private IEnumerator BackBlast(PlayerController target)
-        {
-            float duration = 0f;
-            float elapsed = -BraveTime.DeltaTime;
-            float angle = gun.CurrentOwner.CurrentGun.CurrentAngle + 180;
-            float adjSpeed = 0;
-            this.gun.CanBeDropped = false;
-            target.inventory.GunLocked.SetOverride("Be Free", true, null);
-            duration = .15f;
-            adjSpeed = 90;
-            while (elapsed < duration)
-            {
-                elapsed += BraveTime.DeltaTime;
-                gun.CurrentOwner.specRigidbody.Velocity = BraveMathCollege.DegreesToVector(angle).normalized * adjSpeed;
-                yield return null;
-            }
-            this.gun.CanBeDropped = true;
-            target.inventory.GunLocked.RemoveOverride("Be Free");
-        }
+      
 
         public override void OnPostFired(PlayerController player, Gun gun)
         {
             gun.PreventNormalFireAudio = false;
-            player.StartCoroutine(this.BackBlast(player));
+
         }
 
 

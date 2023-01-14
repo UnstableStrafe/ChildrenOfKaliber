@@ -1,11 +1,12 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 
 namespace Items
 {
     class StakeLauncher : GunBehaviour
     {
+        
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Stake Launcher", "stake_launcher");
@@ -16,7 +17,7 @@ namespace Items
             gun.SetupSprite(null, "stake_launcher_idle_001", 13);
 
             gun.SetAnimationFPS(gun.shootAnimation, 12);
-            gun.AddProjectileModuleFrom("crossbow", true, false);
+            gun.AddProjectileModuleFrom("crossbow");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -39,11 +40,11 @@ namespace Items
             projectile.baseData.damage *= 0.18182f;
             projectile.baseData.speed *= 1f;
             projectile.transform.parent = gun.barrelOffset;
-            projectile.SetProjectileSpriteRight("stake_projectile_001", 10, 5, null, null);
+            projectile.SetProjectileSpriteRight("stake_projectile_001", 10, 5);
             gun.sprite.IsPerpendicular = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
 
-
+            
         }
 
         private bool HasReloaded;
@@ -52,7 +53,7 @@ namespace Items
             base.PostProcessProjectile(projectile);
             projectile.BlackPhantomDamageMultiplier *= 7.5f;
         }
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

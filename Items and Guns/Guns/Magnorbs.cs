@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Gungeon;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 
 namespace Items
@@ -20,7 +20,7 @@ namespace Items
             gun.SetLongDescription("Shoots magnetic orbs that boomerang back to the gun. Whenever an orb returns to the player, they regain ammo. Reloading the gun with full ammo creates a temporary shield.");
             gun.SetupSprite(null, "magnorbs_idle_001", 13);
             gun.SetAnimationFPS(gun.shootAnimation, 12);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -49,9 +49,9 @@ namespace Items
             PierceProjModifier pierce = projectile.gameObject.GetOrAddComponent<PierceProjModifier>();
             pierce.penetratesBreakables = true;
             projectile.ImmuneToBlanks = true;
-            projectile.SetProjectileSpriteRight("magnorb_projectile", 9, 9, null, null);
+            projectile.SetProjectileSpriteRight("magnorb_projectile", 9, 9);
             gun.sprite.IsPerpendicular = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;
@@ -222,7 +222,7 @@ namespace Items
             }
             for(int i = 0; i < orbitalAmount; i++)
             {
-                GameObject gameObject = ItemAPI.SpriteBuilder.SpriteFromResource("Items/Resources/VFX/magnorb_projectile");
+                GameObject gameObject = SpriteBuilder.SpriteFromResource("Items/Resources/VFX/magnorb_projectile");
                 SpeculativeRigidbody speculativeRigidbody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(IntVector2.Zero, new IntVector2(9, 9));
                 PlayerOrbital orbitalPrefab = gameObject.AddComponent<PlayerOrbital>();
                 speculativeRigidbody.CollideWithTileMap = false;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 namespace Items
 {
     class NenFist : AdvancedGunBehaviour
@@ -16,7 +16,7 @@ namespace Items
             gun.SetLongDescription("Cycles between a long range fireball, a medium range energy spear, and a powerful dash with each shot.");
             gun.SetupSprite(null, "nen_fist_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Charged;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -33,7 +33,7 @@ namespace Items
             gun.sprite.IsPerpendicular = true;
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
             gun.encounterTrackable.EncounterGuid = "NN doesnt watch Hunter x Hunter.";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             Projectile nenProj1 = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(336) as Gun).DefaultModule.projectiles[0]);
             PierceProjModifier pierce1 = nenProj1.gameObject.GetComponent<PierceProjModifier>();
             pierce1.penetration -= 4;

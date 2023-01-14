@@ -1,6 +1,6 @@
 ﻿using System;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -18,7 +18,7 @@ namespace Items
             gun.SetLongDescription("Shoots small, remote-control aircrafts which fire upon nearby enemies.\n\nThe Gungeon has often been known to imbue innocent objects with lethal firepower and this children's toy turned deadly weapon is no exception.");
             gun.SetupSprite(null, "assault_fleet_idle_001", 13);
             gun.SetAnimationFPS(gun.shootAnimation, 12);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -49,14 +49,14 @@ namespace Items
             proj2.AdditionalScaleMultiplier = .5f;
             gun.sprite.IsPerpendicular = true;
             gun.CanBeDropped = false;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
 
 
         private bool HasReloaded;
         private bool Assigned;
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

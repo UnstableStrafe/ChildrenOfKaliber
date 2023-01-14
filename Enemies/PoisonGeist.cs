@@ -6,7 +6,8 @@ using UnityEngine;
 using Gungeon;
 using System.Collections;
 using Dungeonator;
-using GungeonAPI;
+using Alexandria.DungeonAPI;
+using Alexandria.ItemAPI;
 
 
 namespace Items
@@ -19,10 +20,10 @@ namespace Items
         }
         public static void Init()
         {
-            GameObject gameObject = ItemAPI.SpriteBuilder.SpriteFromResource("Items/Enemies/Sprites/poison_geist");
+            GameObject gameObject = SpriteBuilder.SpriteFromResource("Items/Enemies/Sprites/poison_geist");
             gameObject.AddAnimation("idle", "Items/Enemies/Sprites/PoisonGeist", 10, Library.AnimationType.Idle, DirectionalAnimation.DirectionType.None, DirectionalAnimation.FlipType.None, tk2dSpriteAnimationClip.WrapMode.Loop);
             gameObject.AddComponent<PoisonGeistEnemy>();
-            ItemAPI.FakePrefab.MarkAsFakePrefab(gameObject);
+            FakePrefab.MarkAsFakePrefab(gameObject);
             gameObject.SetActive(false);
             SpeculativeRigidbody specBody = gameObject.GetComponent<tk2dSprite>().SetUpSpeculativeRigidbody(new IntVector2(+1, +3), new IntVector2(6, 8));
             specBody.PixelColliders.Clear();

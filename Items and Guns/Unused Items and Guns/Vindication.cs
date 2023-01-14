@@ -16,7 +16,7 @@ namespace Items
             gun.SetLongDescription("Weilded by the famous lawmaker Waxillium Ladrian, this 8-shot revolver features two specialized 'Hazekiller' rounds in its cylinder.");
             gun.SetupSprite(null, "vindication_idle_001", 12);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
-            gun.AddProjectileModuleFrom("magnum", true, false);
+            gun.AddProjectileModuleFrom("magnum");
             gun.SetBaseMaxAmmo(160);
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -29,7 +29,7 @@ namespace Items
             gun.DefaultModule.angleVariance = 4f;
             gun.encounterTrackable.EncounterGuid = "vindication";
             gun.sprite.IsPerpendicular = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
 
             
         }

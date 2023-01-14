@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Dungeonator;
 using System.Collections;
+using Alexandria.DungeonAPI;
 
 namespace Items
 {
@@ -51,6 +52,7 @@ namespace Items
             hasTarget = false;
             projectileRangeMultiplier = 1;
             projectile = null;
+            showHitbox = false;
         }
 
         private void Start()
@@ -113,6 +115,8 @@ namespace Items
 
             }
             
+           
+            
         }
 
         private void Update()
@@ -122,7 +126,7 @@ namespace Items
                 return;
             }
             HandleMotion();
-            if (this.canShoot && isOnCooldown && !isReloading)
+           /* if (this.canShoot && isOnCooldown && !isReloading)
             {
                 HandleShootCooldown();
             }
@@ -134,6 +138,7 @@ namespace Items
             {
                 HandleShooting(); //finish after doing motion
             }
+           */
             if(orbitingMode == OrbitingMode.ENEMY)
             {
                 retargetOrbiter -= BraveTime.DeltaTime;
@@ -449,14 +454,21 @@ namespace Items
             {
                 hasTarget = false;
             }
-              //fix rotating to target
-              
-            base.transform.localRotation = Quaternion.Euler(0f, 0f, currentAngle);
+            //fix rotating to target
+            if (shouldRotate)
+            {
+                base.transform.localRotation = Quaternion.Euler(0f, 0f, currentAngle);
+            }
+            
                 
             
 
         }
 
+        public void OnDestroy()
+        {
+            owner.orbitals.Remove(this);
+        }
         
         public void Reinitialize()
         {
@@ -639,6 +651,10 @@ namespace Items
         /// If the orbital reloads
         /// </summary>
         public bool doesReload;
+        /// <summary>
+        /// Shows the orbital's hitbox. Purely for debugging. Requires gungeonapi to work.
+        /// </summary>
+        public bool showHitbox;
         /// <summary>
         /// The player the orbital is tied to
         /// </summary>

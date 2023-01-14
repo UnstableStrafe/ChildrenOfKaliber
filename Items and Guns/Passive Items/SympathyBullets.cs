@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Gungeon;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 
 
@@ -13,11 +13,12 @@ namespace Items
 {
     class SympathyBullets : PassiveItem
     {
+        public static int itemID;
         public static void Init()
         {
             string itemName = "Sympathy Bullets";
 
-            string resourceName = "Items/Resources/sympathy_rounds.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/sympathy_rounds.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -33,6 +34,7 @@ namespace Items
 
             item.quality = ItemQuality.S;
             item.sprite.IsPerpendicular = true;
+            itemID = item.PickupObjectId;
         }
         private void OnEnemyDamaged(PlayerController player, float damage, bool fatal, HealthHaver enemy)
         {
@@ -105,14 +107,26 @@ namespace Items
         public override void Pickup(PlayerController player)
         {
             player.OnDealtDamageContext += OnEnemyDamaged;
+            player.PostProcessProjectile += KvotheKingKillerSyn;
             base.Pickup(player);
         }
+
+        private void KvotheKingKillerSyn(Projectile proj, float eff)
+        {
+            if(Owner.PlayerHasActiveSynergy("Kvothe, Kingkiller"))
+            {
+                HomingModifier mod = proj.gameObject.GetOrAddComponent<HomingModifier>();
+                mod.HomingRadius = 30f;
+                mod.AngularVelocity = 300;
+            }
+        }
+
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject debrisObject = base.Drop(player);
             player.OnDealtDamageContext -= OnEnemyDamaged;
             debrisObject.GetComponent<SympathyBullets>().m_pickedUpThisRun = true;
-            
+            player.PostProcessProjectile -= KvotheKingKillerSyn;
             return debrisObject;
         }
     }

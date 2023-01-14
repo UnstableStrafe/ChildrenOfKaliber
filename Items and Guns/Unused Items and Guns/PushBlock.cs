@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 namespace Items
 {
@@ -15,7 +15,7 @@ namespace Items
             gun.SetLongDescription("Does what you would expect.");
             gun.SetupSprite(null, "push_block_idle_001", 13);
             gun.SetAnimationFPS(gun.shootAnimation, 12);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
@@ -38,9 +38,9 @@ namespace Items
             projectile.baseData.speed *= .5f;
             projectile.baseData.force *= 6f;
             projectile.transform.parent = gun.barrelOffset;
-            projectile.SetProjectileSpriteRight("push_block_idle_001", 16, 16, null, null);
+            projectile.SetProjectileSpriteRight("push_block_idle_001", 16, 16);
             gun.sprite.IsPerpendicular = true;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;
@@ -53,7 +53,7 @@ namespace Items
         {
             proj.Speed *= 1.10f;
         }
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

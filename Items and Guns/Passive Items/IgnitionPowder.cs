@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Gungeon;
 
 namespace Items
@@ -14,7 +14,7 @@ namespace Items
         {
             string itemName = "Ignition Powder";
 
-            string resourceName = "Items/Resources/test_icon.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/ignition_powder.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -23,7 +23,7 @@ namespace Items
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
 
             string shortDesc = "Thermite Wake-up Call";
-            string longDesc = "Increases damage while on fire. Reloading an empty clip spawns fire below the player. Increases the time it takes for the fire gauge to fill up. Gives 2 Risk.\nDoes NOT grand fire immunity!\n\nI feel like there's a joke about the Vietnam War I could make here.";
+            string longDesc = "Increases damage while on fire. Reloading an empty clip spawns fire below the player. Increases the time it takes for the fire gauge to fill up. Gives 2 Risk.\nDoes NOT grant fire immunity!\n\nI feel like there's a joke about the Vietnam War I could make here.";
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
             item.RiskToGive = 2;
@@ -40,7 +40,7 @@ namespace Items
                 ddgm.TimedAddGoopCircle(Owner.sprite.WorldCenter, 3f, .1f);
             }
         }
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
             FireCheck();

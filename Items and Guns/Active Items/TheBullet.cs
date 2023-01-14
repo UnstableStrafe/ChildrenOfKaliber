@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 namespace Items
 {
@@ -8,7 +8,7 @@ namespace Items
         {
             string itemName = "The Bullet";
 
-            string resourceName = "Items/Resources/TheBullet.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/TheBullet.png";
 
             GameObject obj = new GameObject();
 
@@ -35,7 +35,7 @@ namespace Items
             item.sprite.IsPerpendicular = true;
         }
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             float curHealth = user.healthHaver.GetMaxHealth();
             if (curHealth > 3)

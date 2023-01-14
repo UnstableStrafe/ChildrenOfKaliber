@@ -1,17 +1,18 @@
 ﻿using System;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
 {
     class DragunSkull : PassiveItem
     {
+
         public static void Init()
         {
                
             string itemName = "Dragun Skull";
 
-            string resourceName = "Items/Resources/dragun_skull.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/dragun_skull.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -28,6 +29,7 @@ namespace Items
             item.sprite.IsPerpendicular = true;
             item.CanBeDropped = true;
             item.CanBeSold = true;
+            dragunSkullId = item.PickupObjectId;
         }
         private Gun HyperLight = ETGMod.Databases.Items[504] as Gun;
         private Projectile HandlePreFireProjectileModification(Gun sourceGun, Projectile sourceProjectile)
@@ -60,59 +62,26 @@ namespace Items
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
-            WeightedGameObject Object1 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Dragun Wing"].PickupObjectId,
-                weight = 1.7f,
-                rawGameObject = ETGMod.Databases.Items["Dragun Wing"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            WeightedGameObject Object2 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Dragun Claw"].PickupObjectId,
-                weight = 1.7f,
-                rawGameObject = ETGMod.Databases.Items["Dragun Claw"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            WeightedGameObject Object3 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Dragun Heart"].PickupObjectId,
-                weight = 1.7f,
-                rawGameObject = ETGMod.Databases.Items["Dragun Heart"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            if (!player.HasPickupID(ETGMod.Databases.Items["Dragun Wing"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object1);
-            }
-            if (!player.HasPickupID(ETGMod.Databases.Items["Dragun Claw"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object2);
-            }
-            if (!player.HasPickupID(ETGMod.Databases.Items["Dragun Heart"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object3);
-            }
+            
             player.OnPreFireProjectileModifier = (Func<Gun, Projectile, Projectile>)Delegate.Combine(player.OnPreFireProjectileModifier, new Func<Gun, Projectile, Projectile>(this.HandlePreFireProjectileModification));
-            if (player.HasPickupID(ETGMod.Databases.Items["Dragun Heart"].PickupObjectId) && player.HasPickupID(ETGMod.Databases.Items["Dragun Wing"].PickupObjectId) && player.HasPickupID(ETGMod.Databases.Items["Dragun Claw"].PickupObjectId) && !player.HasPickupID(ETGMod.Databases.Items["spirit_of_the_dragun"].PickupObjectId))
+            if (player.HasPickupID(DragunHeart.dragunHeartId) && player.HasPickupID(DragunWing.dragunWingId) && player.HasPickupID(DragunClaw.dragunClawID) && !player.HasPickupID(SpiritOfTheDragun.gunID))
             {
                 AkSoundEngine.PostEvent("Play_VO_dragun_death_01", gameObject);
-                player.inventory.AddGunToInventory((ETGMod.Databases.Items["spirit_of_the_dragun"] as Gun), true);
+                player.inventory.AddGunToInventory(PickupObjectDatabase.GetById(SpiritOfTheDragun.gunID) as Gun, true);
             }
         }
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject debrisObject = base.Drop(player);
             player.OnPreFireProjectileModifier = (Func<Gun, Projectile, Projectile>)Delegate.Remove(player.OnPreFireProjectileModifier, new Func<Gun, Projectile, Projectile>(this.HandlePreFireProjectileModification));
-            debrisObject.GetComponent<DragunSkull>().m_pickedUpThisRun = true;           
+            debrisObject.GetComponent<DragunSkull>().m_pickedUpThisRun = true;
+           
             return debrisObject;
         }
 
         public Projectile ReplacementProjectile;
-       // private int DragunWing = ETGMod.Databases.Items["Dragun Wing"].PickupObjectId;
-       // private int DragunClaw = ETGMod.Databases.Items["Dragun Claw"].PickupObjectId;
-      //  private int DragunHeart = ETGMod.Databases.Items["Dragun Heart"].PickupObjectId;
-        public static PlayerController player;
+        public static int dragunSkullId;
+        
         
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Gungeon;
 using SaveAPI;
 using System.IO;
@@ -14,11 +14,12 @@ namespace Items
 {
     class GoldenRecord : PlayerItem
     {
+        public static int itemID;
         public static void Init()
         {
             string itemName = "Golden Record";
 
-            string resourceName = "Items/Resources/golden_record.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/golden_record.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -37,14 +38,14 @@ namespace Items
             item.quality = ItemQuality.S;
             item.sprite.IsPerpendicular = true;
             item.consumable = true;
-
+            itemID = item.PickupObjectId;
         }
         public override void Pickup(PlayerController player)
         {
 
             base.Pickup(player);
         }
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             string path = Path.Combine(ETGMod.ResourcesDirectory, "../ChildrenOfKaliberData/");
             if (!Directory.Exists(path))

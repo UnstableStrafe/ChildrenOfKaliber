@@ -1,6 +1,9 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Random = UnityEngine.Random;
+using UnityEngine;
+using System.Collections;
+using System;
 
 namespace Items
 {
@@ -20,7 +23,7 @@ namespace Items
             gun.SetupSprite(null, "russian_revolver_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 16);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.gameObject.AddComponent<RussianRevolver>();
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.MEDIUM_BULLET;
             gun.DefaultModule.ammoCost = 1;
@@ -46,17 +49,18 @@ namespace Items
             projectile.transform.parent = gun.barrelOffset;
             projectile.baseData.damage *= 0;
             projectile.sprite.renderer.enabled = false;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             gun.AddToSubShop(ItemBuilder.ShopType.Goopton);
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);  
         }
         private int Index = 0;
+        [SerializeField]
         private int LoadedShot = Random.Range(1, RussianRevolv.ClipCapacity + 1);
         private int LoadedShot2;
         private bool UsedShot = false;
         private bool HasReloaded;
 
-        protected void Update()
+        public override void Update()
         {
             PlayerController player = gun.CurrentOwner as PlayerController;
             if (gun.CurrentOwner)      
@@ -77,7 +81,7 @@ namespace Items
             PlayerController player = gun.CurrentOwner as PlayerController;
             if (player.HasPickupID(289))
             {
-                RussianRevolv.DefaultModule.projectiles[0].baseData.damage = 15 * player.stats.GetStatValue(PlayerStats.StatType.Damage);
+                RussianRevolv.DefaultModule.projectiles[0].baseData.damage = 35 * player.stats.GetStatValue(PlayerStats.StatType.Damage);
                 RussianRevolv.DefaultModule.projectiles[0].sprite.renderer.enabled = true;
             }
             else
@@ -94,12 +98,11 @@ namespace Items
                 if (Index == LoadedShot)
                 {
                     projectile.sprite.renderer.enabled = true;
-                    projectile.baseData.damage = 15 * player.stats.GetStatValue(PlayerStats.StatType.Damage);
+                    projectile.baseData.damage = 35 * player.stats.GetStatValue(PlayerStats.StatType.Damage);
                 }
                 if (Index != LoadedShot)
                 {
-                    projectile.hitEffects.suppressMidairDeathVfx = true;
-                    projectile.baseData.range = 0.00001f;
+                    projectile.DieInAir(true);
                 }
             }
 

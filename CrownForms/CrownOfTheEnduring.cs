@@ -1,5 +1,5 @@
 ﻿using System;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +33,7 @@ namespace Items
             item.sprite.IsPerpendicular = true;
 
         }
-        protected override void Update()
+		public override void Update()
         {
             base.Update();
             this.EvaluateStats();

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Gungeon;
 using UnityEngine;
 namespace Items
@@ -18,7 +18,7 @@ namespace Items
             gun.SetLongDescription("Charge up for powerful dashes. Grants melee immunity and flight while dashing. A fully-charged dash reflects projectiles.\n\nThis guantlet is charged to the brim with ions. Simply touching another object creates a powerful electric surge.");
             gun.SetupSprite(null, shorthandName+"_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 24);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.SetBaseMaxAmmo(180);
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Charged;
@@ -38,11 +38,11 @@ namespace Items
             UnityEngine.Object.DontDestroyOnLoad(projectile1);
             gun.DefaultModule.projectiles[0] = projectile1;
             projectile1.gameObject.AddComponent<UnchangeableRangeController>();
-            projectile1.baseData.damage *= 1.2f;
+            projectile1.baseData.damage *= 4f;
             projectile1.baseData.speed *= 1f;
             projectile1.baseData.force *= 1f;
             projectile1.baseData.range = 4f;
-            projectile1.AdditionalScaleMultiplier = 1.1f;
+            projectile1.AdditionalScaleMultiplier = 1.4f;
             projectile1.transform.parent = gun.barrelOffset;
             projectile1.sprite.renderer.enabled = false;
             Projectile projectile2 = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(153) as Gun).DefaultModule.projectiles[0]);
@@ -52,11 +52,11 @@ namespace Items
             gun.DefaultModule.projectiles[0] = projectile2;
             gun.gunHandedness = GunHandedness.HiddenOneHanded;
             projectile2.gameObject.AddComponent<UnchangeableRangeController>();
-            projectile2.baseData.damage *= 2.5f;
+            projectile2.baseData.damage *= 8f;
             projectile2.baseData.speed *= .75f;
             projectile2.baseData.force *= 1f;
             projectile2.baseData.range = 7.5f;
-            projectile2.AdditionalScaleMultiplier = 1.1f;
+            projectile2.AdditionalScaleMultiplier = 1.4f;
             projectile2.transform.parent = gun.barrelOffset;
             projectile2.sprite.renderer.enabled = false;
             Projectile projectile3 = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(153) as Gun).DefaultModule.projectiles[0]);
@@ -65,11 +65,11 @@ namespace Items
             UnityEngine.Object.DontDestroyOnLoad(projectile3);
             gun.DefaultModule.projectiles[0] = projectile3;
             projectile3.gameObject.AddComponent<UnchangeableRangeController>();
-            projectile3.baseData.damage *= 5f;
+            projectile3.baseData.damage *= 15f;
             projectile3.baseData.speed *= .75f;
             projectile3.baseData.force *= 1f;
             projectile3.baseData.range = 14f;
-            projectile3.AdditionalScaleMultiplier = 1.1f;
+            projectile3.AdditionalScaleMultiplier = 1.4f;
             projectile3.transform.parent = gun.barrelOffset;
             projectile3.sprite.renderer.enabled = false;
             ProjectileModule.ChargeProjectile chargeProj1 = new ProjectileModule.ChargeProjectile()
@@ -94,7 +94,7 @@ namespace Items
                 chargeProj3
             };
             
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;
@@ -240,7 +240,7 @@ namespace Items
         {
 
         };
-        private int forme = 1;
+        
 
         
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -18,7 +18,7 @@ namespace Items
             gun.SetupSprite(null, "royal_guard's_knife_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 12);
             gun.SetAnimationFPS(gun.reloadAnimation, 2);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BULLET;
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -42,15 +42,15 @@ namespace Items
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.transform.parent = gun.barrelOffset;
             projectile.baseData.damage *= .5f;
-            VFXPool fuckyouyoustupidfuckingvfxihateyousofuckingmuchyougoddamnmistakefuckyourubelaswellihateyousomuchformakingthevfxpoolcodesofuckingbadAAAAAAAAAAAAAAAAAAAAAAAAA = VFXLibrary.CreateMuzzleflash("royal_guard's_knife_slash", new List<string> { "royal_guard's_knife_slash_001", "royal_guard's_knife_slash_002", "royal_guard's_knife_slash_003", "royal_guard's_knife_slash_004", }, 10, new List<IntVector2> { new IntVector2(27, 27), new IntVector2(27, 27), new IntVector2(27, 27), new IntVector2(27, 27), }, new List<tk2dBaseSprite.Anchor> {
-                tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft}, new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero, Vector2.zero, }, false, false, false, false, 0, VFXAlignment.Fixed, true, new List<float> { 0, 0, 0, 0}, new List<Color> { VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor, });
+            //VFXPool fuckyouyoustupidfuckingvfxihateyousofuckingmuchyougoddamnmistakefuckyourubelaswellihateyousomuchformakingthevfxpoolcodesofuckingbadAAAAAAAAAAAAAAAAAAAAAAAAA = VFXLibrary.CreateMuzzleflash("royal_guard's_knife_slash", new List<string> { "royal_guard's_knife_slash_001", "royal_guard's_knife_slash_002", "royal_guard's_knife_slash_003", "royal_guard's_knife_slash_004", }, 10, new List<IntVector2> { new IntVector2(27, 27), new IntVector2(27, 27), new IntVector2(27, 27), new IntVector2(27, 27), }, new List<tk2dBaseSprite.Anchor> {
+            //    tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft}, new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero, Vector2.zero, }, false, false, false, false, 0, VFXAlignment.Fixed, true, new List<float> { 0, 0, 0, 0}, new List<Color> { VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor, });
 
-            ProjectileSlashingBehaviour slashingBehaviour = projectile.gameObject.AddComponent<ProjectileSlashingBehaviour>();
-            slashingBehaviour.SlashVFX = fuckyouyoustupidfuckingvfxihateyousofuckingmuchyougoddamnmistakefuckyourubelaswellihateyousomuchformakingthevfxpoolcodesofuckingbadAAAAAAAAAAAAAAAAAAAAAAAAA;
-            slashingBehaviour.SlashDimensions = 65;
-            slashingBehaviour.SlashRange = 2.5f;
+            //ProjectileSlashingBehaviour slashingBehaviour = projectile.gameObject.AddComponent<ProjectileSlashingBehaviour>();
+            //slashingBehaviour.SlashVFX = fuckyouyoustupidfuckingvfxihateyousofuckingmuchyougoddamnmistakefuckyourubelaswellihateyousomuchformakingthevfxpoolcodesofuckingbadAAAAAAAAAAAAAAAAAAAAAAAAA;
+            //slashingBehaviour.SlashDimensions = 65;
+            //slashingBehaviour.SlashRange = 2.5f;
             
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             gun.AddToSubShop(ItemBuilder.ShopType.Goopton);
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
         }

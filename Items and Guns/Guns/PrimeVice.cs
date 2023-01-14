@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 namespace Items
 {
@@ -15,7 +15,7 @@ namespace Items
             gun.SetLongDescription("Designed by a mechanic on a far away planet. These weapons were part of a mechanical skeleton meant to restore the damaged body of Cthulhu.");
             gun.SetupSprite(null, "prime_vice_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 11);
-            gun.AddProjectileModuleFrom("38_special", true, false);
+            gun.AddProjectileModuleFrom("38_special");
             gun.SetBaseMaxAmmo(310);
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -43,12 +43,12 @@ namespace Items
             projectile.baseData.speed *= 2f;
             projectile.hitEffects.suppressMidairDeathVfx = true;
             projectile.AdditionalScaleMultiplier = 1.2f;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;
 
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

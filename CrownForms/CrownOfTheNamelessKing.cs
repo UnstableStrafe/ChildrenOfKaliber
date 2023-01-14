@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using System.Collections;
 
@@ -102,7 +102,7 @@ namespace Items
             this.m_radialIndicator.CurrentRadius = 1.75f * num;
 
         }
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
             RoomHandler r = Owner.sprite.transform.position.GetAbsoluteRoom();
@@ -129,7 +129,7 @@ namespace Items
                 indicator = null;
             }
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.Owner.PostProcessProjectile -= this.PostProcessProjectile;
             UnhandleRadialIndicator();

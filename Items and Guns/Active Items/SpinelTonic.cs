@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -11,7 +11,7 @@ namespace Items
         {
             string itemName = "Spinel Tonic";
 
-            string resourceName = "Items/Resources/spinel_tonic.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/spinel_tonic.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -36,7 +36,7 @@ namespace Items
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
         }
         private float duration = 12f;
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             StartEffect(user);
             
@@ -47,7 +47,7 @@ namespace Items
         private StatModifier FireR;
         private StatModifier SPD;
         private StatModifier RLD;
-        private StatModifier ACC;
+        
         private StatModifier DGS;
         private void StartEffect(PlayerController user)
         {
@@ -80,6 +80,7 @@ namespace Items
             this.CanBeDropped = true;
             this.CanBeSold = true;
         }
+        [SerializeField]
         private float Uses;
         
         public override void Pickup(PlayerController player)

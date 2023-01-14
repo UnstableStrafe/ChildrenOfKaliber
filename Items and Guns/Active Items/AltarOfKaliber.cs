@@ -1,4 +1,4 @@
-﻿using ItemAPI;
+﻿using Alexandria.ItemAPI;
 using UnityEngine;
 namespace Items
 {
@@ -29,7 +29,7 @@ namespace Items
             base.Pickup(player);
         }
         int kaliFavor = 0;
-        protected override void OnPreDrop(PlayerController player)
+        public override void OnPreDrop(PlayerController player)
         {
             if(kaliFavor < 2)
             {
@@ -53,7 +53,7 @@ namespace Items
         {            
             UnityEngine.Object.Destroy(base.gameObject, 1f);
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.OnDestroy();
         }

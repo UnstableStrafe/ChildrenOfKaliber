@@ -16,7 +16,7 @@ namespace Items
             GunExt.SetAnimationFPS(gun, gun.shootAnimation, 8);
             GunExt.SetAnimationFPS(gun, gun.idleAnimation, 1);
             GunExt.SetAnimationFPS(gun, gun.reloadAnimation, 1);
-            GunExt.AddProjectileModuleFrom(gun, "wonderboy", true, true);
+            GunExt.AddProjectileModuleFrom(gun, "wonderboy");
             gun.SetBaseMaxAmmo(100);
             gun.reloadTime = 0f;
             gun.DefaultModule.cooldownTime = .2f;
@@ -24,7 +24,7 @@ namespace Items
             gun.DefaultModule.numberOfShotsInClip = int.MaxValue;
             gun.quality = PickupObject.ItemQuality.SPECIAL;
             gun.encounterTrackable.EncounterGuid = "dwarven_mallet";
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             gun.CanBeDropped = false;
             gun.InfiniteAmmo = true;
             //ItemBuilder.AddPassiveStatModifier(gun, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
@@ -35,7 +35,7 @@ namespace Items
             gun.DefaultModule.GetCurrentProjectile().baseData.damage = 20f;
         }
 
-        public void Update()
+        public override void Update()
         {
             bool flag = this.SwordCooldown > 0f;
             if (flag)

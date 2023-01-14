@@ -1,5 +1,5 @@
 ﻿using System;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -11,7 +11,7 @@ namespace Items
         {
 
             string itemName = "Terrible Ammo Bag";
-            string resourceName = "Items/Resources/terrible_ammo_bag.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/terrible_ammo_bag.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -33,24 +33,33 @@ namespace Items
 
         public void OnKilledEnemy(PlayerController player)
         {
-            float chanceToDrain = .25f;
-            if (Owner.HasPickupID(116))
+            if (!player.CurrentGun.InfiniteAmmo)
             {
-                chanceToDrain = 0f;
+                float chanceToDrain = .25f;
+                if (Owner.HasPickupID(116))
+                {
+                    chanceToDrain = 0f;
+                }
+                if (Random.value < chanceToDrain)
+                {
+                    float AmmoRaw = player.inventory.CurrentGun.GetBaseMaxAmmo() * .05f;
+                    int AmmoTrue = Mathf.FloorToInt(AmmoRaw);
+
+
+                    player.inventory.CurrentGun.ammo -= AmmoTrue;
+                    if (player.inventory.CurrentGun.ammo < 0)
+                    {
+                        player.inventory.CurrentGun.ammo = 0;
+                    }
+                }
             }
-            if (Random.value < chanceToDrain)
-            {
-                float AmmoRaw = player.inventory.CurrentGun.GetBaseMaxAmmo() * .05f;
-                int AmmoTrue = Convert.ToInt32(AmmoRaw);
-      //          ETGModConsole.Log("Took Away " + AmmoTrue.ToString() + " Ammo From "+ player.inventory.CurrentGun.gunName);
-        
-                player.inventory.CurrentGun.ammo -= AmmoTrue;
-            }
+            
 
         }
 
         public void RoomClear(PlayerController obj)
         {
+
             float chanceOnClear = .2f;
             if(Random.value < chanceOnClear)
             {

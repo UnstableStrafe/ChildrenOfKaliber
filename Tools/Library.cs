@@ -1,6 +1,5 @@
 ﻿using System.Linq;
-using ItemAPI;
-using Steamworks;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Dungeonator;
 using Gungeon;
@@ -10,22 +9,24 @@ using System.Collections;
 using MonoMod.RuntimeDetour;
 using MonoMod;
 using System.Reflection;
+
+//Something in this class MAJORLY FUCKED UP
 namespace Items
 {
     public static class Library
     {
-        public static GameActorHealthEffect Venom = new GameActorHealthEffect()
+        public static GameActorHealthEffect Venom = new GameActorHealthEffect
         {
-            TintColor = new Color(78 / 255f, 5 / 255f, 120 / 255f),
-            DeathTintColor = new Color(78 / 255f, 5 / 255f, 120 / 255f),
+            TintColor = new Color(0.30588236f, 0.019607844f, 0.47058824f),
+            DeathTintColor = new Color(0.30588236f, 0.019607844f, 0.47058824f),
             AppliesTint = true,
             AppliesDeathTint = true,
             AffectsEnemies = true,
             DamagePerSecondToEnemies = 20f,
             duration = 2.5f,
-            effectIdentifier = "Venom",
+            effectIdentifier = "Venom"
         };
-        public static GoopDefinition VenomGoop = new GoopDefinition()
+        public static GoopDefinition VenomGoop = new GoopDefinition
         {
             CanBeIgnited = false,
             damagesEnemies = false,
@@ -33,52 +34,57 @@ namespace Items
             baseColor32 = new Color32(78, 5, 120, 200),
             goopTexture = ResourceExtractor.GetTextureFromResource("Items/Resources/goop_standard_base_001.png"),
             AppliesDamageOverTime = true,
-            HealthModifierEffect = Library.Venom,    
+            HealthModifierEffect = Library.Venom
         };
-        public static NitricAcidHealthEffect NitricAcid = new NitricAcidHealthEffect()
+
+        public static NitricAcidHealthEffect NitricAcid = new NitricAcidHealthEffect
         {
             DamagePerSecondToEnemies = 5f,
             effectIdentifier = "Nitric Acid",
             AffectsEnemies = true,
             resistanceType = EffectResistanceType.Poison,
-            duration = 5,
-            TintColor = new Color(240 / 110, 230 / 110, 89 / 110),
+            duration = 5f,
+            TintColor = new Color(2f, 2f, 0f),
             AppliesTint = true,
-            AppliesDeathTint = true,
+            AppliesDeathTint = true
         };
-        public static GoopDefinition NitricAcidGoop = new GoopDefinition()
+
+        public static GoopDefinition NitricAcidGoop = new GoopDefinition
         {
             CanBeIgnited = false,
             damagesEnemies = false,
             damagesPlayers = false,
-            baseColor32 = new Color32(240, 230, 89, 255),
+            baseColor32 = new Color32(240, 230, 89, byte.MaxValue),
             goopTexture = ResourceExtractor.GetTextureFromResource("Items/Resources/goop_standard_base_001.png"),
             AppliesDamageOverTime = true,
-            HealthModifierEffect = Library.NitricAcid,
+            HealthModifierEffect = Library.NitricAcid
         };
-        public static CharcoalDustEffect CharcoalDust = new CharcoalDustEffect()
+
+        public static CharcoalDustEffect CharcoalDust = new CharcoalDustEffect
         {
             duration = 6f,
             effectIdentifier = "Charcoal",
             AffectsEnemies = true,
-            TintColor = new Color(56 / 100, 59 / 100, 64 / 100),
+            TintColor = new Color(0f, 0f, 0f),
             AppliesDeathTint = true,
-            DeathTintColor = new Color(56 / 85, 59 / 85, 64 / 85),
-            AppliesTint = true,       
-            resistanceType = EffectResistanceType.Fire,
+            DeathTintColor = new Color(0f, 0f, 0f),
+            AppliesTint = true,
+            resistanceType = EffectResistanceType.Fire
         };
-        public static SulfurFuseEffect SulfurEffect = new SulfurFuseEffect()
+
+        public static SulfurFuseEffect SulfurEffect = new SulfurFuseEffect
         {
             AffectsEnemies = true,
             AffectsPlayers = false,
-            duration = 10000000000000000,
+            duration = 1E+16f,
             effectIdentifier = "Sulfur",
             AppliesTint = false,
             AppliesDeathTint = false,
             AppliesOutlineTint = true,
             resistanceType = EffectResistanceType.None,
-            OutlineTintColor = new Color(252f, 56f, 56f, 50f),
+            OutlineTintColor = new Color(252f, 56f, 56f, 50f)
         };
+
         public static GoopDefinition SlowGoop = new GoopDefinition()
         {
             CanBeIgnited = false,
@@ -89,7 +95,7 @@ namespace Items
             AppliesDamageOverTime = true,
             SpeedModifierEffect = (ETGMod.Databases.Items["triple_crossbow"] as Gun).DefaultModule.projectiles[0].speedEffect,
         };
-        
+
         public static Projectile RandomProjectile()
         {
             int gunID;
@@ -111,23 +117,23 @@ namespace Items
             {
                 return true;
             }
-            else 
+            else
             {
                 return false;
             }
         }
-        public static int LichEye = 815;        
-        public static Color LightGreen = (new Color(77f / 140f, 247f / 140f, 122f / 140f));
+        public static int LichEye = 815;
+        public static Color32 LightGreen = (new Color32(77, 247, 122, 255));
         public static void DefineGoops()
         {
             var assetBundle = ResourceManager.LoadAssetBundle("shared_auto_001");
-            
+
             foreach (string text in Library.goops)
-            {               
-                GoopDefinition goopDefinition;                
+            {
+                GoopDefinition goopDefinition;
                 try
                 {
-                    GameObject gameObject2 = assetBundle.LoadAsset(text) as GameObject;                   
+                    GameObject gameObject2 = assetBundle.LoadAsset(text) as GameObject;
                     goopDefinition = gameObject2.GetComponent<GoopDefinition>();
                 }
                 catch
@@ -136,9 +142,9 @@ namespace Items
                 }
                 goopDefinition.name = text.Replace("assets/data/goops/", "").Replace(".asset", "");
                 Library.goopDefs.Add(goopDefinition);
-                
+
             }
-            
+
             List<GoopDefinition> list = Library.goopDefs;
 
             FireDef = Library.goopDefs[0];
@@ -147,7 +153,7 @@ namespace Items
             BlobulonGoopDef = Library.goopDefs[3];
             WebGoop = Library.goopDefs[4];
             WaterGoop = Library.goopDefs[5];
-            
+
             GoopDefinition midInitWeb = UnityEngine.Object.Instantiate<GoopDefinition>(WebGoop);
             midInitWeb.playerStepsChangeLifetime = false;
             midInitWeb.SpeedModifierEffect = FriendlyWebGoopSpeedMod;
@@ -157,7 +163,7 @@ namespace Items
             goopDefs.Add(GreenFireDef);
             goopDefs.Add(CheeseDef);
         }
-        
+
         static Gun TripleCrossbow = ETGMod.Databases.Items["triple_crossbow"] as Gun;
         static GameActorSpeedEffect TripleCrossbowEffect = TripleCrossbow.DefaultModule.projectiles[0].speedEffect;
         public static GameActorSpeedEffect FriendlyWebGoopSpeedMod = new GameActorSpeedEffect
@@ -177,7 +183,7 @@ namespace Items
             AffectsPlayers = false,
             AppliesOutlineTint = false,
             OutlineTintColor = TripleCrossbowEffect.OutlineTintColor,
-            PlaysVFXOnActor = false, 
+            PlaysVFXOnActor = false,
         };
         public static void DebugGrabComponents(GameObject gameObject)
         {
@@ -190,7 +196,7 @@ namespace Items
                 log.Add("Beginning debugging object!");
                 log.Add(" -Debug mode: Grab Components");
                 log.Add("----------------");
-                foreach(Component c in gameObject.GetComponents(typeof(Component)))
+                foreach (Component c in gameObject.GetComponents(typeof(Component)))
                 {
                     log.Add("Found component: " + c.GetType().Name);
                     log.Add("----------------");
@@ -198,11 +204,11 @@ namespace Items
                 log.Add("End of debugging! We hope you found what you were looking for! :)");
                 log.Add("----------------");
                 var retstr = string.Join("\n", log.ToArray());
-                CelsItems.Log(retstr);
+                ETGModConsole.Log(retstr);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                CelsItems.Log("Something broke when debugging object!\n - Error is: " + e.ToString(), "#FF0000");
+                ETGModConsole.Log("Something broke when debugging object!\n - Error is: " + e.ToString());
             }
         }
         public static T CopyFields<T>(Projectile sample2) where T : Projectile
@@ -320,106 +326,8 @@ namespace Items
             UnityEngine.Object.Destroy(sample2);
             return sample;
         }
-        public static void InitVacuumProjectiles()
-        {
-            Gun gun = PickupObjectDatabase.GetById(56) as Gun;
-            for(int i = 0; i < 12; i++)
-            {
-                Projectile projectile = Library.CopyFields<RandomMidAirTachyon>(UnityEngine.Object.Instantiate(gun.DefaultModule.projectiles[0]));
-                projectile.gameObject.SetActive(false);
-                FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-                UnityEngine.Object.DontDestroyOnLoad(projectile);
-                projectile.transform.parent = gun.barrelOffset;
-                projectile.baseData.damage *= .25f;
-                projectile.baseData.speed *= .75f;
-                projectile.baseData.force *= .8f;
-                projectile.baseData.range *= 1.4f;
-                projectile.shouldRotate = true;
-                ProjectileSpeedChange speedMod = projectile.gameObject.AddComponent<ProjectileSpeedChange>();
-                speedMod.incrementRate = .10f;
-                string filepath = "filler";
-                int x = 0;
-                int y = 0;
-                switch (i)
-                {
-                    case 0:
-                        filepath = "vacuum_debris_001";
-                        x = 6;
-                        y = 12;
-                        break;
-                    case 1:
-                        filepath = "vacuum_debris_002";
-                        x = 5;
-                        y = 5;
-                        break;
-                    case 2:
-                        filepath = "vacuum_debris_003";
-                        x = 6;
-                        y = 5;
-                        break;
-                    case 3:
-                        filepath = "vacuum_debris_004";
-                        x = 9;
-                        y = 15;
-                        break;
-                    case 4:
-                        filepath = "vacuum_debris_005";
-                        x = 5;
-                        y = 7;
-                        break;
-                    case 5:
-                        filepath = "vacuum_debris_006";
-                        x = 4;
-                        y = 6;
-                        break;
-                    case 6:
-                        filepath = "vacuum_debris_007";
-                        x = 7;
-                        y = 7;
-                        break;
-                    case 7:
-                        filepath = "vacuum_debris_008";
-                        x = 11;
-                        y = 11;
-                        break;
-                    case 8:
-                        filepath = "vacuum_debris_009";
-                        x = 9;
-                        y = 6;
-                        break;
-                    case 9:
-                        filepath = "vacuum_debris_010";
-                        x = 8;
-                        y = 7;
-                        break;
-                    case 10:
-                        filepath = "vacuum_debris_011";
-                        x = 5;
-                        y = 7;
-                        break;
-                    case 11:
-                        filepath = "vacuum_debris_012";
-                        x = 6;
-                        y = 8;
-                        break;
-                }
-                int? overrideX = null;
-                if(x < 7)
-                {
-                    overrideX = 7;
-                }
-                int? overrideY = null;
-                if(y < 7)
-                {
-                    overrideY = 7;
-                }
-                projectile.SetProjectileSpriteRight(filepath, x, y, overrideX, overrideY);
-                vacuumProjectiles.Add(projectile);
-                
-            }
 
-        }
-        public static List<Projectile> vacuumProjectiles = new List<Projectile> { };
+
         public static List<GoopDefinition> goopDefs = new List<GoopDefinition> { };
         private static string[] goops = new string[]
         {
@@ -677,76 +585,442 @@ namespace Items
             tr.startColor = startColor;
             tr.endColor = endColor;
         }
-        
 
-        public static List<StickProjectileToEnemy> stickiesAlive = new List<StickProjectileToEnemy>
+        public static T ReflectGetField<T>(Type classType, string fieldName, object o = null)
+        {
+            FieldInfo field = classType.GetField(fieldName, BindingFlags.Public | BindingFlags.NonPublic | ((o != null) ? BindingFlags.Instance : BindingFlags.Static));
+            return (T)field.GetValue(o);
+        }
+
+        public static List<StickyProjectile> stickiesAlive = new List<StickyProjectile>
         {
 
         };
+
+        public static Projectile SetupProjectile(int id)
+        {
+            Projectile proj = UnityEngine.Object.Instantiate<Projectile>((PickupObjectDatabase.GetById(id) as Gun).DefaultModule.projectiles[0]);
+            proj.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(proj.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(proj);
+
+            return proj;
+        }
+
+        public static Projectile SetupProjectile(Projectile projToCopy)
+        {
+            Projectile proj = UnityEngine.Object.Instantiate<Projectile>(projToCopy);
+            proj.gameObject.SetActive(false);
+            FakePrefab.MarkAsFakePrefab(proj.gameObject);
+            UnityEngine.Object.DontDestroyOnLoad(proj);
+
+            return proj;
+        }
+        public static void DisableSuperTinting(AIActor actor)
+        {
+            Material mat = actor.sprite.renderer.material;
+            mat.mainTexture = actor.sprite.renderer.material.mainTexture;
+            mat.EnableKeyword("BRIGHTNESS_CLAMP_ON");
+            mat.DisableKeyword("BRIGHTNESS_CLAMP_OFF");
+        }
+
+        public static List<string> SetupSpritePaths(string filepath, int frameCount)
+        {
+            List<string> sl = new List<string> { };
+            for (int i = 1; i < frameCount; i++)
+            {
+                string frameNum = "";
+                if (i <= 9)
+                {
+                    frameNum = "_00" + i.ToString();
+                }
+                else if (i > 9 && i <= 99)
+                {
+                    frameNum = "_0" + i.ToString();
+                }
+                else if (i > 99)
+                {
+                    frameNum = "_" + i.ToString();
+                }
+                string s = filepath + frameNum + ".png";
+                sl.Add(s);
+            }
+
+            return sl;
+        }
+        public static void GenerateSpriteAnimator(GameObject targetObject, tk2dSpriteAnimation library = null, int DefaultClipId = 0, float AdditionalCameraVisibilityRadius = 0, bool AnimateDuringBossIntros = false, bool AlwaysIgnoreTimeScale = false, bool ignoreTimeScale = false, bool ForceSetEveryFrame = false, bool playAutomatically = false, bool IsFrameBlendedAnimation = false, float clipTime = 0, float ClipFps = 15, bool deferNextStartClip = false, bool alwaysUpdateOffscreen = false, bool maximumDeltaOneFrame = false)
+        {
+            if (targetObject.GetComponent<tk2dSpriteAnimator>()) { UnityEngine.Object.Destroy(targetObject.GetComponent<tk2dSpriteAnimator>()); }
+            tk2dSpriteAnimator newAnimator = targetObject.AddComponent<tk2dSpriteAnimator>();
+            newAnimator.Library = library;
+            newAnimator.DefaultClipId = DefaultClipId;
+            newAnimator.AdditionalCameraVisibilityRadius = AdditionalCameraVisibilityRadius;
+            newAnimator.AnimateDuringBossIntros = AnimateDuringBossIntros;
+            newAnimator.AlwaysIgnoreTimeScale = AlwaysIgnoreTimeScale;
+            newAnimator.ignoreTimeScale = ignoreTimeScale;
+            newAnimator.ForceSetEveryFrame = ForceSetEveryFrame;
+            newAnimator.playAutomatically = playAutomatically;
+            newAnimator.IsFrameBlendedAnimation = IsFrameBlendedAnimation;
+            newAnimator.clipTime = clipTime;
+            newAnimator.ClipFps = ClipFps;
+            newAnimator.deferNextStartClip = deferNextStartClip;
+            newAnimator.alwaysUpdateOffscreen = alwaysUpdateOffscreen;
+            newAnimator.maximumDeltaOneFrame = maximumDeltaOneFrame;
+
+            return;
+        }
+        public static tk2dSpriteAnimationClip AddAnimation2(tk2dSpriteAnimator targetAnimator, tk2dSpriteCollectionData collection, List<string> spriteNameList, string clipName, tk2dSpriteAnimationClip.WrapMode wrapMode = tk2dSpriteAnimationClip.WrapMode.Once, int frameRate = 15, int loopStart = 0, float minFidgetDuration = 0.5f, float maxFidgetDuration = 1)
+        {
+            if (!targetAnimator.Library)
+            {
+                targetAnimator.Library = targetAnimator.gameObject.AddComponent<tk2dSpriteAnimation>();
+                targetAnimator.Library.clips = new tk2dSpriteAnimationClip[0];
+            }
+            List<tk2dSpriteAnimationFrame> animationList = new List<tk2dSpriteAnimationFrame>();
+            for (int i = 0; i < spriteNameList.Count; i++)
+            {
+                tk2dSpriteDefinition spriteDefinition = collection.GetSpriteDefinition(spriteNameList[i]);
+                if (spriteDefinition != null && spriteDefinition.Valid)
+                {
+                    animationList.Add(
+                        new tk2dSpriteAnimationFrame
+                        {
+                            spriteCollection = collection,
+                            spriteId = collection.GetSpriteIdByName(spriteNameList[i]),
+                            invulnerableFrame = false,
+                            groundedFrame = true,
+                            requiresOffscreenUpdate = false,
+                            eventAudio = string.Empty,
+                            eventVfx = string.Empty,
+                            eventStopVfx = string.Empty,
+                            eventLerpEmissive = false,
+                            eventLerpEmissiveTime = 0.5f,
+                            eventLerpEmissivePower = 30,
+                            forceMaterialUpdate = false,
+                            finishedSpawning = false,
+                            triggerEvent = false,
+                            eventInfo = string.Empty,
+                            eventInt = 0,
+                            eventFloat = 0,
+                            eventOutline = tk2dSpriteAnimationFrame.OutlineModifier.Unspecified,
+                        }
+                    );
+                }
+            }
+
+            if (animationList.Count <= 0)
+            {
+                ETGModConsole.Log("[ExpandTheGungeon] AddAnimation: ERROR! Animation list is empty! No valid sprites found in specified list!");
+                return null;
+            }
+
+            tk2dSpriteAnimationClip animationClip = new tk2dSpriteAnimationClip()
+            {
+                name = clipName,
+                frames = animationList.ToArray(),
+                fps = frameRate,
+                wrapMode = wrapMode,
+                loopStart = loopStart,
+                minFidgetDuration = minFidgetDuration,
+                maxFidgetDuration = maxFidgetDuration,
+            };
+            Array.Resize(ref targetAnimator.Library.clips, targetAnimator.Library.clips.Length + 1);
+            targetAnimator.Library.clips[targetAnimator.Library.clips.Length - 1] = animationClip;
+            return animationClip;
+        }
+
+        public static Vector2 DegreeToVector2(this float degree)
+        {
+            return (degree * Mathf.Deg2Rad).RadianToVector2();
+        }
+        public static Vector2 RadianToVector2(this float radian)
+        {
+            return new Vector2(Mathf.Cos(radian), Mathf.Sin(radian));
+        }
+
+        public static float KeyTime(GungeonActions.GungeonActionType action, PlayerController user)
+        {
+            return BraveInput.GetInstanceForPlayer(user.PlayerIDX).ActiveActions.GetActionFromType(action).PressedDuration;
+        }
+
+        public static bool KeyDown(GungeonActions.GungeonActionType action, PlayerController user)
+        {
+            return BraveInput.GetInstanceForPlayer(user.PlayerIDX).ActiveActions.GetActionFromType(action).WasPressed;
+        }
+
+        public static bool Key(GungeonActions.GungeonActionType action, PlayerController user)
+        {
+            return BraveInput.GetInstanceForPlayer(user.PlayerIDX).ActiveActions.GetActionFromType(action).IsPressed;
+        }
+
+        public static GameActorFireEffect fireEffect = PickupObjectDatabase.GetById(295).GetComponent<BulletStatusEffectItem>().FireModifierEffect;
+        public static GameActorHealthEffect poisonEffect = PickupObjectDatabase.GetById(204).GetComponent<BulletStatusEffectItem>().HealthModifierEffect;
+        public static GameActorCharmEffect charmEffect = PickupObjectDatabase.GetById(527).GetComponent<BulletStatusEffectItem>().CharmModifierEffect;
+
+        public static GameObject laserSightPrefab = LoadHelper.LoadAssetFromAnywhere("assets/resourcesbundle/global vfx/vfx_lasersight.prefab") as GameObject;
+        public static GameObject RenderLaserSight(Vector2 position, float length, float width, float angle, bool alterColour = false, Color? colour = null)
+        {
+            GameObject gameObject = SpawnManager.SpawnVFX(laserSightPrefab, position, Quaternion.Euler(0, 0, angle));
+
+            tk2dTiledSprite component2 = gameObject.GetComponent<tk2dTiledSprite>();
+            float newWidth = 1f;
+            if (width != -1) newWidth = width;
+            component2.dimensions = new Vector2(length, newWidth);
+            if (alterColour && colour != null)
+            {
+                component2.usesOverrideMaterial = true;
+                component2.sprite.renderer.material.shader = ShaderCache.Acquire("Brave/LitTk2dCustomFalloffTintableTiltedCutoutEmissive");
+                component2.sprite.renderer.material.SetColor("_OverrideColor", (Color)colour);
+                component2.sprite.renderer.material.SetColor("_EmissiveColor", (Color)colour);
+                component2.sprite.renderer.material.SetFloat("_EmissivePower", 100);
+                component2.sprite.renderer.material.SetFloat("_EmissiveColorPower", 1.55f);
+            }
+            return gameObject;
+        }
+        public static PlayerController ProjectilePlayerOwner(this Projectile bullet)
+        {
+            if (bullet && bullet.Owner && bullet.Owner is PlayerController) return bullet.Owner as PlayerController;
+            else return null;
+        }
+        public static Vector2 GetPositionOfNearestEnemy(this Vector2 startPosition, bool canTargetNonRoomClear, bool targetSprite = false, List<AIActor> excludedActors = null)
+        {
+            List<AIActor> exclude = new List<AIActor>();
+            if (excludedActors != null && excludedActors.Count > 0) exclude.AddRange(excludedActors);
+            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable && a.healthHaver.IsAlive && !a.IsGone && !exclude.Contains(a);
+            IntVector2 intVectorStartPos = startPosition.ToIntVector2();
+            RoomHandler.ActiveEnemyType enemyType = RoomHandler.ActiveEnemyType.RoomClear;
+            if (canTargetNonRoomClear) enemyType = RoomHandler.ActiveEnemyType.All;
+            AIActor closestToPosition = BraveUtility.GetClosestToPosition<AIActor>(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(intVectorStartPos).GetActiveEnemies(enemyType), startPosition, isValid, new AIActor[] { });
+            if (closestToPosition == null) return Vector2.zero;
+            if (targetSprite && closestToPosition.sprite) return closestToPosition.sprite.WorldCenter;
+            else return closestToPosition.specRigidbody.UnitCenter;
+        }
+
+        public static Vector2 GetVectorToNearestEnemy(this Vector2 bulletPosition, float angleFromAim = 0, float angleVariance = 0, PlayerController playerToScaleAccuracyOff = null, List<AIActor> excludedActors = null)
+        {
+            List<AIActor> exclude = new List<AIActor>();
+            if (excludedActors != null && excludedActors.Count > 0) exclude.AddRange(excludedActors);
+            Vector2 dirVec = UnityEngine.Random.insideUnitCircle;
+            Func<AIActor, bool> isValid = (AIActor a) => a && a.HasBeenEngaged && a.healthHaver && a.healthHaver.IsVulnerable && !exclude.Contains(a);
+            IntVector2 bulletPositionIntVector2 = bulletPosition.ToIntVector2();
+            AIActor closestToPosition = BraveUtility.GetClosestToPosition<AIActor>(GameManager.Instance.Dungeon.data.GetAbsoluteRoomFromPosition(bulletPositionIntVector2).GetActiveEnemies(RoomHandler.ActiveEnemyType.All), bulletPosition, isValid, new AIActor[]
+            {
+
+            });
+            if (closestToPosition)
+            {
+                dirVec = closestToPosition.CenterPosition - bulletPosition;
+            }
+            if (angleFromAim != 0)
+            {
+                dirVec = dirVec.Rotate(angleFromAim);
+            }
+            if (angleVariance != 0)
+            {
+                if (playerToScaleAccuracyOff != null) angleVariance *= playerToScaleAccuracyOff.stats.GetStatValue(PlayerStats.StatType.Accuracy);
+                float positiveVariance = angleVariance * 0.5f;
+                float negativeVariance = positiveVariance * -1f;
+                float finalVariance = UnityEngine.Random.Range(negativeVariance, positiveVariance);
+                dirVec = dirVec.Rotate(finalVariance);
+            }
+            return dirVec;
+        }
+        public static List<T> ConstructListOfSameValues<T>(T value, int length)
+        {
+            List<T> list = new List<T>();
+            for (int i = 0; i < length; i++)
+            {
+                list.Add(value);
+            }
+            return list;
+        }
+
+        public static string[] JoinAtStart(string prepender, string[] array)
+        {
+            List<string> l = new List<string> { };
+            if (array.Any())
+            {
+                foreach (string s in array)
+                {
+                    string newString = prepender + s;
+
+                    l.Add(newString);
+                }
+
+            }
+            return l.ToArray();
+        }
+
+        public static List<string> JoinAtStart(string prepender, List<string> list)
+        {
+            List<string> l = new List<string> { };
+            if (list.Any())
+            {
+                foreach (string s in list)
+                {
+                    string newString = prepender + s;
+
+                    l.Add(newString);
+                }
+
+            }
+
+            return l;
+        }
+
+
+        public static List<T> RandomNoRepeats<T>(List<T> candidates, int count)
+        {
+            List<T> outcomes = new List<T> { };
+            int i = 0;
+            do
+            {
+                i++;
+                int V = UnityEngine.Random.Range(0, candidates.Count);
+                if (!outcomes.Contains(candidates[V]))
+                {
+                    outcomes.Add(candidates[V]);
+                }
+                
+
+            } while (i < count * 3 && outcomes.Count < count);
+
+            return outcomes;
+        }
+
+        public static List<S> RandomRemoveChosen<S>(List<S> candidates, int count)
+        {
+            List<S> outcomes = new List<S> { };
+            int i = 0;
+            do
+            {
+                i++;
+                int V = UnityEngine.Random.Range(0, candidates.Count);
+                if (!outcomes.Contains(candidates[V]))
+                {
+                    outcomes.Add(candidates[V]);
+                }
+
+            } while (i < count * 3 && outcomes.Count < count);
+            foreach(S item in outcomes)
+            {
+                if (candidates.Contains(item))
+                {
+                    candidates.Remove(item);
+                }
+            }
+            return outcomes;
+        }
+        public static GameObject Mines_Cave_In = ResourceManager.LoadAssetBundle("shared_auto_002").LoadAsset<GameObject>("Mines_Cave_In");
+
+        public static SpeculativeRigidbody GenerateOrAddToRigidBody(GameObject targetObject, CollisionLayer collisionLayer, PixelCollider.PixelColliderGeneration colliderGenerationMode = PixelCollider.PixelColliderGeneration.Tk2dPolygon, bool collideWithTileMap = false, bool CollideWithOthers = true, bool CanBeCarried = true, bool CanBePushed = false, bool RecheckTriggers = false, bool IsTrigger = false, bool replaceExistingColliders = false, bool UsesPixelsAsUnitSize = false, IntVector2? dimensions = null, IntVector2? offset = null)
+        {
+            SpeculativeRigidbody m_CachedRigidBody = GameObjectExtensions.GetOrAddComponent<SpeculativeRigidbody>(targetObject);
+            m_CachedRigidBody.CollideWithOthers = CollideWithOthers;
+            m_CachedRigidBody.CollideWithTileMap = collideWithTileMap;
+            m_CachedRigidBody.Velocity = Vector2.zero;
+            m_CachedRigidBody.MaxVelocity = Vector2.zero;
+            m_CachedRigidBody.ForceAlwaysUpdate = false;
+            m_CachedRigidBody.CanPush = false;
+            m_CachedRigidBody.CanBePushed = CanBePushed;
+            m_CachedRigidBody.PushSpeedModifier = 1f;
+            m_CachedRigidBody.CanCarry = false;
+            m_CachedRigidBody.CanBeCarried = CanBeCarried;
+            m_CachedRigidBody.PreventPiercing = false;
+            m_CachedRigidBody.SkipEmptyColliders = false;
+            m_CachedRigidBody.RecheckTriggers = RecheckTriggers;
+            m_CachedRigidBody.UpdateCollidersOnRotation = false;
+            m_CachedRigidBody.UpdateCollidersOnScale = false;
+
+            IntVector2 Offset = IntVector2.Zero;
+            IntVector2 Dimensions = IntVector2.Zero;
+            if (colliderGenerationMode != PixelCollider.PixelColliderGeneration.Tk2dPolygon)
+            {
+                if (dimensions.HasValue)
+                {
+                    Dimensions = dimensions.Value;
+                    if (!UsesPixelsAsUnitSize)
+                    {
+                        Dimensions = (new IntVector2(Dimensions.x * 16, Dimensions.y * 16));
+                    }
+                }
+                if (offset.HasValue)
+                {
+                    Offset = offset.Value;
+                    if (!UsesPixelsAsUnitSize)
+                    {
+                        Offset = (new IntVector2(Offset.x * 16, Offset.y * 16));
+                    }
+                }
+            }
+            PixelCollider m_CachedCollider = new PixelCollider()
+            {
+                ColliderGenerationMode = colliderGenerationMode,
+                CollisionLayer = collisionLayer,
+                IsTrigger = IsTrigger,
+                BagleUseFirstFrameOnly = (colliderGenerationMode == PixelCollider.PixelColliderGeneration.Tk2dPolygon),
+                SpecifyBagelFrame = string.Empty,
+                BagelColliderNumber = 0,
+                ManualOffsetX = Offset.x,
+                ManualOffsetY = Offset.y,
+                ManualWidth = Dimensions.x,
+                ManualHeight = Dimensions.y,
+                ManualDiameter = 0,
+                ManualLeftX = 0,
+                ManualLeftY = 0,
+                ManualRightX = 0,
+                ManualRightY = 0
+            };
+
+            if (replaceExistingColliders | m_CachedRigidBody.PixelColliders == null)
+            {
+                m_CachedRigidBody.PixelColliders = new List<PixelCollider> { m_CachedCollider };
+            }
+            else
+            {
+                m_CachedRigidBody.PixelColliders.Add(m_CachedCollider);
+            }
+
+            if (m_CachedRigidBody.sprite && colliderGenerationMode == PixelCollider.PixelColliderGeneration.Tk2dPolygon)
+            {
+                Bounds bounds = m_CachedRigidBody.sprite.GetBounds();
+                m_CachedRigidBody.sprite.GetTrueCurrentSpriteDef().colliderVertices = new Vector3[] { bounds.center - bounds.extents, bounds.center + bounds.extents };
+                // m_CachedRigidBody.ForceRegenerate();
+                // m_CachedRigidBody.RegenerateCache();
+            }
+
+            return m_CachedRigidBody;
+        }
+
     }
+    //
+    // End of first part
+    //
+
     public class StickyProjectile : MonoBehaviour
     {
-        public StickyProjectile()
+        private StickyProjectile()
         {
-            this.sourceVector = Vector2.zero;
             this.shouldExplodeOnReload = false;
             this.maxLifeTime = 15;
             this.destroyOnGunChanged = false;
             explosionDamageBasedOnProjectileDamage = false;
             hasDetTimer = false;
+            shouldExplode = false;
+            explosionData = null;
         }
-        private void Start()
+        public void Start()
         {
-            sourceProjectile = base.GetComponent<Projectile>();
-            if(sourceProjectile.Owner is PlayerController)
+            currentObject = this.GetComponent<Projectile>();
+            if (currentObject)
             {
-                player = sourceProjectile.Owner as PlayerController;
+                currentObject.OnHitEnemy += HandleHit;
             }
-            sourceGun = player.CurrentGun;
-            sourceProjectile.OnHitEnemy += OnHit;
-           
-        }
-        private void OnHit(Projectile self, SpeculativeRigidbody enemy, bool fatal)
-        {
-            sourceVector = self.LastVelocity;
-            if (enemy.aiActor && enemy.aiActor.healthHaver)
-            {
-                StickProjectileToEnemy sticky = enemy.aiActor.gameObject.AddComponent<StickProjectileToEnemy>();
-                sticky.destroyOnGunChanged = destroyOnGunChanged;
-                sticky.shouldExplodeOnReload = shouldExplodeOnReload;
-                sticky.explosionDamageBasedOnProjectileDamage = explosionDamageBasedOnProjectileDamage;
-                sticky.explosionData = explosionData;
-                sticky.maxLifeTime = maxLifeTime;
-                sticky.sourceProjectile = sourceProjectile;
-                sticky.sourceVector = sourceVector;
-                sticky.player = player;
-                sticky.sourceGun = sourceGun;
-                sticky.hasDetTimer = hasDetTimer;
-                sticky.detTimer = detTimer;
-            }
-        }
-        public bool destroyOnGunChanged;
-        public bool shouldExplodeOnReload;
-        public bool explosionDamageBasedOnProjectileDamage;
-        public bool hasDetTimer;
-        public ExplosionData explosionData;
-        public float maxLifeTime;
-        public float detTimer;
-        private Projectile sourceProjectile;
-        private Vector2 sourceVector;
-        private PlayerController player;
-        private Gun sourceGun;
-    }
-    public class StickProjectileToEnemy : MonoBehaviour
-    {
-        private void Start()
-        {
-            CreateSprite(sourceProjectile);
             Library.stickiesAlive.Add(this);
-            if(Library.stickiesAlive.Count >= 15)
+            if (Library.stickiesAlive.Count >= 15)
             {
-                StickProjectileToEnemy oldestSticky = Library.stickiesAlive.First();
-                if (oldestSticky.shouldExplodeOnReload)
+                StickyProjectile oldestSticky = Library.stickiesAlive.First();
+                if (oldestSticky.shouldExplode)
                 {
                     oldestSticky.Explode();
                 }
@@ -755,109 +1029,69 @@ namespace Items
                     Destroy(oldestSticky);
                 }
             }
-            explosionData = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData;
-            explosionData.damageToPlayer = 0;
-            explosionData.preventPlayerForce = true;
+            if (explosionData == null)
+            {
+                explosionData = GameManager.Instance.Dungeon.sharedSettingsPrefab.DefaultSmallExplosionData;
+                explosionData.damageToPlayer = 0;
+                explosionData.preventPlayerForce = true;
+            }
+            this.StartCoroutine(Decease());
         }
-        private void CreateSprite(Projectile source)
+        private void HandleHit(Projectile projectile, SpeculativeRigidbody otherBody, bool fatal)
         {
-            obj = new GameObject("sticky proj");
-            
-            obj.layer = source.gameObject.layer + 1;
-            tk2dSprite sprite = obj.AddComponent<tk2dSprite>();
-            sprite.SetSprite(source.sprite.Collection, source.sprite.spriteId);
-            base.GetComponent<tk2dSprite>().AttachRenderer(sprite);
-            
-            sprite.IsPerpendicular = true;
-            sprite.HeightOffGround = 0.1f;
-            sprite.transform.rotation = Quaternion.Euler(0, 0, sourceVector.ToAngle());
-            sprite.transform.parent = base.GetComponent<SpeculativeRigidbody>().transform;
-            sprite.GetCurrentSpriteDef().material.shader = ShaderCache.Acquire("Brave/PlayerShader");
-            sprite.depthUsesTrimmedBounds = true;
-            sprite.UpdateZDepth();
-            stickyPrefab = UnityEngine.Object.Instantiate<GameObject>(obj, base.transform.position, Quaternion.Euler(0f, 0f, 0f));
-            SpriteOutlineManager.AddOutlineToSprite(sprite, Color.black);
-            base.GetComponent<tk2dBaseSprite>().UpdateZDepth();
-            if (shouldExplodeOnReload)
+            if (otherBody.aiActor != null && !otherBody.healthHaver.IsDead && otherBody.aiActor.behaviorSpeculator && !otherBody.aiActor.IsHarmlessEnemy)
             {
-                if(sourceGun != null)
+                projectile.DestroyMode = Projectile.ProjectileDestroyMode.DestroyComponent;
+                objectToLookOutFor = projectile.gameObject;
+                objectToLookOutFor.transform.parent = otherBody.transform;
+                PlayerController player = projectile.Owner as PlayerController;
+                if (player)
                 {
-                    sourceGun.OnReloadPressed += OnPlayerReloaded;
+                    sourceGun = player.CurrentGun;
+                    this.player = player;
+                    player.CurrentGun.OnReloadPressed += OnPlayerReloaded;
+                    player.GunChanged += GunChanged;
                 }
             }
-            if (destroyOnGunChanged)
-            {
-                if(player != null)
-                {
-                    player.GunChanged += RemoveOnSwitch;
-                }
-            }
-            this.StartCoroutine(Decease(stickyPrefab, base.GetComponent<SpeculativeRigidbody>()));
         }
-        private IEnumerator Decease(GameObject stickyPrefab, SpeculativeRigidbody target)
+
+        private void GunChanged(Gun arg1, Gun arg2, bool arg3)
+        {   
+            Destroy(this.gameObject);    
+        }
+
+        private void OnPlayerReloaded(PlayerController arg1, Gun arg2, bool actual)
+        {
+            Explode();
+        }
+
+        private void Explode()
+        {
+            Exploder.Explode(parent.CenterPosition, explosionData, Vector2.zero, null, true);
+            shouldExplode = false;
+            Destroy(this.gameObject);
+        }
+
+        private IEnumerator Decease()
         {
             float timer = 0;
             while (timer < maxLifeTime)
             {
                 timer += BraveTime.DeltaTime;
-                stickyPrefab.transform.position = new Vector3(target.UnitCenter.x, target.UnitCenter.y + (target.UnitHeight / 3) * 2, target.transform.position.z);
-                stickyPrefab.transform.rotation = Quaternion.Euler(0, 0, sourceVector.ToAngle());
-                stickyPrefab.GetComponent<tk2dBaseSprite>().HeightOffGround = base.GetComponent<tk2dBaseSprite>().HeightOffGround + (target.UnitHeight / 3) * 2 + 0.8f;
-                stickyPrefab.GetComponent<tk2dBaseSprite>().UpdateZDepth();
                 yield return null;
             }
-            Destroy(stickyPrefab);
-            Destroy(this);
+           
+            Destroy(this.gameObject);
             yield break;
         }
-        private void Disconnect()
-        {
-            if (destroyOnGunChanged)
-            {
-                if (player != null)
-                {
-                    player.GunChanged -= RemoveOnSwitch;
-                }
-            }
-            if (shouldExplodeOnReload)
-            {
-                if (sourceGun != null)
-                {
-                    sourceGun.OnReloadPressed -= OnPlayerReloaded;
-                }
-            }
-        }
-        private void Explode()
-        {
-            Exploder.Explode(base.GetComponent<AIActor>().CenterPosition, explosionData, Vector2.zero, null, true);
 
-            Destroy(this);
-        }
-        private void RemoveOnSwitch(Gun arg1, Gun arg2, bool newGun)
-        {
-            Disconnect();
-            if (shouldExplodeOnReload)
-            {
-                Explode();
-            }
-            else
-            {
-               
-                Destroy(this);
-            }
-        }
-        private void OnPlayerReloaded(PlayerController arg1, Gun arg2, bool actual)
-        {
-            Disconnect();
-            Explode();
-        }
         private void OnDestroy()
         {
             if (destroyOnGunChanged)
             {
                 if (player != null)
                 {
-                    player.GunChanged -= RemoveOnSwitch;
+                    player.GunChanged -= GunChanged;
                 }
             }
             if (shouldExplodeOnReload)
@@ -867,24 +1101,33 @@ namespace Items
                     sourceGun.OnReloadPressed -= OnPlayerReloaded;
                 }
             }
+            if (shouldExplode)
+            {
+                Exploder.Explode(base.GetComponent<AIActor>().CenterPosition, explosionData, Vector2.zero, null, true);
+            }
             Library.stickiesAlive.Remove(this);
-            Destroy(stickyPrefab);
+           
         }
+
+        public Projectile currentObject;
+        public GameObject objectToLookOutFor;
+        public Material materialToCopy;
+        public tk2dSprite objectSprite;
+        public AIActor parent;
+        public Gun ToCheckReloadFor;
+        private PlayerController player;
+
+        public ExplosionData explosionData;
         public bool destroyOnGunChanged;
         public bool shouldExplodeOnReload;
         public bool explosionDamageBasedOnProjectileDamage;
         public bool hasDetTimer;
-        public ExplosionData explosionData;
+        public bool shouldExplode;
         public float maxLifeTime;
         public float detTimer;
-        public Projectile sourceProjectile;
-        public Vector2 sourceVector;
-        public PlayerController player;
-        public Gun sourceGun;
-        private GameObject stickyPrefab;
-        private GameObject obj;
-
+        private Gun sourceGun;
     }
+
     public class RandomMidAirTachyon : Projectile
     {
         public override void Start()
@@ -978,11 +1221,11 @@ namespace Items
             return intVector.ToCenterVector2();
         }
 
-        protected override void Move()
+        public override void Move()
         {
             base.Move();
         }
-        protected override void OnDestroy()
+        public override void OnDestroy()
         {
             base.OnDestroy();
         }
@@ -1011,19 +1254,19 @@ namespace Items
             {
                 terminalVelocity = proj.baseData.speed * .03f;
             }
-            
+
         }
         private void Update()
         {
-            if(timer <= .005f)
+            if (timer <= .005f)
             {
                 timer += BraveTime.DeltaTime;
             }
-            if(accelerate && timer > .005f && proj.Speed != terminalVelocity)
+            if (accelerate && timer > .005f && proj.Speed != terminalVelocity)
             {
                 proj.Speed *= (incrementRate + 1);
             }
-            else if(!accelerate && timer > .005f && proj.Speed != terminalVelocity)
+            else if (!accelerate && timer > .005f && proj.Speed != terminalVelocity)
             {
                 proj.Speed *= (1 - incrementRate);
             }
@@ -1058,30 +1301,7 @@ namespace Items
         public float damageMultOnPierce;
         private Projectile m_projectile;
     }
-    public class SpecialBlankModificationItem : BlankModificationItem
-    {
-        public static void InitHooks()
-        {
-            Hook hook = new Hook(
-                typeof(SilencerInstance).GetMethod("ProcessBlankModificationItemAdditionalEffects", BindingFlags.NonPublic | BindingFlags.Instance),
-                typeof(SpecialBlankModificationItem).GetMethod("BlankModificationHook")
-            );
-        }
-
-        public static void BlankModificationHook(Action<SilencerInstance, BlankModificationItem, Vector2, PlayerController> orig, SilencerInstance self, BlankModificationItem bmi, Vector2 centerPoint, PlayerController user)
-        {
-            orig(self, bmi, centerPoint, user);
-            if (bmi is SpecialBlankModificationItem)
-            {
-                (bmi as SpecialBlankModificationItem).OnBlank(self, centerPoint, user);
-            }
-        }
-
-        protected virtual void OnBlank(SilencerInstance silencerInstance, Vector2 centerPoint, PlayerController user)
-        {
-
-        }
-    }
+        
     public class PreventOnActiveEffects : MonoBehaviour
     {
         string pisslord = "yeah this is basically an empty component for making smth work. sue me.";
@@ -1154,4 +1374,525 @@ namespace Items
         public float EndWidth;
 
     }
+    public class LinkedPickupObjectBehav : MonoBehaviour
+    {
+        private void Start()
+        {
+            if (base.gameObject.GetComponent<PickupObject>())
+            {
+                pickupObject = base.GetComponent<PickupObject>();
+
+            }
+        }
+
+        private void TestCode()
+        {
+            ETGModConsole.Log("test");
+        }
+
+        public string linkGroup;
+
+        private PickupObject pickupObject;
+    }
+    public class LightningProjectileComp : MonoBehaviour
+    {
+        public LightningProjectileComp()
+        {
+            initialAngle = float.NegativeInfinity;
+            lightningWidth = -1;
+            targetEnemies = true;
+            lightingColor = new Color(130f / 255f, 230f / 255f, 2255f / 255f);
+        }
+        private void Start()
+        {
+            self = base.GetComponent<Projectile>();
+            self.OnHitEnemy += OnHitEnemy;
+            laserVFX = new List<GameObject>();
+            owner = self.ProjectilePlayerOwner();
+            if (self.GetComponent<BounceProjModifier>()) self.GetComponent<BounceProjModifier>().OnBounceContext += OnBounce;
+            StartCoroutine(moveLightning());
+
+        }
+        private void OnBounce(BounceProjModifier mod, SpeculativeRigidbody collider)
+        {
+            initialAngle = self.Direction.ToAngle();
+        }
+        private void Update()
+        {
+            if (self)
+            {
+                if (self.GetElapsedDistance() > tilesSinceLastCheck)
+                {
+                    tilesSinceLastCollision += (self.GetElapsedDistance() - tilesSinceLastCheck);
+
+                    tilesSinceLastCheck = self.GetElapsedDistance();
+                }
+            }
+            if (tilesSinceLastCollision > 3 && midEnemyZapping) midEnemyZapping = false;
+        }
+        private void OnHitEnemy(Projectile self, SpeculativeRigidbody enemy, bool fatal)
+        {
+            if (enemy && enemy.aiActor)
+            {
+                if (enemy.aiActor != lastHitEnemy)
+                {
+                    if (lastHitEnemy != null) secondToLastHitEnemy = lastHitEnemy;
+                    lastHitEnemy = enemy.aiActor;
+                }
+                tilesSinceLastCollision = 0;
+
+                //Check if there's another valid enemy around to arc to
+                if (targetEnemies)
+                {
+                    if (Vector2.Distance(enemy.UnitCenter, enemy.UnitCenter.GetPositionOfNearestEnemy(true, true, new List<AIActor>() { lastHitEnemy, secondToLastHitEnemy })) < 3)
+                    {
+                        PierceProjModifier piercing = self.gameObject.GetComponent<PierceProjModifier>();
+                        if (piercing != null)
+                        {
+                            piercing.penetration++;
+                        }
+                        else
+                        {
+                            self.gameObject.AddComponent<PierceProjModifier>();
+                        }
+
+                        //midEnemyZapping = true;
+                        float newArc = self.specRigidbody.UnitCenter.GetVectorToNearestEnemy(0, 0, self.ProjectilePlayerOwner(), new List<AIActor>() { lastHitEnemy, secondToLastHitEnemy }).ToAngle();
+                        self.SendInDirection(newArc.DegreeToVector2(), true, true); //Send the projectile in the new direction
+
+                        TriggerLightningBreak();
+
+                    }
+                }
+
+            }
+        }
+        private IEnumerator moveLightning()
+        {
+            while (self)
+            {
+                yield return new WaitForSeconds(LightningTime);
+                if (!midEnemyZapping)
+                {
+
+                    //Determine the new direction of the projectile
+                    if (initialAngle == float.NegativeInfinity) initialAngle = self.Direction.ToAngle(); //If initial angle is not set to the placeholder, set it
+                    float newArc = ProjSpawnHelper.GetAccuracyAngled(initialAngle, 80, owner); //Determine accuracy
+
+                    if (targetEnemies)
+                    {
+                        if (Vector2.Distance(self.specRigidbody.UnitCenter, self.specRigidbody.UnitCenter.GetPositionOfNearestEnemy(true, true, new List<AIActor>() { lastHitEnemy, secondToLastHitEnemy })) < 3)
+                        {
+                            newArc = self.specRigidbody.UnitCenter.GetVectorToNearestEnemy(0, 5, self.ProjectilePlayerOwner(), new List<AIActor>() { lastHitEnemy, secondToLastHitEnemy }).ToAngle();
+                        }
+                    }
+
+                    self.SendInDirection(newArc.DegreeToVector2(), true, true); //Send the projectile in the new direction
+
+
+                    TriggerLightningBreak();
+                }
+
+            }
+            yield break;
+        }
+        private void TriggerLightningBreak()
+        {
+            //Erase the TiledSpriteConnector from the last laser created, if the last laser exists.
+            if (lastLaser != null)
+            {
+                if (lastLaser.GetComponent<TiledSpriteConnector>() != null) UnityEngine.Object.Destroy(lastLaser.GetComponent<TiledSpriteConnector>());
+                lastLaser = null;
+            }
+
+            //Create New Laser Sight
+            GameObject laserSight = Library.RenderLaserSight(self.specRigidbody.UnitCenter, 1, lightningWidth, self.Direction.ToAngle(), true, lightingColor);
+
+            TiledSpriteConnector connector = laserSight.AddComponent<TiledSpriteConnector>();
+            connector.eraseSpriteIfTargetOrSourceNull = false;
+            connector.sourceRigidbody = self.specRigidbody;
+            connector.eraseComponentIfTargetOrSourceNull = true;
+            connector.targetVector = self.specRigidbody.UnitCenter;
+            connector.usesVector = true;
+
+            lastLaser = laserSight;
+            laserVFX.Add(laserSight);
+        }
+        private float LightningTime
+        {
+            get
+            {
+                //ETGModConsole.Log(BraveTime.DeltaTime.ToString());
+                return (0.005f / Time.timeScale);
+            }
+        }
+        private void OnDestroy()
+        {
+            if (laserVFX.Count > 0) ETGMod.StartGlobalCoroutine(deleteLasers(laserVFX, LightningTime, logDebug));
+        }
+        private static IEnumerator deleteLasers(List<GameObject> lasers, float delay, bool logDebug)
+        {
+            if (logDebug) ETGModConsole.Log("Running laser deletion code");
+            yield return new WaitForSeconds(delay);
+
+            List<GameObject> reversedList = new List<GameObject>();
+            for (int i = lasers.Count - 1; i >= 0; i--)
+            {
+                if (logDebug) ETGModConsole.Log($"Checking laser at index ({i}) in laser List.");
+                if (lasers[i] != null)
+                {
+                    reversedList.Add(lasers[i]);
+                    if (logDebug) ETGModConsole.Log($"Laser at index ({i}) was valid, adding to reversedList at index ({reversedList.Count - 1}).");
+                }
+            }
+            for (int i = reversedList.Count - 1; i >= 0; i--)
+            {
+                if (logDebug) ETGModConsole.Log($"Checking laser at index ({i}) in reversedList.");
+                if (reversedList[i] != null)
+                {
+                    if (logDebug) ETGModConsole.Log($"Laser at index ({i}) in reversedList exists and will be destroyed.");
+
+                    UnityEngine.Object.Destroy(reversedList[i]);
+                }
+                else { if (logDebug) ETGModConsole.Log($"Laser at index ({i}) was NULL in reversedList."); }
+                yield return new WaitForSeconds(delay);
+
+            }
+            yield break;
+        }
+        //Public
+        public Color32 lightingColor;
+        public bool logDebug;
+        public float lightningWidth;
+        public bool targetEnemies;
+        //Private
+        private float initialAngle;
+        private GameObject lastLaser;
+        private List<GameObject> laserVFX;
+        private Projectile self;
+        private PlayerController owner;
+
+        private AIActor lastHitEnemy;
+        private AIActor secondToLastHitEnemy;
+        private bool midEnemyZapping;
+        private float tilesSinceLastCollision;
+        private float tilesSinceLastCheck;
+    }
+    public class TiledSpriteConnector : MonoBehaviour
+    {
+        private void Start()
+        {
+            tiledSprite = base.GetComponent<tk2dTiledSprite>();
+        }
+        private void Update()
+        {
+            if (sourceRigidbody)
+            {
+                Vector2 unitCenter = sourceRigidbody.UnitCenter;
+                Vector2 unitCenter2 = Vector2.zero;
+                if (usesVector && targetVector != Vector2.zero) unitCenter2 = targetVector;
+                else if (targetRigidbody) unitCenter2 = targetRigidbody.UnitCenter;
+                if (unitCenter2 != Vector2.zero)
+                {
+                    tiledSprite.transform.position = unitCenter;
+                    Vector2 vector = unitCenter2 - unitCenter;
+                    float num = BraveMathCollege.Atan2Degrees(vector.normalized);
+                    int num2 = Mathf.RoundToInt(vector.magnitude / 0.0625f);
+                    tiledSprite.dimensions = new Vector2((float)num2, tiledSprite.dimensions.y);
+                    tiledSprite.transform.rotation = Quaternion.Euler(0f, 0f, num);
+                    tiledSprite.UpdateZDepth();
+
+                }
+                else
+                {
+                    if (eraseSpriteIfTargetOrSourceNull) UnityEngine.Object.Destroy(tiledSprite.gameObject);
+                    else if (eraseComponentIfTargetOrSourceNull) UnityEngine.Object.Destroy(this);
+                }
+            }
+            else
+            {
+                if (eraseSpriteIfTargetOrSourceNull) UnityEngine.Object.Destroy(tiledSprite.gameObject);
+                else if (eraseComponentIfTargetOrSourceNull) UnityEngine.Object.Destroy(this);
+            }
+        }
+
+        public SpeculativeRigidbody sourceRigidbody;
+        public SpeculativeRigidbody targetRigidbody;
+        public Vector2 targetVector;
+        public bool usesVector;
+        public bool eraseSpriteIfTargetOrSourceNull;
+        public bool eraseComponentIfTargetOrSourceNull;
+        private tk2dTiledSprite tiledSprite;
+    }
+    class SpecialBlankModificationItem : BlankModificationItem
+    {
+        public static void InitHooks()
+        {
+            Hook hook = new Hook(
+                typeof(SilencerInstance).GetMethod("ProcessBlankModificationItemAdditionalEffects", BindingFlags.NonPublic | BindingFlags.Instance),
+                typeof(SpecialBlankModificationItem).GetMethod("BlankModificationHook")
+            );
+        }
+
+        public static void BlankModificationHook(Action<SilencerInstance, BlankModificationItem, Vector2, PlayerController> orig, SilencerInstance self, BlankModificationItem bmi, Vector2 centerPoint, PlayerController user)
+        {
+            orig(self, bmi, centerPoint, user);
+            if (bmi is SpecialBlankModificationItem)
+            {
+                (bmi as SpecialBlankModificationItem).OnBlank(self, centerPoint, user);
+            }
+        }
+
+        protected virtual void OnBlank(SilencerInstance silencerInstance, Vector2 centerPoint, PlayerController user)
+        {
+
+        }
+    }
+    public class ImprovedAfterImage : BraveBehaviour
+    {
+
+        public ImprovedAfterImage()
+        {
+            shaders = new List<Shader>
+            {
+                ShaderCache.Acquire("Brave/Internal/RainbowChestShader"),
+                ShaderCache.Acquire("Brave/Internal/GlitterPassAdditive"),
+                ShaderCache.Acquire("Brave/Internal/HologramShader"),
+                ShaderCache.Acquire("Brave/Internal/HighPriestAfterImage")
+            };
+            //shaders.Add(ShaderCache.Acquire("Brave/ItemSpecific/MetalSkinShader"));
+            this.IsRandomShader = false;
+            this.spawnShadows = true;
+            this.shadowTimeDelay = 0.1f;
+            this.shadowLifetime = 0.6f;
+            this.minTranslation = 0.2f;
+            this.maxEmission = 800f;
+            this.minEmission = 100f;
+            this.targetHeight = -2f;
+            this.dashColor = new Color(1f, 0f, 1f, 1f);
+            this.m_activeShadows = new LinkedList<Shadow>();
+            this.m_inactiveShadows = new LinkedList<Shadow>();
+        }
+
+        public void Start()
+        {
+            if (this.OptionalImageShader != null)
+            {
+                this.OverrideImageShader = this.OptionalImageShader;
+            }
+            if (base.transform.parent != null && base.transform.parent.GetComponent<Projectile>() != null)
+            {
+                base.transform.parent.GetComponent<Projectile>().OnDestruction += this.ProjectileDestruction;
+            }
+            this.m_lastSpawnPosition = base.transform.position;
+        }
+
+        private void ProjectileDestruction(Projectile source)
+        {
+            if (this.m_activeShadows.Count > 0)
+            {
+                GameManager.Instance.StartCoroutine(this.HandleDeathShadowCleanup());
+            }
+        }
+
+        public void LateUpdate()
+        {
+            if (this.spawnShadows && !this.m_previousFrameSpawnShadows)
+            {
+                this.m_spawnTimer = this.shadowTimeDelay;
+            }
+            this.m_previousFrameSpawnShadows = this.spawnShadows;
+            LinkedListNode<ImprovedAfterImage.Shadow> next;
+            for (LinkedListNode<ImprovedAfterImage.Shadow> linkedListNode = this.m_activeShadows.First; linkedListNode != null; linkedListNode = next)
+            {
+                next = linkedListNode.Next;
+                linkedListNode.Value.timer -= BraveTime.DeltaTime;
+                if (linkedListNode.Value.timer <= 0f)
+                {
+                    this.m_activeShadows.Remove(linkedListNode);
+                    this.m_inactiveShadows.AddLast(linkedListNode);
+                    if (linkedListNode.Value.sprite)
+                    {
+                        linkedListNode.Value.sprite.renderer.enabled = false;
+                    }
+                }
+                else if (linkedListNode.Value.sprite)
+                {
+                    float num = linkedListNode.Value.timer / this.shadowLifetime;
+                    Material sharedMaterial = linkedListNode.Value.sprite.renderer.sharedMaterial;
+                    sharedMaterial.SetFloat("_EmissivePower", Mathf.Lerp(this.maxEmission, this.minEmission, num));
+                    sharedMaterial.SetFloat("_Opacity", num);
+                }
+            }
+            if (this.spawnShadows)
+            {
+                if (this.m_spawnTimer > 0f)
+                {
+                    this.m_spawnTimer -= BraveTime.DeltaTime;
+                }
+                if (this.m_spawnTimer <= 0f && Vector2.Distance(this.m_lastSpawnPosition, base.transform.position) > this.minTranslation)
+                {
+                    this.SpawnNewShadow();
+                    this.m_spawnTimer += this.shadowTimeDelay;
+                    this.m_lastSpawnPosition = base.transform.position;
+                }
+            }
+        }
+
+        private IEnumerator HandleDeathShadowCleanup()
+        {
+            while (this.m_activeShadows.Count > 0)
+            {
+                LinkedListNode<ImprovedAfterImage.Shadow> next;
+                for (LinkedListNode<ImprovedAfterImage.Shadow> node = this.m_activeShadows.First; node != null; node = next)
+                {
+                    next = node.Next;
+                    node.Value.timer -= BraveTime.DeltaTime;
+                    if (node.Value.timer <= 0f)
+                    {
+                        this.m_activeShadows.Remove(node);
+                        this.m_inactiveShadows.AddLast(node);
+                        if (node.Value.sprite)
+                        {
+                            node.Value.sprite.renderer.enabled = false;
+                        }
+                    }
+                    else if (node.Value.sprite)
+                    {
+                        float num = node.Value.timer / this.shadowLifetime;
+                        Material sharedMaterial = node.Value.sprite.renderer.sharedMaterial;
+                        sharedMaterial.SetFloat("_EmissivePower", Mathf.Lerp(this.maxEmission, this.minEmission, num));
+                        sharedMaterial.SetFloat("_Opacity", num);
+                    }
+                }
+                yield return null;
+            }
+            yield break;
+        }
+
+        public override void OnDestroy()
+        {
+            GameManager.Instance.StartCoroutine(this.HandleDeathShadowCleanup());
+            base.OnDestroy();
+        }
+
+
+        private void SpawnNewShadow()
+        {
+            if (this.m_inactiveShadows.Count == 0)
+            {
+                this.CreateInactiveShadow();
+            }
+            LinkedListNode<ImprovedAfterImage.Shadow> first = this.m_inactiveShadows.First;
+            tk2dSprite sprite = first.Value.sprite;
+            this.m_inactiveShadows.RemoveFirst();
+            if (!sprite || !sprite.renderer)
+            {
+                return;
+            }
+            first.Value.timer = this.shadowLifetime;
+            sprite.SetSprite(base.sprite.Collection, base.sprite.spriteId);
+            sprite.transform.position = base.sprite.transform.position;
+            sprite.transform.rotation = base.sprite.transform.rotation;
+            sprite.scale = base.sprite.scale;
+            sprite.usesOverrideMaterial = true;
+            sprite.IsPerpendicular = true;
+            if (sprite.renderer && IsRandomShader)
+            {
+                sprite.renderer.enabled = true;
+                sprite.renderer.material.shader = shaders[(int)UnityEngine.Random.Range(0, shaders.Count)];
+
+                if (sprite.renderer.material.shader == shaders[3])
+                {
+                    sprite.renderer.sharedMaterial.SetFloat("_EmissivePower", this.minEmission);
+                    sprite.renderer.sharedMaterial.SetFloat("_Opacity", 1f);
+                    sprite.renderer.sharedMaterial.SetColor("_DashColor", Color.HSVToRGB(UnityEngine.Random.value, 1.0f, 1.0f));
+                }
+                if (sprite.renderer.material.shader == shaders[0])
+                {
+                    sprite.renderer.sharedMaterial.SetFloat("_AllColorsToggle", 1f);
+                }
+            }
+
+            else if (sprite.renderer)
+            {
+
+                sprite.renderer.enabled = true;
+                sprite.renderer.material.shader = (this.OverrideImageShader ?? ShaderCache.Acquire("Brave/Internal/HighPriestAfterImage"));
+                sprite.renderer.sharedMaterial.SetFloat("_EmissivePower", this.minEmission);
+                sprite.renderer.sharedMaterial.SetFloat("_Opacity", 1f);
+                sprite.renderer.sharedMaterial.SetColor("_DashColor", this.dashColor);
+                sprite.renderer.sharedMaterial.SetFloat("_AllColorsToggle", 1f);
+            }
+
+            sprite.HeightOffGround = this.targetHeight;
+            sprite.UpdateZDepth();
+            this.m_activeShadows.AddLast(first);
+        }
+
+        public bool IsRandomShader;
+
+        private void CreateInactiveShadow()
+        {
+            GameObject gameObject = new GameObject("after image");
+            if (this.UseTargetLayer)
+            {
+                gameObject.layer = LayerMask.NameToLayer(this.TargetLayer);
+            }
+            tk2dSprite sprite = gameObject.AddComponent<tk2dSprite>();
+            gameObject.transform.parent = SpawnManager.Instance.VFX;
+            this.m_inactiveShadows.AddLast(new ImprovedAfterImage.Shadow
+            {
+                timer = this.shadowLifetime,
+                sprite = sprite
+            });
+        }
+
+
+        public bool spawnShadows;
+
+        public float shadowTimeDelay;
+
+        public float shadowLifetime;
+
+        public float minTranslation;
+
+        public float maxEmission;
+
+        public float minEmission;
+
+        public float targetHeight;
+
+        public Color dashColor;
+
+        public Shader OptionalImageShader;
+
+        public bool UseTargetLayer;
+
+        public string TargetLayer;
+
+        [NonSerialized]
+        public Shader OverrideImageShader;
+
+        private readonly LinkedList<ImprovedAfterImage.Shadow> m_activeShadows;
+
+        private readonly LinkedList<ImprovedAfterImage.Shadow> m_inactiveShadows;
+
+        private readonly List<Shader> shaders;
+
+        private float m_spawnTimer;
+
+        private Vector2 m_lastSpawnPosition;
+
+        private bool m_previousFrameSpawnShadows;
+
+        private class Shadow
+        {
+            public float timer;
+
+            public tk2dSprite sprite;
+        }
+    }
+
+
 }

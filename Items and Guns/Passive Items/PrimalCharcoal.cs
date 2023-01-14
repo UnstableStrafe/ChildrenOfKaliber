@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 using Dungeonator;
 namespace Items
@@ -11,7 +11,7 @@ namespace Items
         {
             string itemName = "Primal Charcoal";
 
-            string resourceName = "Items/Resources/primal_charcoal.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/primal_charcoal.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -26,6 +26,7 @@ namespace Items
 
             item.quality = ItemQuality.B;
             item.sprite.IsPerpendicular = true;
+            primalCharcoalId = item.PickupObjectId;
         }
         private void DustCloud(PlayerController player, Gun gun)
         {
@@ -79,42 +80,16 @@ namespace Items
         public override void Pickup(PlayerController player)
         {
             player.OnReloadedGun += DustCloud;
-            WeightedGameObject Object1 = new WeightedGameObject
+            foreach (WeightedGameObject obj in GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements)
             {
-                pickupId = ETGMod.Databases.Items["Primal Sulfur"].PickupObjectId,
-                weight = 1.7f,
-                rawGameObject = ETGMod.Databases.Items["Primal Sulfur"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            WeightedGameObject Object2 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Primal Saltpeter"].PickupObjectId,
-                weight = 1.7f,
-                rawGameObject = ETGMod.Databases.Items["Primal Saltpeter"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            WeightedGameObject Object3 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Primal Nitric Acid"].PickupObjectId,
-                weight = 1.8f,
-                rawGameObject = ETGMod.Databases.Items["Primal Nitric Acid"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            if (!player.HasPickupID(ETGMod.Databases.Items["Primal Sulfur"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object1);
+                if (obj.pickupId == PrimalNitricAcid.primalNitricAcidId || obj.pickupId == PrimalSulfur.primalSulfurId || obj.pickupId == PrimalSaltpeter.primalSaltpeterId && !player.HasPickupID(obj.pickupId))
+                {
+                    obj.weight = 3;
+                }
             }
-            if (!player.HasPickupID(ETGMod.Databases.Items["Primal Saltpeter"].PickupObjectId))
+            if (player.HasPickupID(PrimalSulfur.primalSulfurId) && player.HasPickupID(PrimalSaltpeter.primalSaltpeterId) && player.HasPickupID(PrimalNitricAcid.primalNitricAcidId) && !player.HasPickupID(TrueGunpowder.itemID))
             {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object2);
-            }
-            if (!player.HasPickupID(ETGMod.Databases.Items["Primal Nitric Acid"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object3);
-            }
-            if (player.HasPickupID(ETGMod.Databases.Items["Primal Saltpeter"].PickupObjectId) && player.HasPickupID(ETGMod.Databases.Items["Primal Nitric Acid"].PickupObjectId) && player.HasPickupID(ETGMod.Databases.Items["Primal Sulfur"].PickupObjectId) && !player.HasPickupID(ETGMod.Databases.Items["True Gunpowder"].PickupObjectId))
-            {
-                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(ETGMod.Databases.Items["True Gunpowder"].PickupObjectId).gameObject, player);
+                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(TrueGunpowder.itemID).gameObject, player);
             }
             base.Pickup(player);
         }
@@ -123,7 +98,9 @@ namespace Items
             DebrisObject debrisObject = base.Drop(player);
             debrisObject.GetComponent<PrimalCharcoal>().m_pickedUpThisRun = true;
             player.OnReloadedGun -= DustCloud;
+           
             return debrisObject;
         }
+        public static int primalCharcoalId;
     }
 }

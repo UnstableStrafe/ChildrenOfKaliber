@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Gungeon;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 
 
 namespace Items
@@ -15,7 +15,7 @@ namespace Items
         {
             string itemName = "Hair Gel";
 
-            string resourceName = "Items/Resources/hair_gel.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/hair_gel.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -32,7 +32,7 @@ namespace Items
             item.quality = ItemQuality.C;
             item.sprite.IsPerpendicular = true;
         }
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
             CalculateStats();

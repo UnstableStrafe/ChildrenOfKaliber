@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -11,7 +11,7 @@ namespace Items
         {
             string itemName = "Cup of Water";
 
-            string resourceName = "Items/Resources/water_cup.png";
+            string resourceName = "Items/Resources/ItemSprites/Actives/water_cup.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -36,7 +36,7 @@ namespace Items
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);
         }
 
-        protected override void DoEffect(PlayerController user)
+        public override void DoEffect(PlayerController user)
         {
             base.DoEffect(user);
             AddStat(PlayerStats.StatType.ReloadSpeed, -1000f);

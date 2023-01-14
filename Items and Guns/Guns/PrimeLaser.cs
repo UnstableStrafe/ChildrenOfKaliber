@@ -1,5 +1,5 @@
 ﻿using Gungeon;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using UnityEngine;
 
 namespace Items
@@ -15,7 +15,7 @@ namespace Items
             gun.SetLongDescription("Loser.");
             gun.SetupSprite(null, "prime_laser_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 15);
-            gun.AddProjectileModuleFrom("future_assault_rifle", true, false);
+            gun.AddProjectileModuleFrom("future_assault_rifle");
             gun.SetBaseMaxAmmo(1000);
             gun.DefaultModule.ammoCost = 1;
             gun.DefaultModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
@@ -43,12 +43,12 @@ namespace Items
             proj2.AppliesFire = false;
             BounceProjModifier bounce = proj2.gameObject.GetComponent<BounceProjModifier>();
             bounce.numberOfBounces -= 1;
-            ETGMod.Databases.Items.Add(gun, null, "ANY");
+            ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
         private bool HasReloaded;
 
-        protected void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

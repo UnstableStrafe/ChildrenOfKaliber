@@ -1,6 +1,6 @@
 ﻿using System;
 using UnityEngine;
-using ItemAPI;
+using Alexandria.ItemAPI;
 using Dungeonator;
 using System.Linq;
 using System.Collections.Generic;
@@ -12,7 +12,7 @@ namespace Items
         {
             string itemName = "Primal Saltpeter";
 
-            string resourceName = "Items/Resources/primal_saltpeter.png";
+            string resourceName = "Items/Resources/ItemSprites/Passives/primal_saltpeter.png";
 
             GameObject obj = new GameObject(itemName);
 
@@ -27,8 +27,9 @@ namespace Items
 
             item.quality = ItemQuality.D;
             item.sprite.IsPerpendicular = true;
+            primalSaltpeterId = item.PickupObjectId;
         }
-        protected override void Update()
+        public override void Update()
         {
             base.Update();
         }
@@ -66,54 +67,22 @@ namespace Items
             
             base.Pickup(player);
             ETGMod.AIActor.OnPreStart = (Action<AIActor>)Delegate.Combine(ETGMod.AIActor.OnPreStart, new Action<AIActor>(this.EnergyBending));
-            WeightedGameObject Object1 = new WeightedGameObject
+           
+            if (player.HasPickupID(PrimalNitricAcid.primalNitricAcidId) && player.HasPickupID(PrimalSulfur.primalSulfurId) && player.HasPickupID(PrimalCharcoal.primalCharcoalId) && !player.HasPickupID(TrueGunpowder.itemID))
             {
-                pickupId = ETGMod.Databases.Items["Primal Sulfur"].PickupObjectId,
-                weight = 1.7f,
-                rawGameObject = ETGMod.Databases.Items["Primal Sulfur"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            WeightedGameObject Object2 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Primal Charcoal"].PickupObjectId,
-                weight = 1.7f,
-                rawGameObject = ETGMod.Databases.Items["Primal Charcoal"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            WeightedGameObject Object3 = new WeightedGameObject
-            {
-                pickupId = ETGMod.Databases.Items["Primal Nitric Acid"].PickupObjectId,
-                weight = 1.8f,
-                rawGameObject = ETGMod.Databases.Items["Primal Nitric Acid"].gameObject,
-                forceDuplicatesPossible = false
-            };
-            if (!player.HasPickupID(ETGMod.Databases.Items["Primal Sulfur"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object1);
-            }
-            if (!player.HasPickupID(ETGMod.Databases.Items["Primal Charcoal"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object2);
-            }
-            if (!player.HasPickupID(ETGMod.Databases.Items["Primal Nitric Acid"].PickupObjectId))
-            {
-                GameManager.Instance.RewardManager.ItemsLootTable.defaultItemDrops.elements.Add(Object3);
-            }
-            if (player.HasPickupID(ETGMod.Databases.Items["Primal Sulfur"].PickupObjectId) && player.HasPickupID(ETGMod.Databases.Items["Primal Nitric Acid"].PickupObjectId) && player.HasPickupID(ETGMod.Databases.Items["Primal Charcoal"].PickupObjectId) && !player.HasPickupID(ETGMod.Databases.Items["True Gunpowder"].PickupObjectId))
-            {
-                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(ETGMod.Databases.Items["True Gunpowder"].PickupObjectId).gameObject, player);
+                LootEngine.GivePrefabToPlayer(PickupObjectDatabase.GetById(TrueGunpowder.itemID).gameObject, player);
             }
             
         }
-
-
 
         public override DebrisObject Drop(PlayerController player)
         {
             DebrisObject debrisObject = base.Drop(player);
             debrisObject.GetComponent<PrimalSaltpeter>().m_pickedUpThisRun = true;
             ETGMod.AIActor.OnPreStart = (Action<AIActor>)Delegate.Remove(ETGMod.AIActor.OnPreStart, new Action<AIActor>(this.EnergyBending));
+          
             return debrisObject;
         }
+        public static int primalSaltpeterId;
     }
 }
