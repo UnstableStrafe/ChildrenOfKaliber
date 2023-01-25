@@ -47,8 +47,10 @@ namespace Items
             projectile.baseData.force *= 1f;            
             projectile.transform.parent = gun.barrelOffset;
             ProjectileSlashingBehaviour projectileSlashing = projectile.gameObject.AddComponent<ProjectileSlashingBehaviour>();
-            projectileSlashing.SlashDimensions = 45;
-            
+            SlashData data =  ScriptableObject.CreateInstance<SlashData>();
+            data.slashDegrees = 45;
+            projectileSlashing.slashParameters = data;
+
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             itemID = gun.PickupObjectId;
             behav.activeReloadEnabled = true;

@@ -9,6 +9,7 @@ using System.Collections;
 using MonoMod.RuntimeDetour;
 using MonoMod;
 using System.Reflection;
+using Alexandria.Misc;
 
 //Something in this class MAJORLY FUCKED UP
 namespace Items
@@ -1477,7 +1478,7 @@ namespace Items
 
                     //Determine the new direction of the projectile
                     if (initialAngle == float.NegativeInfinity) initialAngle = self.Direction.ToAngle(); //If initial angle is not set to the placeholder, set it
-                    float newArc = ProjSpawnHelper.GetAccuracyAngled(initialAngle, 80, owner); //Determine accuracy
+                    float newArc = MathsAndLogicHelper.GetAccuracyAngled(initialAngle, 80, owner); //Determine accuracy
 
                     if (targetEnemies)
                     {

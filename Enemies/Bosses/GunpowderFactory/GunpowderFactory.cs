@@ -12,7 +12,6 @@ using Alexandria.DungeonAPI;
 using static DirectionalAnimation;
 using Alexandria.EnemyAPI;
 using Alexandria;
-using AlexandriaLib;
 using Alexandria.ItemAPI;
 using Alexandria.NPCAPI;
 
@@ -550,7 +549,7 @@ namespace Items
                 enemy.encounterTrackable.journalData.PrimaryDisplayName = "#GUNPOWDERFACTORYAMMONOMICON";
                 enemy.encounterTrackable.journalData.NotificationPanelDescription = "#GUNPOWDERFACTORYAMMONOMICONSHORT";
                 enemy.encounterTrackable.journalData.AmmonomiconFullEntry = "#GUNPOWDERFACTORYAMMONOMICONLONG";
-                EnemyBuilder.AddEnemyToDatabase(enemy.gameObject, "ck:gunpowder_foreman");
+                //EnemyBuilder.AddEnemyToDatabase(enemy.gameObject, "ck:gunpowder_foreman");
                 EnemyDatabase.GetEntry("ck:gunpowder_foreman").ForcedPositionInAmmonomicon = 8;
                 EnemyDatabase.GetEntry("ck:gunpowder_foreman").isInBossTab = true;
                 EnemyDatabase.GetEntry("ck:gunpowder_foreman").isNormalEnemy = true;

@@ -1,11 +1,10 @@
-﻿using LootTableAPI;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
-using AlexandriaLib;
 using Alexandria;
+using Alexandria.Misc;
 using Alexandria.NPCAPI;
 using Alexandria.DungeonAPI;
 
@@ -19,7 +18,7 @@ namespace Items
 
             List<string> npcTalkSprites = new List<string> { "Items/Resources/NPCs/CultistShopkeep/cultist_shopkeep_talk_001.png", "Items/Resources/NPCs/CultistShopkeep/cultist_shopkeep_talk_002.png" };
 
-            var lootTable = LootTableTools.CreateLootTable();
+            var lootTable = LootUtility.CreateLootTable();
             lootTable.AddItemToPool(D6.itemID);            
             lootTable.AddItemToPool(GoldenRecord.itemID);
             lootTable.AddItemToPool(SympathyBullets.itemID);

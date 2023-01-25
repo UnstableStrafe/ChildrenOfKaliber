@@ -15,15 +15,14 @@ using Gungeon;
 using Alexandria.DungeonAPI;
 using EnemyBulletBuilder;
 using SaveAPI;
-using LootTableAPI;
-using CustomCharacters;
+using Alexandria.CharacterAPI;
 using Alexandria.EnemyAPI;
 using System.Runtime;
 using BepInEx;
 using System.IO;
 using Alexandria;
-using AlexandriaLib;
 using Alexandria.ItemAPI;
+using Alexandria.Misc;
 
 namespace Items
 {
@@ -726,6 +725,7 @@ namespace Items
         public static List<int> moddedMunitionsIDs = new List<int>(){ };
 
         string credits = "Written by @UnstableStrafe#3928 with help from KyleTheScientist, Neighborino, Glorfindel, Retrash, Retromation, TheTurtleMelon, TankTheta, Spapi, Eternal Frost, Some Bunny, NotABot, BlazeyKat, ExplosivePanda, Nevernamed, Spcreate, Bleak Bubbles, Skilotar_, An3s, my dog Dolly <3, my gf Alice";
+      
         //SPINEL TONIC BY TankTheta!
         //Bismuth Ammolet sprite by TankTheta!
         //Spirit spride by TankTheta!

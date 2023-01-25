@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Alexandria.ItemAPI;
-using LootTableAPI;
+using Alexandria.Misc;
 using Dungeonator;
 using Alexandria.DungeonAPI;
 
@@ -252,7 +252,7 @@ namespace Items
 
                 };
 
-                var lootTable = LootTableTools.CreateLootTable();
+                var lootTable = LootUtility.CreateLootTable();
                 foreach(int i in items)
                 {
                     lootTable.AddItemToPool(i);
