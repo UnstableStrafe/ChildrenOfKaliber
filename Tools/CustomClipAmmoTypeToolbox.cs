@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using UnityEngine;
+using Alexandria.ItemAPI;
 
 namespace ItemAPI
 {
@@ -19,13 +20,9 @@ namespace ItemAPI
             Texture2D bgTexture = ResourceExtractor.GetTextureFromResource(ammoBackgroundSpritePath + ".png");
 
             GameObject fgSpriteObject = new GameObject("sprite fg");
-            fgSpriteObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(fgSpriteObject);
-            UnityEngine.Object.DontDestroyOnLoad(fgSpriteObject);
+            fgSpriteObject.MakeFakePrefab();
             GameObject bgSpriteObject = new GameObject("sprite bg");
-            bgSpriteObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(bgSpriteObject);
-            UnityEngine.Object.DontDestroyOnLoad(bgSpriteObject);
+            bgSpriteObject.MakeFakePrefab();
 
             dfTiledSprite fgSprite = fgSpriteObject.SetupDfSpriteFromTexture<dfTiledSprite>(fgTexture, ShaderCache.Acquire("Daikon Forge/Default UI Shader"));
             dfTiledSprite bgSprite = bgSpriteObject.SetupDfSpriteFromTexture<dfTiledSprite>(bgTexture, ShaderCache.Acquire("Daikon Forge/Default UI Shader"));

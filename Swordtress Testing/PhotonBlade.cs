@@ -44,8 +44,11 @@ namespace Items
             projectile.baseData.damage *= 3f;
             projectile.baseData.speed = 0;
             ProjectileSlashingBehaviour slashingBehaviour = projectile.gameObject.AddComponent<ProjectileSlashingBehaviour>();
-            slashingBehaviour.SlashDimensions = 90;
-            slashingBehaviour.SlashRange = 2.5f;
+            SlashData data = ScriptableObject.CreateInstance<SlashData>();
+            data.slashDegrees = 90;
+            data.slashRange = 2.5f;
+            slashingBehaviour.slashParameters = data;
+
             //VFXPool SlashVFX = VFXLibrary.CreateMuzzleflash("photon_blade_slice", new List<string> { "katanaslice_001", "katanaslice_002", "katanaslice_003", }, 10, new List<IntVector2> { new IntVector2(72, 67), new IntVector2(72, 67), new IntVector2(72, 67), }, new List<tk2dBaseSprite.Anchor> {
             //    tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft}, new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero }, false, false, false, false, 0, VFXAlignment.Fixed, true, new List<float> { 0, 0, 0 }, new List<Color> { VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor });
             //slashingBehaviour.SlashVFX = SlashVFX;

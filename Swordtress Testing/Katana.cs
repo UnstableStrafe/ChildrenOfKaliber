@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Gungeon;
 using Alexandria.ItemAPI;
 using UnityEngine;
+using Alexandria.Misc;
 
 namespace Items
 {
@@ -35,36 +36,33 @@ namespace Items
             gun.encounterTrackable.EncounterGuid = "wht the fuck did this break MTG AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAaAAAA.";
             gun.sprite.IsPerpendicular = true;
             gun.gunClass = GunClass.NONE;
-            Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
-            Projectile projectile2 = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
-            projectile.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile);
-            projectile.transform.parent = gun.barrelOffset;
+
+            Projectile projectile = gun.DefaultModule.projectiles[0].InstantiateAndFakeprefab();
+            Projectile projectile2 = gun.DefaultModule.projectiles[0].InstantiateAndFakeprefab();
+
             projectile.baseData.damage *= 3f;
             projectile.baseData.speed = 0;
-            ProjectileSlashingBehaviour slashingBehaviour = projectile.gameObject.AddComponent<ProjectileSlashingBehaviour>();
-            slashingBehaviour.SlashDimensions = 135;
-            slashingBehaviour.SlashRange = 5f;
-            slashingBehaviour.delayBeforeSlash = .1f;
-            
 
-            projectile2.gameObject.SetActive(false);
-            FakePrefab.MarkAsFakePrefab(projectile2.gameObject);
-            UnityEngine.Object.DontDestroyOnLoad(projectile2);
-            projectile2.transform.parent = gun.barrelOffset;
+            ProjectileSlashingBehaviour slashingBehaviour = projectile.gameObject.AddComponent<ProjectileSlashingBehaviour>();
+            SlashData slashInfo = ScriptableObject.CreateInstance<SlashData>();
+            slashInfo.slashDegrees = 135;
+            slashInfo.slashRange = 5f;
+            slashingBehaviour.initialDelay = .1f;
+            slashingBehaviour.slashParameters = slashInfo;
+
             projectile2.baseData.damage *= 3f;
             projectile2.baseData.speed = 0;
+
             ProjectileSlashingBehaviour slashingBehaviour2 = projectile2.gameObject.AddComponent<ProjectileSlashingBehaviour>();
-            slashingBehaviour2.SlashDimensions = 135;
-            slashingBehaviour2.SlashRange = 5f;
-            slashingBehaviour2.delayBeforeSlash = .2f;
-            slashingBehaviour2.DoesMultipleSlashes = true;
-            slashingBehaviour2.AmountOfMultiSlashes = 5;
-            slashingBehaviour2.DelayBetweenMultiSlashes = .2f;
-            slashingBehaviour2.UsesAngleVariance = true;
-            slashingBehaviour2.MinSlashAngleOffset = -8;
-            slashingBehaviour2.MaxSlashAngleOffset = 8;
+            SlashData slashInfo2 = ScriptableObject.CreateInstance<SlashData>();
+            slashInfo2.slashRange = 5f; 
+            slashInfo2.slashDegrees = 135f;
+            slashingBehaviour2.slashParameters = slashInfo2;
+            slashingBehaviour2.angleVariance = 8f;
+            slashingBehaviour2.timeBetweenSlashes = 0.2f;
+            slashingBehaviour2.timeBetweenCustomSequenceSlashes = 0.2f;
+            slashingBehaviour2.customSequence = new List<float>() { 0, 0, 0, 0, 0 };
+
             ProjectileModule.ChargeProjectile chargeProjectile1 = new ProjectileModule.ChargeProjectile()
             {
                 Projectile = projectile,
@@ -79,7 +77,7 @@ namespace Items
             {
                 chargeProjectile1,
                 chargeProjectile2
-               
+
             };
             //VFXPool SlashVFX = VFXLibrary.CreateMuzzleflash("katanaslice", new List<string> { "katanaslice_001", "katanaslice_002", "katanaslice_003",}, 10, new List<IntVector2> { new IntVector2(72, 67), new IntVector2(72, 67), new IntVector2(72, 67), }, new List<tk2dBaseSprite.Anchor> {
             //    tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft}, new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero}, false, false, false, false, 0, VFXAlignment.Fixed, true, new List<float> { 0, 0, 0}, new List<Color> { VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor});
@@ -88,7 +86,7 @@ namespace Items
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             gun.AddToSubShop(ItemBuilder.ShopType.Goopton);
             gun.AddToSubShop(ItemBuilder.ShopType.Trorc);
-            
+
         }
 
         private bool HasReloaded;
@@ -118,7 +116,7 @@ namespace Items
                 HasReloaded = false;
                 AkSoundEngine.PostEvent("Stop_WPN_All", base.gameObject);
                 base.OnReloadPressed(player, gun, bSOMETHING);
-                
+
             }
         }
 
@@ -126,13 +124,6 @@ namespace Items
         public override void OnPostFired(PlayerController player, Gun gun)
         {
             gun.PreventNormalFireAudio = true;
-        }
-
-
-
-        public Katana()
-        {
-
         }
     }
 }
