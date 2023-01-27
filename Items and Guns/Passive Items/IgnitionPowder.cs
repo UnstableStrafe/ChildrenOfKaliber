@@ -8,7 +8,7 @@ using Gungeon;
 
 namespace Items
 {
-    class IgnitionPowder : RiskPassiveItem
+    class IgnitionPowder : PassiveItem
     {
         public static void Init()
         {
@@ -19,14 +19,14 @@ namespace Items
             GameObject obj = new GameObject(itemName);
 
             var item = obj.AddComponent<IgnitionPowder>();
-            obj.AddComponent<RiskParticles>();
+            //obj.AddComponent<RiskParticles>();
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
 
             string shortDesc = "Thermite Wake-up Call";
             string longDesc = "Increases damage while on fire. Reloading an empty clip spawns fire below the player. Increases the time it takes for the fire gauge to fill up. Gives 2 Risk.\nDoes NOT grant fire immunity!\n\nI feel like there's a joke about the Vietnam War I could make here.";
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
-            item.RiskToGive = 2;
+            //item.RiskToGive = 2;
             item.quality = ItemQuality.C;
             item.sprite.IsPerpendicular = true;
 
