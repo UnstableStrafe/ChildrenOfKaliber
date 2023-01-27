@@ -243,9 +243,9 @@ namespace Items
             EyesOfStone.Init();//95              PASSIVE 41
             ShellBank.Init(); //96                PASSIVE 42
             //HairGel.Init();
-            //IgnitionPowder.Init();
+            IgnitionPowder.Init();
             //Magnorbs.Add(); // need to do the orbiting code 
-            //PoisonPoltergeist.Init();
+            PoisonPoltergeist.Init();
 
             PsiFocus.Init();
             PsiScales.Add();
@@ -256,7 +256,7 @@ namespace Items
             GoldenRecord.Init();//97             ACTIVE 16
             //Baneshee.Add();
             //RebarCrossbow.Add();
-            //--MemeticKillAgent.Init();
+            MemeticKillAgent.Init();
             //--TemporalRounds.Init();
             // CultistsCrook.Add();
             //  Break_ActionRevolver.Add();

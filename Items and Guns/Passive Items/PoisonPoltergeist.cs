@@ -13,7 +13,7 @@ using Alexandria.DungeonAPI;
 
 namespace Items
 {
-    class PoisonPoltergeist : RiskPassiveItem
+    class PoisonPoltergeist : PassiveItem
     {
         public static void Init()
         {
@@ -24,7 +24,7 @@ namespace Items
             GameObject obj = new GameObject(itemName);
 
             var item = obj.AddComponent<PoisonPoltergeist>();
-            obj.AddComponent<RiskParticles>();
+            //obj.AddComponent<RiskParticles>();
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
 
             string shortDesc = "Toxic Relationship";
@@ -32,7 +32,7 @@ namespace Items
             //prob just like make a sprite prefab that leaves a poison trail, like PJ, but poison and no contact damage
 
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
-            item.RiskToGive = 1;
+            //item.RiskToGive = 1;
             item.quality = ItemQuality.B;
             item.sprite.IsPerpendicular = true;
         }
