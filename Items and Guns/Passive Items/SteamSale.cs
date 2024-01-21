@@ -31,7 +31,7 @@ namespace Items
             string longDesc = "Halves shop prices, but is destroyed after 6 purchases.\n\n" +
                     "By holding this, you somehow feel worthless.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.GlobalPriceMultiplier, .5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
 

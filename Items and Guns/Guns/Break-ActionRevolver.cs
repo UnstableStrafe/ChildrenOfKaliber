@@ -20,7 +20,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Break-Action Revolver", "break-action_revolver");
-            Game.Items.Rename("outdated_gun_mods:break-action_revolver", "cel:break-action_revolver");
+            Game.Items.Rename("outdated_gun_mods:break-action_revolver", "ck:break-action_revolver");
             gun.gameObject.AddComponent<Break_ActionRevolver>();
             gun.SetShortDescription("Rust And Ruin");
             gun.SetLongDescription("A powerful break-action revolver. Hold <Dodge Roll> to bring up a selection of powerful abilities. Each ability needs to be recharged to be used again.\n\nThe Exhumed's signature revolver, powerful in its own right, but it takes a skilled gunslinger to bring out its full power.");

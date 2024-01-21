@@ -17,7 +17,7 @@
              string shortDesc = "";
              string longDesc = "";
 
-             ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+             ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
              item.quality = ItemQuality.EXCLUDED;
              item.sprite.IsPerpendicular = true;

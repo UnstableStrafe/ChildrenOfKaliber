@@ -17,7 +17,7 @@ namespace Items
         {
 
             Gun gun = ETGMod.Databases.Items.NewGun("The Last Chamber", "the_last_chamber");
-            Game.Items.Rename("outdated_gun_mods:the_last_chamber", "cel:the_last_chamber");
+            Game.Items.Rename("outdated_gun_mods:the_last_chamber", "ck:the_last_chamber");
             gun.gameObject.AddComponent<TheLastChamber>();
             gun.SetShortDescription("One More In The Chamber");
             gun.SetLongDescription("Kills anything in a single shot. Breaks after one shot. There is no way to prevent it breaking.\n\nA gun that once heavily-wounded Kaliber, destroying her seventh arm. In anger, she cursed the gun and its wielder, " +
@@ -237,7 +237,7 @@ namespace Items
             if (gun.CurrentOwner)
             {
 
-                if (gun.PreventNormalFireAudio)
+                if (!gun.PreventNormalFireAudio)
                 {
                     this.gun.PreventNormalFireAudio = true;
                 }

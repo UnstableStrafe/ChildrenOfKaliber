@@ -10,7 +10,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Dispenser", "dispenser");
-            Game.Items.Rename("outdated_gun_mods:dispenser", "cel:dispenser");
+            Game.Items.Rename("outdated_gun_mods:dispenser", "ck:dispenser");
             gun.gameObject.AddComponent<Dispenser>();
             gun.SetShortDescription("Click");
             gun.SetLongDescription("Originally designed for basic home security, thousands of engineers have discovered obscure uses for the humble dispenser.");
@@ -32,6 +32,7 @@ namespace Items
             gun.DefaultModule.angleVariance = 0f;
             gun.encounterTrackable.EncounterGuid = "dispenser";
             gun.sprite.IsPerpendicular = true;
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(12) as Gun).gunSwitchGroup;
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
@@ -52,10 +53,7 @@ namespace Items
             if (gun.CurrentOwner)
             {
 
-                if (gun.PreventNormalFireAudio)
-                {
-                    this.gun.PreventNormalFireAudio = true;
-                }
+                
                 if (!gun.IsReloading && !HasReloaded)
                 {
                     this.HasReloaded = true;
@@ -76,12 +74,7 @@ namespace Items
 
        
 
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_crossbow_shot_01", gameObject);
-        }
+        
 
 
         public Dispenser()

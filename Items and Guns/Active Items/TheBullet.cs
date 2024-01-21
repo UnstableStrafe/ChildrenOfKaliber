@@ -23,7 +23,7 @@ namespace Items
                 "By just being near it, your soul feels stronger.";
 
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 1.5f);
 

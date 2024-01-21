@@ -7,7 +7,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("D.E.A.T.H.", "d.e.a.t.h.");
-            Game.Items.Rename("outdated_gun_mods:d.e.a.t.h.", "cel:d.e.a.t.h.");
+            Game.Items.Rename("outdated_gun_mods:d.e.a.t.h.", "ck:d.e.a.t.h.");
             gun.gameObject.AddComponent<DEATHGun>();
             gun.SetShortDescription("This Army");
             gun.SetLongDescription("While held, summons three drones. Projectiles of the gun ignore the boss damage cap, but no those of the drones.\n\nDestructive Energized Automated Targeted Hellfire.");
@@ -32,7 +32,7 @@ namespace Items
             gun.muzzleFlashEffects = gun2.muzzleFlashEffects;
             gun.SetBaseMaxAmmo(500);
             gun.quality = PickupObject.ItemQuality.EXCLUDED;
-            gun.encounterTrackable.EncounterGuid = "If you are not Cel, reading this has permanently cursed you forever. Unless you are looking for the code about the drones. That's in HoveringGunsAdder.";
+            gun.encounterTrackable.EncounterGuid = "If you are not UnstableStrafe, reading this has permanently cursed you forever. Unless you are looking for the code about the drones. That's in HoveringGunsAdder.";
             gun.sprite.IsPerpendicular = true;
             gun.gunClass = GunClass.FULLAUTO;
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);

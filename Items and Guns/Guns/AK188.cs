@@ -9,7 +9,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("AK-188", "ak_188");
-            Game.Items.Rename("outdated_gun_mods:ak188", "cel:ak_188");
+            Game.Items.Rename("outdated_gun_mods:ak188", "ck:ak_188");
             gun.gameObject.AddComponent<AK188>();
             gun.SetShortDescription("No God Can Help You");
             gun.SetLongDescription("Good luck, kid.");
@@ -46,6 +46,7 @@ namespace Items
             projectile.baseData.force *= 1f;
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             AK188.AK188ID = gun.PickupObjectId;
+            gun.SetTag("kalashnikov");
         }
         public static int AK188ID;
         private bool HasReloaded;

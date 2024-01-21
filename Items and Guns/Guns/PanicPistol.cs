@@ -14,10 +14,10 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Panic Pistol", "panic_pistol");
-            Game.Items.Rename("outdated_gun_mods:panic_pistol", "cel:panic_pistol");
+            Game.Items.Rename("outdated_gun_mods:panic_pistol", "ck:panic_pistol");
             gun.gameObject.AddComponent<PanicPistol>();
             gun.SetShortDescription("Random BS, Go!");
-            gun.SetLongDescription("Has higher reload speed the more enemies are in a room.\n\nThe Pilot is never far from one of his sidearms as he is also never far from getting into a fight.");
+            gun.SetLongDescription("Reload speed is increased by 10% for each enemy in the room.\n\nThe Pilot is never far from one of his sidearms as he is also never far from getting into a fight.");
 
             gun.SetupSprite(null, "panic_pistol_idle_001", 8);
             gun.SetAnimationFPS(gun.shootAnimation, 10);
@@ -77,7 +77,7 @@ namespace Items
             PlayerController player = gun.CurrentOwner as PlayerController;
             enemies = player.CurrentRoom.GetActiveEnemiesCount(RoomHandler.ActiveEnemyType.RoomClear);
             if (enemies == lastEnemies || enemies == 0) return;
-            float boost = 1 - (enemies * .05f);
+            float boost = 1 - (enemies * .1f);
             gun.RemoveCurrentGunStatModifier(PlayerStats.StatType.ReloadSpeed);
             player.stats.RecalculateStats(player, false, false);
             gun.AddCurrentGunStatModifier(PlayerStats.StatType.ReloadSpeed, boost, StatModifier.ModifyMethod.MULTIPLICATIVE);

@@ -10,7 +10,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Incremental", "incremental");
-            Game.Items.Rename("outdated_gun_mods:incremental", "cel:incremental");
+            Game.Items.Rename("outdated_gun_mods:incremental", "ck:incremental");
             gun.gameObject.AddComponent<Incremental>();
             gun.SetShortDescription("Start Again");
             gun.SetLongDescription("Damage increases the further you are into your clip.\n\nMade by an explorer who liked keeping track of his magazine capacity in style. Ticking can be heard when the gun is idle.");

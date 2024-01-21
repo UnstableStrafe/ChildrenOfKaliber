@@ -14,7 +14,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Magnorbs", "magnorbs");
-            Game.Items.Rename("outdated_gun_mods:magnorbs", "cel:magnorbs");
+            Game.Items.Rename("outdated_gun_mods:magnorbs", "ck:magnorbs");
             gun.gameObject.AddComponent<Magnorbs>();
             gun.SetShortDescription("Magnets Are Fun");
             gun.SetLongDescription("Shoots magnetic orbs that boomerang back to the gun. Whenever an orb returns to the player, they regain ammo. Reloading the gun with full ammo creates a temporary shield.");

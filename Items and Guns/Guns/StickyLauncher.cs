@@ -13,7 +13,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Sticky Launcher", "sticky_launcher");
-            Game.Items.Rename("outdated_gun_mods:sticky_launcher", "cel:sticky_launcher");
+            Game.Items.Rename("outdated_gun_mods:sticky_launcher", "ck:sticky_launcher");
             gun.SetShortDescription("KA-BLOOIE!");
             gun.SetLongDescription("Shoots sticky bombs that detonate on reloading.\n\nA weathered sticky bomb launcher with the words \"Mann Co. Property\" written on the side.");
             gun.SetupSprite(null, "sticky_launcher_idle_001", 8);

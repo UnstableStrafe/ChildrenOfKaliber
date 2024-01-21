@@ -28,7 +28,7 @@ namespace Items
             string shortDesc = "Relics Of The Past";
             string longDesc = "Summons some projectiles from the past to aid you in the present.\n\nThe Pursued's temporal control tech, embeded into bullets.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.S;
             item.sprite.IsPerpendicular = true;

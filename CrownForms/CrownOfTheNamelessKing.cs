@@ -25,7 +25,7 @@ namespace Items
             string shortDesc = "Formless And Eternal";
             string longDesc = "A powerful crown for a king of a nameless land.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, .6f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

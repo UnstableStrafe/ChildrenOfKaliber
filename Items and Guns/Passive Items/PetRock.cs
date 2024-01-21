@@ -36,7 +36,7 @@ namespace Items
             string longDesc = "Gives one coolness and provides emotional support.\n\n" +
                     "For some reason, you know that you can trust this rock.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 3);
 

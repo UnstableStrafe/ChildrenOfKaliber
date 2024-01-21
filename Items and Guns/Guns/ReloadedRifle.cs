@@ -12,7 +12,7 @@ namespace Items
         {
             string shorthandName = "reloaded_rifle";
             Gun gun = ETGMod.Databases.Items.NewGun("Reloaded Rifle", shorthandName);
-            Game.Items.Rename("outdated_gun_mods:"+ shorthandName, "cel:"+shorthandName);
+            Game.Items.Rename("outdated_gun_mods:"+ shorthandName, "ck:"+shorthandName);
             var behav = gun.gameObject.AddComponent<ReloadedRifle>();
             gun.SetShortDescription("Of The Highest Quality");
             gun.SetLongDescription("Has multiple active reloads with different effects. If the first active reload is performed with an empty clip, the empty clip is thrown, stunning hit enemies.\n\nNothing is more satisfying, more sweet to a gunslinger than a crisp, fluid reload.");
@@ -46,10 +46,7 @@ namespace Items
             projectile.baseData.speed *= 1f;
             projectile.baseData.force *= 1f;            
             projectile.transform.parent = gun.barrelOffset;
-            ProjectileSlashingBehaviour projectileSlashing = projectile.gameObject.AddComponent<ProjectileSlashingBehaviour>();
-            SlashData data =  ScriptableObject.CreateInstance<SlashData>();
-            data.slashDegrees = 45;
-            projectileSlashing.slashParameters = data;
+            
 
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             itemID = gun.PickupObjectId;
@@ -76,7 +73,7 @@ namespace Items
 
         private bool HasReloaded;
         private bool AccReload = false, FireReload = false;
-        protected override void Update()
+        public override void Update()
         {
             if (gun.CurrentOwner)
             {

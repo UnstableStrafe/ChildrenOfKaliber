@@ -9,17 +9,49 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Auto Shotgun", "auto_shotgun");
-            Game.Items.Rename("outdated_gun_mods:auto_shotgun", "cel:auto_shotgun");
+            Game.Items.Rename("outdated_gun_mods:auto_shotgun", "ck:auto_shotgun");
             gun.gameObject.AddComponent<AutoShotgun>();
-            gun.SetShortDescription("Become Decease");
+            gun.SetShortDescription("It's Got A Barrel Clip!");
             gun.SetLongDescription("An automatic shotgun. Prefered by those who want the coverage of a shotgun paired with the speed of an assault rifle.");
             gun.SetupSprite(null, "auto_shotgun_idle_001", 8);
-            gun.SetAnimationFPS(gun.shootAnimation, 10);
+            gun.SetAnimationFPS(gun.shootAnimation, 14);
             gun.SetAnimationFPS(gun.reloadAnimation, 5);
-            for (int i = 0; i < 3; i++)
+
+            tk2dSpriteAnimationClip animationclipReload = gun.sprite.spriteAnimator.GetClipByName(gun.reloadAnimation);
+            float[] reloadOffsetsX = new float[] { -0.1250f, -0.1250f, -0.1250f, -0.1250f, -0.1250f, -0.1250f, -0.1250f, -0.1250f, -0.1250f, -0.1250f };
+            float[] reloadOffsetsY = new float[] { 0.1875f, 0.1875f, 0.1875f, 0.1875f, 0.1875f, 0.1250f, 0.1875f, 0.1875f, 0.1875f, 0.0000f };
+
+            tk2dSpriteAnimationClip animationclipShoot = gun.sprite.spriteAnimator.GetClipByName(gun.shootAnimation);
+            float[] shootOffsetsX = new float[] { 0.0000f, -0.3125f, -0.1250f, -0.1250f, 0.0000f };
+            float[] shootOffsetsY = new float[] { 0.0000f, 0.4375f, 0.3750f, 0.0625f, -0.0625f };
+
+            for (int i = 0; i < shootOffsetsX.Length && i < shootOffsetsY.Length && i < animationclipShoot.frames.Length; i++)
+            {
+                int id = animationclipShoot.frames[i].spriteId;
+                Vector3 vector3 = new Vector3(shootOffsetsX[i], shootOffsetsY[i]);
+                animationclipShoot.frames[i].spriteCollection.spriteDefinitions[id].position0 += vector3;
+                animationclipShoot.frames[i].spriteCollection.spriteDefinitions[id].position1 += vector3;
+                animationclipShoot.frames[i].spriteCollection.spriteDefinitions[id].position2 += vector3;
+                animationclipShoot.frames[i].spriteCollection.spriteDefinitions[id].position3 += vector3;
+            }
+
+            for (int i = 0; i < reloadOffsetsX.Length && i < reloadOffsetsY.Length && i < animationclipReload.frames.Length; i++)
+            {
+                int id = animationclipReload.frames[i].spriteId;
+                Vector3 vector3 = new Vector3(reloadOffsetsX[i], reloadOffsetsY[i]);
+                animationclipReload.frames[i].spriteCollection.spriteDefinitions[id].position0 += vector3;
+                animationclipReload.frames[i].spriteCollection.spriteDefinitions[id].position1 += vector3; 
+                animationclipReload.frames[i].spriteCollection.spriteDefinitions[id].position2 += vector3;  
+                animationclipReload.frames[i].spriteCollection.spriteDefinitions[id].position3 += vector3; 
+            }
+
+            
+            for (int i = 0; i < 4; i++)
             {
                 GunExt.AddProjectileModuleFrom(gun, "38_special");
             }
+
+            gun.barrelOffset.localPosition = new Vector3(2f, 0.5f, 0f);
             foreach (ProjectileModule projectileModule in gun.Volley.projectiles)
             {
                 projectileModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
@@ -53,7 +85,7 @@ namespace Items
             gun.Volley.DecreaseFinalSpeedPercentMin = -10f;
             gun.Volley.IncreaseFinalSpeedPercentMax = 10f;
             gun.SetBaseMaxAmmo(360);
-            
+            gun.usesContinuousFireAnimation = false;
             gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "fricc u spapi imma use guids all i want >:c";
             gun.sprite.IsPerpendicular = true;

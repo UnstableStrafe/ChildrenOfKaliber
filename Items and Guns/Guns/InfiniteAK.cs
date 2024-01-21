@@ -12,7 +12,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Infinite AK", "infinite_ak");
-            Game.Items.Rename("outdated_gun_mods:infinite_ak", "cel:infinite_ak");
+            Game.Items.Rename("outdated_gun_mods:infinite_ak", "ck:infinite_ak");
             gun.gameObject.AddComponent<InfiniteAK>();
             gun.SetShortDescription("Witness Perfection");
             gun.SetLongDescription("Perfect, brilliant. This gun might not be the strongest around, but it is the most refined. Every aspect of it is flawless. Each bullet it shoots is symmetrical and expertly crafted. Be grateful to witness such beauty.");
@@ -77,6 +77,7 @@ namespace Items
             
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             InfiniteAK.AKINFID = gun.PickupObjectId;
+            gun.SetTag("kalashnikov");
         }
         public static int AKINFID;
         private bool HasReloaded;

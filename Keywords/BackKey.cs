@@ -20,7 +20,7 @@ namespace Items.Keywords
             string shortDesc = "Monogun Keyword";
             string longDesc = "Gives The Monogun backshots.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.CanBeDropped = false;
             item.CanBeSold = false;

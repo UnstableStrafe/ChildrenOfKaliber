@@ -26,7 +26,7 @@ namespace Items
             string shortDesc = "Best Used Under Pressure";
             string longDesc = "Increases Risk by 1. Increases movement speed and slightly decreases reload speed per Risk point.\n\nThis slick hair gel makes the very air slide off of your body. It also makes it harder to reload bullets into your gun, but who really cares about that?";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.RiskToGive = 1;
             item.quality = ItemQuality.C;

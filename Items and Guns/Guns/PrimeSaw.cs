@@ -9,7 +9,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Prime Saw", "prime_saw");
-            Game.Items.Rename("outdated_gun_mods:prime_saw", "cel:prime_saw");
+            Game.Items.Rename("outdated_gun_mods:prime_saw", "ck:prime_saw");
             gun.gameObject.AddComponent<PrimeSaw>();
             gun.SetShortDescription("The Second Model");
             gun.SetLongDescription("Designed by a mechanic on a far away planet. These weapons were part of a mechanical skeleton meant to restore the damaged body of Cthulhu.");
@@ -58,10 +58,7 @@ namespace Items
                     LootEngine.GivePrefabToPlayer(ETGMod.Databases.Items["prime_vice"].gameObject, player);
                     HasGottenVice = true;
                 }
-                if (gun.PreventNormalFireAudio)
-                {
-                    this.gun.PreventNormalFireAudio = true;
-                }
+                
                 if (!gun.IsReloading && !HasReloaded)
                 {
                     this.HasReloaded = true;
@@ -82,12 +79,7 @@ namespace Items
 
 
 
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-
-            gun.PreventNormalFireAudio = true;
-            
-        }
+        
         public override void OnDropped()
         {
             base.OnDropped();

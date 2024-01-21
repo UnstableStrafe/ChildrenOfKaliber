@@ -9,7 +9,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Prime Laser", "prime_laser");
-            Game.Items.Rename("outdated_gun_mods:prime_laser", "cel:prime_laser");
+            Game.Items.Rename("outdated_gun_mods:prime_laser", "ck:prime_laser");
             gun.gameObject.AddComponent<PrimeLaser>();
             gun.SetShortDescription("Why are you reading this?");
             gun.SetLongDescription("Loser.");
@@ -77,13 +77,7 @@ namespace Items
 
 
 
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_crossbow_shot_01", gameObject);
-        }
-
+        
 
         public PrimeLaser()
         {

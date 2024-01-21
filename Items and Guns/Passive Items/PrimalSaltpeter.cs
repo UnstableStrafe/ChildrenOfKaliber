@@ -23,7 +23,7 @@ namespace Items
             string shortDesc = "Niter Is Cooler!";
             string longDesc = "Purifies non-boss enemy elemental resistances.\n\nOne of the first resources to ever be harvested in the Black Powder Mines.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.D;
             item.sprite.IsPerpendicular = true;

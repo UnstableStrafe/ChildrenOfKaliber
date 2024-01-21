@@ -20,7 +20,7 @@ namespace Items.Keywords
             string shortDesc = "Monogun Type";
             string longDesc = "Gives The Monogun Fire type.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.CanBeDropped = false;
             item.CanBeSold = false;

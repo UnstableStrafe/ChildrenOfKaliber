@@ -24,7 +24,7 @@ namespace Items
                 "These old, limited edition Gungeon-themed thumb tacks can be found in large quantities throughout the Gungeon's depths. They have become a favorite among Gundead, despite their lack of thumbs. " +
                 "Nobody knows why or how these bullets gained their arcane powers. Perhaps the Gungeon favors its own likeness...";
          
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
            
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, 2.5f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1);

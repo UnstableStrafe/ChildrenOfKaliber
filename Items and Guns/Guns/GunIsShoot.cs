@@ -12,7 +12,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("GUN is SHOOT", "gun_is_shoot");
-            Game.Items.Rename("outdated_gun_mods:gun_is_shoot", "cel:gun_is_shoot");
+            Game.Items.Rename("outdated_gun_mods:gun_is_shoot", "ck:gun_is_shoot");
             gun.gameObject.AddComponent<GunIsShoot>();
             gun.SetShortDescription("BULLET is DEFEAT");
             gun.SetLongDescription("The gun has 3 charge stages: the first picks a noun, the second picks a conjuction, and the third picks either a noun or a property. Reloading the gun fires projectiles made from the combination of the queued words, e.g. \"BULLET is HOT\"" +

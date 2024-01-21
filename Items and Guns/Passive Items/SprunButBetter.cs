@@ -27,7 +27,7 @@ namespace Items
 
             SprunButBetter sprun = sprunObject.GetComponent<SprunButBetter>();
             ItemBuilder.SetupItem(sprun, "The Way of Guns", "Transforms into a powerful weapon upon using a blank.\n\nThis Bullet Sprite will transform into an enormously powerful radiant energy weapon under certain circumstances." +
-                " Traditionally, this means showing proficiency in bridge delivery and maintenance. If no bridge is available, however, it will take less important things like courage or determination into consideration.", "cel");
+                " Traditionally, this means showing proficiency in bridge delivery and maintenance. If no bridge is available, however, it will take less important things like courage or determination into consideration.", "ck");
 
 
             sprun.itemName = "Sprun But Better";

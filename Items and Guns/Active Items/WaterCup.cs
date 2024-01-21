@@ -22,7 +22,7 @@ namespace Items
             string shortDesc = "Cracking Open A Cold Water";
             string longDesc = "On use, refills the current gun's clip and activates any 'on reload' effects. Charges are restored on purchasing an item, but only when out of charges. Increases coolness by 2 while held.\n\nSometimes in a firefight, all you need is a glass of cool water. Thankfully Bello has a steady supply.";
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 3, StatModifier.ModifyMethod.ADDITIVE);
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.A;
             item.sprite.IsPerpendicular = true;

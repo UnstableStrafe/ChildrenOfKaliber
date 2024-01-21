@@ -28,7 +28,7 @@ namespace Items
             string shortDesc = "The Whims of Fate";
             string longDesc = "On use takes 3 casings and gives either a good, bad, or nuetral outcome. Depending on the result, increases chance of getting inverse reward type. \n\nAn old roulette, faded and worn by years of use.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 1f);
 

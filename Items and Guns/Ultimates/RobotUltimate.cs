@@ -26,7 +26,7 @@ namespace Items
             string shortDesc = "StartCoroutine(DoubleMinigun);";
             string longDesc = "Temporarily dual wield two powerful miniguns for 6 seconds.\nHold <Switch Active Item Up> to bring up the selector for the ultimate. The ultimate ability will need to be recharged after use.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;
@@ -275,7 +275,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Robots Lesser Left Hand", "robots_lesser_left_hand");
-            Game.Items.Rename("outdated_gun_mods:robots_lesser_left_hand", "cel:robots_lesser_left_hand");
+            Game.Items.Rename("outdated_gun_mods:robots_lesser_left_hand", "ck:robots_lesser_left_hand");
             gun.gameObject.AddComponent<MiniUberbotHand>();
             gun.SetShortDescription("Adios");
             gun.SetLongDescription("Rapidly unloads powerful energy bullets.");

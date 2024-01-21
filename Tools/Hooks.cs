@@ -38,9 +38,9 @@ namespace Items
                     typeof(StringTableManager).GetMethod("GetSynergyString", BindingFlags.Static | BindingFlags.Public),
                     typeof(Hooks).GetMethod("SynergyStringHook")
                 );
-                Hook hook = new Hook(
+                /*Hook hook = new Hook(
                     typeof(PlayerController).GetProperty("CanDetectHiddenEnemies", BindingFlags.Public | BindingFlags.Instance).GetGetMethod(),
-                    typeof(Hooks).GetMethod("HiddenDetectionHook"));
+                    typeof(Hooks).GetMethod("HiddenDetectionHook"));*/
                // Hook gunSpawnHook = new Hook(typeof(LootEngine).GetMethod("PostprocessGunSpawn", BindingFlags.Static | BindingFlags.NonPublic), typeof(Hooks).GetMethod("HandleGunModHook"));
                 Hook activeUseHook = new Hook(typeof(PlayerController).GetMethod("UseItem", BindingFlags.Instance | BindingFlags.NonPublic), typeof(Hooks).GetMethod("OnUsedActiveHook"));
                 
@@ -76,10 +76,12 @@ namespace Items
                 }
             }
         }
+        /*
         public static bool HiddenDetectionHook(Func<PlayerController, bool> orig, PlayerController self)
         {
             return orig(self) || self.HasPickupID(ETGMod.Databases.Items["Eyes Of Stone"].PickupObjectId);
         }
+        */
         public static void HandleGunModHook(Action< Gun> orig, Gun gun)
         {
             gun.gameObject.SetActive(true);
@@ -134,13 +136,14 @@ namespace Items
             RGG.RandomizeStats();
             Replacement.RunReplace(m_cachedReplacementTiers);
             PrimeSaw.HasGottenVice = false;
-            ChestReplacementHooks.amountPerRun = 0;
+
             //CrownChanger.Change();
         }
 
 
         public static void HardmodeTweaks()
         {
+            /*
             Gun Gunther = PickupObjectDatabase.GetById(338) as Gun;
             Gunther.quality = PickupObject.ItemQuality.EXCLUDED;
             Gun BSG = PickupObjectDatabase.GetById(21) as Gun;
@@ -153,7 +156,7 @@ namespace Items
             Gunderfury.quality = PickupObject.ItemQuality.EXCLUDED;
             PlayerItem WeirdEgg = PickupObjectDatabase.GetById(637) as PlayerItem;
             WeirdEgg.quality = PickupObject.ItemQuality.EXCLUDED;
-
+            */
         }
         private static void AffectEnemy(AIActor target)
         {
@@ -192,16 +195,18 @@ namespace Items
             RGG.RandomizeStats();
             Replacement.RunReplace(m_cachedReplacementTiers);      
             PrimeSaw.HasGottenVice = false;
-            ChestReplacementHooks.amountPerRun = 0;
+
             //CrownChanger.Change();
         }
         public static void BuffGuns()
         {
+            /*
             Gun GildedHydra = PickupObjectDatabase.GetById(231) as Gun;
             GildedHydra.SetBaseMaxAmmo(120);
             GildedHydra.reloadTime = 1.6f;
             GildedHydra.ammo = 120;
             GildedHydra.DefaultModule.numberOfShotsInClip = 3;
+            */
         }
 
         public static int GetID(string console_id)

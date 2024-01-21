@@ -27,7 +27,7 @@ namespace Items
             string shortDesc = "YIP YIP YIP YIP YIP YIP";
             string longDesc = "Summons a horde of wolves to attack enemies for 10 seconds.\nHold <Switch Active Item Up> to bring up the selector for the ultimate. The ultimate ability will need to be recharged after use.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

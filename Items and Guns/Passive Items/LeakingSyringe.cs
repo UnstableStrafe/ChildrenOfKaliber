@@ -22,7 +22,7 @@ namespace Items
             string shortDesc = "Power Not-So-Eternal";
             string longDesc = "Gives a massive damage up, but killing enemies reduces damage until the boost is lost.\n\nInfused with the power of a thousand bullet kin. Unfortunately, due to the laws of conservation of energy, each time the power is used, some is lost as slippage.\nBe careful not to drop.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.B;
             item.sprite.IsPerpendicular = true;

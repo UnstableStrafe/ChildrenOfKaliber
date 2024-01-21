@@ -24,7 +24,7 @@ namespace Items
                 "From the corpse of one of Bullet Hell's denizens, this horn still retains some of its magical energy.";
 
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
 
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1);

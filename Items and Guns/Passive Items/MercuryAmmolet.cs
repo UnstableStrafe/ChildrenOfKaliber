@@ -20,7 +20,7 @@ namespace Items
             string shortDesc = "The Liquid Metal";
             string longDesc = "Blanks create a pool of venomous goop. Gives one extra blank per floor.\n\nMercury is commonly known for its cannibalistic appetite for other metals. If only there were creatures made of metal in the Gungeon...";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1, StatModifier.ModifyMethod.ADDITIVE);
 
             item.quality = ItemQuality.B;

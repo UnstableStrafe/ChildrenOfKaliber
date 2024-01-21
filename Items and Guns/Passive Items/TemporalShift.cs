@@ -27,7 +27,7 @@ namespace Items
             string shortDesc = "Going Ghost";
             string longDesc = "Adds a chance to dodge enemy attacks. After dodging, gain an increased rate of fire for a short time.\n\nMade by the Pursued, this gadget allows them to briefly swap places with a version of themselves that hadn't been harmed in the event of an emergency. The shift in timelines allows them to use any projectiles the other one had shot for a short time.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.D;
             item.sprite.IsPerpendicular = true;
@@ -57,7 +57,8 @@ namespace Items
 
 		public override void OnDestroy()
 		{
-			base.Owner.healthHaver.ModifyDamage -= this.PreventDamage;
+            if(Owner != null) { base.Owner.healthHaver.ModifyDamage -= this.PreventDamage; }
+			
 			base.OnDestroy();
 		}
 

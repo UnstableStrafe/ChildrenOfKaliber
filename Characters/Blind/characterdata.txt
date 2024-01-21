@@ -1,0 +1,54 @@
+base: Convict
+name short: Blind
+name: The Blind
+
+nickname The Blind
+
+armor: 0
+
+<loadout>
+	ck:psi_scale infinite
+	ck:psi_focus
+
+</loadout>
+
+<altGuns>
+	ck:psi_scale infinite
+</altGuns>
+
+
+<stats>
+
+Accuracy: 1
+AdditionalBlanksPerFloor: 0
+AdditionalClipCapacityMultiplier: 1
+AdditionalGunCapacity: 0
+AdditionalItemCapacity: 0
+AdditionalShotBounces: 0
+AdditionalShotPiercing: 0
+AmmoCapacityMultiplier: 1
+ChargeAmountMultiplier: 1
+Coolness: 0
+Curse: 0
+Damage: 1
+DamageToBosses: 1
+DodgeRollDamage: 1
+DodgeRollDistanceMultiplier: 1
+DodgeRollSpeedMultiplier: 1
+EnemyProjectileSpeedMultiplier: 1
+ExtremeShadowBulletChance: 0
+GlobalPriceMultiplier: 1
+Health: 3
+KnockbackMultiplier: 1
+MoneyMultiplierFromEnemies: 1
+MovementSpeed: 7
+PlayerBulletScale: 1
+ProjectileSpeed: 1
+RangeMultiplier: 1
+RateOfFire: 1
+ReloadSpeed: 1
+ShadowBulletChance: 0
+TarnisherClipCapacityMultiplier: 1
+ThrownGunDamage: 1
+
+</stats>

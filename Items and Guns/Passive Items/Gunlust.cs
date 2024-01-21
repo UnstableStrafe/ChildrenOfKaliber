@@ -23,7 +23,7 @@ namespace Items
             string longDesc = "Killing enemies increases damage up to +15%. Taking damage reduces the boost. Going to a new floor resets the boost. Gives 1.5 curse" +
                 "\n\nA representation of the Tracker's bloodlust, given form by the Gungeon.";
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1.5f, StatModifier.ModifyMethod.ADDITIVE);
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = PickupObject.ItemQuality.D;
             item.sprite.IsPerpendicular = true;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);

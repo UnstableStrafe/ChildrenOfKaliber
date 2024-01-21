@@ -26,7 +26,7 @@ namespace Items
             string shortDesc = "Testing";
             string longDesc = "Targets the enemy in range with the most nearby enemies.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

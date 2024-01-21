@@ -35,9 +35,7 @@ namespace Items
                 SpriteBuilder.SpriteFromResource("Items/Resources/MunitionsChest/munitions_chest_idle_001", obj);
                 tk2dSprite sprite = obj.GetComponent<tk2dSprite>();
                 sprite.HeightOffGround = -1;
-                SpeculativeRigidbody body = sprite.SetUpSpeculativeRigidbody(new IntVector2(0, -8), new IntVector2(25, 25));
-                body.PrimaryPixelCollider.CollisionLayer = CollisionLayer.HighObstacle;
-                Library.GenerateOrAddToRigidBody(obj, CollisionLayer.HighObstacle);
+                
                 tk2dSpriteAnimator animator = obj.AddComponent<tk2dSpriteAnimator>();
                 animator.Library = animator.gameObject.AddComponent<tk2dSpriteAnimation>();
                 animator.Library.clips = new tk2dSpriteAnimationClip[0];
@@ -179,6 +177,66 @@ namespace Items
                     keys = new Keyframe[] { new Keyframe { time = 0f, value = 0f, inTangent = 3.562501f, outTangent = 3.562501f }, new Keyframe { time = 1f, value = 1.0125f, inTangent = 0.09380959f,
                 outTangent = 0.09380959f } }
                 };
+                SpeculativeRigidbody body = sprite.SetUpSpeculativeRigidbody(new IntVector2(0, -8), new IntVector2(25, 25));
+                body.PixelColliders.Clear();
+                body.PixelColliders.Add(new PixelCollider
+                {
+                    ColliderGenerationMode = PixelCollider.PixelColliderGeneration.Manual,
+                    CollisionLayer = CollisionLayer.HighObstacle,
+                    IsTrigger = false,
+                    BagleUseFirstFrameOnly = false,
+                    SpecifyBagelFrame = string.Empty,
+                    BagelColliderNumber = 0,
+                    ManualOffsetX = 0,
+                    ManualOffsetY = -8,
+                    ManualWidth = 25,
+                    ManualHeight = 25,
+                    ManualDiameter = 0,
+                    ManualLeftX = 0,
+                    ManualLeftY = 0,
+                    ManualRightX = 0,
+                    ManualRightY = 0,
+
+                });
+                body.PixelColliders.Add(new PixelCollider
+                {
+                    ColliderGenerationMode = PixelCollider.PixelColliderGeneration.Manual,
+                    CollisionLayer = CollisionLayer.PlayerBlocker,
+                    IsTrigger = false,
+                    BagleUseFirstFrameOnly = false,
+                    SpecifyBagelFrame = string.Empty,
+                    BagelColliderNumber = 0,
+                    ManualOffsetX = 0,
+                    ManualOffsetY = -8,
+                    ManualWidth = 25,
+                    ManualHeight = 25,
+                    ManualDiameter = 0,
+                    ManualLeftX = 0,
+                    ManualLeftY = 0,
+                    ManualRightX = 0,
+                    ManualRightY = 0,
+
+                });
+                body.PixelColliders.Add(new PixelCollider
+                {
+                    ColliderGenerationMode = PixelCollider.PixelColliderGeneration.Manual,
+                    CollisionLayer = CollisionLayer.BulletBlocker,
+                    IsTrigger = false,
+                    BagleUseFirstFrameOnly = false,
+                    SpecifyBagelFrame = string.Empty,
+                    BagelColliderNumber = 0,
+                    ManualOffsetX = 0,
+                    ManualOffsetY = -8,
+                    ManualWidth = 25,
+                    ManualHeight = 25,
+                    ManualDiameter = 0,
+                    ManualLeftX = 0,
+                    ManualLeftY = 0,
+                    ManualRightX = 0,
+                    ManualRightY = 0,
+
+                });
+                body.CollideWithOthers = true;
                 List<int> items = new List<int>
                 {
                     //Base Game
@@ -241,6 +299,7 @@ namespace Items
                     //Items with "Rounds" in the name
                     ETGMod.Databases.Items["Venom Rounds"].PickupObjectId,
                     ETGMod.Databases.Items["Ballistic Rounds"].PickupObjectId,
+                    ETGMod.Databases.Items["Temporal Rounds"].PickupObjectId,
                     //Misc Item names
                     ETGMod.Databases.Items["Imp's Horn"].PickupObjectId,
                     ETGMod.Databases.Items["Sawblade"].PickupObjectId,

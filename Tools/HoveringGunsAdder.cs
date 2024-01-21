@@ -6,7 +6,7 @@ namespace Items
     {
         public static void AddHovers()
         {
-            AdvancedHoveringGunProcessor PrimeSawHover = ETGMod.Databases.Items["prime_saw"].gameObject.AddComponent<AdvancedHoveringGunProcessor>();
+            /*AdvancedHoveringGunProcessor PrimeSawHover = ETGMod.Databases.Items["prime_saw"].gameObject.AddComponent<AdvancedHoveringGunProcessor>();
             PrimeSawHover.Activate = true;
             PrimeSawHover.ConsumesTargetGunAmmo = false;
             PrimeSawHover.AimType = HoveringGunController.AimType.PLAYER_AIM;
@@ -26,6 +26,7 @@ namespace Items
             PrimeViceHover.TargetGunID = ETGMod.Databases.Items["prime_cannon"].PickupObjectId;
             PrimeViceHover.FireCooldown = .6f;
             PrimeViceHover.FireDuration = 0;
+            */
             AdvancedHoveringGunProcessor DroneHover = ETGMod.Databases.Items["drone_controller"].gameObject.AddComponent<AdvancedHoveringGunProcessor>();
             DroneHover.Activate = true;
             DroneHover.ConsumesTargetGunAmmo = false;

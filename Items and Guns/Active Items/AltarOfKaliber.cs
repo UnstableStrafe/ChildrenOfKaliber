@@ -19,7 +19,7 @@ namespace Items
             string shortDesc = "The Goddess Of Guns";
             string longDesc = "";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 1);
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

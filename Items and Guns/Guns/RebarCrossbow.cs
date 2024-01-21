@@ -13,7 +13,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Rebar Crossbow", "rebar_crossbow");
-            Game.Items.Rename("outdated_gun_mods:rebar_crossbow", "cel:rebar_crossbow");
+            Game.Items.Rename("outdated_gun_mods:rebar_crossbow", "ck:rebar_crossbow");
             gun.gameObject.AddComponent<RebarCrossbow>();
             gun.SetShortDescription("Click");
             gun.SetLongDescription("Originally designed for basic home security, thousands of engineers have discovered obscure uses for the humble dispenser.");

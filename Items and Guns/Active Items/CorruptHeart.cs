@@ -24,7 +24,7 @@ namespace Items
             string shortDesc = "Beat of Death";
             string longDesc = "Deals moderate damage to all enemies in the room. \n\nBa-dum... ba-dum... ba-dum... ba-dum.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 10f);
 
@@ -41,8 +41,9 @@ namespace Items
             AkSoundEngine.PostEvent("Play_WPN_seriouscannon_shot_01", base.gameObject);
             EnemyListing(user);
             player = user;
-            DebugLogging();
+
             
+
         }
        
         private void DebugLogging()            

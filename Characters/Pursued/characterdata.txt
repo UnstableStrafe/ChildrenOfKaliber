@@ -7,13 +7,13 @@ nickname The Pursued
 armor: 0
 
 <loadout>
-	cel:phantom_pistol infinite
-	cel:temporal_shift
-	cel:phase_burst
+	ck:phantom_pistol infinite
+	ck:temporal_shift
+	ck:phase_burst
 </loadout>
 
 <altGuns>
-	cel:phantom_pistol infinite
+	ck:phantom_pistol infinite
 </altGuns>
 
 <stats>

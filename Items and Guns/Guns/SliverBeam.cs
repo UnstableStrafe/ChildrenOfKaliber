@@ -14,7 +14,7 @@ namespace Items
         {
 
             Gun gun = ETGMod.Databases.Items.NewGun("Sliver Beam", "sliver_beam");
-            Game.Items.Rename("outdated_gun_mods:sliver_beam", "cel:sliver_beam");
+            Game.Items.Rename("outdated_gun_mods:sliver_beam", "ck:sliver_beam");
             var behav = gun.gameObject.AddComponent<SliverBeam>();
             behav.overrideNormalFireAudio = "Play_ENM_shelleton_beam_01";
             behav.preventNormalFireAudio = true;

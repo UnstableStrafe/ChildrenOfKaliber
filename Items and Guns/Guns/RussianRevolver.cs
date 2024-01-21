@@ -14,7 +14,7 @@ namespace Items
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Russian Revolver", "russian_revolver");
             RussianRevolv = gun;
-            Game.Items.Rename("outdated_gun_mods:russian_revolver", "cel:russian_revolver");
+            Game.Items.Rename("outdated_gun_mods:russian_revolver", "ck:russian_revolver");
 
             //WORK ON RISK MECHANIC IDEA DUMBASS
 

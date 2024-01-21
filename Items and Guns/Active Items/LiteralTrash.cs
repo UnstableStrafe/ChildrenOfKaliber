@@ -43,7 +43,7 @@ namespace Items                                                                 
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj)              ;
             string shortDesc = "Test Des " + "cription."                            ;
             string longDesc = "Test Item. \n\n"                                     ;
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel")                 ;
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck")                 ;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 10f)  ;
             item.consumable = false                                                 ;
             item.quality = ItemQuality.EXCLUDED                                     ;

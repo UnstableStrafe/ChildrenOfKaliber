@@ -161,7 +161,7 @@ namespace Items
 						MaxActiveRange = 0f
 					}
 				};
-				Game.Enemies.Add("cel:terroranchula", enemy.aiActor);
+				Game.Enemies.Add("ck:terroranchula", enemy.aiActor);
 
 				StaticReferenceManager.AllHealthHavers.Remove(enemy.aiActor.healthHaver);
 				ETGModConsole.Log("Test4");

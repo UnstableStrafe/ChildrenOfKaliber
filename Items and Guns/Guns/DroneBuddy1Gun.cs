@@ -7,7 +7,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Little Drone", "little_drone");
-            Game.Items.Rename("outdated_gun_mods:little_drone", "cel:little_drone");
+            Game.Items.Rename("outdated_gun_mods:little_drone", "ck:little_drone");
             gun.gameObject.AddComponent<DroneBuddy1Gun>();
             gun.SetShortDescription("fswwawdw");
             gun.SetLongDescription("wsdfeesadwdasdwda.");

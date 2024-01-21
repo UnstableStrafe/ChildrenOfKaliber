@@ -29,7 +29,7 @@ namespace Items
             string shortDesc = "Bet Ges Aln";
             string longDesc = "On use, converts 5 nearby enemy projectiles into friendly projectiles and sends them towards the nearest enemy. The amount of projectiles that can be converted scales based on ammo capacity and clip size. When in great stress, the capacity is doubled.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 7f);
 
@@ -147,7 +147,7 @@ namespace Items
         
 
 
-        private float range = 25;
+        private float range = 35;
 
     }
     

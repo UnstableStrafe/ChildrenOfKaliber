@@ -24,7 +24,7 @@ namespace Items
             string shortDesc = "Full of Secrets";
             string longDesc = "Adds a chance to fire an additional projectile from ANY non-beam gun with each shot.\n\nA mini version of the Ammonomicon, used as a keychain decoration by gungeoneers.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = PickupObject.ItemQuality.A;
             item.sprite.IsPerpendicular = true;
             item.AddToSubShop(ItemBuilder.ShopType.Cursula);

@@ -30,7 +30,7 @@ namespace Items
             string longDesc = "Hitting an enemy deals extra damage equal to half of the original damage, evenly split to all other enemies of the same type in the room. If there is only one other enemy of the same type in the room, the extra damage on them is 25% instead of 50%." +
                 "\n\nEach of these bullets has intricate sygaldry which creates sympathetic links between any targets identical to the original target, causing pain to be shared between them. It is unknown where the energy to cause the extra damage comes from.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.S;
             item.sprite.IsPerpendicular = true;

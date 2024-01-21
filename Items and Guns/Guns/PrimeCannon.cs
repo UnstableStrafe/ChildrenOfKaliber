@@ -9,7 +9,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Prime Cannon", "prime_cannon");
-            Game.Items.Rename("outdated_gun_mods:prime_cannon", "cel:prime_cannon");
+            Game.Items.Rename("outdated_gun_mods:prime_cannon", "ck:prime_cannon");
             gun.gameObject.AddComponent<PrimeCannon>();
             gun.SetShortDescription("Leedle");
             gun.SetLongDescription("u-u");

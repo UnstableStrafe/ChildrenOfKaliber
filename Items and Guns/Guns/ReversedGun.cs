@@ -13,7 +13,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Reversed Gun", "reversed_gun");
-            Game.Items.Rename("outdated_gun_mods:reversed_gun", "cel:reversed_gun");
+            Game.Items.Rename("outdated_gun_mods:reversed_gun", "ck:reversed_gun");
             gun.gameObject.AddComponent<ReversedGun>();
             gun.SetShortDescription("Not How It's Supposed To Work");
             gun.SetLongDescription("Fires in reverse.\n\nYet another example of how time in The Gungeon is less like a linear path and more like a jumbled mess of chaos.");

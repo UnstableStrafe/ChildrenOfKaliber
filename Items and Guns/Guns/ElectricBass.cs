@@ -14,7 +14,7 @@ namespace Items
         {
 
             Gun gun = ETGMod.Databases.Items.NewGun("Electric Bass", "electric_bass");
-            Game.Items.Rename("outdated_gun_mods:electric_bass", "cel:electric_bass");
+            Game.Items.Rename("outdated_gun_mods:electric_bass", "ck:electric_bass");
             gun.gameObject.AddComponent<ElectricBass>();
             gun.SetShortDescription("Atom And Evil");
             gun.SetLongDescription("Creates an eletric AoE instead of shooting projectiles.\n\nA guitar imbued with the power of heavy metal music.");

@@ -14,7 +14,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Pray-k 47", "pray-k_47");
-            Game.Items.Rename("outdated_gun_mods:prayk_47", "cel:pray_k_47");
+            Game.Items.Rename("outdated_gun_mods:prayk_47", "ck:pray_k_47");
             gun.gameObject.AddComponent<Pray_K47>();
             gun.SetShortDescription("Pray While Shooting");
             gun.SetLongDescription("Deals 20% bonus damage to jammed enemies.\n\nA gun blessed by the Holy Pope Raffles III. For some reason, this affects the Jammed, despite them being from an entirely different religion.");
@@ -52,6 +52,7 @@ namespace Items
             //projectile.SetProjectileSpriteRight("projectile_sprite", 9, 5); // if using a custom projectile sprite
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             Id = gun.PickupObjectId;
+            gun.SetTag("kalashnikov");
         }
 
         private bool HasReloaded;

@@ -28,10 +28,10 @@ namespace Items
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
 
             string shortDesc = "Toxic Relationship";
-            string longDesc = "Gives a chance to inflict poison on enemies based on your Risk, but makes a poisonous spectre hunt you down. The spectre gains speed based on your Risk.\n\nThis devious little spectre enjoys making mischief around the Gungeon."; 
+            string longDesc = "Gives a high chance to inflict poison on enemies, but makes a poisonous spectre hunt you down.\n\nThis devious little spectre enjoys making mischief around the Gungeon."; 
             //prob just like make a sprite prefab that leaves a poison trail, like PJ, but poison and no contact damage
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             //item.RiskToGive = 1;
             item.quality = ItemQuality.B;
             item.sprite.IsPerpendicular = true;
@@ -83,7 +83,7 @@ namespace Items
         {
             GameActorHealthEffect effect = (PickupObjectDatabase.GetById(204) as BulletStatusEffectItem).HealthModifierEffect;
             //effect.DamagePerSecondToEnemies *= (Mathf.Clamp((Owner.gameObject.GetOrAddComponent<RiskStat>().RiskAMT * .3f) + 1, 1, 2.5f));
-            float chance = Mathf.Clamp(Owner.gameObject.GetOrAddComponent<RiskStat>().RiskAMT * .3f, .3f, 1f);
+            float chance = .70f;
             if(UnityEngine.Random.value <= chance)
             {
                 proj.AppliesPoison = true;

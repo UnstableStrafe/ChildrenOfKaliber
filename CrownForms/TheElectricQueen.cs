@@ -23,7 +23,7 @@ namespace Items
             string shortDesc = "Funeral Pyre";
             string longDesc = "Dealing damage periodically unleashes powerful electric attacks. Grants electricity immunity.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

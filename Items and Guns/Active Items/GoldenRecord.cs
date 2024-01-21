@@ -33,7 +33,7 @@ namespace Items
 
 
             //Find out how to code read/write to a file.
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalItemCapacity, 1);
             item.quality = ItemQuality.S;
             item.sprite.IsPerpendicular = true;

@@ -24,7 +24,7 @@ namespace Items
             string longDesc = "Chance to shoot a sawblade with each shot.\n\n.These sawblades hunger for brutality. Whoever owned them last put them to use quite well.";
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1, StatModifier.ModifyMethod.ADDITIVE);
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = PickupObject.ItemQuality.B;
             item.sprite.IsPerpendicular = true;
 
@@ -51,7 +51,7 @@ namespace Items
                     if (Owner.PlayerHasActiveSynergy("Bleeding Edge"))
                     {
                         GameActorHealthEffect bleed = (PickupObjectDatabase.GetById(204) as BulletStatusEffectItem).HealthModifierEffect;
-                        bleed.effectIdentifier = "Cel sawblade bleed";
+                        bleed.effectIdentifier = "CK sawblade bleed";
                         bleed.resistanceType = EffectResistanceType.None;
                         bleed.TintColor = new Color(201, 0, 0, .25f);
                         component.healthEffect = bleed;
@@ -83,7 +83,7 @@ namespace Items
                     if (Owner.PlayerHasActiveSynergy("Bleeding Edge"))
                     {
                         GameActorHealthEffect bleed = (PickupObjectDatabase.GetById(204) as BulletStatusEffectItem).HealthModifierEffect;
-                        bleed.effectIdentifier = "Cel sawblade bleed";
+                        bleed.effectIdentifier = "CK sawblade bleed";
                         bleed.resistanceType = EffectResistanceType.None;
                         bleed.TintColor = new Color(201, 0, 0, .25f);
                         component.healthEffect = bleed;

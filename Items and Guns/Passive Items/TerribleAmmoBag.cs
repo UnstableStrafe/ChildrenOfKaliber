@@ -24,7 +24,7 @@ namespace Items
 
 
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = PickupObject.ItemQuality.D;
             item.sprite.IsPerpendicular = true;
             item.AddToSubShop(ItemBuilder.ShopType.Trorc);

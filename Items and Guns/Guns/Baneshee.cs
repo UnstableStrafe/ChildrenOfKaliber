@@ -15,7 +15,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Baneshee", "baneshee");
-            Game.Items.Rename("outdated_gun_mods:baneshee", "cel:baneshee");
+            Game.Items.Rename("outdated_gun_mods:baneshee", "ck:baneshee");
             gun.gameObject.AddComponent<Baneshee>();
             gun.SetShortDescription("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             gun.SetLongDescription("A powerful gun with an equally devastating curse.");

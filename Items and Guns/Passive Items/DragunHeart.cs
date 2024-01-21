@@ -21,7 +21,7 @@ namespace Items
             string longDesc = "Increases health. Taking damage creates of pool of flaming oil. Gives fire immunity.\n\nThis Dragun heart feels warm in your hands, despite no longer beating." +
                 "\n\nWhen the Dragun champion killed the Past, thereby preventing the death of his homeworld, he was mortified to find that the event occured regardless of if he intervened. He tried over and over to no avail.";
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Health, 1f, StatModifier.ModifyMethod.ADDITIVE);
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.C;
             item.sprite.IsPerpendicular = true;

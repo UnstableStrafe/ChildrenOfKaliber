@@ -13,7 +13,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Hitscanner", "hitscanner");
-            Game.Items.Rename("outdated_gun_mods:hitscanner", "cel:hitscanner");
+            Game.Items.Rename("outdated_gun_mods:hitscanner", "ck:hitscanner");
             gun.gameObject.AddComponent<Hitscanner>();
             gun.SetShortDescription("Click");
             gun.SetLongDescription("test");

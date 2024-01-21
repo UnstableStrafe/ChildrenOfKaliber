@@ -16,17 +16,32 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Vacuum", "vacuum");
-            Game.Items.Rename("outdated_gun_mods:vacuum", "cel:vacuum");
+            Game.Items.Rename("outdated_gun_mods:vacuum", "ck:vacuum");
             gun.gameObject.AddComponent<Vacuum>();
             gun.SetShortDescription("Bullet's Mansion");
-            gun.SetLongDescription("Sucks enemies towards the player. Weakened enemies that get too close are sucked up into the vacuum chamber.\n\nThis hardware store vacuum has been outfitted with a \"Hyper\" mode that can suck up gundead with the same power as dust bunnies.");
+            gun.SetLongDescription("Sucks enemies towards the player. Enemies with low HP that get too close are sucked up into the vacuum chamber.\n\nThis hardware store vacuum has been outfitted with a \"Hyper\" mode that can suck up even the strongest of Gundead.");
             gun.SetupSprite(null, "vacuum_idle_001", 8);
-            gun.SetAnimationFPS(gun.shootAnimation, 4);
-            gun.SetAnimationFPS(gun.reloadAnimation, 2);
+            gun.SetAnimationFPS(gun.shootAnimation, 14);
+            gun.SetAnimationFPS(gun.reloadAnimation, 8);
+            tk2dSpriteAnimationClip animationclipReload = gun.sprite.spriteAnimator.GetClipByName(gun.reloadAnimation);
+            float[] reloadOffsetsX = new float[] { 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f, 0.0000f };
+            float[] reloadOffsetsY = new float[] { 0.0000f, -0.3125f, -0.3125f, -0.3125f, -0.3125f, -0.3125f, -0.3125f, -0.3125f, -0.3125f, -0.3125f, -0.3125f, 0.0000f };
+
+            for (int i = 0; i < reloadOffsetsX.Length && i < reloadOffsetsY.Length && i < animationclipReload.frames.Length; i++)
+            {
+                int id = animationclipReload.frames[i].spriteId;
+                Vector3 vector3 = new Vector3(reloadOffsetsX[i], reloadOffsetsY[i]);
+                animationclipReload.frames[i].spriteCollection.spriteDefinitions[id].position0 += vector3;
+                animationclipReload.frames[i].spriteCollection.spriteDefinitions[id].position1 += vector3;
+                animationclipReload.frames[i].spriteCollection.spriteDefinitions[id].position2 += vector3;
+                animationclipReload.frames[i].spriteCollection.spriteDefinitions[id].position3 += vector3;
+            }
+
             for (int i = 0; i < 3; i++)
             {
                 GunExt.AddProjectileModuleFrom(gun, "ak-47");
             }
+            gun.barrelOffset.localPosition = new Vector3(1.8125f, 0.34375f, 0f);
             foreach (ProjectileModule projectileModule in gun.Volley.projectiles)
             {
                 projectileModule.ammoType = GameUIAmmoType.AmmoType.SMALL_BULLET;
@@ -34,7 +49,7 @@ namespace Items
                 projectileModule.shootStyle = ProjectileModule.ShootStyle.Automatic;
                 projectileModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
                 projectileModule.angleVariance = 35f;
-                projectileModule.cooldownTime = .025f;
+                projectileModule.cooldownTime = .035f;
                 projectileModule.numberOfShotsInClip = 240;
                 Projectile projectile = Library.CopyFields<RandomMidAirTachyon>(UnityEngine.Object.Instantiate(projectileModule.projectiles[0]));
                 projectile.gameObject.SetActive(false);
@@ -50,7 +65,6 @@ namespace Items
                 projectile.hitEffects.suppressMidairDeathVfx = true;
                 projectile.hitEffects.HasProjectileDeathVFX = true;
                 projectile.shouldRotate = true;
-                gun.PreventNormalFireAudio = true;
                 ProjectileSpeedChange speedMod = projectile.gameObject.AddComponent<ProjectileSpeedChange>();
                 speedMod.incrementRate = .10f;
 
@@ -65,13 +79,14 @@ namespace Items
                 }
             }            
             gun.reloadTime = 1.5f;
-           
+
             //gun.muzzleFlashEffects = VFXLibrary.CreateMuzzleflash("succ", new List<string> { "lebigsucc_001", "lebigsucc_002", "lebigsucc_003", "lebigsucc_004" }, 10, new List<IntVector2> { new IntVector2(27,20), new IntVector2(27, 20), new IntVector2(27, 20), new IntVector2(27, 20), }, new List<tk2dBaseSprite.Anchor> {
             //    tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft, tk2dBaseSprite.Anchor.MiddleLeft}, new List<Vector2> { Vector2.zero, Vector2.zero, Vector2.zero, Vector2.zero, }, false, false, false, false, 0, VFXAlignment.Fixed, true, new List<float> { 0, 0, 0, 0 }, new List<Color> { VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor, VFXLibrary.emptyColor, });
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(520) as Gun).gunSwitchGroup;
             gun.muzzleFlashEffects.type = VFXPoolType.None;
             gun.SetBaseMaxAmmo(1200);
             gun.ammo = 1200;
-            gun.barrelOffset.transform.localPosition = new Vector3(1.75f, .075f, 0f);
+            gun.barrelOffset.transform.localPosition = new Vector3(2f, .075f, 0f);
             gun.quality = PickupObject.ItemQuality.D;
             gun.encounterTrackable.EncounterGuid = "vrooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooom";
             gun.sprite.IsPerpendicular = true;
@@ -87,10 +102,7 @@ namespace Items
             if (gun.CurrentOwner)
             {
 
-                if (gun.PreventNormalFireAudio)
-                {
-                    this.gun.PreventNormalFireAudio = true;
-                }
+               
                 if (!gun.IsReloading && !HasReloaded)
                 {
                     this.HasReloaded = true;
@@ -150,7 +162,7 @@ namespace Items
         }
         public override void OnPostFired(PlayerController player, Gun gun)
         {
-            gun.PreventNormalFireAudio = true;
+            
             player.CurrentRoom.ApplyActionToNearbyEnemies(player.CenterPosition, 5.5f, new Action<AIActor, float>(this.ProcessEnemy));
             
 

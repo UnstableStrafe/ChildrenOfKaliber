@@ -38,6 +38,7 @@ namespace Items
             lootTable.AddItemToPool(TheLastChamber.itemID, .7f);
             lootTable.AddItemToPool(Skeleton.itemID);
             lootTable.AddItemToPool(VenomRounds.itemID);
+            lootTable.AddItemToPool(_66Kaliber.id);
             //lootTable.AddItemToPool(SpiritOfTheDragun.gunID, 1);
             //lootTable.AddItemToPool(TrueGunpowder.itemID, 1);
 

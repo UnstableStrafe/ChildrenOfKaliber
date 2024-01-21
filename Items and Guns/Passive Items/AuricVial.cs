@@ -21,7 +21,7 @@ namespace Items
             string shortDesc = "Good For Baiting Ghosts";
             string longDesc = "Each room gives three extra casings. \n\nMade from the pure essence of wealth, this serum increases the drinker's Fortune.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.C;
             item.sprite.IsPerpendicular = true;

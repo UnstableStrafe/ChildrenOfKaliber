@@ -18,7 +18,7 @@ namespace Items
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
             string shortDesc = "D-10";
             string longDesc = "Shoots beams of venom towards enemies.\n\nTenth of Isaac Fogcutter's trifiling travels of tinkering tenacious turrets.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = ItemQuality.A;
             item.sprite.IsPerpendicular = true;
 

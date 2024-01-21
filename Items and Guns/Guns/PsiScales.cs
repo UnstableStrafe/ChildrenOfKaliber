@@ -15,7 +15,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Psi Scale", "psi_scale");
-            Game.Items.Rename("outdated_gun_mods:psi_scale", "cel:psi_scale");
+            Game.Items.Rename("outdated_gun_mods:psi_scale", "ck:psi_scale");
             gun.gameObject.AddComponent<PsiScales>();
             gun.SetShortDescription("With Power, Comes Greed");
             gun.SetLongDescription("Summons homing bolts of psychic energy to attack the nearest enemy in range. The energy will fizzle if there isn't a valid target in range.\n\n");
@@ -50,7 +50,7 @@ namespace Items
             projectile.baseData.damage *= 1.1f;
             projectile.baseData.speed *= 1f;
             projectile.baseData.force *= 0f;
-            projectile.SetProjectileSpriteRight("psi_scale_projectile", 12, 7);
+            projectile.SetProjectileSpriteRight("psi_scale_projectile", 10, 9);
 
 
 

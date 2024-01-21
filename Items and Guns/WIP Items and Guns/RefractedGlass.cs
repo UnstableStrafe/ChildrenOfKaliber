@@ -25,7 +25,7 @@ namespace Items
             string shortDesc = "Glimpses Into Another World";
             string longDesc = "Adds a 50% chance to spawn another projectile upon firing. This effect can happen multiple times per shot.\n\nThis shard of glass reflects glimmers of the 4th gunmension, where all bullets exist and don't exist at the same time.\nIt is said the Phaser Spiders and Killithids originated from there.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

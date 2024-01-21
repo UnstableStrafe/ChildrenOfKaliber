@@ -22,7 +22,7 @@ namespace Items
             string shortDesc = "It Whispers of Ancient Things";
             string longDesc = "Trades one full heart of health to cleanse one point of curse. \n\nIt feels like it wants something from you... Perhaps you should give it what it asks for?";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Timed, 1f);
 

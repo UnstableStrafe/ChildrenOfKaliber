@@ -22,7 +22,7 @@ namespace Items
 
             string shortDesc = "Dance Dance Revolution";
             string longDesc = "Moving in a direction increases a stat- Left: Damage, Right: Shot speed, Up: Rate of fire, Down: Reload speed.\n\nThe gundead have been known to play this game in their spare time.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = PickupObject.ItemQuality.D;
             item.sprite.IsPerpendicular = true;
             

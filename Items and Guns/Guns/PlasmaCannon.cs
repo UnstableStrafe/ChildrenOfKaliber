@@ -10,7 +10,7 @@ namespace Items
         {
 
             Gun gun = ETGMod.Databases.Items.NewGun("Plasma Cannon", "plasma_cannon");
-            Game.Items.Rename("outdated_gun_mods:plasma_cannon", "cel:plasma_cannon");
+            Game.Items.Rename("outdated_gun_mods:plasma_cannon", "ck:plasma_cannon");
             gun.gameObject.AddComponent<PlasmaCannon>();
             gun.SetShortDescription("Spelunk'd");
             gun.SetLongDescription("Shoots extremely powerful explosions. Use with extreme caution.\n\nIt was built by aliens from Earth's moon, but sadly the recoil proved to be too strong for them to use it easily.");
@@ -25,13 +25,15 @@ namespace Items
             gun.DefaultModule.angleVariance = 0f;
             gun.DefaultModule.cooldownTime = .2f;
             gun.DefaultModule.numberOfShotsInClip = 1;
-            gun.InfiniteAmmo = true;
-            gun.DefaultModule.ammoType = (PickupObjectDatabase.GetById(16) as Gun).DefaultModule.ammoType;
+            gun.DefaultModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
+            gun.DefaultModule.customAmmoType = "green blaster";
+
+
             Gun gun2 = PickupObjectDatabase.GetById(32) as Gun;
             gun.muzzleFlashEffects = gun2.muzzleFlashEffects;
-            gun.SetBaseMaxAmmo(150);
-            gun.barrelOffset.transform.localPosition = new Vector3(1.2f, .3f);
-            gun.quality = PickupObject.ItemQuality.B;
+            gun.SetBaseMaxAmmo(250);
+            gun.barrelOffset.transform.localPosition = new Vector3(1.2f, 0f);
+            gun.quality = PickupObject.ItemQuality.C;
             gun.encounterTrackable.EncounterGuid = "Good Luck Kiddo.";
             gun.sprite.IsPerpendicular = true;
             gun.gunClass = GunClass.EXPLOSIVE;
@@ -41,7 +43,7 @@ namespace Items
             UnityEngine.Object.DontDestroyOnLoad(projectile);
             gun.DefaultModule.projectiles[0] = projectile;
             projectile.transform.parent = gun.barrelOffset;
-            projectile.baseData.damage *= 3;
+            projectile.baseData.damage *= 5;
             projectile.baseData.range *= 10000;
             projectile.baseData.speed *= 4;
             projectile.shouldRotate = true;
@@ -112,11 +114,7 @@ namespace Items
         }
       
 
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-            gun.PreventNormalFireAudio = false;
-
-        }
+       
 
 
 

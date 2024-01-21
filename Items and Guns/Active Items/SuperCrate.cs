@@ -25,7 +25,7 @@ namespace Items
             string longDesc = "Spawns a Rainbow Chest!\n\n" +
                 "A lockbox covered in dozens of seals and runes, each details a different ritual or sacrifice. The name 'Pandora' can be seen carved on the lid.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
          
 
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 7500);

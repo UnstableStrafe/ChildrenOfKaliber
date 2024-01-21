@@ -10,7 +10,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Stake Launcher", "stake_launcher");
-            Game.Items.Rename("outdated_gun_mods:stake_launcher", "cel:stake_launcher");
+            Game.Items.Rename("outdated_gun_mods:stake_launcher", "ck:stake_launcher");
             gun.gameObject.AddComponent<StakeLauncher>();
             gun.SetShortDescription("Pumpking's Bane");
             gun.SetLongDescription("Deals less damage to non-jammed enemies.\n\nThe stake is a staple weapon in combating unholy creatures. These bolts have been modified to affect the Jammed Gundead.");
@@ -31,7 +31,7 @@ namespace Items
             gun.muzzleFlashEffects = gun2.muzzleFlashEffects;
             gun.quality = PickupObject.ItemQuality.D;
             gun.encounterTrackable.EncounterGuid = "stake launcher";
-
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(12) as Gun).gunSwitchGroup;
             Projectile projectile = UnityEngine.Object.Instantiate<Projectile>(gun.DefaultModule.projectiles[0]);
             projectile.gameObject.SetActive(false);
             FakePrefab.MarkAsFakePrefab(projectile.gameObject);
@@ -82,12 +82,7 @@ namespace Items
 
 
         // private int MalRounds = Gungeon.Game.Items["rtr:malediction_rounds"].PickupObjectId;
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_crossbow_shot_01", gameObject);
-        }
+        
 
 
 

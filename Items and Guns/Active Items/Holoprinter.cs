@@ -22,7 +22,7 @@ namespace Items
             string longDesc = "On the first use, destroys the currently held gun, storing it's ID. Afterwards, using the item will spawn a copy of the gun for a short time.\n\nThe Retro Emitter-Transmitter Operator, R.E.T.O for short, was invented" +
                "by an extremely handsome individual. This prototype is extremely unstable and is prone to destroying the original copy it replicates.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 600);
 
             item.quality = ItemQuality.A;

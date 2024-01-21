@@ -22,7 +22,7 @@ namespace Items
             string shortDesc = "Not Quite Asbestos";
             string longDesc = "Reloading an empty clip creates a cloud of charcoal dust around the player, causing nearby enemies to take more damage.\n\nWood from the forests that once surrounded the Gungeon, charred by the power that awakened the Gungeon to what it is now. Some of that power is stored within it.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.B;
             item.sprite.IsPerpendicular = true;

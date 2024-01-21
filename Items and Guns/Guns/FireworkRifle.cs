@@ -10,7 +10,7 @@ namespace Items
         {
             
             Gun gun = ETGMod.Databases.Items.NewGun("Firework Rifle", "firework_rifle");
-            Game.Items.Rename("outdated_gun_mods:firework_rifle", "cel:firework_rifle");
+            Game.Items.Rename("outdated_gun_mods:firework_rifle", "ck:firework_rifle");
             gun.gameObject.AddComponent<FireworkRifle>();
             gun.SetShortDescription("Bang, Bang, Bang! Here We Go!");
             gun.SetLongDescription("Shoots powerful fireworks.\n\nThis gun came from a world caught in an eternal struggle for balance. It was created to celebrate the journey of a hero.");
@@ -67,8 +67,8 @@ namespace Items
                 effect = Firecracker.GetComponent<ExplodeOnDeath>().explosionData.effect,
                 //AssetBundle assetBundle = ResourceManager.LoadAssetBundle("shared_auto_001");
                 //  GameObject TestingVFX = assetBundle.LoadAsset<GameObject>("VFX_Dust_Explosion");
-        };
-
+            };
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(54) as Gun).gunSwitchGroup;
             GetFucked.explosionData = die;
             
             
@@ -115,12 +115,7 @@ namespace Items
         }
 
 
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_dl45heavylaser_shot_01", gameObject);
-        }
+        
 
 
 

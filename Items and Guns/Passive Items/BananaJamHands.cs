@@ -20,7 +20,7 @@ namespace Items
             string shortDesc = "Icky";
             string longDesc = "Reloading throws a gun.\n\nHow do you expect to hold a gun with all this jam on your hands?";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = PickupObject.ItemQuality.D;
             item.sprite.IsPerpendicular = true;
             item.AddToSubShop(ItemBuilder.ShopType.Goopton);

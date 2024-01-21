@@ -30,7 +30,7 @@ namespace Items
                 " This goo, as mentioned earlier, is in no way related to any substances in media whatsoever and have no connections to an Earth film from 1997. To think such is the case would be absurd.";
 
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, .75f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.A;
             item.sprite.IsPerpendicular = true;

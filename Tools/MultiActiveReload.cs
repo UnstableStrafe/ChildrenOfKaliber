@@ -4,6 +4,9 @@ using System.Reflection;
 using MonoMod.RuntimeDetour;
 using MonoMod.Utils;
 using UnityEngine;
+using Alexandria.ItemAPI;
+
+
 namespace Items
 {
     public static class MultiActiveReloadManager
@@ -27,6 +30,22 @@ namespace Items
                 typeof(Gun).GetMethod("Reload", BindingFlags.Public | BindingFlags.Instance),
                 typeof(MultiActiveReloadManager).GetMethod("ReloadHook")
             );
+
+            Hook hook5 = new Hook(
+               typeof(Gun).GetMethod("DropGun", BindingFlags.Public | BindingFlags.Instance),
+               typeof(MultiActiveReloadManager).GetMethod("DropGunHook")
+           );
+        }
+
+        public static DebrisObject DropGunHook(Func<Gun, Single, DebrisObject> orig, Gun self, float H = 0.5f)
+        {
+            MultiActiveReloadController controller = self.GetComponent<MultiActiveReloadController>();
+            if (controller != null)
+            {
+                controller.reloads = new List<MultiActiveReloadData>();
+                controller.reloads.AddRange((PickupObjectDatabase.GetById(self.PickupObjectId) as Gun).GetComponent<MultiActiveReloadController>().reloads);
+            }
+            return orig(self, H);
         }
 
         public static bool ReloadHook(Func<Gun, bool> orig, Gun self)
@@ -43,7 +62,7 @@ namespace Items
         public static void TriggerReloadHook(Action<GameUIReloadBarController, PlayerController, Vector3, float, float, int> orig, GameUIReloadBarController self, PlayerController attachParent, Vector3 offset, float duration, float activeReloadStartPercent,
             int pixelWidth)
         {
-            
+
             if (tempraryActiveReloads.ContainsKey(self))
             {
                 foreach (MultiActiveReload multiactivereload in tempraryActiveReloads[self])
@@ -67,7 +86,9 @@ namespace Items
                     dfSprite sprite = UnityEngine.Object.Instantiate(self.activeReloadSprite);
                     self.activeReloadSprite.Parent.AddControl(sprite);
                     sprite.enabled = true;
+
                     float width = self.progressSlider.Width;
+
                     float maxValue = self.progressSlider.MaxValue;
                     float num = data.startValue / maxValue * width;
                     float num2 = data.endValue / maxValue * width;
@@ -75,7 +96,12 @@ namespace Items
                     float width2 = (float)pixelWidth * Pixelator.Instance.CurrentTileScale;
                     sprite.RelativePosition = self.activeReloadSprite.RelativePosition;
                     sprite.RelativePosition = GameUIUtility.QuantizeUIPosition(sprite.RelativePosition.WithX(x));
-                    sprite.Width = width2;
+                    sprite.RelativePosition += new Vector3(0, 0, 10);
+                    sprite.Width = width2 * 2;
+                    sprite.Height = width2 * 10;
+
+
+
                     sprite.IsVisible = true;
                     dfSprite celebrationSprite = UnityEngine.Object.Instantiate(self.celebrationSprite);
                     self.activeReloadSprite.Parent.AddControl(celebrationSprite);
@@ -108,7 +134,9 @@ namespace Items
                     }
                 }
             }
-            
+
+
+
         }
 
         public static bool AttemptActiveReloadHook(Func<GameUIReloadBarController, bool> orig, GameUIReloadBarController self)
@@ -211,7 +239,7 @@ namespace Items
                         }
                         if (reload == null || !reload.canAttemptActiveReloadAfterwards)
                         {
-                            ETGModConsole.Log("yes");
+                            //ETGModConsole.Log("yes");
                             controller.canAttemptActiveReload = false;
                             Action<PlayerController, Gun, bool> act = (Action<PlayerController, Gun, bool>)info2.CreateDelegate<Action<PlayerController, Gun, bool>>();
                             self.OnReloadPressed -= act;
@@ -285,7 +313,7 @@ namespace Items
         public string Name;
     }
 
-    class MultiActiveReloadController : AdvancedGunBehaviour
+    class MultiActiveReloadController : AdvancedGunBehaviourMultiActive
     {
         public virtual void OnActiveReloadSuccess(MultiActiveReload reload)
         {

@@ -25,7 +25,7 @@ namespace Items.CrownForms
             string shortDesc = "Steal Your Heart!";
             string longDesc = "Unleas devastating finales on bosses under 33% health!";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

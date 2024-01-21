@@ -26,7 +26,7 @@ namespace Items
             string shortDesc = "Cooler Than You";
             string longDesc = "Increases stats based on coolness. Gives 2 coolness.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 2);
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

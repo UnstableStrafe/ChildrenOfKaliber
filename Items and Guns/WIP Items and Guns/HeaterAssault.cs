@@ -9,7 +9,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Heater Assault Rifle", "heater_assault_rifle");
-            Game.Items.Rename("outdated_gun_mods:heater_assault_rifle", "cel:heater_assault_rifle");
+            Game.Items.Rename("outdated_gun_mods:heater_assault_rifle", "ck:heater_assault_rifle");
             gun.gameObject.AddComponent<HeaterAssault>();
             gun.SetShortDescription("Children Of The Colt");
             gun.SetLongDescription("No reload time, but gains heat as it is fired. If the gun overheats, it is put on a cooldown before it can start shooting again. Heat decreases while not firing. All heat dissapates while not in combat.");

@@ -14,7 +14,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Phantom Pistol", "phantom_pistol");
-            Game.Items.Rename("outdated_gun_mods:phantom_pistol", "cel:phantom_pistol");
+            Game.Items.Rename("outdated_gun_mods:phantom_pistol", "ck:phantom_pistol");
             gun.gameObject.AddComponent<PhantomPistol>();
             gun.SetShortDescription("An Unforseen Death");
             gun.SetLongDescription("Reloading this gun allows you to pull bullets from the past into the future.\n\nLight and compact for easy storage, this modified pistol can shoot bullets it has fired in other timelines.");

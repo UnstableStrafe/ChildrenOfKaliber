@@ -24,7 +24,7 @@ namespace Items
             string longDesc = "Increases damage for each carried blank.\n\nWhoever created these bullets was clearly too lazy to actually make anything beyond a void in time and space.";
             
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = PickupObject.ItemQuality.C;
             item.sprite.IsPerpendicular = true;
             item.AddToSubShop(ItemBuilder.ShopType.OldRed);

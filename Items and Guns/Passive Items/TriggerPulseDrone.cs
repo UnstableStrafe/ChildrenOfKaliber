@@ -19,7 +19,7 @@ namespace Items
             string shortDesc = "D-7";
             string longDesc = "Attacks enemies passively. Grants 2 coolness.\n\nSeventh of Isaac Fogcutter's setoff into specialized spacial strike sentries sent seeking stupid suckers.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Coolness, 2, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = ItemQuality.B;
             item.sprite.IsPerpendicular = true;

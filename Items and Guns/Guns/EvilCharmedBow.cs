@@ -8,7 +8,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Evil Charmed Bow", "evil_charmed_bow");
-            Game.Items.Rename("outdated_gun_mods:evil_charmed_bow", "cel:evil_charmed_bow");
+            Game.Items.Rename("outdated_gun_mods:evil_charmed_bow", "ck:evil_charmed_bow");
             gun.gameObject.AddComponent<EvilCharmedBow>();
             gun.SetShortDescription("Click");
             gun.SetLongDescription("filler text.");
@@ -42,6 +42,7 @@ namespace Items
             projectile.PoisonApplyChance = .33f;
             projectile.healthEffect = Library.Venom;
             projectile.transform.parent = gun.barrelOffset;
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(12) as Gun).gunSwitchGroup;
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
@@ -52,10 +53,7 @@ namespace Items
             if (gun.CurrentOwner)
             {
 
-                if (gun.PreventNormalFireAudio)
-                {
-                    this.gun.PreventNormalFireAudio = true;
-                }
+               
                 if (!gun.IsReloading && !HasReloaded)
                 {
                     this.HasReloaded = true;
@@ -76,12 +74,7 @@ namespace Items
 
 
 
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_crossbow_shot_01", gameObject);
-        }
+       
 
 
         public EvilCharmedBow()

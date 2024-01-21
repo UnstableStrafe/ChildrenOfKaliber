@@ -24,7 +24,7 @@ namespace Items
             string longDesc = "Increases movement speed. Killing an enemy creates a ring of fire around the player.\n\nThe wing of an elderly Dragun that is too weak to allow for flight anymore. It glows in the presence of gunfire." +
                 "\n\nRight before their home was destroyed, the Draguns sent their bravest warrior to the Gungeon in an attempt to prevent the onset of the apocolypse.";
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.MovementSpeed, 1.15f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             
             item.quality = ItemQuality.B;
             item.sprite.IsPerpendicular = true;

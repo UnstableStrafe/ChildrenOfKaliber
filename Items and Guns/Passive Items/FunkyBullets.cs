@@ -22,7 +22,7 @@ namespace Items
             string longDesc = "Makes bullet stats weird.\n\n" +
                 "A horribly failed attempt at forging a bullet that could kill the past. The creator threw them into the Gungeon some time later, where they remained until your grubby little hands put them in a magazine.";   
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ProjectileSpeed, .85f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Accuracy, .75f, StatModifier.ModifyMethod.MULTIPLICATIVE);

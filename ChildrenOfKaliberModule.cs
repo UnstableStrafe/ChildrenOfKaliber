@@ -32,7 +32,7 @@ namespace Items
     {
         public const string NAME = "Children of Kaliber";
         public const string GUID = "unstablestrafe.etg.childrenofkaliber";
-        public const string VERSION = "3.9.3";
+        public const string VERSION = "4.0.0";
 
 
         public static readonly string Color = "#FCA4E2";
@@ -123,7 +123,7 @@ namespace Items
             IronHeart.Init(); 
             VoidBottle.Init();
             SuperCrate.Init();
-            Matchbox.Init();
+            Matchsticks.Init();
             ACMESupply.Init();
             Questlog.Init();
 
@@ -135,7 +135,7 @@ namespace Items
             NeedleBullets.Init(); 
             ImpsHorn.Init(); 
             SnareBullets.Init();
-            SprunButBetter.Init();      
+            //SprunButBetter.Init();      
             PetRock.Init();
             SteamSale.Init(); 
             EmptyBullets.Init();
@@ -173,32 +173,32 @@ namespace Items
             MalachiteAmmolet.Init(); //40        PASSIVE 23
             GlassHeart.Init(); // 41             PASSIVE 24
             AccursedShackles.Init();// 42        PASSIVE 25   
-            Hooks.BuffGuns(); //43               GUN 7
+            
             D6.Init(); //44                      ACTIVE 12
 
             //TimeKeepersPistol.Add();
-            ALiteralRock.Add(); // 47            GUN 8 
+            ALiteralRock.Add(); // 47            GUN 7 
             FloopBullets.Init(); // 48           PASSIVE 26     
             EliteBullets.Init();// 49            PASSIVE 27
             Enemies.AmmoDotBehav();
-            FireworkRifle.Add(); // 50           GUN 9
-            Skeleton.Add();// 51                 GUN 10
-            Incremental.Add();// 52              GUN 11
+            FireworkRifle.Add(); // 50           GUN 8
+            Skeleton.Add();// 51                 GUN 9
+            Incremental.Add();// 52              GUN 01
 
             VenomRounds.Init();// 53             PASSIVE 28
             BismuthAmmolet.Init();//54           PASSIVE 29
             MercuryAmmolet.Init();//55           PASSIVE 30
 
 
-            BashelliskRifle.Add();//56           GUN 12
+            BashelliskRifle.Add();//56           GUN 11
             MarkOfWind.Init();//57               PASSIVE 31
-            PrimeSaw.Add();//58a                 GUN 13a                      
-            PrimeVice.Add();//58b                GUN 13b
-            PrimeLaser.Add();//58c               GUN 13c
-            PrimeCannon.Add();//58d              GUN 13d
-            RussianRevolver.Add();//59           GUN 14
+            //PrimeSaw.Add();//58a                 GUN 12a                      
+            //PrimeVice.Add();//58b                GUN 12b
+            //PrimeLaser.Add();//58c               GUN 12c
+            //PrimeCannon.Add();//58d              GUN 12d
+            RussianRevolver.Add();//59           GUN 12
             ImpactRounds.Init();//60             PASSIVE 31
-            DroneController.Add();//61           GUN 15
+            DroneController.Add();//61           GUN 13
             Drone.Add();
             Drone2.Add();
             
@@ -209,61 +209,61 @@ namespace Items
             PrimalSaltpeter.Init();//69          PASSIVE 36
             TrueGunpowder.Init();//70            PASSIVE 37
             //
-            SpiritOfTheDragun.Add();//71         GUN 16
-            BilliardBouncer.Add();//72           GUN 17
-            //ElectricBass.Add();//73              GUN 18
-            IonFist.Add();//74                   GUN 19
+            SpiritOfTheDragun.Add();//71         GUN 14
+            BilliardBouncer.Add();//72           GUN 15
+            //ElectricBass.Add();//73              GUN 17
+            IonFist.Add();//74                   GUN 16
             NenFist.Add();//74a
             EvilCharmedBow.Add();
-            ReloadedRifle.Add();//75             GUN 20
-            AK94.Add();//76                      GUN 21
+            ReloadedRifle.Add();//75             GUN 17
+            AK94.Add();//76                      GUN 18
             LeakingSyringe.Init();//77           PASSIVE 38
             Holoprinter.Init();//78              ACTIVE 14
-            Günther.Add();//79                   GUN 22
-            AK141.Add();//80                     GUN 23
-            AK188.Add();//81                     GUN 24
-            InfiniteAK.Add();//82                GUN 25
+            Günther.Add();//79                   GUN 19
+            AK141.Add();//80                     GUN 20
+            AK188.Add();//81                     GUN 21
+            InfiniteAK.Add();//82                GUN 22
 
-            PlasmaCannon.Add();//85              GUN 25
-            TheLastChamber.Add();//86            GUN 27
+            PlasmaCannon.Add();//85              GUN 23
+            TheLastChamber.Add();//86            GUN 24
 
-            AutoShotgun.Add();//87               GUN 28
+            AutoShotgun.Add();//87               GUN 25
 
 
-            Vacuum.Add();//88                    GUN 29
-            StickyLauncher.Add();//89            GUN 20
+            Vacuum.Add();//88                    GUN 26
+            //StickyLauncher.Add();//89            GUN 20
             SupportContract.Init();//90          ACTIVE 15
-            PanicPistol.Add();//91               GUN 31            
-            PepperBox.Add();//92           GUN 32
+            PanicPistol.Add();//91               GUN 27            
+            PepperBox.Add();//92                 GUN 28
             //ReversedGun.Add();
 
             SympathyBullets.Init();//93          PASSIVE 39
 
             BloatedRounds.Init();//94            PASSIVE 40
-            EyesOfStone.Init();//95              PASSIVE 41
-            ShellBank.Init(); //96                PASSIVE 42
+            //EyesOfStone.Init();
+            ShellBank.Init(); //95               PASSIVE 41
             //HairGel.Init();
-            IgnitionPowder.Init();
+            IgnitionPowder.Init();//96           PASSIVE 42
             //Magnorbs.Add(); // need to do the orbiting code 
-            PoisonPoltergeist.Init();
+            PoisonPoltergeist.Init();//97        PASSIVE 43
 
-            PsiFocus.Init();
-            PsiScales.Add();
+            PsiFocus.Init();//98                 ACTIVE 16
+            PsiScales.Add();//99                 GUN 29
 
 
             //SliverBeam.Add();
 
-            GoldenRecord.Init();//97             ACTIVE 16
+            GoldenRecord.Init();//100            ACTIVE 17
             //Baneshee.Add();
             //RebarCrossbow.Add();
-            MemeticKillAgent.Init();
-            //--TemporalRounds.Init();
+            MemeticKillAgent.Init();//101        PASSIVE 44 
+            TemporalRounds.Init();//102          PASSIVE 45
             // CultistsCrook.Add();
             //  Break_ActionRevolver.Add();
 
-            Pray_K47.Add();
+            Pray_K47.Add();//103                 GUN 30                      
 
-
+            _66Kaliber.Add();//104               GUN 31
 
 
             //Ultimates
@@ -301,11 +301,14 @@ namespace Items
 
             //ROOMS
 
-
+            //Alexandria.DungeonAPI.RoomFactory.BuildFromResource("Items/Resources/Rooms/cultistShopkeepRoom.room");
 
             //CHARACTERS
 
             var pursued = Loader.BuildCharacter("Items/Characters/Pursued", "ck:pursued", new Vector3(23, 27, 27.1f), false, new Vector3(15.3f, 24.8f, 25.3f), true, false, false, true, false, null, null, 0, false, "");
+
+            var blind = Loader.BuildCharacter("Items/Characters/Blind", "ck:blind", new Vector3(14, 27, 27.1f), false, new Vector3(15.3f, 24.8f, 25.3f), true, false, false, true, false, null, null, 0, false, "");
+
 
             /*
             pursued.prerequisites = new DungeonPrerequisite[1]
@@ -319,6 +322,9 @@ namespace Items
             */
 
             //MISC
+
+
+
 
             LiteralTrash.Init();
 
@@ -447,7 +453,7 @@ namespace Items
             ETGModConsole.Commands.GetGroup("ck").AddUnit("toggle_eyestrain", ToggleEyeStrain);
             //---ETGModConsole.Commands.GetGroup("ck").AddUnit("get_risk_value", GetRiskStatValue);
             Log($"{NAME} Initialized", Color);
-            Log($"Link to Changelog https://pastebin.com/0LeBBa57", Color);
+            //Log($"Link to Changelog https://pastebin.com/0LeBBa57", Color);
         }
 
         private void CrownOverride(string[] args)
@@ -472,6 +478,10 @@ namespace Items
                 Log("WHY ISNT THE CHEST LOCKED????????");
             }
             Chest.Spawn(testMChest, (GameManager.Instance.PrimaryPlayer.CurrentRoom.GetBestRewardLocation(IntVector2.One * 3, RoomHandler.RewardLocationStyle.PlayerCenter, true)));
+            if (testMChest.GetComponent<SpeculativeRigidbody>())
+            {
+                testMChest.GetComponent<SpeculativeRigidbody>().Reinitialize();
+            }
             //testMChest.ConfigureOnPlacement(GameManager.Instance.PrimaryPlayer.CurrentRoom);
             
         }
@@ -516,14 +526,17 @@ namespace Items
         }
         public void DelayedStart()
         {
+
+            Akffinity.akIds.AddRange(AlexandriaTags.GetAllItemsIdsWithTag("kalashnikov"));
             foreach (string s in Akffinity.moddedAks)
             {
                 if (Game.Items.ContainsID(s))
                 {
                     int i = PickupObjectDatabase.GetById(Game.Items.Get(s).PickupObjectId).PickupObjectId;
-                    Akffinity.akIds.Add(i);
+                    if (!Akffinity.akIds.Contains(i)) Akffinity.akIds.Add(i);
                 }
             }
+           
             Akffinity.Init();
             AddWeightsToCustomItems();
             ModdedIDStuff.SetupIDs();
@@ -577,7 +590,7 @@ namespace Items
                             LootModData mod = new LootModData
                             {
                                 AssociatedPickupId = i2,
-                                DropRateMultiplier = 5,
+                                DropRateMultiplier = 15,
                             };
                             modDatas.Add(mod);
                         }
@@ -594,7 +607,7 @@ namespace Items
                             LootModData mod = new LootModData
                             {
                                 AssociatedPickupId = i2,
-                                DropRateMultiplier = 5,
+                                DropRateMultiplier = 15,
                             };
                             modDatas.Add(mod);
                         }
@@ -611,7 +624,7 @@ namespace Items
                             LootModData mod = new LootModData
                             {
                                 AssociatedPickupId = i2,
-                                DropRateMultiplier = 5,
+                                DropRateMultiplier = 15,
                             };
                             modDatas.Add(mod);
                         }
@@ -642,7 +655,7 @@ namespace Items
                             LootModData mod = new LootModData
                             {
                                 AssociatedPickupId = i2,
-                                DropRateMultiplier = 5,
+                                DropRateMultiplier = 15,
                             };
                             modDatas.Add(mod);
                         }
@@ -659,7 +672,7 @@ namespace Items
                             LootModData mod = new LootModData
                             {
                                 AssociatedPickupId = i2,
-                                DropRateMultiplier = 5,
+                                DropRateMultiplier = 15,
                             };
                             modDatas.Add(mod);
                         }
@@ -676,7 +689,7 @@ namespace Items
                             LootModData mod = new LootModData
                             {
                                 AssociatedPickupId = i2,
-                                DropRateMultiplier = 5,
+                                DropRateMultiplier = 15,
                             };
                             modDatas.Add(mod);
                         }
@@ -693,7 +706,7 @@ namespace Items
                             LootModData mod = new LootModData
                             {
                                 AssociatedPickupId = i2,
-                                DropRateMultiplier = 5,
+                                DropRateMultiplier = 15,
                             };
                             modDatas.Add(mod);
                         }

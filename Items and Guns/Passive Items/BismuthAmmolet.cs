@@ -22,7 +22,7 @@ namespace Items
             string shortDesc = "Silvery Rainbow";
             string longDesc = "Blanks envenom enemies in the room. Gives one extra blank per floor.\n\nUpon extreme force being applied to the ammolet by a blank, toxic particles are released into the air. Thankfully only gundead are vulnerable to them. The Aztecs believed the pyramid-like crytals contained vast power.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.AdditionalBlanksPerFloor, 1, StatModifier.ModifyMethod.ADDITIVE);
 
             item.quality = ItemQuality.B;

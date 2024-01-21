@@ -26,7 +26,7 @@ namespace Items
             string shortDesc = "Ring Of Fire";
             string longDesc = "Throw a ring of 8 molotovs around you in all directions.\nHold <Switch Active Item Up> to bring up the selector for the ultimate. The ultimate ability will need to be recharged after use.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

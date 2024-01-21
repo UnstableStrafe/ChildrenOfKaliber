@@ -23,7 +23,7 @@ namespace Items
 
 
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 600);
 
             item.consumable = false;

@@ -20,7 +20,7 @@ namespace Items
             string shortDesc = "Osmium Core";
             string longDesc = "Projectiles break the boss damage cap\n\nBuilt from one of the densest" +
                 " metals, these bullets don't have armor-piercing shells, but instead are meant to deal crushing damage to objects with a bigger surface area.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = ItemQuality.S;
             item.sprite.IsPerpendicular = true;
         }

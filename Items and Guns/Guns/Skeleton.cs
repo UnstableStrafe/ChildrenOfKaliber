@@ -9,7 +9,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Skeleton", "skeleton");
-            Game.Items.Rename("outdated_gun_mods:skeleton", "cel:skeleton");
+            Game.Items.Rename("outdated_gun_mods:skeleton", "ck:skeleton");
             gun.gameObject.AddComponent<Skeleton>();
             gun.SetShortDescription("Rattled");
             gun.SetLongDescription("It is not unheard of for a mimic to die with its last meal still mid-digestion. How the Gungeon could possibly consider this as a gun is best left to the imagination.");
@@ -41,6 +41,7 @@ namespace Items
             projectile.SetProjectileSpriteRight("skeleton_projectile_001", 16, 7);
             gun.sprite.IsPerpendicular = true;
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(45) as Gun).gunSwitchGroup;
             itemID = gun.PickupObjectId;
         }
 
@@ -67,10 +68,7 @@ namespace Items
             if (gun.CurrentOwner)
             {
 
-                if (gun.PreventNormalFireAudio)
-                {
-                    this.gun.PreventNormalFireAudio = true;
-                }
+               
                 if (!gun.IsReloading && !HasReloaded)
                 {
                     this.HasReloaded = true;
@@ -89,12 +87,7 @@ namespace Items
             }
         }
 
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_skullgun_shot_01", gameObject);
-        }
+       
 
 
 

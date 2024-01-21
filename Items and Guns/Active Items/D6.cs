@@ -29,7 +29,7 @@ namespace Items
             string longDesc = "Rerolls the nearest item on the ground.\n\nA small die used for tabletop roleplaying games. It seems to be enchanted.";
 
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = PickupObject.ItemQuality.A;
             item.sprite.IsPerpendicular = true;
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 1000f);
@@ -107,7 +107,7 @@ namespace Items
                 int chanceToDowngrade = 10;
                 int chanceToUpgrade = 80;
                 ItemQuality newGunQuality = targetTier;
-                PickupObject newGunObject = PickupObjectDatabase.GetByName("cel:r.g.g.");
+                PickupObject newGunObject = PickupObjectDatabase.GetByName("ck:r.g.g.");
                 int RollToCheckUpgradeStatus = UnityEngine.Random.Range(0, 101);
                 if (RollToCheckUpgradeStatus <= chanceToDowngrade && targetTier != ItemQuality.D)
                 {
@@ -151,7 +151,7 @@ namespace Items
                 int chanceToDowngrade = 10; 
                 int chanceToUpgrade = 80;
                 ItemQuality newItemQuality = targetTier;
-                PickupObject newItemObject = PickupObjectDatabase.GetByName("cel:test_item");
+                PickupObject newItemObject = PickupObjectDatabase.GetByName("ck:test_item");
                 int RollToCheckUpgradeStatus = UnityEngine.Random.Range(0, 101); 
                 if(RollToCheckUpgradeStatus <= chanceToDowngrade && targetTier != ItemQuality.D)
                 {

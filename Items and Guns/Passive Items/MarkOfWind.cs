@@ -21,7 +21,7 @@ namespace Items
             string shortDesc = "Too Fast For Eyes";
             string longDesc = "Upon entering combat, time is briefly slowed down.\n\nThose given this marking gain enhanced adrenal glands, allowing them to react to sudden danger with incredible speed.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.A;
             item.sprite.IsPerpendicular = true;

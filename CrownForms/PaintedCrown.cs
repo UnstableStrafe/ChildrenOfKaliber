@@ -25,7 +25,7 @@ namespace Items
             string shortDesc = "Splatfest";
             string longDesc = "Imbues the player's projectiles with random goops. Reloading creates pools of random goops.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

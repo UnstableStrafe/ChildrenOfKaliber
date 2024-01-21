@@ -8,7 +8,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Drone Controller", "drone_controller");
-            Game.Items.Rename("outdated_gun_mods:drone_controller", "cel:drone_controller");
+            Game.Items.Rename("outdated_gun_mods:drone_controller", "ck:drone_controller");
             gun.gameObject.AddComponent<DroneController>();
             gun.SetShortDescription("Autobots");
             gun.SetLongDescription("Creates 2 drones that fire at the nearest enemies.\n\nThese cute little drones excel at creating violence for those on their recieving end. Having just one of these is enough to earn 1000 years in a statis chamber, under Hegemony law. Thankfully, time has no meaning inside the Gungeon! Also, they can make coffee.");

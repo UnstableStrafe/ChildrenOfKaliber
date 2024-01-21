@@ -21,7 +21,7 @@ namespace Items
             string shortDesc = "retoStonks";
             string longDesc = "While held, all collected casings will be banked. Dropping the item will destroy it and give the player the stored currency, with 2x intrest! Taking damage while the item is held will reduce the stored currency by 15%.\n\n" +
                 "Bullet kin are taught to save their money at a young age for when they want to buy a new gun. While this coin bank has nothing in it right now, it's never too late to start investing!";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.C;
             item.sprite.IsPerpendicular = true;

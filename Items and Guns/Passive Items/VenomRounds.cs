@@ -21,7 +21,7 @@ namespace Items
 
             string shortDesc = "The Good Stuff";
             string longDesc = "Shots can inflict a powerful venom on enemies they hit.\n\nFew can withstand a small dosage of a Bashellisk's vemon for more than a couple seconds.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.A;
             item.sprite.IsPerpendicular = true;

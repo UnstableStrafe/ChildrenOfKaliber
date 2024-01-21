@@ -30,7 +30,7 @@ namespace Items
             string shortDesc = "Cold, Cruel";
             string longDesc = "All illusions are dispelled under the bearer's eyes. Increases accuracy.\n\nAn ancient technique that allows one to strip themselves of personal biases and see the world through the perspective of another.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.D;
             item.sprite.IsPerpendicular = true;

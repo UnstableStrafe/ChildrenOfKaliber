@@ -20,7 +20,7 @@ namespace Items
             string longDesc = "Refills the primary and secondary gun, and all other guns by 33%, but increases Risk by 1.";
 
             item.gameObject.AddComponent<RiskParticles>();
-            item.SetupItem(shortDesc, longDesc, "cel");
+            item.SetupItem(shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.IgnoredByRat = true;

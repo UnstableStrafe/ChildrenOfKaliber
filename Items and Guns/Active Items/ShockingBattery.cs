@@ -23,7 +23,7 @@ namespace Items
             string longDesc = "While active, increases movement speed, reload speed, rate of fire, shot speed, and dodge roll speed. \n\nOriginally a prototype for infinite energy, this battery became super-charged " +
                 "after a careless scientist spilled a packet of sugar into the battery acid.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 700);
 

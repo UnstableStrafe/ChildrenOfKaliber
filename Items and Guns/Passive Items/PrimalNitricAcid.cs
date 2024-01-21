@@ -20,7 +20,7 @@ namespace Items
             string shortDesc = "Don't Ask How It's Made";
             string longDesc = "Shots can douse enemies in nitric acid, inflicting damage over time and creaing a pool of nitric acid on death.\n\nHarvested from the first bullat to be spawned in the Gungeon, teeming with energy from the Bullet.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.A;
             item.sprite.IsPerpendicular = true;

@@ -9,7 +9,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Prime Vice", "prime_vice");
-            Game.Items.Rename("outdated_gun_mods:prime_vice", "cel:prime_vice");
+            Game.Items.Rename("outdated_gun_mods:prime_vice", "ck:prime_vice");
             gun.gameObject.AddComponent<PrimeVice>();
             gun.SetShortDescription("The Second Model");
             gun.SetLongDescription("Designed by a mechanic on a far away planet. These weapons were part of a mechanical skeleton meant to restore the damaged body of Cthulhu.");

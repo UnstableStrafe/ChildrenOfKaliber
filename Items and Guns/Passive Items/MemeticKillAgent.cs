@@ -28,7 +28,7 @@ namespace Items
             string shortDesc = "[REDACTED]";
             string longDesc = "Instantly kills any weak enemies. Most low-tier bullet kin have 33% less hp. Has no effect on jammed enemies. Gives 2 curse while held.\n\nAn image cursed with magic that causes any weak creatures to die upon looking at it.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 2, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = ItemQuality.S;
             item.sprite.IsPerpendicular = true;

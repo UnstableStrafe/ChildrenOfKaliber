@@ -153,7 +153,7 @@ namespace Items
             Gun gun = ETGMod.Databases.Items.NewGun("R.G.G.", "r.g.g.");
             RGG.rng_gun = gun;
 
-            Game.Items.Rename("outdated_gun_mods:rgg", "cel:rgg");
+            Game.Items.Rename("outdated_gun_mods:rgg", "ck:rgg");
             gun.gameObject.AddComponent<RGG>();
             gun.SetShortDescription("ShortDescription.txt");       
             gun.SetLongDescription("Stats randomize each run. \n\nA gun from the fabled 3rd dimension, it has become unstable in this realm and is constantly shifting."); 

@@ -10,7 +10,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Nen Fist", "nen_fist");
-            Game.Items.Rename("outdated_gun_mods:nen_fist", "cel:nen_fist");
+            Game.Items.Rename("outdated_gun_mods:nen_fist", "ck:nen_fist");
             gun.gameObject.AddComponent<NenFist>();
             gun.SetShortDescription("Hunted");
             gun.SetLongDescription("Cycles between a long range fireball, a medium range energy spear, and a powerful dash with each shot.");

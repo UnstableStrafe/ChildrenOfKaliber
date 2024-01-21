@@ -9,7 +9,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Bashellisk Rifle", "bashellisk_rifle");
-            Game.Items.Rename("outdated_gun_mods:bashellisk_rifle", "cel:bashellisk_rifle");
+            Game.Items.Rename("outdated_gun_mods:bashellisk_rifle", "ck:bashellisk_rifle");
             gun.gameObject.AddComponent<BashelliskRifle>();
             gun.SetShortDescription("Deadly Deadly Gun");
             gun.SetLongDescription("Shoots toxic shots which can somtimes afflict enemies with a powerful venom.\n\nInfused with the fang of a Bashellisk, this gun's bullets are empowered with an even deadlier power.");
@@ -65,10 +65,7 @@ namespace Items
             if (gun.CurrentOwner)
             {
 
-                if (gun.PreventNormalFireAudio)
-                {
-                    this.gun.PreventNormalFireAudio = true;
-                }
+                
                 if (!gun.IsReloading && !HasReloaded)
                 {
                     this.HasReloaded = true;

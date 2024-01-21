@@ -25,7 +25,7 @@ namespace Items
             string shortDesc = "Like Birdshot, But Not";
             string longDesc = "Enemies have a chance to explode into friendly bullets on death.\n\nAn extremely deadly and painful disease that causes deformations in a gundead's body. There is no known cure for it.\nBet you don't feel so good about using it now, hmm?";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.C;
             item.sprite.IsPerpendicular = true;

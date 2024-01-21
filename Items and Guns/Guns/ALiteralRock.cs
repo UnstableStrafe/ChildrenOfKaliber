@@ -7,7 +7,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("A Rock", "a_literal_rock");
-            Game.Items.Rename("outdated_gun_mods:a_rock", "cel:a_rock");
+            Game.Items.Rename("outdated_gun_mods:a_rock", "ck:a_rock");
             gun.gameObject.AddComponent<ALiteralRock>();
 
             gun.SetShortDescription("Ooga Booga");

@@ -24,7 +24,7 @@ namespace Items
             string longDesc = "Use on a boss with less than 1/3 health remaining for a devastating finale!\n\nA gun once wielded by a powerful Trickster who sought defiance against those who abused power. A potent energy thrums from within it." +
                 "\n\nIt's time for an all out attack!";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 2, StatModifier.ModifyMethod.ADDITIVE);
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 1000);
             ItemBuilder.AddToSubShop(item, ItemBuilder.ShopType.Cursula);

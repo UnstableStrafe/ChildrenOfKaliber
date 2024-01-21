@@ -12,7 +12,7 @@ namespace Items
         {
             string shorthandName = "ion_fist";
             Gun gun = ETGMod.Databases.Items.NewGun("Ion Fist", shorthandName);
-            Game.Items.Rename("outdated_gun_mods:"+ shorthandName, "cel:"+shorthandName);
+            Game.Items.Rename("outdated_gun_mods:"+ shorthandName, "ck:"+shorthandName);
             gun.gameObject.AddComponent<IonFist>();
             gun.SetShortDescription("Casually Approach Child");
             gun.SetLongDescription("Charge up for powerful dashes. Grants melee immunity and flight while dashing. A fully-charged dash reflects projectiles.\n\nThis guantlet is charged to the brim with ions. Simply touching another object creates a powerful electric surge.");
@@ -93,7 +93,7 @@ namespace Items
                 chargeProj2,
                 chargeProj3
             };
-            
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(13) as Gun).gunSwitchGroup;
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
@@ -222,11 +222,7 @@ namespace Items
             base.OnAutoReload(player, gun);
             //forme = 1;
         }
-        public override void OnPostFired(PlayerController player, Gun gun)
-        { 
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_ENV_puddle_zap_01", gameObject);
-        }
+        
         private void OnPreCollision(SpeculativeRigidbody myRigidbody, PixelCollider myCollider, SpeculativeRigidbody otherRigidbody, PixelCollider otherCollider)
         {
             Projectile component = otherRigidbody.GetComponent<Projectile>();

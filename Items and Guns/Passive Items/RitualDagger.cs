@@ -21,7 +21,7 @@ namespace Items
             string shortDesc = "Fatality!";
             string longDesc = "Killing an enemy releases a swarm of homing daggers. \n\nWhen given blood, this dagger vibrates rapidly.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Curse, 1f, StatModifier.ModifyMethod.ADDITIVE);
             item.quality = ItemQuality.A;
             item.sprite.IsPerpendicular = true;

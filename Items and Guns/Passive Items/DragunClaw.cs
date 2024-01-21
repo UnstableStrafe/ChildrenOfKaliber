@@ -21,7 +21,7 @@ namespace Items
             string longDesc = "Increases reload speed. Reloading creates flaming oil. Gives fire immunity.\n\nThe claw of the First Dragun, it is covered in a flammable liquid that never seems to run out." +
                 "\n\nThe Draguns were not originally from the Gungeon. They came from a fiery world that no longer exists.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 1.10f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = ItemQuality.C;
             item.sprite.IsPerpendicular = true;

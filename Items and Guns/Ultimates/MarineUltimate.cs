@@ -28,7 +28,7 @@ namespace Items
             string shortDesc = "Heavy Air Support";
             string longDesc = "Summons a series of air strikes at the largest cluster of enemies in the room.\nHold <Switch Active Item Up> to bring up the selector for the ultimate. The ultimate ability will need to be recharged after use.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

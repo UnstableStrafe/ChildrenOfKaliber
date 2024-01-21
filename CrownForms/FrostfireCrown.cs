@@ -25,7 +25,7 @@ namespace Items
             string shortDesc = "Forever Wandering";
             string longDesc = "Adds a flaming projectile and a freezing projectile to each shot";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

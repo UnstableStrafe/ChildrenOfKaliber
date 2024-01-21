@@ -25,7 +25,7 @@ namespace Items
             string shortDesc = "Cha Cha Real Smooth";
             string longDesc = "Allows the user to temporarily slip between timelines, but at the cost of being unable to attack.\n\nThe Pursued is known for jumping in and out of timestreams in order to escape the Hegemony Police Force. Doing so is a delicate balance, but the risk is worth being able to evade capture.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 400);
 
             item.quality = ItemQuality.C;

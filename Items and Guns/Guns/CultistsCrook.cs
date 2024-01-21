@@ -16,7 +16,7 @@ namespace Items
         {
 
             Gun gun = ETGMod.Databases.Items.NewGun("Cultist's Crook", "cultist's_crook");
-            Game.Items.Rename("outdated_gun_mods:cultist's_crook", "cel:cultist's_crook");
+            Game.Items.Rename("outdated_gun_mods:cultist's_crook", "ck:cultist's_crook");
             gun.gameObject.AddComponent<CultistsCrook>();
             gun.SetShortDescription("CA-CAW!");
             gun.SetLongDescription("Gains more damage the more rooms that have been cleared whilst carrying it. Damage bonus is reset on going to a new floor.\n\nCA-CAW CA-CAW!");

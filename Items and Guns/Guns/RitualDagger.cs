@@ -15,7 +15,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Ritual Dagger", "ritual_dagger");
-            Game.Items.Rename("outdated_gun_mods:ritual_dagger", "cel:ritual_dagger");
+            Game.Items.Rename("outdated_gun_mods:ritual_dagger", "ck:ritual_dagger");
             gun.gameObject.AddComponent<RitualDagger>();
             gun.SetShortDescription("Blood For The Bird God");
             gun.SetLongDescription("Gains a small, permanent damage upgrade for each enemy killed with it.\n\nAn ornate ritual dagger that is used to elevate the status of members of am avian cult.");

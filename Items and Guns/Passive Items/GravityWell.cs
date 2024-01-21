@@ -23,7 +23,7 @@ namespace Items
             string longDesc = "Reduces knockback from weapons and gives some damage.\n\nAdding this to a gun increases the gravitational field of its bullets until they have a pull that is strong enough to counteract their kenetic force.";
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.KnockbackMultiplier, .6f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.10f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.C;
             item.sprite.IsPerpendicular = true;

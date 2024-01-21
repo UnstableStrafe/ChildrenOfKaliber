@@ -8,7 +8,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("AK-94", "ak_94");
-            Game.Items.Rename("outdated_gun_mods:ak94", "cel:ak_94");
+            Game.Items.Rename("outdated_gun_mods:ak94", "ck:ak_94");
             gun.gameObject.AddComponent<AK94>();
             gun.SetShortDescription("Accept No SuuS oN tpeccA");
             gun.SetLongDescription("Some idiot decided to create this affront against God by taping two AK-47's together.");
@@ -45,6 +45,7 @@ namespace Items
 
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             AK94.AK94ID = gun.PickupObjectId;
+            gun.SetTag("kalashnikov");
         }
         public static int AK94ID;
 

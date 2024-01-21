@@ -27,7 +27,7 @@ namespace Items
             string longDesc = "Gives two max hp. Missing health increases damage.";
 
 			ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Health, 2, StatModifier.ModifyMethod.ADDITIVE);
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
            
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

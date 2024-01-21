@@ -22,7 +22,7 @@ namespace Items
             string shortDesc = "Just A Sip";
             string longDesc = "A vial containing a seemingly endless amount of an empowering fluid. Each use increases the power of the boost. Gives a slight stat down while held." +
                 "\n\nBrought from a strange planet caught in a time loop not unlike the Gungeon's itself, this tonic is said to be highly addictive.";
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.A;
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, .9f, StatModifier.ModifyMethod.MULTIPLICATIVE);

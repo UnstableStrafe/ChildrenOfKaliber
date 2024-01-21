@@ -21,7 +21,7 @@ namespace Items
             string longDesc = "Increases damage. Projectiles are automatically aimed at the nearest enemy.\n\nThe lead for these bullets was mined in the heart of a dying planet, the gunpowder" +
                 "created from the ashes of a Dragun, and forged in the fire of Gunymede's star. No creature has more skill than them.";
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.Damage, 1.10f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = ItemQuality.S;
             item.sprite.IsPerpendicular = true;
 

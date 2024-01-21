@@ -25,7 +25,7 @@ namespace Items
                 "To capture something, you must lure it in with something familiar.";
             
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
 
 

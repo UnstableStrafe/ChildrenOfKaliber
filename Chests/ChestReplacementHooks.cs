@@ -23,25 +23,29 @@ namespace Items
             }
 
         }
-        public static int amountPerRun = 0;
+
         public static void ConfigureOnPlacementHook(Action<FloorChestPlacer, RoomHandler> orig, FloorChestPlacer self, RoomHandler room)
         {
             
-            if(self.OverrideChestPrefab != MunitionsChestController.munitionsChest) //this migggght break shit im not sure but ill find out ig.
+            if(self.OverrideChestPrefab != MunitionsChestController.munitionsChest && self.ItemQuality != PickupObject.ItemQuality.S) //this migggght break shit im not sure but ill find out ig.
             {
                 float f = UnityEngine.Random.value;
-                if (f <= munitionsChestOverrideChance && amountPerRun == 0)
+                if (f <= munitionsChestOverrideChance)
                 {
                     Chest chest = MunitionsChestController.munitionsChest;
                     self.OverrideChestPrefab = chest;
                     self.UseOverrideChest = true;
+                    if (chest.GetComponent<SpeculativeRigidbody>())
+                    {
+                        chest.GetComponent<SpeculativeRigidbody>().Reinitialize();
+                    }
                     DungeonPrerequisite dungeonPrerequisite = new DungeonPrerequisite()
                     {
                         saveFlagToCheck = GungeonFlags.TUTORIAL_COMPLETED,
                         requireFlag = true,
                         prerequisiteType = DungeonPrerequisite.PrerequisiteType.FLAG,
                     };
-                    amountPerRun++;
+                    
 
                     //fix nulling shit with chest.ConfigureOnPlacement / setting up minimap and collision shiz
 
@@ -62,6 +66,6 @@ namespace Items
 
         }
         */
-        public static readonly float munitionsChestOverrideChance = 1f;
+        public static readonly float munitionsChestOverrideChance = .05f;
     }
 }

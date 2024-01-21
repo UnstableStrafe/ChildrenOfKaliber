@@ -29,19 +29,32 @@ namespace Items
             string longDesc = "Increases the power of any Ak-type weapons the player has. Also increases the chances to find Ak-type weapons.\n\nA necklace with a miniture model of an Ak-47 hanging from it." +
                 " Wearing it bestows an esoteric knowledge of all things Ak-related.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.C;
             item.sprite.IsPerpendicular = true;
             List<LootModData> lootModDatas = new List<LootModData> {};
             foreach(int i in akIds)
             {
-                LootModData mod = new LootModData
+                if(i == AK94.AK94ID)
                 {
-                    AssociatedPickupId = i,
-                    DropRateMultiplier = 5,
-                };
-                lootModDatas.Add(mod);
+                    LootModData mod = new LootModData
+                    {
+                        AssociatedPickupId = i,
+                        DropRateMultiplier = 15,
+                    };
+                    lootModDatas.Add(mod);
+                }
+                else
+                {
+                    LootModData mod = new LootModData
+                    {
+                        AssociatedPickupId = i,
+                        DropRateMultiplier = 30,
+                    };
+                    lootModDatas.Add(mod);
+                }
+                
             }
             item.associatedItemChanceMods = lootModDatas.ToArray();
             
@@ -119,29 +132,14 @@ namespace Items
         public static bool didSetupIds = false;
 
         public static List<string> moddedAks = new List<string> 
-        {
-           
-            "nn:kalashnirang",
-            "nn:gayk47",
-            "bot:kr82m",
+        {                 
             "ski:ack-ch00",
             "ski:toy_ak",
         };
 
         public static List<int> akIds = new List<int>
         {
-            15,
-            29,
-            95,
-            221,
-            510,
-            611,
-            726,
-            AK94.AK94ID,
-            AK141.AK141ID,
-            AK188.AK188ID,
-            InfiniteAK.AKINFID,
-            Pray_K47.Id,
+
         
         };
 

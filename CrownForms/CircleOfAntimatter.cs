@@ -25,7 +25,7 @@ namespace Items
             string shortDesc = "NullReferenceException";
             string longDesc = "Periodically causes chain explosions in the direction the player is aiming.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             //WORK ON BASIC STAT UP SPRITES FOR SWORDTRESS YOU FUCKIGN GOOONNNNN!!! DO IT COWARD!
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

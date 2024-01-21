@@ -26,7 +26,7 @@ namespace Items
             string shortDesc = "So You Like To Play Hardball, Do Ya?";
             string longDesc = "Grants increased damage, rate of fire, coolness, movement speed, and a chance to block damage when at half a heart. Gives Spare Blood Jar on pickup.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
 
             item.quality = ItemQuality.EXCLUDED;
             item.sprite.IsPerpendicular = true;

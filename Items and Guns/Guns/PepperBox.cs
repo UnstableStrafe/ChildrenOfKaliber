@@ -13,7 +13,7 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Pepper Box", "pepper_box");
-            Game.Items.Rename("outdated_gun_mods:pepper_box", "cel:pepper_box");
+            Game.Items.Rename("outdated_gun_mods:pepper_box", "ck:pepper_box");
             gun.gameObject.AddComponent<PepperBox>();
             gun.SetShortDescription("Slightly Overkill");
             gun.SetLongDescription("Do I even need to say what it does?");

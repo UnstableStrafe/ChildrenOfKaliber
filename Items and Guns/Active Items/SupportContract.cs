@@ -27,7 +27,7 @@ namespace Items
             string shortDesc = "Me And The Boys";
             string longDesc = "Summons a temporary group of Bullet Kin to aid you in battle! \n\nThe Gundead, aside from being irreparably stupid, are extremely loyal. These bullet kin will fight to the death for anyone holding this contract.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.SetCooldownType(item, ItemBuilder.CooldownType.Damage, 650);
 
             item.quality = ItemQuality.B;

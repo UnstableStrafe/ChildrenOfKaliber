@@ -20,7 +20,7 @@ namespace Items
             string shortDesc = "D-1";
             string longDesc = "Shoots automatically at nearby enemies while reloading. Slightly increases reload speed.\n\nFirst of Isaac Fogcutter's foray into friendly flying fellows fashioned for fighting foes.";
 
-            ItemBuilder.SetupItem(item, shortDesc, longDesc, "cel");
+            ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             ItemBuilder.AddPassiveStatModifier(item, PlayerStats.StatType.ReloadSpeed, 1.15f, StatModifier.ModifyMethod.MULTIPLICATIVE);
             item.quality = ItemQuality.C;
             item.sprite.IsPerpendicular = true;

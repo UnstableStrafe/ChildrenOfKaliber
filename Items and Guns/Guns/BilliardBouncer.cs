@@ -8,16 +8,17 @@ namespace Items
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Billiard Bouncer", "billiard_bouncer");
-            Game.Items.Rename("outdated_gun_mods:billiard_bouncer", "cel:billiard_bouncer");
+            Game.Items.Rename("outdated_gun_mods:billiard_bouncer", "ck:billiard_bouncer");
             gun.gameObject.AddComponent<BilliardBouncer>();
             gun.SetShortDescription("Solids Or Stripes?");
             gun.SetLongDescription("Shoots bouncing billiard balls that collide with other player projectiles. \n\nInvented by a gambler who enjoyed the sound of clinking billiard balls a little too much.");
             gun.SetupSprite(null, "billiard_bouncer_idle_001", 13);
-            gun.SetAnimationFPS(gun.shootAnimation, 12);
+            gun.SetAnimationFPS(gun.shootAnimation, 14);
             for (int i = 0; i < 3; i++)
             {
                 GunExt.AddProjectileModuleFrom(gun, "38_special");
             }
+            gun.barrelOffset.localPosition = new Vector3(1.1875f, 0.5625f, 0f);
             foreach (ProjectileModule projectileModule in gun.Volley.projectiles)
             {
                 projectileModule.shootStyle = ProjectileModule.ShootStyle.SemiAutomatic;
@@ -41,7 +42,7 @@ namespace Items
                 projectileModule.ammoType = GameUIAmmoType.AmmoType.CUSTOM;
                 projectileModule.customAmmoType = CustomClipAmmoTypeToolbox.AddCustomAmmoType("Billiard", "Items/Resources/CustomGunAmmoTypes/billiard_full", "Items/Resources/CustomGunAmmoTypes/billiard_empty");
                 projectile.shouldRotate = true;
-                projectile.SetProjectileSpriteRight("billiard_1", 9, 9);
+                projectile.SetProjectileSpriteRight("billiard_cue", 11, 11);
                 bool flag = projectileModule == gun.DefaultModule;
                 if (flag)
                 {
@@ -52,6 +53,7 @@ namespace Items
                     projectileModule.ammoCost = 0;
                 }
             }
+            gun.usesContinuousFireAnimation = false;
             gun.DefaultModule.sequenceStyle = ProjectileModule.ProjectileSequenceStyle.Random;
             gun.reloadTime = 1.5f;
             gun.Volley.UsesShotgunStyleVelocityRandomizer = true;
@@ -60,9 +62,10 @@ namespace Items
             gun.SetBaseMaxAmmo(150);
             gun.gunClass = GunClass.SILLY;   
             gun.muzzleFlashEffects.type = VFXPoolType.None;
-            gun.quality = PickupObject.ItemQuality.A;
+            gun.quality = PickupObject.ItemQuality.B;
             gun.encounterTrackable.EncounterGuid = "Billiard Shotgun";
             gun.sprite.IsPerpendicular = true;
+            gun.gunSwitchGroup = (PickupObjectDatabase.GetById(45) as Gun).gunSwitchGroup;
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
@@ -120,12 +123,7 @@ namespace Items
 
             }
         }
-        public override void OnPostFired(PlayerController player, Gun gun)
-        {
-
-            gun.PreventNormalFireAudio = true;
-            AkSoundEngine.PostEvent("Play_WPN_skullgun_shot_01", gameObject);
-        }
+        
         public BilliardBouncer()
         {
 
