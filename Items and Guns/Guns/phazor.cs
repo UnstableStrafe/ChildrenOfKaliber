@@ -107,10 +107,15 @@ namespace Items
         }
 
 
+        public override void OnPostFired(PlayerController player, Gun gun)
+        {
+            base.OnPostFired(player, gun);
+            string anim = gun.shootAnimation;
+            gun.PlayIfExists(anim, true);
+        }
 
-        
 
-        
+
 
         public Phazor()
         {
