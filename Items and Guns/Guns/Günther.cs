@@ -6,9 +6,9 @@ namespace Items
     {
         public static void Add()
         {
-            string ShortName = "günther";
+            string ShortName = "guunther";
             Gun gun = ETGMod.Databases.Items.NewGun("Günther", ShortName);
-            Game.Items.Rename("outdated_gun_mods:" + ShortName, "ck:"+ ShortName);
+            Game.Items.Rename("outdated_gun_mods:" + ShortName, "ck:günther");
             gun.gameObject.AddComponent<Günther>();
             gun.SetShortDescription("He Tries His Best");
             gun.SetLongDescription("Not as powerful as Gunther, this gun still holds his own. Treat with kindness.");
