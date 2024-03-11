@@ -40,6 +40,7 @@ namespace Items
             projectile.baseData.speed *= 1f;
             projectile.transform.parent = gun.barrelOffset;
             gun.sprite.IsPerpendicular = true;
+            gun.SetName("Günther");
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
         }
 
