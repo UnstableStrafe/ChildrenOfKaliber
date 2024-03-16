@@ -35,7 +35,7 @@ namespace Items
 
         public void OnKill(PlayerController player)
         {
-            if (this.m_indicator)
+            if (indicator != null)
             {
                 return;
             }
@@ -46,8 +46,15 @@ namespace Items
         private IEnumerator HandleHeatEffectsCR(float Radius, float Duration, GameActorFireEffect HeatEffect, Vector2 pos)
         {
 
-            
-            this.HandleRadialIndicator(TRadius, pos);
+
+            if (indicator == null)
+            {
+
+                this.indicator = ((GameObject)UnityEngine.Object.Instantiate(ResourceCache.Acquire("Global VFX/HeatIndicator"), Owner.CenterPosition.ToVector3ZisY(), Quaternion.identity, base.Owner.sprite.transform)).GetComponent<HeatIndicatorController>();
+                this.indicator.CurrentRadius = TRadius;
+                this.indicator.transform.parent = Owner.sprite.transform;
+
+            }
             float elapsed = 0f;
             RoomHandler r = Owner.CurrentRoom;
             
@@ -61,27 +68,12 @@ namespace Items
                 r.ApplyActionToNearbyEnemies(pos, TRadius, AuraAction);
                 yield return null;
             }
-            this.UnhandleRadialIndicator();
+            if (indicator != null)
+            {
+                UnityEngine.Object.Destroy(indicator.gameObject);
+                indicator = null;
+            }
             yield break;
-        }
-        private void HandleRadialIndicator(float Radius, Vector2 pos)
-        {
-           
-            if (!this.m_indicator)
-            {
-
-                this.m_indicator = ((GameObject)UnityEngine.Object.Instantiate(ResourceCache.Acquire("Global VFX/HeatIndicator"), pos, Quaternion.identity, sprite.transform)).GetComponent<HeatIndicatorController>();
-                this.m_indicator.CurrentRadius = TRadius;
-                
-            }
-        }
-        private void UnhandleRadialIndicator()
-        {
-            if (this.m_indicator)
-            {
-                this.m_indicator.EndEffect();
-                this.m_indicator = null;
-            }
         }
 
         public override void Pickup(PlayerController player)
@@ -102,7 +94,6 @@ namespace Items
             DebrisObject debrisObject = base.Drop(player);
             player.OnKilledEnemy -= this.OnKill;
             debrisObject.GetComponent<DragunWing>().m_pickedUpThisRun = true;
-            
             return debrisObject;
         }
         
@@ -118,7 +109,7 @@ namespace Items
 
 
         };
-        private HeatIndicatorController m_indicator;
+        private HeatIndicatorController indicator;
         public static int dragunWingId;
         
     }

@@ -48,7 +48,15 @@ namespace Items
                 ReadOnlyCollection<Projectile> allProjectiles = StaticReferenceManager.AllProjectiles;
                 if(allProjectiles != null)
                 {
-                    
+                    if (indicator == null)
+                    {
+
+                        this.indicator = ((GameObject)UnityEngine.Object.Instantiate(ResourceCache.Acquire("Global VFX/HeatIndicator"), user.CenterPosition.ToVector3ZisY(), Quaternion.identity, user.sprite.transform)).GetComponent<HeatIndicatorController>();
+                        this.indicator.CurrentRadius = range / 8;
+                        this.indicator.transform.parent = user.sprite.transform;
+                        indicator.IsFire = false;
+                        indicator.CurrentColor = new Color(254, 126, 229, 30);
+                    }
                     GameManager.Instance.StartCoroutine(FindNearbyEnemyProjectiles(user));
                     //StartCoroutine(ItemBuilder.HandleDurationWithoutEndEffect(this, .3f, user));
                 }
@@ -57,16 +65,14 @@ namespace Items
            
             
         }
-       
         public override void Pickup(PlayerController player)
         {
             base.Pickup(player);
-
-         
         }
 
         private IEnumerator FindNearbyEnemyProjectiles(PlayerController player)
         {
+            
             ReadOnlyCollection<Projectile> allProjectiles = StaticReferenceManager.AllProjectiles;
             List<Projectile> projectiles = new List<Projectile> { };
             int c = Mathf.CeilToInt((4 + Mathf.CeilToInt(1 * player.stats.GetStatModifier(PlayerStats.StatType.AdditionalClipCapacityMultiplier))) * player.stats.GetStatModifier(PlayerStats.StatType.AmmoCapacityMultiplier));
@@ -100,11 +106,18 @@ namespace Items
             {
                 GameManager.Instance.StartCoroutine(RetargetEnemyProjectiles(player, projectiles));
             }
+            yield return new WaitForSeconds(.3f);
+            if (indicator != null)
+            {
+                Destroy(indicator.gameObject);
+                indicator = null;
+            }
             yield break;
         }
         private IEnumerator RetargetEnemyProjectiles(PlayerController player, List<Projectile> projectiles)
         {
-            foreach(Projectile proj in projectiles)
+            
+            foreach (Projectile proj in projectiles)
             {
                 if(proj != null)
                 {
@@ -125,11 +138,12 @@ namespace Items
                     proj.collidesWithPlayer = false;
                     proj.collidesWithEnemies = true;
                     proj.UpdateCollisionMask();
-                    Color32 color = new Color32(254, 126, 229, 255);
+                    Color color = new Color32(254, 126, 229, 255);
+                    proj.AdjustPlayerProjectileTint(color, 10000);
                     player.DoPostProcessProjectile(proj);
                 }
             }
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(.35f);
             foreach(Projectile proj in projectiles)
             {
                 proj.Speed = 25;
@@ -144,10 +158,10 @@ namespace Items
             }
             yield break;
         }
-        
 
 
-        private float range = 35;
+        private HeatIndicatorController indicator = null;
+        private float range = 30;
 
     }
     
