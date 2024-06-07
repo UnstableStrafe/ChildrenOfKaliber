@@ -35,9 +35,9 @@ namespace Items
                     Chest chest = MunitionsChestController.munitionsChest;
                     self.OverrideChestPrefab = chest;
                     self.UseOverrideChest = true;
-                    if (chest.GetComponent<SpeculativeRigidbody>())
+                    if (chest.GetComponent<SpeculativeRigidbody>() is SpeculativeRigidbody body && body.m_initialized)
                     {
-                        chest.GetComponent<SpeculativeRigidbody>().Reinitialize();
+                        body.Reinitialize();
                     }
                     DungeonPrerequisite dungeonPrerequisite = new DungeonPrerequisite()
                     {
