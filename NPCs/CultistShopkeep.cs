@@ -24,7 +24,7 @@ namespace Items
             lootTable.AddItemToPool(SympathyBullets.itemID);
             //lootTable.AddItemToPool(TemporalRounds.itemID);
             lootTable.AddItemToPool(SuperCrate.itemID);
-            //lootTable.AddItemToPool(MemeticKillAgent.itemID);
+            lootTable.AddItemToPool(MemeticKillAgent.itemID);
             lootTable.AddItemToPool(Mininomicon.itemID);
             lootTable.AddItemToPool(NeedleBullets.itemID);
             lootTable.AddItemToPool(DragunSkull.dragunSkullId);
@@ -35,10 +35,13 @@ namespace Items
             lootTable.AddItemToPool(PrimalNitricAcid.primalNitricAcidId);
             lootTable.AddItemToPool(PrimalSaltpeter.primalSaltpeterId);
             lootTable.AddItemToPool(PrimalSulfur.primalSulfurId);           
-            lootTable.AddItemToPool(TheLastChamber.itemID, .7f);
-            lootTable.AddItemToPool(Skeleton.itemID);
+            lootTable.AddItemToPool(TheLastChamber.itemID, .75f);
+            lootTable.AddItemToPool(Skeleton.itemID, .9f);
             lootTable.AddItemToPool(VenomRounds.itemID);
             lootTable.AddItemToPool(_66Kaliber.id);
+            lootTable.AddItemToPool(Dispenser.DispenserID, .9f);
+            lootTable.AddItemToPool(RGG.id);
+            lootTable.AddItemToPool(AccursedShackles.id, .9f);
             //lootTable.AddItemToPool(SpiritOfTheDragun.gunID, 1);
             //lootTable.AddItemToPool(TrueGunpowder.itemID, 1);
 
@@ -69,16 +72,16 @@ namespace Items
 
             CultistShop = ShopAPI.SetUpShop("CultistShopkeep", "ck", npcIdleSprites, 7, npcTalkSprites, 2, lootTable, CustomShopItemController.ShopCurrencyType.COINS,
                 "#KALIBERCULTIST_RUNBASEDMULTILINE_GENERIC", "#KALIBERCULTIST_RUNBASEDMULTILINE_STOPPER", "#KALIBERCULTIST_SHOP_PURCHASED", "#KALIBERCULTIST_PURCHASE_FAILED", "#KALIBERCULTIST_INTRO", "#KALIBERCULTIST_ATTACKED", "#KALIBERCULTIST_STOLEN",
-                ShopAPI.defaultTalkPointOffset, ShopAPI.defaultNpcPosition, ShopAPI.VoiceBoxes.OLD_MAN, ShopAPI.defaultItemPositions, 1.2f, false, null, null, null, null, null, null, "", "", true, true, "Items/Resources/NPCs/CultistShopkeep/cultist_shopkeep_carpet_001.png", new Vector3(-.6f, -.6f, 1.7f), true, "Items/Resources/NPCs/CultistShopkeep/cultist_shopkeep_icon_001.png", true, .1f, null).GetOrAddComponent<CustomShopController>();
+                ShopAPI.defaultTalkPointOffset, ShopAPI.defaultNpcPosition, ShopAPI.VoiceBoxes.OLD_MAN, ShopAPI.defaultItemPositions, (5f/6f), false, null, null, null, null, null, null, "", "", true, true, "Items/Resources/NPCs/CultistShopkeep/cultist_shopkeep_carpet_001.png", new Vector3(-.6f, -.6f, 1.7f), true, "Items/Resources/NPCs/CultistShopkeep/cultist_shopkeep_icon_001.png", true, .1f, null).GetOrAddComponent<CustomShopController>();
             StaticReferences.StoredRoomObjects.Add("CultistShopkeep", CultistShop.gameObject);
         }
-        public static int RareItemPriceMod(CustomShopController shop, CustomShopItemController shopItem, PickupObject item)
+        public static float RareItemPriceMod(CustomShopController shop, CustomShopItemController shopItem, PickupObject item)
         {
             if (item.PickupObjectId == SpiritOfTheDragun.gunID || item.PickupObjectId == TrueGunpowder.itemID)
             {
                 return 3;
             }
-            return 1;
+            return 5/6;
         }
         public static CustomShopController CultistShop;
     }

@@ -28,7 +28,7 @@ namespace Items
             ItemBuilder.AddSpriteToObject(itemName, resourceName, obj);
 
             string shortDesc = "Savestate";
-            string longDesc = "On use, saves the following items from the user's inventory:\n-The player's current gun and a random gun.\n-2 Random passives\n-A random active item \n\nThen the previous savestate is loaded." +
+            string longDesc = "On use, saves the following items from the user's inventory:\n-The player's current gun and a random gun.\n-2 Random passives\n-A random active item \n\nThen the previous savestate is loaded. If no savestate exists, gives the player a random gun and 2 passives." +
                 "\n\nIn 1977AD Sol, Nasa launched two probes, each carrying a record of various aspects of life on Earth. The record was meant to be a way to show potential future extraterrestrial life what Earth was like. Unfortunately, one of them ended up in the Gungeon.";
 
 
@@ -57,12 +57,17 @@ namespace Items
             
             base.DoEffect(user);
         }
+
+        private bool noFile = false;
+
         private void DoRead(string path, PlayerController user)
         {
             bool doLoad = true;
             string[] items = new string[] { };
             if (!File.Exists(path))
             {
+
+                noFile = true;
                 doLoad = false;
                 string[] piss = new string[] {""};
                 File.WriteAllLines(path, piss);
@@ -149,6 +154,13 @@ namespace Items
                 if (currentGuns.Any())
                 {
                     stuffToSave.Add(currentGuns[UnityEngine.Random.Range(0, currentGuns.Count)]);
+                }
+                if (noFile)
+                {
+                    LootEngine.TryGivePrefabToPlayer(PickupObjectDatabase.GetRandomGun().gameObject, player);
+                    LootEngine.TryGivePrefabToPlayer(PickupObjectDatabase.GetById(286).gameObject, player);
+                    LootEngine.TryGivePrefabToPlayer(PickupObjectDatabase.GetById(213).gameObject, player);
+                    noFile = false;
                 }
                 if (doLoad)
                 {

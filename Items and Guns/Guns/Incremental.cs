@@ -101,6 +101,10 @@ namespace Items
                 Inc3 = Inc + Inc2;
                 Inc = Inc2;
                 Inc2 = Inc3;
+                if(Inc3 > 34)
+                {
+                    Inc3 = 34;
+                }
             }
             else
             {

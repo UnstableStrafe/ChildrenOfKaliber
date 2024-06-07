@@ -32,7 +32,7 @@ namespace Items
     {
         public const string NAME = "Children of Kaliber";
         public const string GUID = "unstablestrafe.etg.childrenofkaliber";
-        public const string VERSION = "4.0.0";
+        public const string VERSION = "4.0.11";
 
 
         public static readonly string Color = "#FCA4E2";
@@ -307,7 +307,7 @@ namespace Items
 
             var pursued = Loader.BuildCharacter("Items/Characters/Pursued", "ck:pursued", new Vector3(23, 27, 27.1f), false, new Vector3(15.3f, 24.8f, 25.3f), true, false, false, true, false, null, null, 0, false, "");
 
-            var blind = Loader.BuildCharacter("Items/Characters/Blind", "ck:blind", new Vector3(14, 27, 27.1f), false, new Vector3(15.3f, 24.8f, 25.3f), true, false, false, true, false, null, null, 0, false, "");
+            var blind = Loader.BuildCharacter("Items/Characters/Blind", "ck:blind", new Vector3(14, 27, 27.1f), false, new Vector3(15.3f, 24.8f, 27.3f), true, false, false, true, false, null, null, 0, false, "");
 
 
             /*

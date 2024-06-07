@@ -6,6 +6,7 @@ namespace Items
 {
     class AccursedShackles : PassiveItem
     {
+        public static int id;
         public static void Init()
         {
 
@@ -27,6 +28,7 @@ namespace Items
             ItemBuilder.SetupItem(item, shortDesc, longDesc, "ck");
             item.quality = PickupObject.ItemQuality.D;
             item.sprite.IsPerpendicular = true;
+            id = item.PickupObjectId;
         }
         private bool Shackled = true;
         private float MaxHp, CurHp, StoredHp;

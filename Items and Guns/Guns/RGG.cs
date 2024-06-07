@@ -12,6 +12,7 @@ namespace Items
     class RGG : GunBehaviour
     {
         private static Gun rng_gun;
+        public static int id;
 
         private static List<string> muzzleFlashes = new List<string>
         {
@@ -213,6 +214,7 @@ namespace Items
             }
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
             RandomizeStats();
+            id = gun.PickupObjectId;
         }
 
 

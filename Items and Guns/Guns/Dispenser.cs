@@ -5,7 +5,7 @@ namespace Items
 {
     public class Dispenser : GunBehaviour
     {
-
+        public static int DispenserID;
         //ITEM IDEA --- CROWN OF THE CHOSEN or smth like it. Gives certain effects for different people. Special effects for each modder, Turtle, Reto, Hutts, etc. Name changes depeding on who has it. Other ppl will prob have a random effect or smth idk good luck tomorrow me AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         public static void Add()
         {
@@ -44,6 +44,7 @@ namespace Items
             projectile.transform.parent = gun.barrelOffset;
             projectile.SetProjectileSpriteRight("dispenser_projectile_001", 11, 3);
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
+            DispenserID = gun.PickupObjectId;
         }
 
         private bool HasReloaded;

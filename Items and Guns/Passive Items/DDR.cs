@@ -50,25 +50,25 @@ namespace Items
             if (AngVel == 0f)
             {
                 AddStat(PlayerStats.StatType.ProjectileSpeed, 1.3f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                outlineMaterial.SetColor("_OverrideColor", new Color(54, 208, 255, 50));
+                outlineMaterial.SetColor("_OverrideColor", new Color(54, 208, 255, 30));
             }
 
             if(AngVel == 90f)
             {
                 AddStat(PlayerStats.StatType.RateOfFire, 1.3f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                outlineMaterial.SetColor("_OverrideColor", new Color(232, 255, 54, 50));
+                outlineMaterial.SetColor("_OverrideColor", new Color(232, 255, 54, 30));
             }   
 
             if(AngVel == -180f)
             {
                 AddStat(PlayerStats.StatType.Damage, 1.3f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                outlineMaterial.SetColor("_OverrideColor", new Color(252, 56, 56, 50));
+                outlineMaterial.SetColor("_OverrideColor", new Color(252, 56, 56, 30));
             }
 
             if(AngVel == -90f)
             {
                 AddStat(PlayerStats.StatType.ReloadSpeed, .7f, StatModifier.ModifyMethod.MULTIPLICATIVE);
-                outlineMaterial.SetColor("_OverrideColor", new Color(54, 255, 121, 50));
+                outlineMaterial.SetColor("_OverrideColor", new Color(54, 255, 121, 30));
             }
             
             this.Owner.stats.RecalculateStats(Owner, true);

@@ -26,8 +26,8 @@ namespace Items
 
         public static void ConfigureOnPlacementHook(Action<FloorChestPlacer, RoomHandler> orig, FloorChestPlacer self, RoomHandler room)
         {
-            
-            if(self.OverrideChestPrefab != MunitionsChestController.munitionsChest && self.ItemQuality != PickupObject.ItemQuality.S) //this migggght break shit im not sure but ill find out ig.
+
+            if (self.OverrideChestPrefab != MunitionsChestController.munitionsChest && self.ItemQuality != PickupObject.ItemQuality.S) //this migggght break shit im not sure but ill find out ig.
             {
                 float f = UnityEngine.Random.value;
                 if (f <= munitionsChestOverrideChance)
@@ -45,7 +45,7 @@ namespace Items
                         requireFlag = true,
                         prerequisiteType = DungeonPrerequisite.PrerequisiteType.FLAG,
                     };
-                    
+
 
                     //fix nulling shit with chest.ConfigureOnPlacement / setting up minimap and collision shiz
 
