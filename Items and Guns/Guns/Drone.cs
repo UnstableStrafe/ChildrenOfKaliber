@@ -5,6 +5,8 @@ namespace Items
 {
     class Drone : GunBehaviour
     {
+        public static int Id;
+
         public static void Add()
         {
             Gun gun = ETGMod.Databases.Items.NewGun("Drone", "drone");
@@ -40,6 +42,8 @@ namespace Items
             projectile.sprite.renderer.enabled = true;
 
             ETGMod.Databases.Items.Add(gun.GetComponent<PickupObject>());
+
+            Id = gun.PickupObjectId;
         }
 
         private bool HasReloaded;
