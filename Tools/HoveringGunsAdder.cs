@@ -34,7 +34,7 @@ namespace Items
             DroneHover.PositionType = HoveringGunController.HoverPosition.CIRCULATE;
             DroneHover.FireType = HoveringGunController.FireType.ON_FIRED_GUN;
             DroneHover.UsesMultipleGuns = true;
-            DroneHover.TargetGunIDs = new List<int> { ETGMod.Databases.Items["drone"].PickupObjectId, ETGMod.Databases.Items["drone_2"].PickupObjectId};
+            DroneHover.TargetGunIDs = new List<int> { Drone.Id, Drone2.Id };
             DroneHover.FireCooldown = .11f;
             DroneHover.FireDuration = 0;
             DroneHover.NumToTrigger = 2;

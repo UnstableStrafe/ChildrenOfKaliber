@@ -121,6 +121,8 @@ namespace Items
             {
                 if(proj != null)
                 {
+                    SpawnManager.PoolManager.Remove(proj.transform);
+
                     proj.RemoveBulletScriptControl();
                     if (proj.Owner && proj.Owner.specRigidbody)
                     {
