@@ -49,20 +49,30 @@ namespace Items
 
         public override Projectile OnPreFireProjectileModifier(Gun gun, Projectile projectile, ProjectileModule mod)
         {
-
             if(gun.CurrentOwner is PlayerController)
             {
                 PlayerController player = gun.CurrentOwner as PlayerController;
                 if (player.PlayerHasActiveSynergy("S H A K E N"))
                 {
                     Projectile proj = (PickupObjectDatabase.GetById(406) as Gun).Volley.projectiles[1].projectiles[0];
-                    proj.baseData.damage *= 2.5f;
                     return proj;
                 }
             }
 
             return projectile;
         }
+
+        public override void PostProcessProjectile(Projectile projectile)
+        {
+            if (gun.CurrentOwner is PlayerController)
+            {
+                PlayerController player = gun.CurrentOwner as PlayerController;
+
+                if (player.PlayerHasActiveSynergy("S H A K E N"))
+                    projectile.baseData.damage *= 2.5f;
+            }
+        }
+
         protected override void Update()
         {
             if (gun.CurrentOwner)
