@@ -49,6 +49,9 @@ namespace Items
         private bool? check = false, lastCheck = null;
         private void FireCheck()
         {
+            if (!PickedUp || !Owner)
+                return;
+
             check = Owner.IsOnFire;
             if (check == lastCheck) return;
             if (check == true)
