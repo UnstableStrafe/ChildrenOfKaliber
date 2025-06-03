@@ -23,6 +23,7 @@ using System.IO;
 using Alexandria;
 using Alexandria.ItemAPI;
 using Alexandria.Misc;
+using HarmonyLib;
 
 namespace Items
 {
@@ -74,6 +75,9 @@ namespace Items
             SaveAPI.SaveAPIManager.Setup("ck");
             ItemBuilder.Init();
             Hooks.Init();
+
+            var harmony = new Harmony(GUID);
+            harmony.PatchAll();
 
             ChestReplacementHooks.Init();
 
